@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<component inheritJdk="true">
+<component jdk="17 (2)" jdk_type="JavaSDK">
 	<contentEntry url="file://$MODULE_DIR$"/>
+	<lib name="jcalendar-1.1.4.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/Lib/jcalendar-1.1.4.jar!/"/>
+	</lib>
+	<lib name="jcalendar-1.2.2.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/Lib/jcalendar-1.2.2.jar!/"/>
+	</lib>
 </component>
