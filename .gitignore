@@ -10,9 +10,8 @@
 hs_err_pid*
 
 # Eclipse
-# leave for develop coherence
-#   .classpath
-#   .project
+.classpath
+.project
 .settings/
 
 # Intellij
