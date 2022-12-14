@@ -1,13 +1,13 @@
-package models;
+package cnpm.quanlynhankhau.models;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Database {
-    private static final String dbURL = "jdbc:mysql://localhost:3306/";
-    private static final String dbUName = "mysql";
-    private static final String dbPasswd = null;
+    private static final String dbURL = "jdbc:mysql://localhost:3306/quan_ly_nhan_khau";
+    private static final String dbUName = "root";
+    private static final String dbPasswd = "";
     private static volatile Connection connection = null;
 
 
@@ -24,5 +24,10 @@ public class Database {
     }
     public static Connection getConnection(){
         return getConnection(true);
+    }
+
+    public static void main(String[] args) {
+        var c = getConnection();
+        System.out.println(c);
     }
 }

@@ -20,7 +20,7 @@ public class QuanLyNhanKhauApplication extends Application {
         }
         //Image icon = new Image(" "); /*path to icon */
 
-        stage.setTitle("Ai là Triệu phú");
+        stage.setTitle("Quản Lý Nhân Khẩu");
         //stage.getIcons().add(icon);
         stage.setScene(scene);
         stage.show();

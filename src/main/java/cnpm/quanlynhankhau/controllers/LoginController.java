@@ -1,6 +1,7 @@
 package cnpm.quanlynhankhau.controllers;
 
-import models.Database;
+import cnpm.quanlynhankhau.models.Database;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -27,21 +28,24 @@ public class LoginController {
 
     @FXML
     protected void onClickConfirmLogin() {
+        String sqlquery = """
+                    SELECT * FROM quan_ly_nhan_khau.users u 
+                    WHERE u.userName = ? AND u.passwd = ?  
+                    """;
         String sUserName = tfUserName.getText();
         String sPasswd = tfPasswd.getText();
 
         Connection connection = Database.getConnection();
         PreparedStatement statement;
         try{
-            statement = connection.prepareStatement("Select ID from Users "
-                    + "where Users.Name = ? and Users.Passwd = ?");
+            statement = connection.prepareStatement(sqlquery);
             statement.setString(1, sUserName);
             statement.setString(2, sPasswd);
 
             ResultSet resultSet = statement.executeQuery();
 
             if(resultSet.next()){
-                int userID = resultSet.getInt("UID");
+                int userID = resultSet.getInt("ID");
 
                 // change view
 //                FXMLLoader fxmlLoader = new FXMLLoader(LoginController.class.getResource("Home-view.fxml"));
@@ -60,7 +64,7 @@ public class LoginController {
             }
 
         }catch (SQLException e) {
-
+            e.printStackTrace();
         }
     }
 
