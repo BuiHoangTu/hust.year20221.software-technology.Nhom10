@@ -11,7 +11,7 @@ public class QuanLyNhanKhauApplication extends Application {
 
     @Override
     public void start(Stage stage){
-        FXMLLoader fxmlLoader = new FXMLLoader(QuanLyNhanKhauApplication.class.getResource("/views/Login-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(QuanLyNhanKhauApplication.class.getResource("/cnpm/quanlynhankhau/Login-view.fxml"));
         Scene scene;
         try {
             scene = new Scene(fxmlLoader.load());
