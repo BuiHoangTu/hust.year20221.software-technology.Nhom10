@@ -29,6 +29,6 @@ public class ChooseFunctionController {
 
     @FXML
     protected void clickButton() {
-        changeView("Your Function");
+        changeView("Your-view.fxml");
     }
 }
