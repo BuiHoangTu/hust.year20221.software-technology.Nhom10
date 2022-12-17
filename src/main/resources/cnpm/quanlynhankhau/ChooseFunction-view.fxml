@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="cnpm.quanlynhankhau.controllers.ChooseFunctionController">
+   <Button fx:id="marker" layoutX="59.0" layoutY="200.0" mnemonicParsing="false" onMouseClicked="#clickButton"
+           text="Test Button "/>
+   <Button layoutX="159.0" layoutY="85.0" mnemonicParsing="false" text="Button"/>
+   <Button layoutX="259.0" layoutY="82.0" mnemonicParsing="false" text="Button"/>
+   <Button layoutX="364.0" layoutY="82.0" mnemonicParsing="false" text="Button"/>
+   <Button layoutX="449.0" layoutY="85.0" mnemonicParsing="false" text="Button"/>
+   <Button layoutX="520.0" layoutY="85.0" mnemonicParsing="false" text="Button"/>
+</AnchorPane>
