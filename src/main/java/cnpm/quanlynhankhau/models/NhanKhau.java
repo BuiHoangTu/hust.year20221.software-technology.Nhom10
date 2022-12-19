@@ -1,6 +1,7 @@
 package cnpm.quanlynhankhau.models;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 public class NhanKhau {
     private String name;
@@ -9,5 +10,5 @@ public class NhanKhau {
     private String CMND;
     private boolean isMale;
     private Address DCThuongTru = new Address();
-    private Date birthday;
+    private LocalDate birthday;
 }
