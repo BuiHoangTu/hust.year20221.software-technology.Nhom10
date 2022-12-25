@@ -48,7 +48,7 @@ public class LoginController {
                 int userID = resultSet.getInt("ID");
 
                 // change view
-                FXMLLoader fxmlLoader = new FXMLLoader(LoginController.class.getResource("ChooseFunction-view.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(LoginController.class.getResource("/cnpm/quanlynhankhau/ChooseFunction-view.fxml"));
                 Scene scene;
                 try {
                     scene = new Scene(fxmlLoader.load());
@@ -72,16 +72,16 @@ public class LoginController {
     @FXML
     protected void onClickToSignup() {
         // change view
-//        FXMLLoader fxmlLoader = new FXMLLoader(LoginController.class.getResource("SignUp-view.fxml"));
-//        Scene scene;
-//        try {
-//            scene = new Scene(fxmlLoader.load());
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//        Stage stage =  (Stage) tfUserName.getScene().getWindow();
-//
-//        stage.setScene(scene);
-//        stage.show();
+        FXMLLoader fxmlLoader = new FXMLLoader(LoginController.class.getResource("SignUp-view.fxml"));
+        Scene scene;
+        try {
+            scene = new Scene(fxmlLoader.load());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        Stage stage =  (Stage) tfUserName.getScene().getWindow();
+
+        stage.setScene(scene);
+        stage.show();
     }
 }
