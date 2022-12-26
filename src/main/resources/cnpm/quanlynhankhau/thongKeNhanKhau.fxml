@@ -39,4 +39,7 @@
         </content>
       </ScrollPane>
    </center>
+   <left>
+      <Button fx:id="BackButton" mnemonicParsing="false" onAction="#BackController" text="back" BorderPane.alignment="CENTER" />
+   </left>
 </BorderPane>
