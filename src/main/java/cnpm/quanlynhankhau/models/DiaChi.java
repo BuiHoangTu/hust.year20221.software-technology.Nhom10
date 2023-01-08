@@ -1,5 +1,8 @@
 package cnpm.quanlynhankhau.models;
 
+/**
+ * Class thể hiện vị trí
+ */
 public class DiaChi {
     public String thanhPho;
     public String quan;
@@ -12,8 +15,13 @@ public class DiaChi {
     public String ghiChu;
 
 
+    /**
+     * Đổi text địa chỉ thành object DiaChi
+     * @param text Địa chỉ dạng xâu
+     * @return object DiaChi
+     */
     public static DiaChi parse(CharSequence text) {
-        // TODO parse dia chi
+        // TODO parse dia chi theo format toString dưới
         return null;
     }
 

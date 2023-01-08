@@ -5,6 +5,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class xứ lý giao tiếp DB mà không phù hợp chứa trong các models khác
+ */
 public class Database {
     private static final String dbURL = "jdbc:mysql://localhost:3306/quan_ly_nhan_khau";
     private static final String dbUName = "root";
@@ -23,7 +26,6 @@ public class Database {
         }
         return connection;
     }
-
     public static Connection getConnection(){
         return getConnection(true);
     }
@@ -45,6 +47,12 @@ public class Database {
         return resultSet.next();
     }
 
+    /**
+     * Danh sách tạm trú/vắng của 1 người
+     * @param soNhanKhau định danh người này
+     * @return Các lần tạm trú/vắng
+     * @throws SQLException khi kết nối đến db thất bại. Bật mySQL lên.
+     */
     public static List<TamTruVang> searchTamVang(String soNhanKhau) throws SQLException {
         Connection connection = getConnection();
 

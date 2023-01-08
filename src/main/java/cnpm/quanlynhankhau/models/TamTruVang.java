@@ -2,6 +2,9 @@ package cnpm.quanlynhankhau.models;
 
 import java.time.LocalDate;
 
+/**
+ * Thể hiện 1 lần tạm trú tạm vắng của 1 người
+ */
 public class TamTruVang {
 	private String maTamTruVang;
 	private LocalDate tuNgay, denNgay;

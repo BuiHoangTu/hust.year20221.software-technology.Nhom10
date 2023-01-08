@@ -5,7 +5,29 @@ import javafx.scene.image.Image;
 import java.time.LocalDate;
 
 public class ChungMinhThu {
-	public static ChungMinhThu lamCMT(Image anhChanDung, DiaChi noiCap){
+
+	private String soCMT;
+	private LocalDate ngayCap;
+	private DiaChi noiCap;
+	private Image anhChanDung;
+
+
+	private ChungMinhThu(){}
+	public ChungMinhThu(String soCMT, LocalDate ngayCap, DiaChi noiCap, Image anhChanDung) {
+		this.soCMT = soCMT;
+		this.ngayCap = ngayCap;
+		this.noiCap = noiCap;
+		this.anhChanDung = anhChanDung;
+	}
+
+
+	/**
+	 * Làm chứng minh thư mới. CMT được cập nhật luôn trong DB
+	 * @param anhChanDung ảnh chân dung
+	 * @param noiCap địa chỉ nơi cấp
+	 * @return chứng minh thư mới
+	 */
+	public static ChungMinhThu lamCMT(Image anhChanDung, DiaChi noiCap) {
 		ChungMinhThu output = new ChungMinhThu();
 		output.anhChanDung = anhChanDung;
 		output.noiCap = noiCap;
@@ -17,20 +39,6 @@ public class ChungMinhThu {
 		return output;
 	}
 
-	private String soCMT;
-	private LocalDate ngayCap;
-	private DiaChi noiCap;
-	private Image anhChanDung;
-
-
-	private ChungMinhThu(){}
-
-	public ChungMinhThu(String soCMT, LocalDate ngayCap, DiaChi noiCap, Image anhChanDung) {
-		this.soCMT = soCMT;
-		this.ngayCap = ngayCap;
-		this.noiCap = noiCap;
-		this.anhChanDung = anhChanDung;
-	}
 
 	public String getSoCMT() {
 		return soCMT;
