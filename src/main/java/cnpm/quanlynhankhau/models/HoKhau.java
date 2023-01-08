@@ -1,6 +1,7 @@
 package cnpm.quanlynhankhau.models;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class HoKhau {
@@ -10,7 +11,7 @@ public class HoKhau {
     private String maKhuVuc;
     private DiaChi diaChi;
     private LocalDate ngayLap;
-    private List<NhanKhau> thanhViens;
+    private final List<NhanKhau> thanhViens = new ArrayList<>();
 
 
     public String getSoHoKhau() {

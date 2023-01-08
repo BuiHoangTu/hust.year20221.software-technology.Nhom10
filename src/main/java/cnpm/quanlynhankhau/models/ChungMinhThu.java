@@ -6,12 +6,11 @@ import java.time.LocalDate;
 
 public class ChungMinhThu {
 	public static ChungMinhThu lamCMT(Image anhChanDung, DiaChi noiCap){
-		// TODO database auto generate
 		ChungMinhThu output = new ChungMinhThu();
 		output.anhChanDung = anhChanDung;
 		output.noiCap = noiCap;
 
-		// thay bang database output
+		// thay bang database output// TODO database auto generate
 		output.soCMT = null;
 		output.ngayCap = null;
 

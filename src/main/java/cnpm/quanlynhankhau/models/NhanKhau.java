@@ -1,6 +1,8 @@
 package cnpm.quanlynhankhau.models;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class NhanKhau {
     private String soNhanKhau;
@@ -45,6 +47,7 @@ public class NhanKhau {
     public boolean lyDoChuyenDenIsChanged = false;
     private String ghiChu;
     public boolean ghiChuIsChanged = false;
+    private final List<TamTruVang> tamTruVangs = new ArrayList<>();
 
     private ChungMinhThu chungMinhThu;
     private String idNguoiTao;
@@ -55,7 +58,35 @@ public class NhanKhau {
 
     public NhanKhau() {
     }
-
+    public NhanKhau(String soNhanKhau, String ten, String bietDanh, String tonGiao, boolean isMale, DiaChi thuongTru, LocalDate ngaySinh, DiaChi noiSinh, DiaChi nguyenQuan, String danToc, String hoChieu, DiaChi diaChiHienTai, String trinhDoChuyenMon, String trinhDoHocVan, String trinhDoNgoaiNgu, String ngheNghiep, DiaChi noiLamViec, String tienAn, LocalDate ngayChuyenDen, String lyDoChuyenDen, String ghiChu, ChungMinhThu chungMinhThu, String idNguoiTao, LocalDate ngayXoa, String idNguoiXoa, String lyDoXoa, LocalDate ngayTao) {
+        this.soNhanKhau = soNhanKhau;
+        this.ten = ten;
+        this.bietDanh = bietDanh;
+        this.tonGiao = tonGiao;
+        this.isMale = isMale;
+        this.thuongTru = thuongTru;
+        this.ngaySinh = ngaySinh;
+        this.noiSinh = noiSinh;
+        this.nguyenQuan = nguyenQuan;
+        this.danToc = danToc;
+        this.hoChieu = hoChieu;
+        this.diaChiHienTai = diaChiHienTai;
+        this.trinhDoChuyenMon = trinhDoChuyenMon;
+        this.trinhDoHocVan = trinhDoHocVan;
+        this.trinhDoNgoaiNgu = trinhDoNgoaiNgu;
+        this.ngheNghiep = ngheNghiep;
+        this.noiLamViec = noiLamViec;
+        this.tienAn = tienAn;
+        this.ngayChuyenDen = ngayChuyenDen;
+        this.lyDoChuyenDen = lyDoChuyenDen;
+        this.ghiChu = ghiChu;
+        this.chungMinhThu = chungMinhThu;
+        this.idNguoiTao = idNguoiTao;
+        this.ngayXoa = ngayXoa;
+        this.idNguoiXoa = idNguoiXoa;
+        this.lyDoXoa = lyDoXoa;
+        this.ngayTao = ngayTao;
+    }
 
     public String getSoNhanKhau() {
         return soNhanKhau;
@@ -268,6 +299,15 @@ public class NhanKhau {
 
     public ChungMinhThu getChungMinhThu() {
         return chungMinhThu;
+    }
+
+    /**
+     * Khai báo tạm vắng
+     * @return Mã tạm vắng
+     */
+    public String tamVang(LocalDate tuNgay, LocalDate denNgay) {
+        // TODO database make tam vang
+        return null;
     }
 
 

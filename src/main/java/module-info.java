@@ -4,7 +4,8 @@ module cnpm.quanlynhankhau {
     requires java.sql;
 
 
-    opens cnpm.quanlynhankhau to javafx.fxml;
+    exports cnpm.quanlynhankhau.models;
+    opens cnpm.quanlynhankhau.models to javafx.fxml;
     exports cnpm.quanlynhankhau.application;
     opens cnpm.quanlynhankhau.application to javafx.fxml;
     exports cnpm.quanlynhankhau.controllers;

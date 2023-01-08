@@ -1,5 +1,6 @@
 package cnpm.quanlynhankhau.application;
 
+import cnpm.quanlynhankhau.models.DiaChi;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -8,6 +9,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class QuanLyNhanKhauApplication extends Application {
+    public static final DiaChi CO_SO_HIEN_TAI = new DiaChi("Hà Nội", "Hai Bà Trưng", null, null, "Trụ Sở Quản Lý Nhân Khẩu Bách Khoa");
 
     @Override
     public void start(Stage stage){

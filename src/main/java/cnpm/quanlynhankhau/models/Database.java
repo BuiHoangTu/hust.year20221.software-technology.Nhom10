@@ -1,6 +1,9 @@
 package cnpm.quanlynhankhau.models;
 
 import java.sql.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Database {
     private static final String dbURL = "jdbc:mysql://localhost:3306/quan_ly_nhan_khau";
@@ -20,7 +23,7 @@ public class Database {
         }
         return connection;
     }
-    
+
     public static Connection getConnection(){
         return getConnection(true);
     }
@@ -40,5 +43,31 @@ public class Database {
         ResultSet resultSet = preparedStatement.executeQuery();
 
         return resultSet.next();
+    }
+
+    public static List<TamTruVang> searchTamVang(String soNhanKhau) throws SQLException {
+        Connection connection = getConnection();
+
+        PreparedStatement preparedStatement = connection.prepareStatement("""
+                SELECT maGiayTamtru, tuNgay, denNgay, lyDo
+                FROM quan_ly_nhan_khau.tam_tru
+                WHERE quan_ly_nhan_khau.tam_tru.idNhanKhau = ?;
+                """);
+        preparedStatement.setString(1, soNhanKhau);
+        ResultSet res = preparedStatement.executeQuery();
+
+        List<TamTruVang> output = new ArrayList<>();
+        while (res.next()) {
+            output.add(new TamTruVang(
+                    res.getString("maGiayTamtru"),
+                    LocalDate.parse(res.getString("tuNgay")),
+                    LocalDate.parse(res.getString("denNgay")),
+                    DiaChi.parse(res.getString("diaChiTamVang")),
+                    DiaChi.parse(res.getString("diaChiTamTru")),
+                    res.getString("lyDo")
+                    ));
+        }
+
+        return output;
     }
 }
