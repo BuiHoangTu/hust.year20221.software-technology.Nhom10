@@ -20,12 +20,12 @@
     git push -u origin your_branch_name     # make new branch on remote repo
 ```
 
-2. Get update from main branch
+2. Get update from master branch
 
 ```Console
-    git switch your_branch_name     # make sure you are on right branch 
-    git fetch origin main:main      # update with remote main repo
-    git merge origin/main           # get master update
+    git switch your_branch_name         # make sure you are on right branch 
+    git fetch origin master:master      # update with remote master repo
+    git merge origin/master             # get master update
 ```
 
 2. Commit your work
@@ -39,12 +39,12 @@
 3. Delete your old branch after finish your work
 
 ```Console
-    git switch main                     # go away from deleting branch
-    git branch -d old_branch_name       # delete it
+    git switch master                     # go away from deleting branch
+    git branch -d old_branch_name         # delete it
 ```
 
-``note`` Go to step 1 and create new branch
+_note_ Go to step 1 and create new branch
 
-**Note : You mustn't touch main branch**
+**Note : You mustn't touch master branch**
 
-**Note** : You may change models for experiment purposes. **BUT** if you want to add feature, ask the owner.
+**Note** : You may change models for experiment purposes. **_BUT_** if you want to add feature, ask the owner.
