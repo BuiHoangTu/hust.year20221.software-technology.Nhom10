@@ -55,10 +55,11 @@ public class ChooseFunctionController {
     @FXML
     private Button marker;
 
-    @FXML private Button TTNK;
+    @FXML
+    private Button ChuyenHoKhau;
 
     @FXML
-    void ChuyenHoController(ActionEvent event) throws IOException {
+    void ChuyenHoController(MouseEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(LoginController.class.getResource("/cnpm/quanlynhankhau/TachHo.fxml"));
         Scene scene;
         try {
@@ -66,7 +67,7 @@ public class ChooseFunctionController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        Stage stage =  (Stage) marker.getScene().getWindow();
+        Stage stage =  (Stage) ChuyenHoKhau.getScene().getWindow();
 
         stage.setScene(scene);
         stage.show();

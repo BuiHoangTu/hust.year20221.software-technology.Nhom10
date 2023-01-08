@@ -1,6 +1,5 @@
 package cnpm.quanlynhankhau.models;
 
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 

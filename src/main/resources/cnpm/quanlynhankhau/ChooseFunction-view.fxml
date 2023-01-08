@@ -5,7 +5,7 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cnpm.quanlynhankhau.controllers.ChooseFunctionController">
    <Button fx:id="marker" layoutX="59.0" layoutY="200.0" mnemonicParsing="false" onMouseClicked="#clickButton" text="Test Button " />
-   <Button layoutX="87.0" layoutY="82.0" mnemonicParsing="false" onMouseClicked="#ChuyenHoController" text="Chuyển hộ khẩu" />
+   <Button fx:id="ChuyenHoKhau" layoutX="87.0" layoutY="82.0" mnemonicParsing="false" onMouseClicked="#ChuyenHoController" text="Chuyển hộ khẩu" />
    <Button layoutX="237.0" layoutY="187.0" mnemonicParsing="false" onMouseClicked="#TTNKView" text="Thong tin nhan khau" />
    <Button layoutX="364.0" layoutY="82.0" mnemonicParsing="false" text="Button" />
    <Button layoutX="449.0" layoutY="85.0" mnemonicParsing="false" text="Button" />
