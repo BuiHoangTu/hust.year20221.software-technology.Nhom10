@@ -48,6 +48,7 @@ public class NhanKhau {
     private String ghiChu;
     public boolean ghiChuIsChanged = false;
     private final List<TamTruVang> tamTruVangs = new ArrayList<>();
+    public boolean tamTruVangsIsChanged = false;
 
     private ChungMinhThu chungMinhThu;
     private String idNguoiTao;
@@ -56,8 +57,7 @@ public class NhanKhau {
     private String lyDoXoa;
     private LocalDate ngayTao;
 
-    public NhanKhau() {
-    }
+    public NhanKhau() {}
     public NhanKhau(String soNhanKhau, String ten, String bietDanh, String tonGiao, boolean isMale, DiaChi thuongTru, LocalDate ngaySinh, DiaChi noiSinh, DiaChi nguyenQuan, String danToc, String hoChieu, DiaChi diaChiHienTai, String trinhDoChuyenMon, String trinhDoHocVan, String trinhDoNgoaiNgu, String ngheNghiep, DiaChi noiLamViec, String tienAn, LocalDate ngayChuyenDen, String lyDoChuyenDen, String ghiChu, ChungMinhThu chungMinhThu, String idNguoiTao, LocalDate ngayXoa, String idNguoiXoa, String lyDoXoa, LocalDate ngayTao) {
         this.soNhanKhau = soNhanKhau;
         this.ten = ten;
@@ -88,10 +88,10 @@ public class NhanKhau {
         this.ngayTao = ngayTao;
     }
 
+
     public String getSoNhanKhau() {
         return soNhanKhau;
     }
-
     public void setSoNhanKhau(String soNhanKhau) {
         this.soNhanKhau = soNhanKhau;
         soNhanKhauIsChanged = true;
@@ -100,7 +100,6 @@ public class NhanKhau {
     public String getTen() {
         return ten;
     }
-
     public void setTen(String ten) {
         this.ten = ten;
         tenIsChanged = true;
@@ -109,7 +108,6 @@ public class NhanKhau {
     public String getBietDanh() {
         return bietDanh;
     }
-
     public void setBietDanh(String bietDanh) {
         this.bietDanh = bietDanh;
         bietDanhIsChanged = true;
@@ -118,7 +116,6 @@ public class NhanKhau {
     public String getTonGiao() {
         return tonGiao;
     }
-
     public void setTonGiao(String tonGiao) {
         this.tonGiao = tonGiao;
         tonGiaoIsChanged = true;
@@ -127,8 +124,7 @@ public class NhanKhau {
     public boolean isMale() {
         return isMale;
     }
-
-    public void setMale(boolean male) {
+    public void setISMale(boolean male) {
         isMale = male;
         isMaleIsChanged = true;
     }
@@ -136,7 +132,6 @@ public class NhanKhau {
     public DiaChi getThuongTru() {
         return thuongTru;
     }
-
     public void setThuongTru(DiaChi thuongTru) {
         this.thuongTru = thuongTru;
         thuongTruIsChanged = true;
@@ -145,7 +140,6 @@ public class NhanKhau {
     public LocalDate getNgaySinh() {
         return ngaySinh;
     }
-
     public void setNgaySinh(LocalDate ngaySinh) {
         this.ngaySinh = ngaySinh;
         ngaySinhIsChanged = true;
@@ -154,7 +148,6 @@ public class NhanKhau {
     public DiaChi getNoiSinh() {
         return noiSinh;
     }
-
     public void setNoiSinh(DiaChi noiSinh) {
         this.noiSinh = noiSinh;
         noiSinhIsChanged = true;
@@ -163,7 +156,6 @@ public class NhanKhau {
     public DiaChi getNguyenQuan() {
         return nguyenQuan;
     }
-
     public void setNguyenQuan(DiaChi nguyenQuan) {
         this.nguyenQuan = nguyenQuan;
         nguyenQuanIsChanged = true;
@@ -172,7 +164,6 @@ public class NhanKhau {
     public String getDanToc() {
         return danToc;
     }
-
     public void setDanToc(String danToc) {
         this.danToc = danToc;
         danTocIsChanged = true;
@@ -181,7 +172,6 @@ public class NhanKhau {
     public String getHoChieu() {
         return hoChieu;
     }
-
     public void setHoChieu(String hoChieu) {
         this.hoChieu = hoChieu;
         hoChieuIsChanged = true;
@@ -190,7 +180,6 @@ public class NhanKhau {
     public DiaChi getDiaChiHienTai() {
         return diaChiHienTai;
     }
-
     public void setDiaChiHienTai(DiaChi diaChiHienTai) {
         this.diaChiHienTai = diaChiHienTai;
         diaChiHienTaiIsChanged = true;
@@ -199,7 +188,6 @@ public class NhanKhau {
     public String getTrinhDoChuyenMon() {
         return trinhDoChuyenMon;
     }
-
     public void setTrinhDoChuyenMon(String trinhDoChuyenMon) {
         this.trinhDoChuyenMon = trinhDoChuyenMon;
         trinhDoChuyenMonIsChanged = true;
@@ -208,7 +196,6 @@ public class NhanKhau {
     public String getTrinhDoHocVan() {
         return trinhDoHocVan;
     }
-
     public void setTrinhDoHocVan(String trinhDoHocVan) {
         this.trinhDoHocVan = trinhDoHocVan;
         trinhDoHocVanIsChanged = true;
@@ -217,7 +204,6 @@ public class NhanKhau {
     public String getTrinhDoNgoaiNgu() {
         return trinhDoNgoaiNgu;
     }
-
     public void setTrinhDoNgoaiNgu(String trinhDoNgoaiNgu) {
         this.trinhDoNgoaiNgu = trinhDoNgoaiNgu;
         trinhDoNgoaiNguIsChanged = true;
@@ -226,7 +212,6 @@ public class NhanKhau {
     public String getNgheNghiep() {
         return ngheNghiep;
     }
-
     public void setNgheNghiep(String ngheNghiep) {
         this.ngheNghiep = ngheNghiep;
         ngheNghiepIsChanged = true;
@@ -235,7 +220,6 @@ public class NhanKhau {
     public DiaChi getNoiLamViec() {
         return noiLamViec;
     }
-
     public void setNoiLamViec(DiaChi noiLamViec) {
         this.noiLamViec = noiLamViec;
         noiLamViecIsChanged = true;
@@ -244,7 +228,6 @@ public class NhanKhau {
     public String getTienAn() {
         return tienAn;
     }
-
     public void setTienAn(String tienAn) {
         this.tienAn = tienAn;
         tienAnIsChanged = true;
@@ -253,7 +236,6 @@ public class NhanKhau {
     public LocalDate getNgayChuyenDen() {
         return ngayChuyenDen;
     }
-
     public void setNgayChuyenDen(LocalDate ngayChuyenDen) {
         this.ngayChuyenDen = ngayChuyenDen;
         ngayChuyenDenIsChanged = true;
@@ -262,7 +244,6 @@ public class NhanKhau {
     public String getLyDoChuyenDen() {
         return lyDoChuyenDen;
     }
-
     public void setLyDoChuyenDen(String lyDoChuyenDen) {
         this.lyDoChuyenDen = lyDoChuyenDen;
         lyDoChuyenDenIsChanged = true;
@@ -291,15 +272,27 @@ public class NhanKhau {
     public String getGhiChu() {
         return ghiChu;
     }
-
     public void setGhiChu(String ghiChu) {
         this.ghiChu = ghiChu;
         ghiChuIsChanged = true;
     }
 
+    public void addTamTruVang(TamTruVang x) {
+        tamTruVangs.add(x);
+        tamTruVangsIsChanged = true;
+    }
+    public void removeTamTruVang(TamTruVang x) {
+        tamTruVangs.remove(x);
+        tamTruVangsIsChanged = true;
+    }
+    public List<TamTruVang> getTamTruVangs() {
+        return tamTruVangs;
+    }
+
     public ChungMinhThu getChungMinhThu() {
         return chungMinhThu;
     }
+
 
     /**
      * Khai báo tạm vắng
@@ -309,7 +302,6 @@ public class NhanKhau {
         // TODO database make tam vang
         return null;
     }
-
 
     /**
      * Save changes in this NK in database
