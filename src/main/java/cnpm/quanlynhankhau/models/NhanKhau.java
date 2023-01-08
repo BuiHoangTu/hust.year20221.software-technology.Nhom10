@@ -13,19 +13,19 @@ public class NhanKhau {
     public boolean tonGiaoIsChanged = false;
     private boolean isMale;
     public boolean isMaleIsChanged = false;
-    private Address thuongTru;
+    private DiaChi thuongTru;
     public boolean thuongTruIsChanged = false;
     private LocalDate ngaySinh;
     public boolean ngaySinhIsChanged = false;
-    private Address noiSinh;
+    private DiaChi noiSinh;
     public boolean noiSinhIsChanged = false;
-    private Address nguyenQuan;
+    private DiaChi nguyenQuan;
     public boolean nguyenQuanIsChanged = false;
     private String danToc;
     public boolean danTocIsChanged = false;
     private String hoChieu;
     public boolean hoChieuIsChanged = false;
-    private Address diaChiHienTai;
+    private DiaChi diaChiHienTai;
     public boolean diaChiHienTaiIsChanged = false;
     private String trinhDoChuyenMon;
     public boolean trinhDoChuyenMonIsChanged = false;
@@ -35,7 +35,7 @@ public class NhanKhau {
     public boolean trinhDoNgoaiNguIsChanged = false;
     private String ngheNghiep;
     public boolean ngheNghiepIsChanged = false;
-    private Address noiLamViec;
+    private DiaChi noiLamViec;
     public boolean noiLamViecIsChanged = false;
     private String tienAn;
     public boolean tienAnIsChanged = false;
@@ -43,15 +43,18 @@ public class NhanKhau {
     public boolean ngayChuyenDenIsChanged = false;
     private String lyDoChuyenDen;
     public boolean lyDoChuyenDenIsChanged = false;
-    private LocalDate ngayTao;
-    public boolean ngayTaoIsChanged = false;
     private String ghiChu;
     public boolean ghiChuIsChanged = false;
 
+    private ChungMinhThu chungMinhThu;
     private String idNguoiTao;
     private LocalDate ngayXoa;
     private String idNguoiXoa;
     private String lyDoXoa;
+    private LocalDate ngayTao;
+
+    public NhanKhau() {
+    }
 
 
     public String getSoNhanKhau() {
@@ -99,11 +102,11 @@ public class NhanKhau {
         isMaleIsChanged = true;
     }
 
-    public Address getThuongTru() {
+    public DiaChi getThuongTru() {
         return thuongTru;
     }
 
-    public void setThuongTru(Address thuongTru) {
+    public void setThuongTru(DiaChi thuongTru) {
         this.thuongTru = thuongTru;
         thuongTruIsChanged = true;
     }
@@ -117,20 +120,20 @@ public class NhanKhau {
         ngaySinhIsChanged = true;
     }
 
-    public Address getNoiSinh() {
+    public DiaChi getNoiSinh() {
         return noiSinh;
     }
 
-    public void setNoiSinh(Address noiSinh) {
+    public void setNoiSinh(DiaChi noiSinh) {
         this.noiSinh = noiSinh;
         noiSinhIsChanged = true;
     }
 
-    public Address getNguyenQuan() {
+    public DiaChi getNguyenQuan() {
         return nguyenQuan;
     }
 
-    public void setNguyenQuan(Address nguyenQuan) {
+    public void setNguyenQuan(DiaChi nguyenQuan) {
         this.nguyenQuan = nguyenQuan;
         nguyenQuanIsChanged = true;
     }
@@ -153,11 +156,11 @@ public class NhanKhau {
         hoChieuIsChanged = true;
     }
 
-    public Address getDiaChiHienTai() {
+    public DiaChi getDiaChiHienTai() {
         return diaChiHienTai;
     }
 
-    public void setDiaChiHienTai(Address diaChiHienTai) {
+    public void setDiaChiHienTai(DiaChi diaChiHienTai) {
         this.diaChiHienTai = diaChiHienTai;
         diaChiHienTaiIsChanged = true;
     }
@@ -198,11 +201,11 @@ public class NhanKhau {
         ngheNghiepIsChanged = true;
     }
 
-    public Address getNoiLamViec() {
+    public DiaChi getNoiLamViec() {
         return noiLamViec;
     }
 
-    public void setNoiLamViec(Address noiLamViec) {
+    public void setNoiLamViec(DiaChi noiLamViec) {
         this.noiLamViec = noiLamViec;
         noiLamViecIsChanged = true;
     }
@@ -238,10 +241,6 @@ public class NhanKhau {
         return ngayTao;
     }
 
-    public void setNgayTao(LocalDate ngayTao) {
-        this.ngayTao = ngayTao;
-    }
-
     public String getIdNguoiTao() {
         return idNguoiTao;
     }
@@ -265,5 +264,17 @@ public class NhanKhau {
     public void setGhiChu(String ghiChu) {
         this.ghiChu = ghiChu;
         ghiChuIsChanged = true;
+    }
+
+    public ChungMinhThu getChungMinhThu() {
+        return chungMinhThu;
+    }
+
+
+    /**
+     * Save changes in this NK in database
+     */
+    public void commit() {
+        // TODO make commit
     }
 }
