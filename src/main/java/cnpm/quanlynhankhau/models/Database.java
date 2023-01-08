@@ -1,8 +1,6 @@
 package cnpm.quanlynhankhau.models;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class Database {
     private static final String dbURL = "jdbc:mysql://localhost:3306/quan_ly_nhan_khau";
@@ -22,12 +20,25 @@ public class Database {
         }
         return connection;
     }
+    
     public static Connection getConnection(){
         return getConnection(true);
     }
 
-    public static void main(String[] args) {
-        var c = getConnection();
-        System.out.println(c);
+    public static boolean login(String uname, String passwd) throws SQLException {
+        Connection connection = getConnection();
+
+        PreparedStatement preparedStatement = connection.prepareStatement("""
+            SELECT ID
+            FROM quan_ly_nhan_khau.users
+            WHERE quan_ly_nhan_khau.users.userName = ?
+            AND quan_ly_nhan_khau.users.passwd = ?
+            """);
+        preparedStatement.setString(1, uname);
+        preparedStatement.setString(2, passwd);
+
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        return resultSet.next();
     }
 }
