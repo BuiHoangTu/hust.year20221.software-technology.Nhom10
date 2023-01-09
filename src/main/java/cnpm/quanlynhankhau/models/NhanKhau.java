@@ -307,6 +307,28 @@ public class NhanKhau {
      * Save changes in this NK in database
      */
     public void commit() {
+        soNhanKhauIsChanged = false;
+        tenIsChanged = false;
+        bietDanhIsChanged = false;
+        tonGiaoIsChanged = false;
+        isMaleIsChanged = false;
+        thuongTruIsChanged = false;
+        ngaySinhIsChanged = false;
+        noiSinhIsChanged = false;
+        nguyenQuanIsChanged = false;
+        danTocIsChanged = false;
+        hoChieuIsChanged = false;
+        diaChiHienTaiIsChanged = false;
+        trinhDoChuyenMonIsChanged = false;
+        trinhDoHocVanIsChanged = false;
+        trinhDoNgoaiNguIsChanged = false;
+        ngheNghiepIsChanged = false;
+        noiLamViecIsChanged = false;
+        tienAnIsChanged = false;
+        ngayChuyenDenIsChanged = false;
+        lyDoChuyenDenIsChanged = false;
+        ghiChuIsChanged = false;
+        tamTruVangsIsChanged = false;
         // TODO make commit
     }
 }

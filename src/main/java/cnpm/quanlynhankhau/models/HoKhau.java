@@ -8,10 +8,15 @@ public class HoKhau {
     private String soHoKhau;
     private NhanKhau chuHo;
     // TODO làm IsChanged như NK
+    private boolean chuHoIsChanged = false;
     private String maKhuVuc;
+    private boolean maKhuVucIsChanged = false;
     private DiaChi diaChi;
+    private boolean diaChiIsChanged = false;
     private LocalDate ngayLap;
+    private boolean ngayLapIsChanged = false;
     private final List<NhanKhau> thanhViens = new ArrayList<>();
+    private boolean thanhVienIsChanged = false;
 
 
     public String getSoHoKhau() {
@@ -25,6 +30,7 @@ public class HoKhau {
 
     public void setChuHo(NhanKhau chuHo) {
         this.chuHo = chuHo;
+        chuHoIsChanged = true;
     }
 
     public String getMaKhuVuc() {
@@ -33,6 +39,7 @@ public class HoKhau {
 
     public void setMaKhuVuc(String maKhuVuc) {
         this.maKhuVuc = maKhuVuc;
+        maKhuVucIsChanged = true;
     }
 
     public DiaChi getDiaChi() {
@@ -41,6 +48,7 @@ public class HoKhau {
 
     public void setDiaChi(DiaChi diaChi) {
         this.diaChi = diaChi;
+        diaChiIsChanged = true;
     }
 
     public LocalDate getNgayLap() {
@@ -49,6 +57,7 @@ public class HoKhau {
 
     public void setNgayLap(LocalDate ngayLap) {
         this.ngayLap = ngayLap;
+        ngayLapIsChanged = true;
     }
 
     public List<NhanKhau> getThanhViens() {
@@ -57,13 +66,16 @@ public class HoKhau {
 
     public void themThanhVien(NhanKhau thanhVien) {
         this.thanhViens.add(thanhVien);
+        thanhVienIsChanged = true;
     }
 
     public void xoaThanhVien(NhanKhau nhanKhau) {
         this.thanhViens.remove(nhanKhau);
+        thanhVienIsChanged = true;
     }
     public void xoaThanhVien(int sttNhanKhau) {
         this.thanhViens.remove(sttNhanKhau);
+        thanhVienIsChanged = true;
     }
 
 
@@ -72,6 +84,11 @@ public class HoKhau {
      * Changes don't include NKs' content changes
      */
     public void commit() {
+        chuHoIsChanged = false;
+        maKhuVucIsChanged = false;
+        diaChiIsChanged = false;
+        ngayLapIsChanged = false;
+        thanhVienIsChanged = false;
         // TODO make commit
     }
 }
