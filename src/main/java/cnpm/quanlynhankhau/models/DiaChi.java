@@ -51,20 +51,21 @@ public class DiaChi {
     @Override
     public String toString() {
         var x = new StringBuilder();
-        if (ghiChu != null) x.append(ghiChu).append(", ");
-        if (soNha != null) x.append("Số ").append(soNha).append(", ");
-        if (duongPho != null) x.append("Đường ").append(duongPho).append(", ");
-        if (quan != null) x.append("Quận ").append(quan).append(", ");
-        if (thanhPho != null) x.append("Thành phố ").append(thanhPho).append(".");
+        if ((ghiChu != null) && (ghiChu != "")) x.append(ghiChu).append(", ");
+        if ((soNha != null) && (soNha != "")) x.append("Số ").append(soNha).append(", ");
+        if ((duongPho != null) && (duongPho != "")) x.append("Đường ").append(duongPho).append(", ");
+        if ((quan != null) && (quan != "")) x.append("Quận ").append(quan).append(", ");
+        if ((thanhPho != null) && (thanhPho != "")) x.append("Thành phố ").append(thanhPho).append(".");
 
         return x.toString();
     }
     public static void main(String[] args) {
     	String thanhPho1 = null, quan1 = null, duongPho1 = null, soNha1 = null, ghiChu1 = null;
     	String test = new String();
-    	test = "Đại Học Bách Khoa, Số 1, Đường Giải Phóng, Quận Hai Bà Trưng, Thành Phố Hà Nội";
+    	test = ", , Đường Giải Phóng, Quận Hai Bà Trưng, Thành Phố Hà Nội";
     	DiaChi test1 = new DiaChi(thanhPho1, quan1, duongPho1, soNha1, ghiChu1);
     	test1 = parse(test);
-    	System.out.print(test1.ghiChu +" "+ test1.soNha +" "+ test1.duongPho +" "+ test1.quan +" "+ test1.thanhPho);
+    	//System.out.println(test1.ghiChu +" "+ test1.soNha +" "+ test1.duongPho +" "+ test1.quan +" "+ test1.thanhPho);
+    	System.out.println(test1.toString());
     }
 }
