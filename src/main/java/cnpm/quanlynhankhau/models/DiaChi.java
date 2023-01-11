@@ -60,8 +60,10 @@ public class DiaChi {
                 end = quanIndex - 2; 
             } else if (phoIndex > 0) {
                 end = phoIndex - 2; 
-            } else {
+            } else if (!strDiaChi.isEmpty()) {
                 end = strDiaChi.length() - 1;
+            } else {
+                end = 0;
             }
 
             ghiChu = strDiaChi.substring(begin, end);
@@ -136,12 +138,19 @@ public class DiaChi {
     @Override
     public String toString() {
         var x = new StringBuilder();
-        if (ghiChu != null) x.append(ghiChu);
-        if (soNha != null) x.append(", ").append("Số ").append(soNha);
-        if (duongPho != null) x.append(", ").append("Đường ").append(duongPho);
-        if (quan != null) x.append(", ").append("Quận ").append(quan);
-        if (thanhPho != null) x.append(", ").append("Thành phố ").append(thanhPho);
-        x.append(".");
+        if (ghiChu != null && ! ghiChu.trim().isEmpty()) x.append(ghiChu);
+        if (soNha != null && !soNha.trim().isEmpty()) x.append(", ").append("Số ").append(soNha);
+        if (duongPho != null && !duongPho.trim().isEmpty()) x.append(", ").append("Đường ").append(duongPho);
+        if (quan != null && !quan.trim().isEmpty()) x.append(", ").append("Quận ").append(quan);
+        if (thanhPho != null && !thanhPho.trim().isEmpty()) x.append(", ").append("Thành phố ").append(thanhPho);
+
+        if (
+                (ghiChu != null && !ghiChu.trim().isEmpty()) ||
+                (soNha != null && !soNha.trim().isEmpty()) ||
+                (duongPho != null && !duongPho.trim().isEmpty()) ||
+                (quan != null && !quan.trim().isEmpty()) ||
+                (thanhPho != null && !thanhPho.trim().isEmpty())
+        ) x.append(".");
 
         return x.toString();
     }
