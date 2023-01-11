@@ -26,25 +26,25 @@ public class DiaChi {
         int soIndex, soNextIndext = -1; 
         do {
             soIndex = soNextIndext;    
-            soNextIndext = strDiaChi.indexOf("Số ", soNextIndext);
+            soNextIndext = strDiaChi.indexOf("Số ", soNextIndext + 1);
         } while (soNextIndext >= 0); 
         
         int duongIndex, duongNextIndext = -1; 
         do {
             duongIndex = duongNextIndext;    
-            duongNextIndext = strDiaChi.indexOf("Đường ", duongNextIndext);
+            duongNextIndext = strDiaChi.indexOf("Đường ", duongNextIndext + 1);
         } while (duongNextIndext >= 0); 
 
         int quanIndex, quanNextIndext = -1; 
         do {
             quanIndex = quanNextIndext;    
-            quanNextIndext = strDiaChi.indexOf("Quận ", quanNextIndext);
+            quanNextIndext = strDiaChi.indexOf("Quận ", quanNextIndext + 1);
         } while (quanNextIndext >= 0); 
 
         int phoIndex, phoNextIndext = -1; 
         do {
             phoIndex = phoNextIndext;    
-            phoNextIndext = strDiaChi.indexOf("Thành phố ", phoNextIndext);
+            phoNextIndext = strDiaChi.indexOf("Thành phố ", phoNextIndext + 1);
         } while (phoNextIndext >= 0); 
 
         int begin, end;
