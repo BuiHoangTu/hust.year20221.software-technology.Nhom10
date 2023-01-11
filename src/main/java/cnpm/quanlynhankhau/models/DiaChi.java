@@ -24,10 +24,11 @@ public class DiaChi {
         // TODO parse dia chi theo format toString dưới
      	String thanhPho1 = null, quan1 = null, duongPho1 = null, soNha1 = null, ghiChu1 = null;
      	String output = String.valueOf(text);
-     	output = output.replaceAll("Số", "");
-     	output = output.replaceAll("Đường", "");
-     	output = output.replaceAll("Quận", "");
-     	output = output.replaceAll("Thành Phố", "");
+     	output = output.replaceAll("(?i)Số", "");
+     	output = output.replaceAll("(?i)Đường", "");
+     	output = output.replaceAll("(?i)Quận", "");
+     	output = output.replaceAll("(?i)Thành phố", "");
+     	output = output.replace('.' , ' ');
  
      	String[] splited = output.split("[,]", 0);
      	ghiChu1 = splited[0].strip();
@@ -66,10 +67,12 @@ public class DiaChi {
     public static void main(String[] args) {
     	String thanhPho1 = null, quan1 = null, duongPho1 = null, soNha1 = null, ghiChu1 = null;
     	String test = new String();
-    	test = ", , Đường Giải Phóng, Quận Hai Bà Trưng, Thành Phố Hà Nội";
+    	test = ", , Đường Giải Phóng, Quận Hai Bà Trưng, Thành phố Hà Nội";
     	DiaChi test1 = new DiaChi(thanhPho1, quan1, duongPho1, soNha1, ghiChu1);
     	test1 = parse(test);
-    	//System.out.println(test1.ghiChu +"-"+ test1.soNha +"-"+ test1.duongPho +" "+ test1.quan +" "+ test1.thanhPho);
-    	System.out.println(parse(test1.toString()));
+    	System.out.println(test1.toString());
+    	test1= parse(test1.toString());
+    	System.out.println(test1.ghiChu +"-"+ test1.soNha +"-"+ test1.duongPho +"-"+ test1.quan +"-"+ test1.thanhPho);
+    	
     }
 }
