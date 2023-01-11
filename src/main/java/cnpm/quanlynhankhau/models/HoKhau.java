@@ -7,7 +7,6 @@ import java.util.List;
 public class HoKhau {
     private String soHoKhau;
     private NhanKhau chuHo;
-    // TODO làm IsChanged như NK
     private boolean chuHoIsChanged = false;
     private String maKhuVuc;
     private boolean maKhuVucIsChanged = false;
@@ -76,6 +75,14 @@ public class HoKhau {
     public void xoaThanhVien(int sttNhanKhau) {
         this.thanhViens.remove(sttNhanKhau);
         thanhVienIsChanged = true;
+    }
+
+
+    public List<HoKhau> filterBySoLuong(int slnk) {
+        List<HoKhau> output = new ArrayList<>();
+        // TODO here
+
+        return output;
     }
 
 
