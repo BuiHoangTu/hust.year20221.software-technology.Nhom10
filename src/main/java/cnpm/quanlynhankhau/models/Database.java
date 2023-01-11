@@ -1,9 +1,13 @@
 package cnpm.quanlynhankhau.models;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
+/**
+ * Class xứ lý giao tiếp DB mà không phù hợp chứa trong các models khác
+ */
 public class Database {
     private static final String dbURL = "jdbc:mysql://localhost:3306/quan_ly_nhan_khau";
     private static final String dbUName = "root";
@@ -26,8 +30,52 @@ public class Database {
         return getConnection(true);
     }
 
-    public static void main(String[] args) {
-        var c = getConnection();
-        System.out.println(c);
+    public static boolean login(String uname, String passwd) throws SQLException {
+        Connection connection = getConnection();
+
+        PreparedStatement preparedStatement = connection.prepareStatement("""
+            SELECT ID
+            FROM quan_ly_nhan_khau.users
+            WHERE quan_ly_nhan_khau.users.userName = ?
+            AND quan_ly_nhan_khau.users.passwd = ?
+            """);
+        preparedStatement.setString(1, uname);
+        preparedStatement.setString(2, passwd);
+
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        return resultSet.next();
+    }
+
+    /**
+     * Danh sách tạm trú/vắng của 1 người
+     * @param soNhanKhau định danh người này
+     * @return Các lần tạm trú/vắng
+     * @throws SQLException khi kết nối đến db thất bại. Bật mySQL lên.
+     */
+    public static List<TamTruVang> searchTamVang(String soNhanKhau) throws SQLException {
+        Connection connection = getConnection();
+
+        PreparedStatement preparedStatement = connection.prepareStatement("""
+                SELECT maGiayTamtru, tuNgay, denNgay, lyDo
+                FROM quan_ly_nhan_khau.tam_tru
+                WHERE quan_ly_nhan_khau.tam_tru.idNhanKhau = ?;
+                """);
+        preparedStatement.setString(1, soNhanKhau);
+        ResultSet res = preparedStatement.executeQuery();
+
+        List<TamTruVang> output = new ArrayList<>();
+        while (res.next()) {
+            output.add(new TamTruVang(
+                    res.getString("maGiayTamtru"),
+                    LocalDate.parse(res.getString("tuNgay")),
+                    LocalDate.parse(res.getString("denNgay")),
+                    DiaChi.parse(res.getString("diaChiTamVang")),
+                    DiaChi.parse(res.getString("diaChiTamTru")),
+                    res.getString("lyDo")
+                    ));
+        }
+
+        return output;
     }
 }
