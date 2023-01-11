@@ -24,17 +24,17 @@ public class DiaChi {
         // TODO parse dia chi theo format toString dưới
      	String thanhPho1 = null, quan1 = null, duongPho1 = null, soNha1 = null, ghiChu1 = null;
      	String output = String.valueOf(text);
-     	output = output.replaceAll(" Số ", "");
-     	output = output.replaceAll(" Đường ", "");
-     	output = output.replaceAll(" Quận ", "");
-     	output = output.replaceAll(" Thành Phố ", "");
+     	output = output.replaceAll("Số", "");
+     	output = output.replaceAll("Đường", "");
+     	output = output.replaceAll("Quận", "");
+     	output = output.replaceAll("Thành Phố", "");
  
      	String[] splited = output.split("[,]", 0);
-     	ghiChu1 = splited[0];
-     	soNha1 = splited[1];
-     	duongPho1 = splited[2];
-     	quan1 = splited[3];
-     	thanhPho1 = splited[4];
+     	ghiChu1 = splited[0].strip();
+     	soNha1 = splited[1].strip();
+     	duongPho1 = splited[2].strip();
+     	quan1 = splited[3].strip();
+     	thanhPho1 = splited[4].strip();
 		DiaChi x = new DiaChi(thanhPho1, quan1, duongPho1, soNha1, ghiChu1);
     	return x;
     }
@@ -51,11 +51,15 @@ public class DiaChi {
     @Override
     public String toString() {
         var x = new StringBuilder();
-        if ((ghiChu != null) && (ghiChu != "")) x.append(ghiChu).append(", ");
-        if ((soNha != null) && (soNha != "")) x.append("Số ").append(soNha).append(", ");
-        if ((duongPho != null) && (duongPho != "")) x.append("Đường ").append(duongPho).append(", ");
-        if ((quan != null) && (quan != "")) x.append("Quận ").append(quan).append(", ");
-        if ((thanhPho != null) && (thanhPho != "")) x.append("Thành phố ").append(thanhPho).append(".");
+        if ((ghiChu != null) && (!ghiChu.isBlank())) x.append(ghiChu);
+        x.append(", ");
+        if ((soNha != null) && (!soNha.isBlank())) x.append("Số ").append(soNha);
+        x.append(", ");
+        if ((duongPho != null) && (!duongPho.isBlank())) x.append("Đường ").append(duongPho);
+        x.append(", ");
+        if ((quan != null) && (!quan.isBlank())) x.append("Quận ").append(quan);
+        x.append(", ");
+        if ((thanhPho != null) && (!thanhPho.isBlank())) x.append("Thành phố ").append(thanhPho).append(".");
 
         return x.toString();
     }
@@ -65,7 +69,7 @@ public class DiaChi {
     	test = ", , Đường Giải Phóng, Quận Hai Bà Trưng, Thành Phố Hà Nội";
     	DiaChi test1 = new DiaChi(thanhPho1, quan1, duongPho1, soNha1, ghiChu1);
     	test1 = parse(test);
-    	//System.out.println(test1.ghiChu +" "+ test1.soNha +" "+ test1.duongPho +" "+ test1.quan +" "+ test1.thanhPho);
-    	System.out.println(test1.toString());
+    	//System.out.println(test1.ghiChu +"-"+ test1.soNha +"-"+ test1.duongPho +" "+ test1.quan +" "+ test1.thanhPho);
+    	System.out.println(parse(test1.toString()));
     }
 }
