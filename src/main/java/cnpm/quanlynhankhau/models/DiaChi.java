@@ -21,8 +21,107 @@ public class DiaChi {
      * @return object DiaChi
      */
     public static DiaChi parse(CharSequence text) {
-        // TODO parse dia chi theo format toString dưới
-        return null;
+        String strDiaChi =  text.toString();
+
+        int soIndex, soNextIndext = -1; 
+        do {
+            soIndex = soNextIndext;    
+            soNextIndext = strDiaChi.indexOf("Số ", soNextIndext);
+        } while (soNextIndext >= 0); 
+        
+        int duongIndex, duongNextIndext = -1; 
+        do {
+            duongIndex = duongNextIndext;    
+            duongNextIndext = strDiaChi.indexOf("Đường ", duongNextIndext);
+        } while (duongNextIndext >= 0); 
+
+        int quanIndex, quanNextIndext = -1; 
+        do {
+            quanIndex = quanNextIndext;    
+            quanNextIndext = strDiaChi.indexOf("Quận ", quanNextIndext);
+        } while (quanNextIndext >= 0); 
+
+        int phoIndex, phoNextIndext = -1; 
+        do {
+            phoIndex = phoNextIndext;    
+            phoNextIndext = strDiaChi.indexOf("Thành phố ", phoNextIndext);
+        } while (phoNextIndext >= 0); 
+
+        int begin, end;
+        String ghiChu = null;
+        if (soIndex != 0 && duongIndex != 0 && quanIndex != 0 && phoIndex != 0) {
+            begin = 0;
+
+            if (soIndex > 0) {
+                end = soIndex - 2; // bỏ dấu phẩy 
+            } else if (duongIndex > 0) {
+                end = duongIndex - 2;
+            } else if (quanIndex > 0) {
+                end = quanIndex - 2; 
+            } else if (phoIndex > 0) {
+                end = phoIndex - 2; 
+            } else {
+                end = strDiaChi.length() - 1;
+            }
+
+            ghiChu = strDiaChi.substring(begin, end);
+        }
+
+        String so = null;
+        if (soIndex >= 0) {
+            begin = soIndex + 3;
+
+            if (duongIndex > 0) {
+                end = duongIndex - 2;
+            } else if (quanIndex > 0) {
+                end = quanIndex - 2; 
+            } else if (phoIndex > 0) {
+                end = phoIndex - 2; 
+            } else {
+                end = strDiaChi.length() - 1;
+            }
+
+            so = strDiaChi.substring(begin, end);
+        }
+
+        String duong = null;
+        if (duongIndex >= 0) {
+            begin = duongIndex + 6;
+
+            if (quanIndex > 0) {
+                end = quanIndex - 2; 
+            } else if (phoIndex > 0) {
+                end = phoIndex - 2; 
+            } else {
+                end = strDiaChi.length() - 1;
+            }
+
+            duong = strDiaChi.substring(begin, end);
+        }
+
+        String quan = null;
+        if (quanIndex >= 0) {
+            begin = quanIndex + 5;
+
+            if (phoIndex > 0) {
+                end = phoIndex - 2; 
+            } else {
+                end = strDiaChi.length() - 1;
+            }
+
+            quan = strDiaChi.substring(begin, end);
+        }
+
+        String pho = null;
+        if (phoIndex >= 0) {
+            begin = phoIndex + 10;
+
+            end = strDiaChi.length() - 1;
+
+            pho = strDiaChi.substring(begin, end);
+        }
+
+        return new DiaChi(pho, quan, duong, so, ghiChu);
     }
 
 
@@ -37,11 +136,12 @@ public class DiaChi {
     @Override
     public String toString() {
         var x = new StringBuilder();
-        if (ghiChu != null) x.append(ghiChu).append(", ");
-        if (soNha != null) x.append("Số ").append(soNha).append(", ");
-        if (duongPho != null) x.append("Đường ").append(duongPho).append(", ");
-        if (quan != null) x.append("Quận ").append(quan).append(", ");
-        if (thanhPho != null) x.append("Thành phố ").append(thanhPho).append(".");
+        if (ghiChu != null) x.append(ghiChu);
+        if (soNha != null) x.append(", ").append("Số ").append(soNha);
+        if (duongPho != null) x.append(", ").append("Đường ").append(duongPho);
+        if (quan != null) x.append(", ").append("Quận ").append(quan);
+        if (thanhPho != null) x.append(", ").append("Thành phố ").append(thanhPho);
+        x.append(".");
 
         return x.toString();
     }
