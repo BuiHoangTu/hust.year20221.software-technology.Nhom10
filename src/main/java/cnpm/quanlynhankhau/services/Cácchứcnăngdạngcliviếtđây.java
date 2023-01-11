@@ -1,4 +1,4 @@
-package cnpm.quanlynhankhau.services;
+package cnpm.quanlynhankhau.styles.services;
 
 public class Cácchứcnăngdạngcliviếtđây {
 }
