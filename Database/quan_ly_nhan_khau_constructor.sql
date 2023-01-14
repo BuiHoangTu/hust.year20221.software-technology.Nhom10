@@ -5,6 +5,8 @@ SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
+CREATE DATABASE IF NOT EXISTS `quan_ly_nhan_khau` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `quan_ly_nhan_khau`;
 
 DROP TABLE IF EXISTS `chung_minh_thu`;
 CREATE TABLE `chung_minh_thu` (
@@ -36,7 +38,7 @@ CREATE TABLE `dinh_chinh_ho_khau` (
   `thongTinThayDoi` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `thayDoiTu` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `thayDoiThanh` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `thoiGianThayDoi` date NOT NULL,
+  `thoiGianThayDoi` date NOT NULL DEFAULT current_timestamp(),
   `nguoiThayDoi` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -46,7 +48,7 @@ CREATE TABLE `ho_khau` (
   `idChuHo` bigint(12) UNSIGNED ZEROFILL DEFAULT NULL,
   `maKhuVuc` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `diaChi` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `ngayLap` date DEFAULT NULL,
+  `ngayLap` date DEFAULT current_timestamp(),
   `nguoiThucHien` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -61,7 +63,7 @@ CREATE TABLE `khai_tu` (
   `soGiayKhaiTu` bigint(12) UNSIGNED ZEROFILL NOT NULL,
   `idNguoiKhai` bigint(12) UNSIGNED ZEROFILL DEFAULT NULL,
   `idNguoiChet` bigint(12) UNSIGNED ZEROFILL DEFAULT NULL,
-  `ngayKhai` date DEFAULT NULL,
+  `ngayKhai` date DEFAULT current_timestamp(),
   `ngayChet` date DEFAULT NULL,
   `lyDoChet` text COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
