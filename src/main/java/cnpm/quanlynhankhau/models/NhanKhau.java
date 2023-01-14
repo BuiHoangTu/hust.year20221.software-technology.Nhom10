@@ -48,7 +48,7 @@ public class NhanKhau {
     private String ghiChu;
     public boolean ghiChuIsChanged = false;
     private final List<TamTruVang> tamTruVangs = new ArrayList<>();
-    public boolean tamTruVangsIsChanged = false;
+    // TODO commit directly
 
     private ChungMinhThu chungMinhThu;
     private String idNguoiTao;
@@ -279,11 +279,11 @@ public class NhanKhau {
 
     public void addTamTruVang(TamTruVang x) {
         tamTruVangs.add(x);
-        tamTruVangsIsChanged = true;
+        // TODO: 14/01/2023 db
     }
     public void removeTamTruVang(TamTruVang x) {
         tamTruVangs.remove(x);
-        tamTruVangsIsChanged = true;
+        // TODO: 14/01/2023 db
     }
     public List<TamTruVang> getTamTruVangs() {
         return tamTruVangs;
@@ -307,6 +307,7 @@ public class NhanKhau {
      * Save changes in this NK in database
      */
     public void commit() {
+        // TODO make commit
         soNhanKhauIsChanged = false;
         tenIsChanged = false;
         bietDanhIsChanged = false;
@@ -328,7 +329,6 @@ public class NhanKhau {
         ngayChuyenDenIsChanged = false;
         lyDoChuyenDenIsChanged = false;
         ghiChuIsChanged = false;
-        tamTruVangsIsChanged = false;
-        // TODO make commit
+
     }
 }

@@ -10,6 +10,7 @@ import java.io.IOException;
 
 public class QuanLyNhanKhauApplication extends Application {
     public static final DiaChi CO_SO_HIEN_TAI = new DiaChi("Hà Nội", "Hai Bà Trưng", "Đại Cồ Việt", "1", "Trụ Sở Quản Lý Nhân Khẩu Bách Khoa");
+    public static int USER;
 
     @Override
     public void start(Stage stage){
