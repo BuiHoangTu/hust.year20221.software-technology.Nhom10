@@ -24,7 +24,7 @@
 
 ```Console
     git switch your_branch_name         # make sure you are on right branch 
-    git fetch origin master:master      # update with remote master repo
+    git pull origin master              # update with remote master repo
     git merge origin/master             # get master update
 ```
 
