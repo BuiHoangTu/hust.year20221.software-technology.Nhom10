@@ -1,18 +1,14 @@
 package cnpm.quanlynhankhau.controllers;
 
+import cnpm.quanlynhankhau.application.QuanLyNhanKhauApplication;
 import cnpm.quanlynhankhau.models.Database;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class LoginController {
@@ -28,43 +24,25 @@ public class LoginController {
 
     @FXML
     protected void onClickConfirmLogin() {
-        String sqlquery = """
-                    SELECT * FROM quan_ly_nhan_khau.users u 
-                    WHERE u.userName = ? AND u.passwd = ?  
-                    """;
-        String sUserName = tfUserName.getText();
-        String sPasswd = tfPasswd.getText();
-
-        Connection connection = Database.getConnection();
-        PreparedStatement statement;
-        try{
-            statement = connection.prepareStatement(sqlquery);
-            statement.setString(1, sUserName);
-            statement.setString(2, sPasswd);
-
-            ResultSet resultSet = statement.executeQuery();
-
-            if(resultSet.next()){
-                int userID = resultSet.getInt("ID");
-
-                // change view
-                FXMLLoader fxmlLoader = new FXMLLoader(LoginController.class.getResource("ChooseFunction-view.fxml"));
-                Scene scene;
+        try {
+            int uID = Database.login(tfUserName.getText(), tfPasswd.getText());
+            if (uID >= 0) {
+				QuanLyNhanKhauApplication.USER = uID;
+                FXMLLoader fxmlLoader = new FXMLLoader(LoginController.class.getResource("/cnpm/quanlynhankhau/views/ChooseFunction-view.fxml"));
+                Scene scene = null;
                 try {
                     scene = new Scene(fxmlLoader.load());
                 } catch (IOException e) {
-                    throw new RuntimeException(e);
+                    e.printStackTrace();
                 }
-                Stage stage =  (Stage) tfUserName.getScene().getWindow();
-
-                stage.setScene(scene);
-                stage.show();
+                QuanLyNhanKhauApplication.MAIN_STAGE.setScene(scene);
             } else {
                 lWarning.setVisible(true);
+                lWarning.setText("Your account or password is wrong!");
             }
-
-        }catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            lWarning.setVisible(true);
+            lWarning.setText("Server Error! Please wait a minute and re-try");
         }
     }
 }
