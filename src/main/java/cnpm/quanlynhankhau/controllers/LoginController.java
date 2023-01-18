@@ -67,21 +67,4 @@ public class LoginController {
             e.printStackTrace();
         }
     }
-
-// TODO : remove this
-    @FXML
-    protected void onClickToSignup() {
-        // change view
-//        FXMLLoader fxmlLoader = new FXMLLoader(LoginController.class.getResource("SignUp-view.fxml"));
-//        Scene scene;
-//        try {
-//            scene = new Scene(fxmlLoader.load());
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//        Stage stage =  (Stage) tfUserName.getScene().getWindow();
-//
-//        stage.setScene(scene);
-//        stage.show();
-    }
 }
