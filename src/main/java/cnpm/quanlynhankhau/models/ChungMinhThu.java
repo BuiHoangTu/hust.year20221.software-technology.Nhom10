@@ -2,6 +2,9 @@ package cnpm.quanlynhankhau.models;
 
 import javafx.scene.image.Image;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 
 public class ChungMinhThu {
@@ -27,7 +30,7 @@ public class ChungMinhThu {
 	 * @param noiCap địa chỉ nơi cấp
 	 * @return chứng minh thư mới
 	 */
-	public static ChungMinhThu lamCMT(Image anhChanDung, DiaChi noiCap) {
+	public static ChungMinhThu lamCMT(Image anhChanDung, DiaChi noiCap) throws SQLException {
 		ChungMinhThu output = new ChungMinhThu();
 		output.anhChanDung = anhChanDung;
 		output.noiCap = noiCap;
@@ -35,6 +38,14 @@ public class ChungMinhThu {
 		// todo thay bang database output
 		output.soCMT = null;
 		output.ngayCap = null;
+		StringBuilder sqlQuery = new StringBuilder();
+		sqlQuery.append("Insert into quan_ly_nhan_khau.chung_minh_thu(ngayCap, noiCap, anhChanDung) values (?, ?, ?)");
+		PreparedStatement statement = Database.getConnection().prepareStatement(sqlQuery.toString());
+		statement.setString(1, LocalDate.now().toString());
+		statement.setString(2, noiCap.toString());
+		statement.setString(3, anhChanDung.toString());
+
+		ResultSet resultSet = statement.executeQuery();
 
 		return output;
 	}

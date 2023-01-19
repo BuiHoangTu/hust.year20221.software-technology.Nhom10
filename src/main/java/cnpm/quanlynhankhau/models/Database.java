@@ -83,17 +83,42 @@ public class Database {
     }
 
     public static final int BY_MA_NHAN_KHAU = 1, BY_SO_DIEN_THOAI = 2;
-    public static List<NhanKhau> getNhanKhau(int loaiMa, String ma) {
+    public static List<NhanKhau> getNhanKhau(int loaiMa, String ma) throws SQLException {
         // TODO tim nk co ma = maNhanKhau
+        StringBuilder sqlQuery = new StringBuilder();
+        sqlQuery.append("Select * from quan_ly_nhan_khau.nhan_khau ");
+        if(loaiMa == 1) sqlQuery.append("where maNhanKhau = ?");
+        if(loaiMa == 2) sqlQuery.append("where soDienThoai = ?");
+        PreparedStatement statement = Database.getConnection().prepareStatement(sqlQuery.toString());
+        statement.setString(1, ma);
+        statement.executeQuery();
         return null;
     }
 
-    public static void xoaNhanKhau (NhanKhau nhanKhau) {
+    public static void xoaNhanKhau (NhanKhau nhanKhau) throws SQLException {
         // TODO xoaNhanKhau
+        StringBuilder sqlQuery = new StringBuilder();
+        sqlQuery.append("Delete from quan_ly_nhan_khau.nhan_khau where maNhanKhau = ?;");
+        PreparedStatement statement = Database.getConnection().prepareStatement(sqlQuery.toString());
+        statement.setString(1, nhanKhau.getSoNhanKhau());
+        ResultSet resultSet = statement.executeQuery();
+        if(!resultSet.next()){
+            throw new SQLException("Nhan Khau khong ton tai");
+        }
     }
 
-    public static void taoHoKhau (HoKhau hoKhau) {
+    public static void taoHoKhau (HoKhau hoKhau) throws SQLException {
         // TODO: 14/01/2023 insert database
+        StringBuilder sqlQuery = new StringBuilder();
+        sqlQuery.append("Insert into quan_ly_nhan_khau.ho_khau (maHoKhau, idChuHo, maKhuVuc, diaChi, ngayLap) values(?, ?, ?, ?, ?);");
+        PreparedStatement statement = Database.getConnection().prepareStatement(sqlQuery.toString());
+
+        statement.setString(1, hoKhau.getSoHoKhau());
+        statement.setString(2, hoKhau.getChuHo().getSoNhanKhau());
+        statement.setString(3, hoKhau.getMaKhuVuc());
+        statement.setString(4, hoKhau.getDiaChi().toString());
+        statement.setString(5, hoKhau.getNgayLap().toString());
+        statement.executeUpdate();
     }
 
 }

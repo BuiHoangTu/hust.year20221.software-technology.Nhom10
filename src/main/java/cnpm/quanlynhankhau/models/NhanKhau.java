@@ -1,5 +1,8 @@
 package cnpm.quanlynhankhau.models;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -277,13 +280,29 @@ public class NhanKhau {
         ghiChuIsChanged = true;
     }
 
-    public void addTamTruVang(TamTruVang x) {
+    public void addTamTruVang(TamTruVang x) throws SQLException {
         tamTruVangs.add(x);
         // TODO: 14/01/2023 db
+        StringBuilder sqlQuery = new StringBuilder();
+        sqlQuery.append("Insert INTO quan_ly_nhan_khau.tam_tru_vang (idNhanKhau, maGiayTamVang, noiTamTru, tuNgay, denNgay, lyDo, noiTamVang) values(?, ?, ?, ?, ?, ?, ?)");
+        PreparedStatement statement = Database.getConnection().prepareStatement(sqlQuery.toString());
+        statement.setString(1, soNhanKhau);
+        statement.setString(2, x.getMaTamTruVang());
+        statement.setString(3, x.getDcTamTru().toString());
+        statement.setString(4, x.getTuNgay().toString());
+        statement.setString(5, x.getDenNgay().toString());
+        statement.setString(6, x.getLyDo());
+        statement.setString(7, x.getDcTamVang().toString());
+        statement.executeUpdate();
     }
-    public void removeTamTruVang(TamTruVang x) {
+    public void removeTamTruVang(TamTruVang x) throws SQLException {
         tamTruVangs.remove(x);
         // TODO: 14/01/2023 db
+        StringBuilder sqlQuery = new StringBuilder();
+        sqlQuery.append("Delete from quan_ly_nhan_khau.tam_tru_vang where maGiayTamVang = ?;");
+        PreparedStatement statement = Database.getConnection().prepareStatement(sqlQuery.toString());
+        statement.setString(1, x.getMaTamTruVang());
+        statement.executeUpdate();
     }
     public List<TamTruVang> getTamTruVangs() {
         return tamTruVangs;
