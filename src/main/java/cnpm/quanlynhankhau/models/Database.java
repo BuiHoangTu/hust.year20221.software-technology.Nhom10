@@ -30,7 +30,7 @@ public class Database {
         return getConnection(true);
     }
 
-    public static boolean login(String uname, String passwd) throws SQLException {
+    public static int login(String uname, String passwd) throws SQLException {
         Connection connection = getConnection();
 
         PreparedStatement preparedStatement = connection.prepareStatement("""
@@ -43,8 +43,11 @@ public class Database {
         preparedStatement.setString(2, passwd);
 
         ResultSet resultSet = preparedStatement.executeQuery();
+        if (! resultSet.next()) {
+            return -1;
+        }
 
-        return resultSet.next();
+        return Integer.parseInt(resultSet.getString("ID"));
     }
 
     /**
@@ -78,4 +81,19 @@ public class Database {
 
         return output;
     }
+
+    public static final int BY_MA_NHAN_KHAU = 1, BY_SO_DIEN_THOAI = 2;
+    public static List<NhanKhau> getNhanKhau(int loaiMa, String ma) {
+        // TODO tim nk co ma = maNhanKhau
+        return null;
+    }
+
+    public static void xoaNhanKhau (NhanKhau nhanKhau) {
+        // TODO xoaNhanKhau
+    }
+
+    public static void taoHoKhau (HoKhau hoKhau) {
+        // TODO: 14/01/2023 insert database 
+    }
+
 }

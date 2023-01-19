@@ -32,7 +32,7 @@ public class ChungMinhThu {
 		output.anhChanDung = anhChanDung;
 		output.noiCap = noiCap;
 
-		// thay bang database output// TODO database auto generate
+		// todo thay bang database output
 		output.soCMT = null;
 		output.ngayCap = null;
 

@@ -48,7 +48,7 @@ public class NhanKhau {
     private String ghiChu;
     public boolean ghiChuIsChanged = false;
     private final List<TamTruVang> tamTruVangs = new ArrayList<>();
-    public boolean tamTruVangsIsChanged = false;
+    // TODO commit directly
 
     private ChungMinhThu chungMinhThu;
     private String idNguoiTao;
@@ -86,6 +86,26 @@ public class NhanKhau {
         this.idNguoiXoa = idNguoiXoa;
         this.lyDoXoa = lyDoXoa;
         this.ngayTao = ngayTao;
+    }
+    public NhanKhau(String soNhanKhau, String ten, String bietDanh, String tonGiao, boolean isMale, DiaChi thuongTru, LocalDate ngaySinh, DiaChi noiSinh, DiaChi nguyenQuan, String danToc, String hoChieu, DiaChi diaChiHienTai, String trinhDoChuyenMon, String trinhDoHocVan, String trinhDoNgoaiNgu, String ngheNghiep, DiaChi noiLamViec, String tienAn) {
+        this.soNhanKhau = soNhanKhau;
+        this.ten = ten;
+        this.bietDanh = bietDanh;
+        this.tonGiao = tonGiao;
+        this.isMale = isMale;
+        this.thuongTru = thuongTru;
+        this.ngaySinh = ngaySinh;
+        this.noiSinh = noiSinh;
+        this.nguyenQuan = nguyenQuan;
+        this.danToc = danToc;
+        this.hoChieu = hoChieu;
+        this.diaChiHienTai = diaChiHienTai;
+        this.trinhDoChuyenMon = trinhDoChuyenMon;
+        this.trinhDoHocVan = trinhDoHocVan;
+        this.trinhDoNgoaiNgu = trinhDoNgoaiNgu;
+        this.ngheNghiep = ngheNghiep;
+        this.noiLamViec = noiLamViec;
+        this.tienAn = tienAn;
     }
 
 
@@ -279,11 +299,11 @@ public class NhanKhau {
 
     public void addTamTruVang(TamTruVang x) {
         tamTruVangs.add(x);
-        tamTruVangsIsChanged = true;
+        // TODO: 14/01/2023 db
     }
     public void removeTamTruVang(TamTruVang x) {
         tamTruVangs.remove(x);
-        tamTruVangsIsChanged = true;
+        // TODO: 14/01/2023 db
     }
     public List<TamTruVang> getTamTruVangs() {
         return tamTruVangs;
@@ -308,5 +328,27 @@ public class NhanKhau {
      */
     public void commit() {
         // TODO make commit
+        soNhanKhauIsChanged = false;
+        tenIsChanged = false;
+        bietDanhIsChanged = false;
+        tonGiaoIsChanged = false;
+        isMaleIsChanged = false;
+        thuongTruIsChanged = false;
+        ngaySinhIsChanged = false;
+        noiSinhIsChanged = false;
+        nguyenQuanIsChanged = false;
+        danTocIsChanged = false;
+        hoChieuIsChanged = false;
+        diaChiHienTaiIsChanged = false;
+        trinhDoChuyenMonIsChanged = false;
+        trinhDoHocVanIsChanged = false;
+        trinhDoNgoaiNguIsChanged = false;
+        ngheNghiepIsChanged = false;
+        noiLamViecIsChanged = false;
+        tienAnIsChanged = false;
+        ngayChuyenDenIsChanged = false;
+        lyDoChuyenDenIsChanged = false;
+        ghiChuIsChanged = false;
+
     }
 }

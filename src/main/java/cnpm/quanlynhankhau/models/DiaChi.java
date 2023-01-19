@@ -21,23 +21,111 @@ public class DiaChi {
      * @return object DiaChi
      */
     public static DiaChi parse(CharSequence text) {
-        // TODO parse dia chi theo format toString dưới
-     	String thanhPho1 = null, quan1 = null, duongPho1 = null, soNha1 = null, ghiChu1 = null;
-     	String output = String.valueOf(text);
-     	output = output.replaceAll("(?i)Số", "");
-     	output = output.replaceAll("(?i)Đường", "");
-     	output = output.replaceAll("(?i)Quận", "");
-     	output = output.replaceAll("(?i)Thành phố", "");
-     	output = output.replace('.' , ' ');
- 
-     	String[] splited = output.split("[,]", 0);
-     	ghiChu1 = splited[0].strip();
-     	soNha1 = splited[1].strip();
-     	duongPho1 = splited[2].strip();
-     	quan1 = splited[3].strip();
-     	thanhPho1 = splited[4].strip();
-		DiaChi x = new DiaChi(thanhPho1, quan1, duongPho1, soNha1, ghiChu1);
-    	return x;
+
+        String strDiaChi =  text.toString();
+
+        int soIndex, soNextIndext = -1; 
+        do {
+            soIndex = soNextIndext;    
+            soNextIndext = strDiaChi.indexOf("Số ", soNextIndext + 1);
+        } while (soNextIndext >= 0); 
+        
+        int duongIndex, duongNextIndext = -1; 
+        do {
+            duongIndex = duongNextIndext;    
+            duongNextIndext = strDiaChi.indexOf("Đường ", duongNextIndext + 1);
+        } while (duongNextIndext >= 0); 
+
+        int quanIndex, quanNextIndext = -1; 
+        do {
+            quanIndex = quanNextIndext;    
+            quanNextIndext = strDiaChi.indexOf("Quận ", quanNextIndext + 1);
+        } while (quanNextIndext >= 0); 
+
+        int phoIndex, phoNextIndext = -1; 
+        do {
+            phoIndex = phoNextIndext;    
+            phoNextIndext = strDiaChi.indexOf("Thành phố ", phoNextIndext + 1);
+        } while (phoNextIndext >= 0); 
+
+        int begin, end;
+        String ghiChu = null;
+        if (soIndex != 0 && duongIndex != 0 && quanIndex != 0 && phoIndex != 0) {
+            begin = 0;
+
+            if (soIndex > 0) {
+                end = soIndex - 2; // bỏ dấu phẩy 
+            } else if (duongIndex > 0) {
+                end = duongIndex - 2;
+            } else if (quanIndex > 0) {
+                end = quanIndex - 2; 
+            } else if (phoIndex > 0) {
+                end = phoIndex - 2; 
+            } else if (!strDiaChi.isEmpty()) {
+                end = strDiaChi.length() - 1;
+            } else {
+                end = 0;
+            }
+
+            ghiChu = strDiaChi.substring(begin, end);
+        }
+
+        String so = null;
+        if (soIndex >= 0) {
+            begin = soIndex + 3;
+
+            if (duongIndex > 0) {
+                end = duongIndex - 2;
+            } else if (quanIndex > 0) {
+                end = quanIndex - 2; 
+            } else if (phoIndex > 0) {
+                end = phoIndex - 2; 
+            } else {
+                end = strDiaChi.length() - 1;
+            }
+
+            so = strDiaChi.substring(begin, end);
+        }
+
+        String duong = null;
+        if (duongIndex >= 0) {
+            begin = duongIndex + 6;
+
+            if (quanIndex > 0) {
+                end = quanIndex - 2; 
+            } else if (phoIndex > 0) {
+                end = phoIndex - 2; 
+            } else {
+                end = strDiaChi.length() - 1;
+            }
+
+            duong = strDiaChi.substring(begin, end);
+        }
+
+        String quan = null;
+        if (quanIndex >= 0) {
+            begin = quanIndex + 5;
+
+            if (phoIndex > 0) {
+                end = phoIndex - 2; 
+            } else {
+                end = strDiaChi.length() - 1;
+            }
+
+            quan = strDiaChi.substring(begin, end);
+        }
+
+        String pho = null;
+        if (phoIndex >= 0) {
+            begin = phoIndex + 10;
+
+            end = strDiaChi.length() - 1;
+
+            pho = strDiaChi.substring(begin, end);
+        }
+
+        return new DiaChi(pho, quan, duong, so, ghiChu);
+
     }
 
 
@@ -52,15 +140,20 @@ public class DiaChi {
     @Override
     public String toString() {
         var x = new StringBuilder();
-        if ((ghiChu != null) && (!ghiChu.isBlank())) x.append(ghiChu);
-        x.append(", ");
-        if ((soNha != null) && (!soNha.isBlank())) x.append("Số ").append(soNha);
-        x.append(", ");
-        if ((duongPho != null) && (!duongPho.isBlank())) x.append("Đường ").append(duongPho);
-        x.append(", ");
-        if ((quan != null) && (!quan.isBlank())) x.append("Quận ").append(quan);
-        x.append(", ");
-        if ((thanhPho != null) && (!thanhPho.isBlank())) x.append("Thành phố ").append(thanhPho).append(".");
+
+        if (ghiChu != null && ! ghiChu.trim().isEmpty()) x.append(ghiChu);
+        if (soNha != null && !soNha.trim().isEmpty()) x.append(", ").append("Số ").append(soNha);
+        if (duongPho != null && !duongPho.trim().isEmpty()) x.append(", ").append("Đường ").append(duongPho);
+        if (quan != null && !quan.trim().isEmpty()) x.append(", ").append("Quận ").append(quan);
+        if (thanhPho != null && !thanhPho.trim().isEmpty()) x.append(", ").append("Thành phố ").append(thanhPho);
+
+        if (
+                (ghiChu != null && !ghiChu.trim().isEmpty()) ||
+                (soNha != null && !soNha.trim().isEmpty()) ||
+                (duongPho != null && !duongPho.trim().isEmpty()) ||
+                (quan != null && !quan.trim().isEmpty()) ||
+                (thanhPho != null && !thanhPho.trim().isEmpty())
+        ) x.append(".");
 
         return x.toString();
     }
