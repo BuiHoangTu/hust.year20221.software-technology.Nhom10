@@ -82,18 +82,92 @@ public class Database {
         return output;
     }
 
-    public static final int BY_MA_NHAN_KHAU = 1, BY_SO_DIEN_THOAI = 2;
-    public static List<NhanKhau> getNhanKhau(int loaiMa, String ma) {
+    public static final int BY_MA_NHAN_KHAU = 1, BY_TEN = 2, ;
+    public static void getNhanKhau(int loaiMa, String ma) throws SQLException {
         // TODO tim nk co ma = maNhanKhau
-        return null;
+    	if (loaiMa == 1) { 
+	    	PreparedStatement subStatement = Database.getConnection().prepareStatement("""
+	                SELECT *
+	                FROM quan_ly_nhan_khau.nhan_khau
+	                WHERE maNhanKhau = ?;
+	                """);
+	        subStatement.setString(1, ma);
+	        ResultSet res = subStatement.executeQuery();
+	        
+	        if (!res.next()) {
+	            throw new SQLException("NhanKhau khong ton tai");
+	        }
+	        
+	        ChungMinhThu CMTtemp;
+	        
+	        NhanKhau nk = new NhanKhau(
+	        	ma,
+	        	res.getString("hoTen"),
+	        	res.getString("bietDanh"),
+	        	res.getString("tonGiao"),
+	        	res.getString("gioiTinh") == "Nam"? true : false,
+	        	DiaChi.parse(res.getString("noiThuongTru")),
+	        	LocalDate.parse(res.getString("namSinh")),
+	        	DiaChi.parse(res.getString("noiSinh")),
+	        	DiaChi.parse(res.getString("nguyenQuan")),
+	        	res.getString("danToc"),
+	        	res.getString("soHoChieu"),
+	        	DiaChi.parse(res.getString("diaChiHienNay")),
+	        	res.getString("trinhDoChuyenMon"),
+	        	res.getString("trinhDoHocVan"),
+	        	res.getString("trinhDoNgoaiNgu"),
+	        	res.getString("ngheNghiep"),
+	        	DiaChi.parse(res.getString("noiLamViec")),
+	        	res.getString("tienAn"),
+	        	LocalDate.parse(res.getString("ngayChuyenDen")),
+	        	res.getString("lyDoChuyenDen"),
+	        	res.getString("ghiChu"),
+	        	CMTtemp, // chua co CMT parse()
+	        	res.getString("idNguoiTao"),
+	        	LocalDate.parse(res.getString("ngayXoa")),
+	        	res.getString("idNguoiXoa"),
+	        	res.getString("lyDoXoa"),
+	        	LocalDate.parse(res.getString("ngayTao"))
+	        );
+	   	        
+	        subStatement.executeUpdate();
+    	} else if (loaiMa == 2) {
+    		
+    	}
     }
 
-    public static void xoaNhanKhau (NhanKhau nhanKhau) {
+    public static void xoaNhanKhau (NhanKhau nhanKhau) throws SQLException {
         // TODO xoaNhanKhau
+    	StringBuilder sqlQuery = new StringBuilder();
+    	sqlQuery = new StringBuilder();
+        sqlQuery.append("DELETE FROM quan_ly_nhan_khau.nhan_khau ");
+        sqlQuery.append("WHERE idChuHo= ? ");
+
+        PreparedStatement statement = Database.getConnection().prepareStatement(sqlQuery.toString());
+        
+        statement.setString(1, nhanKhau.getSoNhanKhau());
+        
+        statement.executeUpdate();
+        
+        // Done. Need Check and Test
     }
 
-    public static void taoHoKhau (HoKhau hoKhau) {
+    public static void taoHoKhau (HoKhau hoKhau) throws SQLException {
         // TODO: 14/01/2023 insert database
+    	StringBuilder sqlQuery = new StringBuilder();
+        sqlQuery.append("INSERT INTO quan_ly_nhan_khau.ho_khau (maHoKhau, idChuHo, maKhuVuc, diaChi, ngayLap) VALUES( ? , ? , ? , ? , ? );");
+        // thông tin thêm
+        PreparedStatement statement = Database.getConnection().prepareStatement(sqlQuery.toString());
+        
+        statement.setString(1, hoKhau.getSoHoKhau());
+        statement.setString(2, hoKhau.getChuHo().getSoNhanKhau());
+        statement.setString(3, hoKhau.getMaKhuVuc());
+        statement.setString(4, hoKhau.getDiaChi().toString());
+        statement.setString(5, hoKhau.getNgayLap().toString());
+        
+        statement.executeUpdate();
+        
+        // Done. Need Check and Test
     }
 
 }
