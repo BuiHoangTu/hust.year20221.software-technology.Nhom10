@@ -86,21 +86,55 @@ public class Database {
     public static final int BY_MA_NHAN_KHAU = 1, BY_SO_DIEN_THOAI = 2;
     public static void getNhanKhau(int loaiMa, String ma) throws SQLException {
         // TODO tim nk co ma = maNhanKhau
-    	NhanKhau nhankhau = null;
-    	PreparedStatement subStatement = Database.getConnection().prepareStatement("""
-                SELECT *
-                FROM quan_ly_nhan_khau.nhan_khau
-                WHERE maNhanKhau = ?;
-                """);
-        subStatement.setString(1, ma);
-        
-//        ResultSet resultSet = subStatement.executeQuery();
-//        if (!resultSet.next()) {
-//            throw new SQLException("HoKhau khong ton tai");
-//        }
-//        String chuHoCu = resultSet.getString("idChuHo");
-        
-        // TODO: Làm hơi cấn =))
+    	if (loaiMa == 1) { 
+	    	PreparedStatement subStatement = Database.getConnection().prepareStatement("""
+	                SELECT *
+	                FROM quan_ly_nhan_khau.nhan_khau
+	                WHERE maNhanKhau = ?;
+	                """);
+	        subStatement.setString(1, ma);
+	        ResultSet res = subStatement.executeQuery();
+	        
+	        if (!res.next()) {
+	            throw new SQLException("NhanKhau khong ton tai");
+	        }
+	        
+	        ChungMinhThu CMTtemp;
+	        
+	        NhanKhau nk = new NhanKhau(
+	        	ma,
+	        	res.getString("hoTen"),
+	        	res.getString("bietDanh"),
+	        	res.getString("tonGiao"),
+	        	res.getString("gioiTinh") == "Nam"? true : false,
+	        	DiaChi.parse(res.getString("noiThuongTru")),
+	        	LocalDate.parse(res.getString("namSinh")),
+	        	DiaChi.parse(res.getString("noiSinh")),
+	        	DiaChi.parse(res.getString("nguyenQuan")),
+	        	res.getString("danToc"),
+	        	res.getString("soHoChieu"),
+	        	DiaChi.parse(res.getString("diaChiHienNay")),
+	        	res.getString("trinhDoChuyenMon"),
+	        	res.getString("trinhDoHocVan"),
+	        	res.getString("trinhDoNgoaiNgu"),
+	        	res.getString("ngheNghiep"),
+	        	DiaChi.parse(res.getString("noiLamViec")),
+	        	res.getString("tienAn"),
+	        	LocalDate.parse(res.getString("ngayChuyenDen")),
+	        	res.getString("lyDoChuyenDen"),
+	        	res.getString("ghiChu"),
+	        	CMTtemp, // chua co CMT parse()
+	        	res.getString("idNguoiTao"),
+	        	LocalDate.parse(res.getString("ngayXoa")),
+	        	res.getString("idNguoiXoa"),
+	        	res.getString("lyDoXoa"),
+	        	LocalDate.parse(res.getString("ngayTao"))
+	        );
+	   	        
+	        subStatement.executeUpdate();
+    	} else if (loaiMa == 2) {
+    		
+    	}
     }
 
     public static void xoaNhanKhau (NhanKhau nhanKhau) throws SQLException {
