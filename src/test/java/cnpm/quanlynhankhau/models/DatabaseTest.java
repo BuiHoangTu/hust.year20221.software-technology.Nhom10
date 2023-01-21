@@ -7,6 +7,11 @@ import java.sql.SQLException;
 import static org.junit.jupiter.api.Assertions.*;
 
 class DatabaseTest {
+    @Test
+    void getNhanKhau() throws SQLException {
+        Database x = new Database();
+        x.getNhanKhau(5,"Hà Nội");
+    }
 
 //	@Test
 //	void login() throws SQLException {
