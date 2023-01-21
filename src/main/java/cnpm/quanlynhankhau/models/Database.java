@@ -138,17 +138,27 @@ public class Database {
         }
     }
 
-    public static void taoHoKhau (HoKhau hoKhau) throws SQLException {
+    public static HoKhau taoHoKhau (HoKhau hoKhau) throws SQLException {
         // TODO: 14/01/2023 insert database
+        int id = 0;
         StringBuilder sqlQuery = new StringBuilder();
-        sqlQuery.append("Insert into quan_ly_nhan_khau.ho_khau (idChuHo, maKhuVuc, diaChi, ngayLap) values(?, ?, ?, ?, ?);");
+        sqlQuery.append("Insert into quan_ly_nhan_khau.ho_khau (idChuHo, maKhuVuc, diaChi) values(?, ?, ?);");
         PreparedStatement statement = Database.getConnection().prepareStatement(sqlQuery.toString());
 
         statement.setString(1, hoKhau.getChuHo().getSoNhanKhau());
         statement.setString(2, hoKhau.getMaKhuVuc());
         statement.setString(3, hoKhau.getDiaChi().toString());
-        statement.setString(4, hoKhau.getNgayLap().toString());
         statement.executeUpdate();
+
+//        StringBuilder sqlQuery2 = new StringBuilder();
+//        sqlQuery2.append("Select LAST_INSERTED_ID()");
+//        statement = Database.getConnection().prepareStatement(sqlQuery2.toString());
+//        ResultSet resultSet = statement.executeQuery();
+//        while(resultSet.next()){
+//            id = resultSet.getInt(1);
+//        }
+//        System.out.println(id);
+        return null;
     }
 
 }

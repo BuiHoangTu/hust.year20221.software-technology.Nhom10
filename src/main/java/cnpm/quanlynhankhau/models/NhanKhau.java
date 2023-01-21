@@ -3,6 +3,7 @@ package cnpm.quanlynhankhau.models;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -281,18 +282,25 @@ public class NhanKhau {
     }
 
     public void addTamTruVang(TamTruVang x) throws SQLException {
-        tamTruVangs.add(x);
+        //tamTruVangs.add(x);
+        String i = "";
         // TODO: 14/01/2023 db
         StringBuilder sqlQuery = new StringBuilder();
-        sqlQuery.append("Insert INTO quan_ly_nhan_khau.tam_tru_vang (maGiayTamVang, noiTamTru, tuNgay, denNgay, lyDo, noiTamVang) values(?, ?, ?, ?, ?, ?, ?)");
-        PreparedStatement statement = Database.getConnection().prepareStatement(sqlQuery.toString());
-        statement.setString(1, x.getMaTamTruVang());
-        statement.setString(2, x.getDcTamTru().toString());
-        statement.setString(3, x.getTuNgay().toString());
-        statement.setString(4, x.getDenNgay().toString());
-        statement.setString(5, x.getLyDo());
-        statement.setString(6, x.getDcTamVang().toString());
+        sqlQuery.append("Insert INTO quan_ly_nhan_khau.tam_tru_vang (noiTamTru, tuNgay, denNgay, lyDo, noiTamVang) values(?, ?, ?, ?, ?)");
+        PreparedStatement statement = Database.getConnection().prepareStatement(sqlQuery.toString(), Statement.RETURN_GENERATED_KEYS);
+        statement.setString(1, x.getDcTamTru().toString());
+        statement.setString(2, x.getTuNgay().toString());
+        statement.setString(3, x.getDenNgay().toString());
+        statement.setString(4, x.getLyDo());
+        statement.setString(5, x.getDcTamVang().toString());
         statement.executeUpdate();
+        ResultSet rs = statement.getGeneratedKeys();
+
+        while (rs.next()){
+            i = rs.getString(1);
+        }
+        x.setMaTamTruVang(i);
+        tamTruVangs.add(x);
     }
     public void removeTamTruVang(TamTruVang x) throws SQLException {
         tamTruVangs.remove(x);
