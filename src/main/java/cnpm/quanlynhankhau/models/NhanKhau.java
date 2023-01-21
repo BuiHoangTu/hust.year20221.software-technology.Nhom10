@@ -304,15 +304,14 @@ public class NhanKhau {
         tamTruVangs.add(x);
         // TODO: 14/01/2023 db
         StringBuilder sqlQuery = new StringBuilder();
-        sqlQuery.append("Insert INTO quan_ly_nhan_khau.tam_tru_vang (idNhanKhau, maGiayTamVang, noiTamTru, tuNgay, denNgay, lyDo, noiTamVang) values(?, ?, ?, ?, ?, ?, ?)");
+        sqlQuery.append("Insert INTO quan_ly_nhan_khau.tam_tru_vang (maGiayTamVang, noiTamTru, tuNgay, denNgay, lyDo, noiTamVang) values(?, ?, ?, ?, ?, ?, ?)");
         PreparedStatement statement = Database.getConnection().prepareStatement(sqlQuery.toString());
-        statement.setString(1, soNhanKhau);
-        statement.setString(2, x.getMaTamTruVang());
-        statement.setString(3, x.getDcTamTru().toString());
-        statement.setString(4, x.getTuNgay().toString());
-        statement.setString(5, x.getDenNgay().toString());
-        statement.setString(6, x.getLyDo());
-        statement.setString(7, x.getDcTamVang().toString());
+        statement.setString(1, x.getMaTamTruVang());
+        statement.setString(2, x.getDcTamTru().toString());
+        statement.setString(3, x.getTuNgay().toString());
+        statement.setString(4, x.getDenNgay().toString());
+        statement.setString(5, x.getLyDo());
+        statement.setString(6, x.getDcTamVang().toString());
         statement.executeUpdate();
     }
     public void removeTamTruVang(TamTruVang x) throws SQLException {
