@@ -22,6 +22,10 @@ public class TamTruVang {
 	}
 
 
+	public void setMaTamTruVang(String maTamTruVang) {
+		this.maTamTruVang = maTamTruVang;
+	}
+
 	public String getMaTamTruVang() {
 		return maTamTruVang;
 	}
