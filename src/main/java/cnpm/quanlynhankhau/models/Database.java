@@ -122,6 +122,7 @@ public class Database {
         for (NhanKhau nk : result){
             System.out.println(nk.getTen());
         }
+        //finish(chac the)
         return result;
     }
 
