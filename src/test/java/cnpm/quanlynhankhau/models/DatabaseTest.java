@@ -10,8 +10,8 @@ class DatabaseTest {
 
 	@Test
 	void login() throws SQLException {
-		assertFalse(Database.login(null, null));
-		assertFalse(Database.login("wrong", "wrong"));
-		assertTrue(Database.login("admin", "1"));
+		assertFalse(Database.login(null, null) > 0);
+		assertFalse(Database.login("wrong", "wrong") > 0);
+		assertTrue(Database.login("admin", "1") > 0);
 	}
 }
