@@ -93,7 +93,11 @@ public class Database {
     }
 
     public static void taoHoKhau (HoKhau hoKhau) {
+<<<<<<< HEAD
         // TODO: 14/01/2023 insert database 
+=======
+        // TODO: 14/01/2023 insert database
+>>>>>>> origin
     }
 
 }
