@@ -112,7 +112,7 @@ public class HoKhau {
     }
 
 
-    public List<HoKhau> filterBySoLuong(int slnk) throws SQLException {
+    public static List<HoKhau> filterBySoLuong(int slnk) throws SQLException {
         List<HoKhau> output = new ArrayList<>();        
         // TODO here
         PreparedStatement subStatement = Database.getConnection().prepareStatement("""
