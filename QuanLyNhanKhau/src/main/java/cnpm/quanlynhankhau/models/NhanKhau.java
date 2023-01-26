@@ -321,15 +321,16 @@ public class NhanKhau {
         }
         x.setMaTamTruVang(i);
         tamTruVangs.add(x);
+        System.out.println(tamTruVangs.get(0).getMaTamTruVang());
     }
     public void removeTamTruVang(TamTruVang x) throws SQLException {
-        tamTruVangs.remove(x);
         // TODO: 14/01/2023 db
         StringBuilder sqlQuery = new StringBuilder();
         sqlQuery.append("Delete from quan_ly_nhan_khau.tam_tru_vang where maGiayTamVang = ?;");
         PreparedStatement statement = Database.getConnection().prepareStatement(sqlQuery.toString());
         statement.setString(1, x.getMaTamTruVang());
         statement.executeUpdate();
+        tamTruVangs.remove(x);
     }
     public List<TamTruVang> getTamTruVangs() {
         return tamTruVangs;
@@ -338,7 +339,6 @@ public class NhanKhau {
     public ChungMinhThu getChungMinhThu() {
         return chungMinhThu;
     }
-
 
     /**
      * Khai báo tạm vắng

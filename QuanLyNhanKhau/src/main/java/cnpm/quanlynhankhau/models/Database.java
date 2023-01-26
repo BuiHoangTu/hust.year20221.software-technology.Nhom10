@@ -119,9 +119,6 @@ public class Database {
                     rs.getString(22), rs.getString(31), null,rs.getString(27),/*rs.getDate(28).toLocalDate()*/ null,rs.getString(29),rs.getString(30), rs.getDate(26).toLocalDate());
             result.add(x);
         }
-        for (NhanKhau nk : result){
-            System.out.println(nk.getTen());
-        }
         //finish(chac the)
         return result;
     }
@@ -132,15 +129,13 @@ public class Database {
         sqlQuery.append("Delete from quan_ly_nhan_khau.nhan_khau where maNhanKhau = ?;");
         PreparedStatement statement = Database.getConnection().prepareStatement(sqlQuery.toString());
         statement.setString(1, nhanKhau.getSoNhanKhau());
-        ResultSet resultSet = statement.executeQuery();
-        if(!resultSet.next()){
-            throw new SQLException("Nhan Khau khong ton tai");
-        }
+        statement.executeUpdate();
     }
 
     public static HoKhau taoHoKhau (HoKhau hoKhau) throws SQLException {
         // TODO: 14/01/2023 insert database
-        int id = 0;
+        HoKhau x = new HoKhau();
+        String id = "";
         StringBuilder sqlQuery = new StringBuilder();
         sqlQuery.append("Insert into quan_ly_nhan_khau.ho_khau (idChuHo, maKhuVuc, diaChi) values(?, ?, ?);");
         PreparedStatement statement = Database.getConnection().prepareStatement(sqlQuery.toString());
@@ -151,13 +146,7 @@ public class Database {
         statement.executeUpdate();
 
 //        StringBuilder sqlQuery2 = new StringBuilder();
-//        sqlQuery2.append("Select LAST_INSERTED_ID()");
-//        statement = Database.getConnection().prepareStatement(sqlQuery2.toString());
-//        ResultSet resultSet = statement.executeQuery();
-//        while(resultSet.next()){
-//            id = resultSet.getInt(1);
-//        }
-//        System.out.println(id);
+//        sqlQuery2.append("Select * from quan_ly_nhan_khau.ho_khau where ");
         return null;
     }
 

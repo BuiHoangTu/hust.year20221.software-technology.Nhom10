@@ -13,7 +13,7 @@ class NhanKhauTest {
     void testAddTamTruVang() throws SQLException {
         NhanKhau x = new NhanKhau();
         x.setSoNhanKhau("000000000013");
-        DiaChi tamVang = new DiaChi("Hanoi", "Ba Dinh", "HHT", "4", "");
+        DiaChi tamVang = new DiaChi("HCM", "Ba Dinh", "HHT", "4", "");
         DiaChi tamTru = new DiaChi("Hanoi", "HBT","DCV","12","");
         TamTruVang truVang = new TamTruVang(null,LocalDate.of(2002,11,12), LocalDate.of(2025,11,12), tamVang, tamTru, "");
         x.addTamTruVang(truVang);
@@ -21,10 +21,9 @@ class NhanKhauTest {
 
     @Test
     void removeTamTruVang() throws SQLException {
-        NhanKhau x = new NhanKhau();
-        DiaChi tamVang = new DiaChi("Hanoi", "Ba Dinh", "HHT", "4", "");
-        DiaChi tamTru = new DiaChi("Hanoi", "HBT","DCV","12","");
-        TamTruVang truVang = new TamTruVang("3", LocalDate.of(2002,11,12), LocalDate.of(2025,11,12), tamVang, tamTru, "");
-        x.removeTamTruVang(truVang);
+        NhanKhau x = new NhanKhau(); //lấy từ database
+        System.out.println("ma giay tam tru vang: ");
+        System.out.println(x.getTamTruVangs().get(0).getMaTamTruVang());
+        x.removeTamTruVang(x.getTamTruVangs().get(0));
     }
 }
