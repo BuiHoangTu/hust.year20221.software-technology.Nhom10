@@ -1,7 +1,12 @@
 package cnpm.quanlynhankhau.models;
 
+import javafx.scene.effect.ImageInput;
 import javafx.scene.image.Image;
 
+import java.io.*;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -30,7 +35,11 @@ public class ChungMinhThu {
 	 * @param noiCap địa chỉ nơi cấp
 	 * @return chứng minh thư mới
 	 */
-	public static ChungMinhThu lamCMT(Image anhChanDung, DiaChi noiCap) throws SQLException {
+	public static ChungMinhThu lamCMT(Image anhChanDung, DiaChi noiCap) throws SQLException, FileNotFoundException, URISyntaxException {
+		URI url = new URI(anhChanDung.getUrl());
+		File f = new File(url);
+		FileInputStream input = new FileInputStream(f);
+
 		ChungMinhThu output = new ChungMinhThu();
 		output.anhChanDung = anhChanDung;
 		output.noiCap = noiCap;
@@ -39,11 +48,10 @@ public class ChungMinhThu {
 		output.soCMT = null;
 		output.ngayCap = null;
 		StringBuilder sqlQuery = new StringBuilder();
-		sqlQuery.append("Insert into quan_ly_nhan_khau.chung_minh_thu(ngayCap, noiCap, anhChanDung) values (?, ?, ?)");
+		sqlQuery.append("Insert into quan_ly_nhan_khau.chung_minh_thu(noiCap, anhChanDung) values (?, ?, ?)");
 		PreparedStatement statement = Database.getConnection().prepareStatement(sqlQuery.toString());
-		statement.setString(1, LocalDate.now().toString());
-		statement.setString(2, noiCap.toString());
-		statement.setString(3, anhChanDung.toString());
+		statement.setString(1, noiCap.toString());
+		statement.setBinaryStream(2, (InputStream) input, (int) f.length());
 
 		ResultSet resultSet = statement.executeQuery();
 
