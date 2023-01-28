@@ -1,18 +1,21 @@
 package cnpm.traothuonghs.services;
 
-import com.google.common.collect.BiMap;
-import com.google.common.collect.HashBiMap;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class TinhThuong {
 	private static volatile TinhThuong tinhThuong = null;
+	private static String[] cacDanhHieu;
 
-	private BiMap<String, Integer> mapTyLeThuong = HashBiMap.create();
+	private Map<String, Integer> mapTyLeThuong = new HashMap<>();
 	private int giaVo;
 
 
 	private TinhThuong() {
 		// // TODO: 27/01/2023 get from database
+		// lay cac danh hieu tu DB
+		cacDanhHieu = mapTyLeThuong.keySet().toArray(new String[0]);
 	}
 
 
@@ -32,9 +35,9 @@ public class TinhThuong {
 
 	/**
 	 * Thay tỉ lệ thưởng. Những ô để trống phải thay bằng tỷ lệ gốc
-	 * @param mapTyLeThuongMoi
+	 * @param mapTyLeThuongMoi tỉ lệ mới
 	 */
-	public void chinhTyLe(BiMap<String, Integer> mapTyLeThuongMoi) {
+	public void chinhTyLe(Map<String, Integer> mapTyLeThuongMoi) {
 		mapTyLeThuong = mapTyLeThuongMoi;
 		// todo update database
 	}

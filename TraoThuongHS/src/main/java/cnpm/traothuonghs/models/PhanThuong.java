@@ -5,8 +5,6 @@ import cnpm.traothuonghs.services.TinhThuong;
 import java.time.LocalDate;
 
 public class PhanThuong {
-	public static String[] cacDanhHieu = {"Giỏi, Khá, Trung Bình"};
-
 	private LocalDate ngayPhatThuong;
 	private String tenDotPhatThuong;
 	private String danhHieu;
