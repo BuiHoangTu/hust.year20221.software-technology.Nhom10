@@ -77,6 +77,7 @@ public class HoKhau {
 
     public void themThanhVien(NhanKhau thanhVien, String QuanHeVoiChuHo) throws SQLException {
         this.thanhViens.add(thanhVien);
+
         PreparedStatement subStatement;
         StringBuilder sqlQuery = new StringBuilder();
         sqlQuery.append("INSERT INTO quan_ly_nhan_khau.thanh_vien_cua_ho (idNhanKhau, idHoKhau, quanHeVoiChuHo) VALUES( ? , ? , ?);");
@@ -86,6 +87,9 @@ public class HoKhau {
         subStatement.setString(3, QuanHeVoiChuHo);
         subStatement.executeUpdate();
         // TODO: waiting for Tu's approval
+
+        // TODO: 14/01/2023 insert database
+
     }
 
     public void xoaThanhVien(NhanKhau nhanKhau) throws SQLException {
@@ -98,6 +102,8 @@ public class HoKhau {
         subStatement.setString(1, nhanKhau.getSoNhanKhau());
         subStatement.executeUpdate();
         // TODO: waiting for Tu's approval
+
+        // TODO: 14/01/2023 remove databse
     }
     public void xoaThanhVien(int sttNhanKhau) throws SQLException {
         this.thanhViens.remove(sttNhanKhau);
@@ -116,15 +122,25 @@ public class HoKhau {
         List<HoKhau> output = new ArrayList<>();        
         // TODO here
         PreparedStatement subStatement = Database.getConnection().prepareStatement("""
-                select idHoKhau from quan_ly_nhan_khau.'thanh_vien_cua_ho
-        		group by idHoKhau
-        		having count(idHoKhau)>=?;
+                select ho_khau.* , nhan_khau.* from quan_ly_nhan_khau.ho_khau
+        		inner join thanh_vien_cua_ho on thanh_vien_cua_ho.idHoKhau = ho_khau.idHoKhau
+        		inner join nhan_khau on nhan_khau.maNhanKhau = ho_khau.idChuHo
+        		group by thanh_vien_cua_ho.idHoKhau
+        		having count(thanh_vien_cua_ho.idHoKhau)>=?;
                 """);
         subStatement.setString(1, String.format("%d", slnk));
         ResultSet res = subStatement.executeQuery();
         
         while (res.next()) {
-        	output.add(new HoKhau(res.getString("idHoKhau"), chuHo, maKhuVuc, diaChi, ngayLap));
+            NhanKhau NK = new NhanKhau();
+            NK.setTen(res.getString("hoTen"));
+            NK.setBietDanh(res.getString("bietDanh"));
+            NK.setDanToc(res.getString("danToc"));
+            NK.setGhiChu(res.getString("ghiChu"));
+            NK.setHoChieu(res.getString("soHoChieu"));
+            NK.setDiaChiHienTai(DiaChi.parse(res.getString("diaChiHienNay")));
+            NK.setNgaySinh(LocalDate.parse(res.getString("namSinh")));
+        	output.add(new HoKhau(res.getString("idHoKhau"), NK, res.getString("maKhuVuc"), DiaChi.parse(res.getString("diaChi")), LocalDate.parse(res.getString("ngayLap"))));
         }
         return output;
     }
@@ -139,8 +155,8 @@ public class HoKhau {
         subStatement.setString(2, this.soHoKhau);
         subStatement.executeUpdate();
         // TODO Waiting for Tu's approval
+        // TODO: 14/01/2023 remove db
     }
-
 
     /**
      * Save changes in this HK in database
@@ -245,8 +261,6 @@ public class HoKhau {
             statement.executeUpdate();
         }
 
-
-
         // commit to db
         sqlQuery = new StringBuilder();
         sqlQuery.append("UPDATE quan_ly_nhan_khau.ho_khau ");
@@ -257,6 +271,7 @@ public class HoKhau {
         if (diaChiIsChanged) sqlQuery.append("SET diaChi= ? ");
         if (ngayLapIsChanged) sqlQuery.append("SET ngayLap= ? ");
         // TODO: waiting for Tu's approval
+        // TODO: 14/01/2023 tuong tu
         sqlQuery.append("WHERE maHoKhau = ? ");
 
         statement = Database.getConnection().prepareStatement(sqlQuery.toString());
@@ -278,6 +293,7 @@ public class HoKhau {
             i += 1;
         };
         // TODO: Waiting for Tu's approval
+        // TODO: 14/01/2023 tuong tu
         statement.setString(i, soHoKhau);
         // gửi câu lệnh đến DB
         statement.executeUpdate();
@@ -288,8 +304,9 @@ public class HoKhau {
         ngayLapIsChanged = false;
     }
 
-    public static void main(String[] args) {
-        HoKhau x = null;
-        x.setChuHo(new NhanKhau());
+    public static void main(String[] args) throws SQLException {
+        //HoKhau x = null;
+        //x.setChuHo(new NhanKhau());
+
     }
 }

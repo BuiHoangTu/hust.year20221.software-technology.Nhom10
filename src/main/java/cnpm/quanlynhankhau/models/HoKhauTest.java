@@ -23,5 +23,7 @@ public class HoKhauTest {
 		//HK.xoaThanhVien(NK);
 		for (int i=0; i<HK.filterBySoLuong(4).size(); i++)
 			System.out.println(HK.filterBySoLuong(4).get(i).getSoHoKhau());
+
+
 	}
 }

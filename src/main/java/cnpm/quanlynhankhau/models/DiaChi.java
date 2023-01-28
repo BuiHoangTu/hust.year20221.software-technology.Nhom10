@@ -21,10 +21,7 @@ public class DiaChi {
      * @return object DiaChi
      */
     public static DiaChi parse(CharSequence text) {
-<<<<<<< HEAD
 
-=======
->>>>>>> origin
         String strDiaChi =  text.toString();
 
         int soIndex, soNextIndext = -1; 
@@ -128,10 +125,7 @@ public class DiaChi {
         }
 
         return new DiaChi(pho, quan, duong, so, ghiChu);
-<<<<<<< HEAD
 
-=======
->>>>>>> origin
     }
 
 
@@ -142,14 +136,14 @@ public class DiaChi {
         this.soNha = soNha;
         this.ghiChu = ghiChu;
     }
+    public DiaChi() {
+ 
+    }
+
 
     @Override
     public String toString() {
         var x = new StringBuilder();
-<<<<<<< HEAD
-
-=======
->>>>>>> origin
         if (ghiChu != null && ! ghiChu.trim().isEmpty()) x.append(ghiChu);
         if (soNha != null && !soNha.trim().isEmpty()) x.append(", ").append("Số ").append(soNha);
         if (duongPho != null && !duongPho.trim().isEmpty()) x.append(", ").append("Đường ").append(duongPho);
