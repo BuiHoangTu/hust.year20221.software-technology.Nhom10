@@ -51,7 +51,7 @@ public class NhanKhau {
     public boolean lyDoChuyenDenIsChanged = false;
     private String ghiChu;
     public boolean ghiChuIsChanged = false;
-    private final List<TamTruVang> tamTruVangs = new ArrayList<>();
+    private List<TamTruVang> tamTruVangs = new ArrayList<>();
     // TODO commit directly
 
     private ChungMinhThu chungMinhThu;
