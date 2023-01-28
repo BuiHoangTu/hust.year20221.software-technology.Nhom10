@@ -21,7 +21,6 @@ public class TamTruVang {
 		this.lyDo = lyDo;
 	}
 
-
 	public String getMaTamTruVang() {
 		return maTamTruVang;
 	}

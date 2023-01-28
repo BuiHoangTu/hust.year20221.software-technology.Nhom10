@@ -38,7 +38,7 @@ CREATE TABLE `dinh_chinh_ho_khau` (
   `thongTinThayDoi` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `thayDoiTu` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `thayDoiThanh` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `thoiGianThayDoi` date NOT NULL DEFAULT current_timestamp(),
+  `thoiGianThayDoi` date NOT NULL DEFAULT CURRENT_TIMESTAMP(),
   `nguoiThayDoi` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -262,3 +262,4 @@ ALTER TABLE `tam_tru_vang`
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
