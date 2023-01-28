@@ -37,7 +37,6 @@ public class ChungMinhThu {
 	 * @return chứng minh thư mới
 	 */
 	public static ChungMinhThu lamCMT(Image anhChanDung, DiaChi noiCap) throws SQLException {
-		// todo thay bang database output
 		String i = "";
 		StringBuilder sqlQuery = new StringBuilder();
 		sqlQuery.append("Insert into quan_ly_nhan_khau.chung_minh_thu(noiCap, anhChanDung) values (?, ?)");

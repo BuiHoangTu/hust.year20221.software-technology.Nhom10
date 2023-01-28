@@ -20,8 +20,7 @@ public class HoKhau {
     private LocalDate ngayLap;
     private boolean ngayLapIsChanged = false;
     private final List<NhanKhau> thanhViens = new ArrayList<>();
-    // TODO add or delete from database directly, remove isChanged
-    
+
     public HoKhau(String soHoKhau, NhanKhau chuHo, String maKhuVuc, DiaChi diaChi, LocalDate ngayLap) {
     	this.soHoKhau = soHoKhau;
     	this.chuHo = chuHo;
@@ -86,9 +85,6 @@ public class HoKhau {
         subStatement.setString(2, this.soHoKhau);
         subStatement.setString(3, QuanHeVoiChuHo);
         subStatement.executeUpdate();
-        // TODO: waiting for Tu's approval
-
-        // TODO: 14/01/2023 insert database
 
     }
 
@@ -101,9 +97,6 @@ public class HoKhau {
                 """);
         subStatement.setString(1, nhanKhau.getSoNhanKhau());
         subStatement.executeUpdate();
-        // TODO: waiting for Tu's approval
-
-        // TODO: 14/01/2023 remove databse
     }
     public void xoaThanhVien(int sttNhanKhau) throws SQLException {
         this.thanhViens.remove(sttNhanKhau);
@@ -114,13 +107,12 @@ public class HoKhau {
                 """);
         subStatement.setString(1, String.format("%d", sttNhanKhau));
         subStatement.executeUpdate();
-        // TODO: waiting for Tu's approval
     }
 
 
     public static List<HoKhau> filterBySoLuong(int slnk) throws SQLException {
         List<HoKhau> output = new ArrayList<>();        
-        // TODO here
+        // TODO fix after get HK
         PreparedStatement subStatement = Database.getConnection().prepareStatement("""
                 select ho_khau.* , nhan_khau.* from quan_ly_nhan_khau.ho_khau
         		inner join thanh_vien_cua_ho on thanh_vien_cua_ho.idHoKhau = ho_khau.idHoKhau
@@ -154,8 +146,6 @@ public class HoKhau {
         subStatement.setString(1, diaChiMoi.toString());
         subStatement.setString(2, this.soHoKhau);
         subStatement.executeUpdate();
-        // TODO Waiting for Tu's approval
-        // TODO: 14/01/2023 remove db
     }
 
     /**
@@ -216,7 +206,6 @@ public class HoKhau {
 
             statement.executeUpdate();
         }
-        // TODO: 14/01/2023 tuong tu (waiting for Tu's approval)
         if (diaChiIsChanged) {
             statement.setString(2, "Địa Chỉ");
             statement.setString(4, diaChi.toString());
@@ -270,8 +259,6 @@ public class HoKhau {
         if (maKhuVucIsChanged) sqlQuery.append("SET maKhuVuc= ? ");
         if (diaChiIsChanged) sqlQuery.append("SET diaChi= ? ");
         if (ngayLapIsChanged) sqlQuery.append("SET ngayLap= ? ");
-        // TODO: waiting for Tu's approval
-        // TODO: 14/01/2023 tuong tu
         sqlQuery.append("WHERE maHoKhau = ? ");
 
         statement = Database.getConnection().prepareStatement(sqlQuery.toString());
@@ -292,8 +279,6 @@ public class HoKhau {
             statement.setString(i, ngayLap.toString());
             i += 1;
         };
-        // TODO: Waiting for Tu's approval
-        // TODO: 14/01/2023 tuong tu
         statement.setString(i, soHoKhau);
         // gửi câu lệnh đến DB
         statement.executeUpdate();

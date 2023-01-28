@@ -50,42 +50,9 @@ public class Database {
         return Integer.parseInt(resultSet.getString("ID"));
     }
 
-    /**
-     * Danh sách tạm trú/vắng của 1 người
-     * @param soNhanKhau định danh người này
-     * @return Các lần tạm trú/vắng
-     * @throws SQLException khi kết nối đến db thất bại. Bật mySQL lên.
-     */
-    public static List<TamTruVang> searchTamVang(String soNhanKhau) throws SQLException {
-        Connection connection = getConnection();
-
-        PreparedStatement preparedStatement = connection.prepareStatement("""
-                SELECT maGiayTamtru, tuNgay, denNgay, lyDo
-                FROM quan_ly_nhan_khau.tam_tru
-                WHERE quan_ly_nhan_khau.tam_tru.idNhanKhau = ?;
-                """);
-        preparedStatement.setString(1, soNhanKhau);
-        ResultSet res = preparedStatement.executeQuery();
-
-        List<TamTruVang> output = new ArrayList<>();
-        while (res.next()) {
-            output.add(new TamTruVang(
-                    res.getString("maGiayTamtru"),
-                    LocalDate.parse(res.getString("tuNgay")),
-                    LocalDate.parse(res.getString("denNgay")),
-                    DiaChi.parse(res.getString("diaChiTamVang")),
-                    DiaChi.parse(res.getString("diaChiTamTru")),
-                    res.getString("lyDo")
-                    ));
-        }
-
-        return output;
-    }
-
     public static final int BY_MA_NHAN_KHAU = 1, BY_SO_DIEN_THOAI = 2, BY_TEN = 3, BY_NGAY_SINH = 4, BY_DIA_CHI = 5;
     public static List<NhanKhau> getNhanKhau(int loaiMa, String ma) throws SQLException {
         List<NhanKhau> result = new ArrayList<>();
-        // TODO tim nk co ma = maNhanKhau
         StringBuilder sqlQuery = new StringBuilder();
         sqlQuery.append("Select * from quan_ly_nhan_khau.nhan_khau ");
 
@@ -141,9 +108,16 @@ public class Database {
         //finish(chac the)
         return result;
     }
+    public static List<NhanKhau> getNhanKhau(String maNK) throws SQLException {
+        return getNhanKhau(1, maNK);
+    }
+
+    public static HoKhau getHoKhau(String soHK) {
+        // // TODO: 28/01/2023 get from DB
+        return null;
+    }
 
     public static void xoaNhanKhau (NhanKhau nhanKhau) throws SQLException {
-        // TODO xoaNhanKhau
         StringBuilder sqlQuery = new StringBuilder();
         sqlQuery.append("Delete from quan_ly_nhan_khau.nhan_khau where maNhanKhau = ?;");
         PreparedStatement statement = Database.getConnection().prepareStatement(sqlQuery.toString());
@@ -151,18 +125,25 @@ public class Database {
         statement.executeUpdate();
     }
 
-    public static HoKhau taoHoKhau (HoKhau hoKhau) throws SQLException {
-        // TODO: 14/01/2023 insert database
+    public static NhanKhau taoNhanKhau(String ten, String bietDanh, String tonGiao, boolean isMale, DiaChi thuongTru, LocalDate ngaySinh, DiaChi noiSinh, DiaChi nguyenQuan, String danToc, String hoChieu, DiaChi diaChiHienTai, String trinhDoChuyenMon, String trinhDoHocVan, String trinhDoNgoaiNgu, String ngheNghiep, DiaChi noiLamViec, String tienAn, LocalDate ngayChuyenDen, String lyDoChuyenDen, String ghiChu, ChungMinhThu chungMinhThu) {
+        // // TODO: 28/01/2023 tao trong DB
+        return null;
+    }
+
+    public static HoKhau taoHoKhau (String soHKChuHo, String maKhuVuc, String diaChi) throws SQLException {
         String i = "";
         StringBuilder sqlQuery = new StringBuilder();
         sqlQuery.append("Insert into quan_ly_nhan_khau.ho_khau (idChuHo, maKhuVuc, diaChi) values(?, ?, ?);");
         PreparedStatement statement = Database.getConnection().prepareStatement(sqlQuery.toString(), Statement.RETURN_GENERATED_KEYS);
 
-        statement.setString(1, hoKhau.getChuHo().getSoNhanKhau());
-        statement.setString(2, hoKhau.getMaKhuVuc());
-        statement.setString(3, hoKhau.getDiaChi().toString());
-        statement.executeUpdate();
+        statement.setString(1, soHKChuHo);
+        statement.setString(2, maKhuVuc);
+        statement.setString(3, diaChi);
+        var rs = statement.executeQuery();
+        rs.next();
+        String soHK = rs.getString(""); // // TODO: 28/01/2023 thay bằng tên cột, get HK tu DB and return
+
+
         return null;
     }
-
 }

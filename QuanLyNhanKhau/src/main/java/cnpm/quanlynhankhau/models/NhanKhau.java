@@ -52,7 +52,6 @@ public class NhanKhau {
     private String ghiChu;
     public boolean ghiChuIsChanged = false;
     private List<TamTruVang> tamTruVangs = new ArrayList<>();
-    // TODO commit directly
 
     private ChungMinhThu chungMinhThu;
     private String idNguoiTao;
@@ -304,7 +303,6 @@ public class NhanKhau {
     public void addTamTruVang(TamTruVang x) throws SQLException {
         //tamTruVangs.add(x);
         String i = "";
-        // TODO: 14/01/2023 db
         StringBuilder sqlQuery = new StringBuilder();
         sqlQuery.append("Insert INTO quan_ly_nhan_khau.tam_tru_vang (noiTamTru, tuNgay, denNgay, lyDo, noiTamVang) values(?, ?, ?, ?, ?)");
         PreparedStatement statement = Database.getConnection().prepareStatement(sqlQuery.toString(), Statement.RETURN_GENERATED_KEYS);
@@ -324,7 +322,6 @@ public class NhanKhau {
         System.out.println(tamTruVangs.get(0).getMaTamTruVang());
     }
     public void removeTamTruVang(TamTruVang x) throws SQLException {
-        // TODO: 14/01/2023 db
         StringBuilder sqlQuery = new StringBuilder();
         sqlQuery.append("Delete from quan_ly_nhan_khau.tam_tru_vang where maGiayTamVang = ?;");
         PreparedStatement statement = Database.getConnection().prepareStatement(sqlQuery.toString());
@@ -341,19 +338,9 @@ public class NhanKhau {
     }
 
     /**
-     * Khai báo tạm vắng
-     * @return Mã tạm vắng
-     */
-    public String tamVang(LocalDate tuNgay, LocalDate denNgay) {
-        // TODO database make tam vang
-        return null;
-    }
-
-    /**
      * Save changes in this NK in database
      */
     public void commit() {
-        // TODO make commit
         soNhanKhauIsChanged = false;
         tenIsChanged = false;
         bietDanhIsChanged = false;
