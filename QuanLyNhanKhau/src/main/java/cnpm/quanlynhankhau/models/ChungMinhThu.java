@@ -10,10 +10,7 @@ import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-<<<<<<< HEAD
-=======
 import java.sql.Statement;
->>>>>>> master
 import java.time.LocalDate;
 
 public class ChungMinhThu {
@@ -24,7 +21,7 @@ public class ChungMinhThu {
 	private Image anhChanDung;
 
 
-	ChungMinhThu(){}
+	private ChungMinhThu(){}
 	public ChungMinhThu(String soCMT, LocalDate ngayCap, DiaChi noiCap, Image anhChanDung) {
 		this.soCMT = soCMT;
 		this.ngayCap = ngayCap;
@@ -39,27 +36,6 @@ public class ChungMinhThu {
 	 * @param noiCap địa chỉ nơi cấp
 	 * @return chứng minh thư mới
 	 */
-<<<<<<< HEAD
-	public static ChungMinhThu lamCMT(Image anhChanDung, DiaChi noiCap) throws SQLException, FileNotFoundException, URISyntaxException {
-		URI url = new URI(anhChanDung.getUrl());
-		File f = new File(url);
-		FileInputStream input = new FileInputStream(f);
-
-		ChungMinhThu output = new ChungMinhThu();
-		output.anhChanDung = anhChanDung;
-		output.noiCap = noiCap;
-
-		// todo thay bang database output
-		output.soCMT = null;
-		output.ngayCap = null;
-		StringBuilder sqlQuery = new StringBuilder();
-		sqlQuery.append("Insert into quan_ly_nhan_khau.chung_minh_thu(noiCap, anhChanDung) values (?, ?, ?)");
-		PreparedStatement statement = Database.getConnection().prepareStatement(sqlQuery.toString());
-		statement.setString(1, noiCap.toString());
-		statement.setBinaryStream(2, (InputStream) input, (int) f.length());
-
-		ResultSet resultSet = statement.executeQuery();
-=======
 	public static ChungMinhThu lamCMT(Image anhChanDung, DiaChi noiCap) throws SQLException {
 		// todo thay bang database output
 		String i = "";
@@ -69,7 +45,6 @@ public class ChungMinhThu {
 		statement.setString(1, noiCap.toString());
 		statement.setBinaryStream(2, null);
 		statement.executeUpdate();
->>>>>>> master
 
 		ResultSet output = statement.getGeneratedKeys();
 		while (output.next()){
