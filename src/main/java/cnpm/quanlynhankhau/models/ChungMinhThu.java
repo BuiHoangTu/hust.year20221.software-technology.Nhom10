@@ -10,6 +10,7 @@ import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDate;
 
 public class ChungMinhThu {
@@ -35,27 +36,29 @@ public class ChungMinhThu {
 	 * @param noiCap địa chỉ nơi cấp
 	 * @return chứng minh thư mới
 	 */
-	public static ChungMinhThu lamCMT(Image anhChanDung, DiaChi noiCap) throws SQLException, FileNotFoundException, URISyntaxException {
-		URI url = new URI(anhChanDung.getUrl());
-		File f = new File(url);
-		FileInputStream input = new FileInputStream(f);
-
-		ChungMinhThu output = new ChungMinhThu();
-		output.anhChanDung = anhChanDung;
-		output.noiCap = noiCap;
-
+	public static ChungMinhThu lamCMT(Image anhChanDung, DiaChi noiCap) throws SQLException {
 		// todo thay bang database output
-		output.soCMT = null;
-		output.ngayCap = null;
+		String i = "";
 		StringBuilder sqlQuery = new StringBuilder();
-		sqlQuery.append("Insert into quan_ly_nhan_khau.chung_minh_thu(noiCap, anhChanDung) values (?, ?, ?)");
-		PreparedStatement statement = Database.getConnection().prepareStatement(sqlQuery.toString());
+		sqlQuery.append("Insert into quan_ly_nhan_khau.chung_minh_thu(noiCap, anhChanDung) values (?, ?)");
+		PreparedStatement statement = Database.getConnection().prepareStatement(sqlQuery.toString(), Statement.RETURN_GENERATED_KEYS);
 		statement.setString(1, noiCap.toString());
-		statement.setBinaryStream(2, (InputStream) input, (int) f.length());
+		statement.setBinaryStream(2, null);
+		statement.executeUpdate();
 
-		ResultSet resultSet = statement.executeQuery();
-
-		return output;
+		ResultSet output = statement.getGeneratedKeys();
+		while (output.next()){
+			i = output.getString(1);
+		}
+		PreparedStatement statement2 = Database.getConnection().prepareStatement("Select * from quan_ly_nhan_khau.chung_minh_thu where soCMT = ?");
+		statement2.setString(1, i);
+		ResultSet rs = statement2.executeQuery();
+		while (rs.next()){
+			ChungMinhThu cmt = new ChungMinhThu(rs.getString(1),rs.getDate(2).toLocalDate(),DiaChi.parse(rs.getString(3)), null);
+			System.out.println(cmt.getSoCMT() + " " + cmt.getNoiCap());
+			return cmt;
+		}
+		return null;
 	}
 
 

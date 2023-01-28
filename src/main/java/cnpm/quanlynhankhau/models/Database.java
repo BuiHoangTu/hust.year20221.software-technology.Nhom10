@@ -82,27 +82,31 @@ public class Database {
         return output;
     }
 
-    public static final int BY_MA_NHAN_KHAU = 1, BY_SO_DIEN_THOAI = 2, BY_TEN = 3, BY_NGAY_SINH = 4, BY_DIA_CHI = 5;
+    public static final int BY_MA_NHAN_KHAU = 1, BY_SO_DIEN_THOAI = 2, BY_TEN = 3, BY_NGAY_SINH = 4, BY_DIA_CHI = 5, DS_TAM_TRU_VANG = 6;
     public static List<NhanKhau> getNhanKhau(int loaiMa, String ma) throws SQLException {
         List<NhanKhau> result = new ArrayList<>();
         // TODO tim nk co ma = maNhanKhau
         StringBuilder sqlQuery = new StringBuilder();
         sqlQuery.append("Select * from quan_ly_nhan_khau.nhan_khau ");
+
         if(loaiMa == 1) sqlQuery.append("where maNhanKhau = ?");
         else if(loaiMa == 2) sqlQuery.append("where soDienThoai = ?");
         else if(loaiMa == 3) {
             ma = "%" + ma + "%";
             sqlQuery.append("where hoTen LIKE ?;");
         }
-        else if(loaiMa == 4) sqlQuery.append("where namSinh = ?");
+        else if(loaiMa == 4) {
+            ma = "%" + ma + "%";
+            sqlQuery.append("where namSinh LIKE ?;");
+        }
         else if(loaiMa == 5) {
             ma = "%" + ma + "%";
             sqlQuery.append("where diaChiHienNay LIKE ?");
-        }
-        else{
+        } else{
             System.out.println("Khong kha dung");
             return null;
         }
+
         PreparedStatement statement = Database.getConnection().prepareStatement(sqlQuery.toString());
         statement.setString(1, ma);
         ResultSet rs = statement.executeQuery();
@@ -117,8 +121,23 @@ public class Database {
                     rs.getDate(4).toLocalDate(), /*DiaChi.parse(rs.getString(6))*/null,DiaChi.parse(rs.getString(7)), rs.getString(8), rs.getString(11),DiaChi.parse(rs.getString(13)),
                     rs.getString(15),rs.getString(14), rs.getString(17), rs.getString(18),DiaChi.parse(rs.getString(19)), rs.getString(20),/*rs.getDate(21).toLocalDate()*/null,
                     rs.getString(22), rs.getString(31), null,rs.getString(27),/*rs.getDate(28).toLocalDate()*/ null,rs.getString(29),rs.getString(30), rs.getDate(26).toLocalDate());
+
             result.add(x);
         }
+
+        StringBuilder sqlQuery2 = new StringBuilder();
+        sqlQuery2.append("Select * from quan_ly_nhan_khau.tam_tru_vang where idNhanKhau = ?");
+        PreparedStatement statement1 = Database.getConnection().prepareStatement(sqlQuery2.toString());
+        for(NhanKhau nk : result){
+            statement1.setString(1, nk.getSoNhanKhau());
+            ResultSet lis = statement1.executeQuery();
+            while (lis.next()){
+                TamTruVang ttv = new TamTruVang(lis.getString(2),lis.getDate(4).toLocalDate(), lis.getDate(5).toLocalDate(),
+                                        DiaChi.parse(lis.getString(7)), DiaChi.parse(lis.getString(3)),lis.getString(6));
+                nk.getTamTruVangs().add(ttv);
+            }
+        }
+
         //finish(chac the)
         return result;
     }
@@ -134,19 +153,15 @@ public class Database {
 
     public static HoKhau taoHoKhau (HoKhau hoKhau) throws SQLException {
         // TODO: 14/01/2023 insert database
-        HoKhau x = new HoKhau();
-        String id = "";
+        String i = "";
         StringBuilder sqlQuery = new StringBuilder();
         sqlQuery.append("Insert into quan_ly_nhan_khau.ho_khau (idChuHo, maKhuVuc, diaChi) values(?, ?, ?);");
-        PreparedStatement statement = Database.getConnection().prepareStatement(sqlQuery.toString());
+        PreparedStatement statement = Database.getConnection().prepareStatement(sqlQuery.toString(), Statement.RETURN_GENERATED_KEYS);
 
         statement.setString(1, hoKhau.getChuHo().getSoNhanKhau());
         statement.setString(2, hoKhau.getMaKhuVuc());
         statement.setString(3, hoKhau.getDiaChi().toString());
         statement.executeUpdate();
-
-//        StringBuilder sqlQuery2 = new StringBuilder();
-//        sqlQuery2.append("Select * from quan_ly_nhan_khau.ho_khau where ");
         return null;
     }
 
