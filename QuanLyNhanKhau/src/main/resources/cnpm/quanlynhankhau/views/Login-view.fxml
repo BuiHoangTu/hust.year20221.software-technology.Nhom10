@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="460.0" prefWidth="680.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cnpm.quanlynhankhau.controllers.LoginController">
+    <left>
+        <AnchorPane prefHeight="200.0" prefWidth="340.0" style="-fx-background-color: #0598ff;" BorderPane.alignment="CENTER" />
+    </left>
+    <right>
+        <AnchorPane prefHeight="460.0" prefWidth="340.0" BorderPane.alignment="CENTER">
+            <Label layoutX="131.0" layoutY="28.0" text="Log In">
+                <font>
+                    <Font size="20.0" />
+                </font>
+            </Label>
+            <TextArea editable="false" layoutX="36.0" layoutY="99.0" prefHeight="231.0" prefWidth="273.0" />
+            <TextField fx:id="tfUserName" layoutX="76.0" layoutY="123.0" prefHeight="32.0" prefWidth="171.0" promptText="User Name" style="-fx-border-color: #0598ff; -fx-border-width: 0px 0px 1px 0px; -fx-background-color: transparent;" />
+            <TextField fx:id="tfPasswd" layoutX="76.0" layoutY="183.0" prefHeight="32.0" prefWidth="171.0" promptText="Password" style="-fx-border-color: #0598ff; -fx-border-width: 0px 0px 1px 0px; -fx-background-color: transparent;" />
+            <Label fx:id="lWarning" layoutX="56.0" layoutY="243.0" minHeight="16" minWidth="69" text="Your account or password is wrong!" textFill="#e40c0c" visible="false" />
+            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="124.0" layoutY="281.0" mnemonicParsing="false" onMouseClicked="#onClickConfirmLogin" prefHeight="28.0" prefWidth="75.0" text="Confirm!" />
+        </AnchorPane>
+    </right>
+</BorderPane>

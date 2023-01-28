@@ -19,6 +19,9 @@ hs_err_pid*
 *.iml
 *.iws
 
+### VS Code ###
+.vscode/
+
 # Mac
 .DS_Store
 
@@ -28,16 +31,6 @@ target/
 
 # Inclusions
 !lib/**
-
-# Compiled Files
-*.class
-bin/
-build/
-/bin1/
-java/build/**
-
-# Sample
-[Ss]ample*
 
 # to_do
 **/todo*
