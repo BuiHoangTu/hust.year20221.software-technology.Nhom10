@@ -21,7 +21,7 @@ public class ChungMinhThu {
 	private Image anhChanDung;
 
 
-	ChungMinhThu(){}
+	private ChungMinhThu(){}
 	public ChungMinhThu(String soCMT, LocalDate ngayCap, DiaChi noiCap, Image anhChanDung) {
 		this.soCMT = soCMT;
 		this.ngayCap = ngayCap;

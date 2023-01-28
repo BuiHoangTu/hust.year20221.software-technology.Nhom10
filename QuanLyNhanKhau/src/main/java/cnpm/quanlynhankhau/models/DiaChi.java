@@ -21,6 +21,7 @@ public class DiaChi {
      * @return object DiaChi
      */
     public static DiaChi parse(CharSequence text) {
+
         String strDiaChi =  text.toString();
 
         int soIndex, soNextIndext = -1; 
@@ -124,6 +125,7 @@ public class DiaChi {
         }
 
         return new DiaChi(pho, quan, duong, so, ghiChu);
+
     }
 
 
@@ -134,6 +136,10 @@ public class DiaChi {
         this.soNha = soNha;
         this.ghiChu = ghiChu;
     }
+    public DiaChi() {
+ 
+    }
+
 
     @Override
     public String toString() {
@@ -153,5 +159,10 @@ public class DiaChi {
         ) x.append(".");
 
         return x.toString();
+    }
+    public static void main(String[] args) {
+       	DiaChi diachi = new DiaChi(null, "hbc", null, "111/95", null);
+       	DiaChi diachiparse = DiaChi.parse(diachi.toString());
+    	System.out.println(diachiparse);
     }
 }

@@ -22,3 +22,12 @@ class NhanKhauTest {
         x.removeTamTruVang(x.getTamTruVangs().get(0));
     }
 }
+
+    @Test
+    void removeTamTruVang() throws SQLException {
+        NhanKhau x = new NhanKhau(); //lấy từ database
+        System.out.println("ma giay tam tru vang: ");
+        System.out.println(x.getTamTruVangs().get(0).getMaTamTruVang());
+        x.removeTamTruVang(x.getTamTruVangs().get(0));
+    }
+}

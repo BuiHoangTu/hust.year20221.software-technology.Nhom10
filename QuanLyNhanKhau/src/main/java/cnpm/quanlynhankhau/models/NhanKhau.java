@@ -91,6 +91,26 @@ public class NhanKhau {
         this.lyDoXoa = lyDoXoa;
         this.ngayTao = ngayTao;
     }
+    public NhanKhau(String soNhanKhau, String ten, String bietDanh, String tonGiao, boolean isMale, DiaChi thuongTru, LocalDate ngaySinh, DiaChi noiSinh, DiaChi nguyenQuan, String danToc, String hoChieu, DiaChi diaChiHienTai, String trinhDoChuyenMon, String trinhDoHocVan, String trinhDoNgoaiNgu, String ngheNghiep, DiaChi noiLamViec, String tienAn) {
+        this.soNhanKhau = soNhanKhau;
+        this.ten = ten;
+        this.bietDanh = bietDanh;
+        this.tonGiao = tonGiao;
+        this.isMale = isMale;
+        this.thuongTru = thuongTru;
+        this.ngaySinh = ngaySinh;
+        this.noiSinh = noiSinh;
+        this.nguyenQuan = nguyenQuan;
+        this.danToc = danToc;
+        this.hoChieu = hoChieu;
+        this.diaChiHienTai = diaChiHienTai;
+        this.trinhDoChuyenMon = trinhDoChuyenMon;
+        this.trinhDoHocVan = trinhDoHocVan;
+        this.trinhDoNgoaiNgu = trinhDoNgoaiNgu;
+        this.ngheNghiep = ngheNghiep;
+        this.noiLamViec = noiLamViec;
+        this.tienAn = tienAn;
+    }
 
 
     public String getSoNhanKhau() {
@@ -282,49 +302,35 @@ public class NhanKhau {
     }
 
     public void addTamTruVang(TamTruVang x) throws SQLException {
+        //tamTruVangs.add(x);
         String i = "";
         // TODO: 14/01/2023 db
         StringBuilder sqlQuery = new StringBuilder();
-        sqlQuery.append("Insert INTO quan_ly_nhan_khau.tam_tru_vang (idNhanKhau, noiTamTru, tuNgay, denNgay, lyDo, noiTamVang) values(?, ?, ?, ?, ?, ?)");
+        sqlQuery.append("Insert INTO quan_ly_nhan_khau.tam_tru_vang (noiTamTru, tuNgay, denNgay, lyDo, noiTamVang) values(?, ?, ?, ?, ?)");
         PreparedStatement statement = Database.getConnection().prepareStatement(sqlQuery.toString(), Statement.RETURN_GENERATED_KEYS);
-        statement.setString(1, this.soNhanKhau);
-        statement.setString(2, x.getDcTamTru().toString());
-        statement.setString(3, x.getTuNgay().toString());
-        statement.setString(4, x.getDenNgay().toString());
-        statement.setString(5, x.getLyDo());
-        statement.setString(6, x.getDcTamVang().toString());
+        statement.setString(1, x.getDcTamTru().toString());
+        statement.setString(2, x.getTuNgay().toString());
+        statement.setString(3, x.getDenNgay().toString());
+        statement.setString(4, x.getLyDo());
+        statement.setString(5, x.getDcTamVang().toString());
         statement.executeUpdate();
         ResultSet rs = statement.getGeneratedKeys();
 
         while (rs.next()){
             i = rs.getString(1);
-            System.out.println(i);
         }
-
-        PreparedStatement statement2 = Database.getConnection().prepareStatement("Select * from quan_ly_nhan_khau.tam_tru_vang where maGiayTamVang = ?");
-        statement2.setString(1, i);
-        ResultSet res = statement2.executeQuery();
-        while (res.next()){
-            TamTruVang result = new TamTruVang(res.getString(2),res.getDate(4).toLocalDate(), res.getDate(5).toLocalDate(),
-                    DiaChi.parse(res.getString(7)), DiaChi.parse(res.getString(3)),res.getString(6));
-            tamTruVangs.add(result);
-        }
+        x.setMaTamTruVang(i);
+        tamTruVangs.add(x);
+        System.out.println(tamTruVangs.get(0).getMaTamTruVang());
     }
     public void removeTamTruVang(TamTruVang x) throws SQLException {
         // TODO: 14/01/2023 db
-        for (TamTruVang tt : tamTruVangs){
-            System.out.print(tt.getMaTamTruVang() + " ");
-        }
         StringBuilder sqlQuery = new StringBuilder();
         sqlQuery.append("Delete from quan_ly_nhan_khau.tam_tru_vang where maGiayTamVang = ?;");
         PreparedStatement statement = Database.getConnection().prepareStatement(sqlQuery.toString());
         statement.setString(1, x.getMaTamTruVang());
         statement.executeUpdate();
         tamTruVangs.remove(x);
-        System.out.println();
-        for (TamTruVang tt : tamTruVangs){
-            System.out.print(tt.getMaTamTruVang() + " ");
-        }
     }
     public List<TamTruVang> getTamTruVangs() {
         return tamTruVangs;

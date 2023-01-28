@@ -82,7 +82,7 @@ public class Database {
         return output;
     }
 
-    public static final int BY_MA_NHAN_KHAU = 1, BY_SO_DIEN_THOAI = 2, BY_TEN = 3, BY_NGAY_SINH = 4, BY_DIA_CHI = 5, DS_TAM_TRU_VANG = 6;
+    public static final int BY_MA_NHAN_KHAU = 1, BY_SO_DIEN_THOAI = 2, BY_TEN = 3, BY_NGAY_SINH = 4, BY_DIA_CHI = 5;
     public static List<NhanKhau> getNhanKhau(int loaiMa, String ma) throws SQLException {
         List<NhanKhau> result = new ArrayList<>();
         // TODO tim nk co ma = maNhanKhau
