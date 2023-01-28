@@ -282,25 +282,23 @@ public class NhanKhau {
     }
 
     public void addTamTruVang(TamTruVang x) throws SQLException {
-        tamTruVangs.add(x);
-        // TODO: 14/01/2023 db
+        String i = "";
         StringBuilder sqlQuery = new StringBuilder();
-        sqlQuery.append("INSERT INTO quan_ly_nhan_khau.dinh_chinh_ho_khau (idNhanKhau, maGiayTamVang, noiTamtru, tuNgay, denNgay, lyDo, noiTamVang, daXacNhanTamVangTru)) VALUES( ? , ? , ? , ? , ? , ? , ? , ? );");
-        // thông tin thêm
-        PreparedStatement statement = Database.getConnection().prepareStatement(sqlQuery.toString());
+        sqlQuery.append("Insert INTO quan_ly_nhan_khau.tam_tru_vang (idNhanKhau, noiTamTru, tuNgay, denNgay, lyDo, noiTamVang) values(?, ?, ?, ?, ?, ?)");
+        PreparedStatement statement = Database.getConnection().prepareStatement(sqlQuery.toString(), Statement.RETURN_GENERATED_KEYS);
         
-        statement.setString(1, this.getSoNhanKhau());
-        statement.setString(2, x.getMaTamTruVang());
-        statement.setString(3, x.getDcTamTru().toString());
-        statement.setString(4, x.getTuNgay().toString());
-        statement.setString(5, x.getDenNgay().toString());
-        statement.setString(6, x.getLyDo());
-        statement.setString(7, x.getDcTamVang().toString());
-        statement.setString(8, "1");
-        
+        statement.setString(1, this.soNhanKhau);
+        statement.setString(2, dcTamTru.toString());
+        statement.setString(3, tuNgay.toString());
+        statement.setString(4, denNgay.toString());
+        statement.setString(5, lyDo);
+        statement.setString(6, dcTamVang.toString());
         statement.executeUpdate();
-        
-        // Done. Need Check and Test
+        ResultSet rs = statement.getGeneratedKeys();
+        rs.next();
+        String maTamTruVang = rs.getString(1);
+        System.out.print(maTamTruVang);
+        tamTruVangs.add(new TamTruVang(maTamTruVang, tuNgay, denNgay, dcTamVang, dcTamTru, lyDo));
     }
     public void removeTamTruVang(TamTruVang x) throws SQLException {
         tamTruVangs.remove(x);
