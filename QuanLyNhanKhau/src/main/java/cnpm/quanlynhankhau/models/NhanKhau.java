@@ -340,7 +340,111 @@ public class NhanKhau {
     /**
      * Save changes in this NK in database
      */
-    public void commit() {
+public void commit() throws SQLException {
+        
+    	StringBuilder sqlQuery = new StringBuilder();
+    	// commit to db
+        sqlQuery = new StringBuilder();
+        sqlQuery.append("UPDATE quan_ly_nhan_khau.nhan_khau ");
+
+        if (tenIsChanged) sqlQuery.append("SET hoTen= ? ");
+        if (bietDanhIsChanged) sqlQuery.append("SET bietDanh = ? ");
+        if (tonGiaoIsChanged) sqlQuery.append("SET tonGiao = ? ");
+        if (isMaleIsChanged) sqlQuery.append("SET gioiTinh = ? ");
+        if (thuongTruIsChanged) sqlQuery.append("SET noiThuongTru = ? ");
+        if (ngaySinhIsChanged) sqlQuery.append("SET namSinh = ? ");
+        if (noiSinhIsChanged) sqlQuery.append("SET noiSinh = ? ");
+        if (danTocIsChanged) sqlQuery.append("SET danToc = ? ");
+        if (hoChieuIsChanged) sqlQuery.append("SET soHoChieu = ? ");
+        if (diaChiHienTaiIsChanged) sqlQuery.append("SET diaChiHienNay= ? ");
+        if (trinhDoChuyenMonIsChanged) sqlQuery.append("SET trinhDoChuyenMon = ? ");
+        if (trinhDoHocVanIsChanged) sqlQuery.append("SET trinhDoHocVan = ? ");
+        if (trinhDoNgoaiNguIsChanged) sqlQuery.append("SET trinhDoNgoaiNgu = ? ");
+        if (ngheNghiepIsChanged) sqlQuery.append("SET ngheNghiep = ? ");
+        if (noiLamViecIsChanged) sqlQuery.append("SET noiLamViec = ? ");
+        if (tienAnIsChanged) sqlQuery.append("SET tienAn = ? ");
+        if (ghiChuIsChanged) sqlQuery.append("SET ghiChu = ? ");
+        
+        // TODO: 14/01/2023 tuong tu
+        sqlQuery.append("WHERE maNhanKhau = ? ");
+
+        PreparedStatement statement = Database.getConnection().prepareStatement(sqlQuery.toString());
+        int i = 1;
+        if (tenIsChanged) {
+            statement.setString(i, this.ten);
+            i += 1;
+        };
+        if (bietDanhIsChanged) {
+        	statement.setString(i, this.bietDanh);
+            i += 1;
+        }
+        if (tonGiaoIsChanged) {
+        	statement.setString(i, this.tonGiao);
+            i += 1;
+        }
+        if (isMaleIsChanged) {
+        	if (this.isMale) statement.setString(i, "Nam");
+        	else statement.setString(i, "Nữ");
+            i += 1;
+        }
+        if (thuongTruIsChanged) {
+        	statement.setString(i, this.thuongTru.toString());
+            i += 1;
+        }
+        if (ngaySinhIsChanged) {
+        	statement.setString(i, this.ngaySinh.toString());
+            i += 1;
+        }
+        if (noiSinhIsChanged) {
+        	statement.setString(i, this.noiSinh.toString());
+            i += 1;
+        }
+        if (danTocIsChanged) {
+        	statement.setString(i, this.danToc);
+            i += 1;
+        }
+        if (hoChieuIsChanged) {
+        	statement.setString(i, this.hoChieu);
+            i += 1;
+        }
+        if (diaChiHienTaiIsChanged) {
+        	statement.setString(i, this.diaChiHienTai.toString());
+            i += 1;
+        }
+        if (trinhDoChuyenMonIsChanged) {
+        	statement.setString(i, this.trinhDoChuyenMon);
+            i += 1;
+        }
+        if (trinhDoHocVanIsChanged) {
+        	statement.setString(i, this.trinhDoHocVan);
+            i += 1;
+        }
+        if (trinhDoNgoaiNguIsChanged) {
+        	statement.setString(i, this.trinhDoNgoaiNgu);
+            i += 1;
+        }
+        if (ngheNghiepIsChanged) {
+        	statement.setString(i, this.ngheNghiep);
+            i += 1;
+        }
+        if (noiLamViecIsChanged) {
+        	statement.setString(i, this.noiLamViec.toString());
+            i += 1;
+        }
+        if (tienAnIsChanged) {
+        	statement.setString(i, this.tienAn);
+            i += 1;
+        }
+        if (ghiChuIsChanged) {
+        	statement.setString(i, this.ghiChu);
+            i += 1;
+        }
+        
+        // TODO: 14/01/2023 tuong tu
+        statement.setString(i, this.soNhanKhau);
+        // gửi câu lệnh đến DB
+        statement.executeUpdate();
+    	
         soNhanKhauIsChanged = false;
         tenIsChanged = false;
         bietDanhIsChanged = false;
