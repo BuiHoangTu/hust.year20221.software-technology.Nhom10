@@ -4,11 +4,14 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<TitledPane animated="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="490.0" prefWidth="600.0" text="Tách hộ khẩu" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<TitledPane animated="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="490.0" prefWidth="678.0" text="Tách hộ khẩu" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <content>
       <SplitPane dividerPositions="0.22927807486631016" prefHeight="160.0" prefWidth="200.0">
         <items>
@@ -39,11 +42,30 @@
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
                   <Label layoutX="14.0" layoutY="29.0" text="Giới tính" />
-                  <ComboBox editable="true" layoutX="68.0" layoutY="24.0" prefHeight="26.0" prefWidth="86.0" promptText="Toàn bộ" />
-                  <Label layoutX="202.0" layoutY="29.0" text="Tình trạng" />
-                  <ComboBox editable="true" layoutX="266.0" layoutY="24.0" prefHeight="26.0" prefWidth="86.0" promptText="Toàn bộ" />
-                  <Button layoutX="339.0" layoutY="61.0" mnemonicParsing="false" text="Show" />
-                  <Button layoutX="339.0" layoutY="99.0" mnemonicParsing="false" text="Xuất file ..." />
+                  <ComboBox fx:id="cbGioiTinh" editable="true" layoutX="68.0" layoutY="24.0" prefHeight="26.0" prefWidth="86.0" promptText="Toàn bộ" />
+                  <Label layoutX="229.0" layoutY="29.0" text="Tình trạng" />
+                  <ComboBox fx:id="cbTinhTrang" editable="true" layoutX="292.0" layoutY="24.0" prefHeight="26.0" prefWidth="86.0" promptText="Toàn bộ" />
+                  <Button layoutX="432.0" layoutY="24.0" mnemonicParsing="false" onAction="#OnShowClicked" prefHeight="26.0" prefWidth="71.0" text="Show" />
+                  <Button layoutX="432.0" layoutY="66.0" mnemonicParsing="false" onAction="#OnExportClicked" text="Xuất file ..." />
+                  <Label layoutX="14.0" layoutY="70.0" text="Độ tuổi :" />
+                  <Label layoutX="229.0" layoutY="70.0" text="Năm :" />
+                  <Label layoutX="68.0" layoutY="70.0" text="Từ" />
+                  <Label layoutX="144.0" layoutY="69.0" text="đến" />
+                  <TextField fx:id="tfAgeFrom" layoutX="90.0" layoutY="65.0" prefHeight="26.0" prefWidth="41.0" />
+                  <TextField fx:id="tfAgeUntil" layoutX="170.0" layoutY="65.0" prefHeight="26.0" prefWidth="41.0" />
+                  <Label layoutX="272.0" layoutY="70.0" text="Từ" />
+                  <Label layoutX="348.0" layoutY="69.0" text="đến" />
+                  <TextField fx:id="tfYearFrom" layoutX="294.0" layoutY="65.0" prefHeight="26.0" prefWidth="41.0" />
+                  <TextField fx:id="tfYearUntil" layoutX="374.0" layoutY="65.0" prefHeight="26.0" prefWidth="41.0" />
+                  <TableView fx:id="tvThanhVien" layoutX="11.0" layoutY="101.0" prefHeight="354.0" prefWidth="500.0">
+                    <columns>
+                      <TableColumn prefWidth="56.80004692077637" text="ID" />
+                      <TableColumn prefWidth="128.00003814697266" text="Họ Tên" />
+                        <TableColumn prefWidth="97.5999755859375" text="Ngày sinh" />
+                        <TableColumn prefWidth="60.0" text="Giới tính" />
+                        <TableColumn prefWidth="153.60003662109375" text="Địa chỉ hiện nay" />
+                    </columns>
+                  </TableView>
                </children>
             </AnchorPane>
         </items>
