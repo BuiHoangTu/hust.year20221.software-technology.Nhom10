@@ -325,35 +325,6 @@ public class NhanKhau {
         return chungMinhThu;
     }
 
-
-    /**
-     * Khai báo tạm vắng
-     * @return Mã tạm vắng
-     */
-//    public String tamVang(LocalDate tuNgay, LocalDate denNgay) throws SQLException {
-//        // TODO database make tam vang
-//    	StringBuilder sqlQuery = new StringBuilder();
-//        sqlQuery.append("INSERT INTO quan_ly_nhan_khau.tam_vang (idNhanKhau, maGiayTamVang, noiTamTru, diaChi, ngayLap) VALUES( ? , ? , ? , ? , ? );");
-//        // thông tin thêm
-//        PreparedStatement statement = Database.getConnection().prepareStatement(sqlQuery.toString());
-//        
-//        return null;
-//        
-//        // Not complete
-//    }
-//    
-//    public String tamTru(LocalDate tuNgay, LocalDate denNgay) throws SQLException {
-//        // TODO database make tam vang
-//    	StringBuilder sqlQuery = new StringBuilder();
-//        sqlQuery.append("INSERT INTO quan_ly_nhan_khau.tam_vang (idNhanKhau, maGiayTamVang, noiTamTru, diaChi, ngayLap) VALUES( ? , ? , ? , ? , ? );");
-//        // thông tin thêm
-//        PreparedStatement statement = Database.getConnection().prepareStatement(sqlQuery.toString());
-//        
-//        return null;
-//        
-//        // Not complete
-//    }
-
     /**
      * Save changes in this NK in database
      */
