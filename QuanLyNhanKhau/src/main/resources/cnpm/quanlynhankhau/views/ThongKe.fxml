@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<TitledPane animated="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="490.0" prefWidth="600.0" text="Tách hộ khẩu" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <content>
+      <SplitPane dividerPositions="0.22927807486631016" prefHeight="160.0" prefWidth="200.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <Button layoutY="1.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="135.0" text="Trang Chủ">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="22.0" layoutY="124.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="113.0" text="Nhân Khẩu">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="22.0" layoutY="232.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="113.0" text="Thống Kê">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="22.0" layoutY="178.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="113.0" text="Hộ Khẩu">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <Label layoutX="14.0" layoutY="29.0" text="Giới tính" />
+                  <ComboBox editable="true" layoutX="68.0" layoutY="24.0" prefHeight="26.0" prefWidth="86.0" promptText="Toàn bộ" />
+                  <Label layoutX="202.0" layoutY="29.0" text="Tình trạng" />
+                  <ComboBox editable="true" layoutX="266.0" layoutY="24.0" prefHeight="26.0" prefWidth="86.0" promptText="Toàn bộ" />
+                  <Button layoutX="339.0" layoutY="61.0" mnemonicParsing="false" text="Show" />
+                  <Button layoutX="339.0" layoutY="99.0" mnemonicParsing="false" text="Xuất file ..." />
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </content>
+</TitledPane>
