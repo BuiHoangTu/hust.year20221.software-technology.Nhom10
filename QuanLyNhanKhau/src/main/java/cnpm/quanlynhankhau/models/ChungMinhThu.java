@@ -1,12 +1,7 @@
 package cnpm.quanlynhankhau.models;
 
-import javafx.scene.effect.ImageInput;
 import javafx.scene.image.Image;
 
-import java.io.*;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,13 +10,12 @@ import java.time.LocalDate;
 
 public class ChungMinhThu {
 
-	private String soCMT;
-	private LocalDate ngayCap;
-	private DiaChi noiCap;
-	private Image anhChanDung;
+	private final String soCMT;
+	private final LocalDate ngayCap;
+	private final DiaChi noiCap;
+	private final Image anhChanDung;
 
 
-	private ChungMinhThu(){}
 	public ChungMinhThu(String soCMT, LocalDate ngayCap, DiaChi noiCap, Image anhChanDung) {
 		this.soCMT = soCMT;
 		this.ngayCap = ngayCap;
@@ -38,9 +32,8 @@ public class ChungMinhThu {
 	 */
 	public static ChungMinhThu lamCMT(Image anhChanDung, DiaChi noiCap) throws SQLException {
 		String i = "";
-		StringBuilder sqlQuery = new StringBuilder();
-		sqlQuery.append("Insert into quan_ly_nhan_khau.chung_minh_thu(noiCap, anhChanDung) values (?, ?)");
-		PreparedStatement statement = Database.getConnection().prepareStatement(sqlQuery.toString(), Statement.RETURN_GENERATED_KEYS);
+		String sqlQuery = "Insert into quan_ly_nhan_khau.chung_minh_thu(noiCap, anhChanDung) values (?, ?)";
+		PreparedStatement statement = Database.getConnection().prepareStatement(sqlQuery, Statement.RETURN_GENERATED_KEYS);
 		statement.setString(1, noiCap.toString());
 		statement.setBinaryStream(2, null);
 		statement.executeUpdate();
@@ -58,6 +51,16 @@ public class ChungMinhThu {
 			return cmt;
 		}
 		return null;
+	}
+
+	public static ChungMinhThu getChungMinhThu (String soCMT) throws SQLException {
+		String sqlQuery = "Select * from quan_ly_nhan_khau.chung_minh_thu where soCMT = ?";
+		PreparedStatement statement = Database.getConnection().prepareStatement(sqlQuery);
+		statement.setString(1, soCMT);
+		var rs = statement.executeQuery();
+
+		if (!rs.next()) return null;
+		return new ChungMinhThu(rs.getString(1), rs.getDate(2).toLocalDate(), DiaChi.parse(rs.getString(3)), null);
 	}
 
 
