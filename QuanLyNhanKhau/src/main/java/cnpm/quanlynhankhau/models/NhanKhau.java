@@ -1,11 +1,12 @@
 package cnpm.quanlynhankhau.models;
 
-import java.sql.*;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
-import cnpm.quanlynhankhau.application.QuanLyNhanKhauApplication;
 
 public class NhanKhau {
     private String soNhanKhau;
@@ -50,8 +51,7 @@ public class NhanKhau {
     public boolean lyDoChuyenDenIsChanged = false;
     private String ghiChu;
     public boolean ghiChuIsChanged = false;
-    private final List<TamTruVang> tamTruVangs = new ArrayList<>();
-    // TODO commit directly
+    private List<TamTruVang> tamTruVangs = new ArrayList<>();
 
     private ChungMinhThu chungMinhThu;
     private String idNguoiTao;
@@ -62,8 +62,7 @@ public class NhanKhau {
 
     public NhanKhau() {}
     public NhanKhau(String soNhanKhau, String ten, String bietDanh, String tonGiao, boolean isMale, DiaChi thuongTru, LocalDate ngaySinh, DiaChi noiSinh, DiaChi nguyenQuan, String danToc, String hoChieu, DiaChi diaChiHienTai, String trinhDoChuyenMon, String trinhDoHocVan, String trinhDoNgoaiNgu, String ngheNghiep, DiaChi noiLamViec, String tienAn, LocalDate ngayChuyenDen, String lyDoChuyenDen, String ghiChu, ChungMinhThu chungMinhThu, String idNguoiTao, LocalDate ngayXoa, String idNguoiXoa, String lyDoXoa, LocalDate ngayTao) {
-    	
-    	this.soNhanKhau = soNhanKhau;
+        this.soNhanKhau = soNhanKhau;
         this.ten = ten;
         this.bietDanh = bietDanh;
         this.tonGiao = tonGiao;
@@ -90,6 +89,26 @@ public class NhanKhau {
         this.idNguoiXoa = idNguoiXoa;
         this.lyDoXoa = lyDoXoa;
         this.ngayTao = ngayTao;
+    }
+    public NhanKhau(String soNhanKhau, String ten, String bietDanh, String tonGiao, boolean isMale, DiaChi thuongTru, LocalDate ngaySinh, DiaChi noiSinh, DiaChi nguyenQuan, String danToc, String hoChieu, DiaChi diaChiHienTai, String trinhDoChuyenMon, String trinhDoHocVan, String trinhDoNgoaiNgu, String ngheNghiep, DiaChi noiLamViec, String tienAn) {
+        this.soNhanKhau = soNhanKhau;
+        this.ten = ten;
+        this.bietDanh = bietDanh;
+        this.tonGiao = tonGiao;
+        this.isMale = isMale;
+        this.thuongTru = thuongTru;
+        this.ngaySinh = ngaySinh;
+        this.noiSinh = noiSinh;
+        this.nguyenQuan = nguyenQuan;
+        this.danToc = danToc;
+        this.hoChieu = hoChieu;
+        this.diaChiHienTai = diaChiHienTai;
+        this.trinhDoChuyenMon = trinhDoChuyenMon;
+        this.trinhDoHocVan = trinhDoHocVan;
+        this.trinhDoNgoaiNgu = trinhDoNgoaiNgu;
+        this.ngheNghiep = ngheNghiep;
+        this.noiLamViec = noiLamViec;
+        this.tienAn = tienAn;
     }
 
 
@@ -282,41 +301,34 @@ public class NhanKhau {
     }
 
     public void addTamTruVang(TamTruVang x) throws SQLException {
+        //tamTruVangs.add(x);
         String i = "";
         StringBuilder sqlQuery = new StringBuilder();
-        sqlQuery.append("Insert INTO quan_ly_nhan_khau.tam_tru_vang (idNhanKhau, noiTamTru, tuNgay, denNgay, lyDo, noiTamVang) values(?, ?, ?, ?, ?, ?)");
+        sqlQuery.append("Insert INTO quan_ly_nhan_khau.tam_tru_vang (noiTamTru, tuNgay, denNgay, lyDo, noiTamVang) values(?, ?, ?, ?, ?)");
         PreparedStatement statement = Database.getConnection().prepareStatement(sqlQuery.toString(), Statement.RETURN_GENERATED_KEYS);
-        
-        statement.setString(1, this.soNhanKhau);
-        statement.setString(2, dcTamTru.toString());
-        statement.setString(3, tuNgay.toString());
-        statement.setString(4, denNgay.toString());
-        statement.setString(5, lyDo);
-        statement.setString(6, dcTamVang.toString());
+        statement.setString(1, x.getDcTamTru().toString());
+        statement.setString(2, x.getTuNgay().toString());
+        statement.setString(3, x.getDenNgay().toString());
+        statement.setString(4, x.getLyDo());
+        statement.setString(5, x.getDcTamVang().toString());
         statement.executeUpdate();
         ResultSet rs = statement.getGeneratedKeys();
-        rs.next();
-        String maTamTruVang = rs.getString(1);
-        System.out.print(maTamTruVang);
-        tamTruVangs.add(new TamTruVang(maTamTruVang, tuNgay, denNgay, dcTamVang, dcTamTru, lyDo));
+
+        while (rs.next()){
+            i = rs.getString(1);
+        }
+        x.setMaTamTruVang(i);
+        tamTruVangs.add(x);
+        System.out.println(tamTruVangs.get(0).getMaTamTruVang());
     }
     public void removeTamTruVang(TamTruVang x) throws SQLException {
-        tamTruVangs.remove(x);
-        // TODO: 14/01/2023 db
         StringBuilder sqlQuery = new StringBuilder();
-    	sqlQuery = new StringBuilder();
-        sqlQuery.append("DELETE FROM quan_ly_nhan_khau.tam_tru_vang ");
-        sqlQuery.append("WHERE maGiayTamVang = ? ");
-
+        sqlQuery.append("Delete from quan_ly_nhan_khau.tam_tru_vang where maGiayTamVang = ?;");
         PreparedStatement statement = Database.getConnection().prepareStatement(sqlQuery.toString());
-        
         statement.setString(1, x.getMaTamTruVang());
-        
-        statement.executeUpdate();     
-        
-        // Done. Need Check and Test
+        statement.executeUpdate();
+        tamTruVangs.remove(x);
     }
-    
     public List<TamTruVang> getTamTruVangs() {
         return tamTruVangs;
     }
@@ -328,111 +340,7 @@ public class NhanKhau {
     /**
      * Save changes in this NK in database
      */
-    public void commit() throws SQLException {
-    	
-    	StringBuilder sqlQuery = new StringBuilder();
-    	// commit to db
-        sqlQuery = new StringBuilder();
-        sqlQuery.append("UPDATE quan_ly_nhan_khau.nhan_khau ");
-
-        if (tenIsChanged) sqlQuery.append("SET hoTen= ? ");
-        if (bietDanhIsChanged) sqlQuery.append("SET bietDanh = ? ");
-        if (tonGiaoIsChanged) sqlQuery.append("SET tonGiao = ? ");
-        if (isMaleIsChanged) sqlQuery.append("SET gioiTinh = ? ");
-        if (thuongTruIsChanged) sqlQuery.append("SET noiThuongTru = ? ");
-        if (ngaySinhIsChanged) sqlQuery.append("SET namSinh = ? ");
-        if (noiSinhIsChanged) sqlQuery.append("SET noiSinh = ? ");
-        if (danTocIsChanged) sqlQuery.append("SET danToc = ? ");
-        if (hoChieuIsChanged) sqlQuery.append("SET soHoChieu = ? ");
-        if (diaChiHienTaiIsChanged) sqlQuery.append("SET diaChiHienNay= ? ");
-        if (trinhDoChuyenMonIsChanged) sqlQuery.append("SET trinhDoChuyenMon = ? ");
-        if (trinhDoHocVanIsChanged) sqlQuery.append("SET trinhDoHocVan = ? ");
-        if (trinhDoNgoaiNguIsChanged) sqlQuery.append("SET trinhDoNgoaiNgu = ? ");
-        if (ngheNghiepIsChanged) sqlQuery.append("SET ngheNghiep = ? ");
-        if (noiLamViecIsChanged) sqlQuery.append("SET noiLamViec = ? ");
-        if (tienAnIsChanged) sqlQuery.append("SET tienAn = ? ");
-        if (ghiChuIsChanged) sqlQuery.append("SET ghiChu = ? ");
-        
-        // TODO: 14/01/2023 tuong tu
-        sqlQuery.append("WHERE maNhanKhau = ? ");
-
-        PreparedStatement statement = Database.getConnection().prepareStatement(sqlQuery.toString());
-        int i = 1;
-        if (tenIsChanged) {
-            statement.setString(i, this.ten);
-            i += 1;
-        };
-        if (bietDanhIsChanged) {
-        	statement.setString(i, this.bietDanh);
-            i += 1;
-        }
-        if (tonGiaoIsChanged) {
-        	statement.setString(i, this.tonGiao);
-            i += 1;
-        }
-        if (isMaleIsChanged) {
-        	if (this.isMale) statement.setString(i, "Nam");
-        	else statement.setString(i, "Nữ");
-            i += 1;
-        }
-        if (thuongTruIsChanged) {
-        	statement.setString(i, this.thuongTru.toString());
-            i += 1;
-        }
-        if (ngaySinhIsChanged) {
-        	statement.setString(i, this.ngaySinh.toString());
-            i += 1;
-        }
-        if (noiSinhIsChanged) {
-        	statement.setString(i, this.noiSinh.toString());
-            i += 1;
-        }
-        if (danTocIsChanged) {
-        	statement.setString(i, this.danToc);
-            i += 1;
-        }
-        if (hoChieuIsChanged) {
-        	statement.setString(i, this.hoChieu);
-            i += 1;
-        }
-        if (diaChiHienTaiIsChanged) {
-        	statement.setString(i, this.diaChiHienTai.toString());
-            i += 1;
-        }
-        if (trinhDoChuyenMonIsChanged) {
-        	statement.setString(i, this.trinhDoChuyenMon);
-            i += 1;
-        }
-        if (trinhDoHocVanIsChanged) {
-        	statement.setString(i, this.trinhDoHocVan);
-            i += 1;
-        }
-        if (trinhDoNgoaiNguIsChanged) {
-        	statement.setString(i, this.trinhDoNgoaiNgu);
-            i += 1;
-        }
-        if (ngheNghiepIsChanged) {
-        	statement.setString(i, this.ngheNghiep);
-            i += 1;
-        }
-        if (noiLamViecIsChanged) {
-        	statement.setString(i, this.noiLamViec.toString());
-            i += 1;
-        }
-        if (tienAnIsChanged) {
-        	statement.setString(i, this.tienAn);
-            i += 1;
-        }
-        if (ghiChuIsChanged) {
-        	statement.setString(i, this.ghiChu);
-            i += 1;
-        }
-        
-        // TODO: 14/01/2023 tuong tu
-        statement.setString(i, this.soNhanKhau);
-        // gửi câu lệnh đến DB
-        statement.executeUpdate();
-    	
+    public void commit() {
         soNhanKhauIsChanged = false;
         tenIsChanged = false;
         bietDanhIsChanged = false;
