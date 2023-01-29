@@ -317,7 +317,7 @@ public class NhanKhau {
         while (rs.next()){
             i = rs.getString(1);
         }
-        x.setMaTamTruVang(i);
+        //x.setMaTamTruVang(i);
         tamTruVangs.add(x);
         System.out.println(tamTruVangs.get(0).getMaTamTruVang());
     }

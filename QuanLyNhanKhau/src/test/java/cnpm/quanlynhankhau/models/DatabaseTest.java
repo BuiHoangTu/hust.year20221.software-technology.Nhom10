@@ -11,16 +11,10 @@ import static org.junit.jupiter.api.Assertions.*;
 class DatabaseTest {
     @Test
     void taoHoKhau() throws SQLException {
-        HoKhau x = new HoKhau();
-        NhanKhau chuHo = new NhanKhau();
-        //chuHo.setSoNhanKhau("000000000001");
-        DiaChi diaChi = new DiaChi(null,"hbc",null,"11/195",null);
-        x.setChuHo(chuHo);
-        x.setDiaChi(diaChi);
-        x.setMaKhuVuc("12");
-
-        Database test = new Database();
-        test.taoHoKhau(x);
+        NhanKhau chuHo = Database.getNhanKhau(1, "8").get(0);
+        DiaChi dc = new DiaChi("Hanoi","HoangMai","HQV","4",null);
+        HoKhau nHK = Database.taoHoKhau(chuHo.getSoNhanKhau(), "HN05",dc.toString());
+        System.out.println(nHK.getSoHoKhau() + "\t" + nHK.getNgayLap());
     }
     @Test
     void getNhanKhau() throws SQLException {
@@ -55,15 +49,6 @@ class DatabaseTest {
         NhanKhau x = Database.getNhanKhau(1, "5").get(0);
         Database.xoaNhanKhau(x);
     }
-
-
-	@Test
-	void login() throws SQLException {
-		assertFalse(Database.login(null, null) > 0);
-		assertFalse(Database.login("wrong", "wrong") > 0);
-		assertTrue(Database.login("admin", "1") > 0);
-	}
-}
 	@Test
 	void login() throws SQLException {
 		assertFalse(Database.login(null, null) > 0);
