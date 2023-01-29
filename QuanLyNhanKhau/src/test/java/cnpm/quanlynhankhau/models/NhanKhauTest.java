@@ -21,7 +21,6 @@ class NhanKhauTest {
         NhanKhau x = Database.getNhanKhau(1,"2").get(0);
         x.removeTamTruVang(x.getTamTruVangs().get(0));
     }
-}
 
     @Test
     void removeTamTruVang() throws SQLException {

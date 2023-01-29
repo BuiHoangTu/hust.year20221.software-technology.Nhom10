@@ -125,8 +125,47 @@ public class Database {
         statement.executeUpdate();
     }
 
-    public static NhanKhau taoNhanKhau(String ten, String bietDanh, String tonGiao, boolean isMale, DiaChi thuongTru, LocalDate ngaySinh, DiaChi noiSinh, DiaChi nguyenQuan, String danToc, String hoChieu, DiaChi diaChiHienTai, String trinhDoChuyenMon, String trinhDoHocVan, String trinhDoNgoaiNgu, String ngheNghiep, DiaChi noiLamViec, String tienAn, LocalDate ngayChuyenDen, String lyDoChuyenDen, String ghiChu, ChungMinhThu chungMinhThu) {
+    public static NhanKhau taoNhanKhau(String ten, String bietDanh, String tonGiao, boolean isMale, DiaChi thuongTru, LocalDate ngaySinh, DiaChi noiSinh, DiaChi nguyenQuan, String danToc, String hoChieu, DiaChi diaChiHienTai, String trinhDoChuyenMon, String trinhDoHocVan, String trinhDoNgoaiNgu, String ngheNghiep, DiaChi noiLamViec, String tienAn, LocalDate ngayChuyenDen, String lyDoChuyenDen, String ghiChu, ChungMinhThu chungMinhThu) throws SQLException {
         // // TODO: 28/01/2023 tao trong DB
+        String idNK = "";
+        StringBuilder sqlQuery = new StringBuilder();
+        sqlQuery.append("Insert into quan_ly_nhan_khau.nhan_khau (hoTen, bietDanh, tonGiao, gioiTinh, noiThuongTru, namSinh, noiSinh, nguyenQuan, danToc, hoChieu, " +
+                                                                "diaChiHienNay, TrinhDoChuyenMon, trinhDoHocVan, trinhDoNgoaiNgu, ngheNghiep, noiLamViec, tienAn, " +
+                                                                "ngayChuyenDen, lyDoChuyenDen, ghiChu)" +
+                                                                "values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+        PreparedStatement statement = Database.getConnection().prepareStatement(sqlQuery.toString(), Statement.RETURN_GENERATED_KEYS);
+        statement.setString(1, ten);
+        statement.setString(2,bietDanh);
+        if(isMale == true){
+            statement.setString(3, "Nam");
+        }else {
+            statement.setString(3, "Nu");
+        }
+        statement.setString(4, thuongTru.toString());
+        statement.setString(5, ngaySinh.toString());
+        statement.setString(6, ngaySinh.toString());
+        statement.setString(7, noiSinh.toString());
+        statement.setString(8, nguyenQuan.toString());
+        statement.setString(9, danToc);
+        statement.setString(10, hoChieu);
+        statement.setString(11, diaChiHienTai.toString());
+        statement.setString(12, trinhDoChuyenMon);
+        statement.setString(13, trinhDoHocVan);
+        statement.setString(14, trinhDoNgoaiNgu);
+        statement.setString(15, ngheNghiep);
+        statement.setString(16, noiLamViec.toString());
+        statement.setString(17, tienAn);
+        statement.setString(18, ngayChuyenDen.toString());
+        statement.setString(19, lyDoChuyenDen);
+        statement.setString(20, ghiChu);
+        statement.executeUpdate();
+        ResultSet rs = statement.getGeneratedKeys();
+        while (rs.next()){
+            idNK = rs.getString(1);
+            NhanKhau x = getNhanKhau(1, idNK).get(0);
+            return x;
+        }
+
         return null;
     }
 
@@ -139,11 +178,22 @@ public class Database {
         statement.setString(1, soHKChuHo);
         statement.setString(2, maKhuVuc);
         statement.setString(3, diaChi);
-        var rs = statement.executeQuery();
-        rs.next();
-        String soHK = rs.getString(""); // // TODO: 28/01/2023 thay bằng tên cột, get HK tu DB and return
-
-
+        statement.executeUpdate();
+        ResultSet rs = statement.getGeneratedKeys();
+        while (rs.next()){
+            String soHK = rs.getString(1);
+            StringBuilder sqlQuery2 = new StringBuilder();
+            sqlQuery2.append("Select * from quan_ly_nhan_khau.ho_khau where maHoKhau = ?");
+            PreparedStatement statement1 = Database.getConnection().prepareStatement(sqlQuery2.toString());
+            statement1.setString(1, soHK);
+            ResultSet resultSet = statement1.executeQuery();
+            while (resultSet.next()){
+                HoKhau newHK = new HoKhau(soHK, Database.getNhanKhau(1, resultSet.getString(2)).get(0), maKhuVuc,
+                        DiaChi.parse(resultSet.getString(4)), resultSet.getDate(5).toLocalDate());
+                return newHK;
+            }
+        }
+        // TODO: 28/01/2023 thay bằng tên cột, get HK tu DB and return
         return null;
     }
 }
