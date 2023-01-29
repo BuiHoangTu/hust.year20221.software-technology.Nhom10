@@ -182,16 +182,18 @@ public class Database {
         ResultSet rs = statement.getGeneratedKeys();
         while (rs.next()){
             String soHK = rs.getString(1);
-            StringBuilder sqlQuery2 = new StringBuilder();
-            sqlQuery2.append("Select * from quan_ly_nhan_khau.ho_khau where maHoKhau = ?");
-            PreparedStatement statement1 = Database.getConnection().prepareStatement(sqlQuery2.toString());
-            statement1.setString(1, soHK);
-            ResultSet resultSet = statement1.executeQuery();
-            while (resultSet.next()){
-                HoKhau newHK = new HoKhau(soHK, Database.getNhanKhau(1, resultSet.getString(2)).get(0), maKhuVuc,
-                        DiaChi.parse(resultSet.getString(4)), resultSet.getDate(5).toLocalDate());
-                return newHK;
-            }
+//            StringBuilder sqlQuery2 = new StringBuilder();
+//            sqlQuery2.append("Select * from quan_ly_nhan_khau.ho_khau where maHoKhau = ?");
+//            PreparedStatement statement1 = Database.getConnection().prepareStatement(sqlQuery2.toString());
+//            statement1.setString(1, soHK);
+//            ResultSet resultSet = statement1.executeQuery();
+//            while (resultSet.next()){
+//                HoKhau newHK = new HoKhau(soHK, Database.getNhanKhau(1, resultSet.getString(2)).get(0), maKhuVuc,
+//                        DiaChi.parse(resultSet.getString(4)), resultSet.getDate(5).toLocalDate());
+//                return newHK;
+//            }
+            HoKhau x = getHoKhau(soHK);
+            return x;
         }
         // TODO: 28/01/2023 thay bằng tên cột, get HK tu DB and return
         return null;
