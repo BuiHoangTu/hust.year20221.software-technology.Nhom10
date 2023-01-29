@@ -29,7 +29,7 @@ public class ChuyenHoKhau {
 
     @FXML
     protected void onHuyClicked() {
-        
+        // TODO
     }
     
     @FXML

@@ -3,6 +3,9 @@ package cnpm.quanlynhankhau.controllers;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
+import javafx.fxml.FXML;
+import javafx.scene.control.*;
+
 public class ThongKe {
 	@FXML
     private ComboBox cbGioiTinh;

@@ -132,6 +132,17 @@ public class HoKhau {
             NK.setHoChieu(res.getString("soHoChieu"));
             NK.setDiaChiHienTai(DiaChi.parse(res.getString("diaChiHienNay")));
             NK.setNgaySinh(LocalDate.parse(res.getString("namSinh")));
+            NK.setNoiSinh(DiaChi.parse(res.getString("noiSinh")));
+            NK.setNguyenQuan(DiaChi.parse(res.getString("nguyenQuan")));
+            NK.setTonGiao(res.getString("tonGiao"));
+            NK.setTrinhDoHocVan(res.getString("trinhDoHocVan"));
+            NK.setTrinhDoChuyenMon(res.getString("TrinhDoChuyenMon"));
+            NK.setTrinhDoNgoaiNgu(res.getString("trinhDoNgoaiNgu"));
+            NK.setNgheNghiep(res.getString("ngheNghiep"));
+            NK.setNoiLamViec(DiaChi.parse(res.getString("noiLamViec")));
+            NK.setTienAn(res.getString("tienAn"));
+            NK.setNgayChuyenDen(LocalDate.parse(res.getString("ngayChuyenDen")));
+            NK.setLyDoChuyenDen(res.getString("lyDoChuyenDen"));
         	output.add(new HoKhau(res.getString("idHoKhau"), NK, res.getString("maKhuVuc"), DiaChi.parse(res.getString("diaChi")), LocalDate.parse(res.getString("ngayLap"))));
         }
         return output;
