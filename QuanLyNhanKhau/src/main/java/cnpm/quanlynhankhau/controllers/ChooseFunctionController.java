@@ -12,7 +12,6 @@ public class ChooseFunctionController {
     @FXML
     private Button marker;
 
-
     private void changeView(String viewName) {
         FXMLLoader fxmlLoader = new FXMLLoader(ChooseFunctionController.class.getResource(viewName));
         Scene scene;
