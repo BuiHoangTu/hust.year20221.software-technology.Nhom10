@@ -112,10 +112,39 @@ public class Database {
         return getNhanKhau(1, maNK);
     }
 
-    public static HoKhau getHoKhau(String soHK) {
-        // // TODO: 28/01/2023 get from DB
-        return null;
-    }
+    public static HoKhau getHoKhau(String soHK) throws SQLException{
+        PreparedStatement subStatement = Database.getConnection().prepareStatement("""
+                select * from quan_ly_nhan_khau.ho_khau
+                inner join thanh_vien_cua_ho on thanh_vien_cua_ho.idHoKhau = ho_khau.idHoKhau
+        		inner join nhan_khau on nhan_khau.maNhanKhau = ho_khau.idChuHo
+        		where ho_Khau.idHoKhau=?
+                """);
+        subStatement.setString(1, String.format("%d", soHK));
+        ResultSet res = subStatement.executeQuery();
+
+        NhanKhau NK = new NhanKhau();
+        NK.setTen(res.getString("hoTen"));
+        NK.setBietDanh(res.getString("bietDanh"));
+        NK.setDanToc(res.getString("danToc"));
+        NK.setGhiChu(res.getString("ghiChu"));
+        NK.setHoChieu(res.getString("soHoChieu"));
+        NK.setDiaChiHienTai(DiaChi.parse(res.getString("diaChiHienNay")));
+        NK.setNgaySinh(LocalDate.parse(res.getString("namSinh")));
+        NK.setNoiSinh(DiaChi.parse(res.getString("noiSinh")));
+        NK.setNguyenQuan(DiaChi.parse(res.getString("nguyenQuan")));
+        NK.setTonGiao(res.getString("tonGiao"));
+        NK.setTrinhDoHocVan(res.getString("trinhDoHocVan"));
+        NK.setTrinhDoChuyenMon(res.getString("TrinhDoChuyenMon"));
+        NK.setTrinhDoNgoaiNgu(res.getString("trinhDoNgoaiNgu"));
+        NK.setNgheNghiep(res.getString("ngheNghiep"));
+        NK.setNoiLamViec(DiaChi.parse(res.getString("noiLamViec")));
+        NK.setTienAn(res.getString("tienAn"));
+        NK.setNgayChuyenDen(LocalDate.parse(res.getString("ngayChuyenDen")));
+        NK.setLyDoChuyenDen(res.getString("lyDoChuyenDen"));
+        return new HoKhau(res.getString("idHoKhau"), NK, res.getString("maKhuVuc"), DiaChi.parse(res.getString("diaChi")), LocalDate.parse(res.getString("ngayLap")));
+        }
+
+
 
     public static void xoaNhanKhau (NhanKhau nhanKhau) throws SQLException {
         StringBuilder sqlQuery = new StringBuilder();
