@@ -300,27 +300,26 @@ public class NhanKhau {
         ghiChuIsChanged = true;
     }
 
-    public void addTamTruVang(TamTruVang x) throws SQLException {
-        //tamTruVangs.add(x);
-        String i = "";
+    public void addTamTruVang(DiaChi dcTamTru, LocalDate tuNgay, LocalDate denNgay, String lyDo, DiaChi dcTamVang) throws SQLException {
+    	String i = "";
         StringBuilder sqlQuery = new StringBuilder();
-        sqlQuery.append("Insert INTO quan_ly_nhan_khau.tam_tru_vang (noiTamTru, tuNgay, denNgay, lyDo, noiTamVang) values(?, ?, ?, ?, ?)");
+        sqlQuery.append("Insert INTO quan_ly_nhan_khau.tam_tru_vang (idNhanKhau, noiTamTru, tuNgay, denNgay, lyDo, noiTamVang) values(?, ?, ?, ?, ?, ?)");
         PreparedStatement statement = Database.getConnection().prepareStatement(sqlQuery.toString(), Statement.RETURN_GENERATED_KEYS);
-        statement.setString(1, x.getDcTamTru().toString());
-        statement.setString(2, x.getTuNgay().toString());
-        statement.setString(3, x.getDenNgay().toString());
-        statement.setString(4, x.getLyDo());
-        statement.setString(5, x.getDcTamVang().toString());
+        
+        statement.setString(1, this.soNhanKhau);
+        statement.setString(2, dcTamTru.toString());
+        statement.setString(3, tuNgay.toString());
+        statement.setString(4, denNgay.toString());
+        statement.setString(5, lyDo);
+        statement.setString(6, dcTamVang.toString());
         statement.executeUpdate();
         ResultSet rs = statement.getGeneratedKeys();
-
-        while (rs.next()){
-            i = rs.getString(1);
-        }
-        //x.setMaTamTruVang(i);
-        tamTruVangs.add(x);
-        System.out.println(tamTruVangs.get(0).getMaTamTruVang());
+        rs.next();
+        String maTamTruVang = rs.getString(1);
+        System.out.print(maTamTruVang);
+        tamTruVangs.add(new TamTruVang(maTamTruVang, tuNgay, denNgay, dcTamVang, dcTamTru, lyDo));
     }
+    
     public void removeTamTruVang(TamTruVang x) throws SQLException {
         StringBuilder sqlQuery = new StringBuilder();
         sqlQuery.append("Delete from quan_ly_nhan_khau.tam_tru_vang where maGiayTamVang = ?;");
@@ -329,6 +328,7 @@ public class NhanKhau {
         statement.executeUpdate();
         tamTruVangs.remove(x);
     }
+    
     public List<TamTruVang> getTamTruVangs() {
         return tamTruVangs;
     }
