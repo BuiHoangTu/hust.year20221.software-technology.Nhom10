@@ -320,7 +320,11 @@ public class NhanKhau {
      * Save changes in this NK in database
      * @throws SQLException 
      */
+<<<<<<< HEAD
     public void commit() throws SQLException {
+=======
+public void commit() throws SQLException {
+>>>>>>> 953682d6e2aee11ea1623da4db0ad477861e38c2
         
     	StringBuilder sqlQuery = new StringBuilder();
     	// commit to db
