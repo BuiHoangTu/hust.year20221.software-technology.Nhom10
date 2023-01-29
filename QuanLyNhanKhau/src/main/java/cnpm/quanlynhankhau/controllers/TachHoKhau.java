@@ -30,6 +30,11 @@ public class TachHoKhau {
     private ListView lvThanhVienHoMoi;
 
 	@FXML
+	private void init() {
+		// TODO : thêm vào các ComboBox
+	}
+	
+	@FXML
     protected void onInsertClicked() {
         
     }
