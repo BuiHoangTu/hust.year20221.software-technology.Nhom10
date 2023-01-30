@@ -60,7 +60,6 @@ public class NhanKhau {
     private String lyDoXoa;
     private LocalDate ngayTao;
 
-    public NhanKhau() {}
     public NhanKhau(String soNhanKhau, String ten, String bietDanh, String tonGiao, boolean isMale, DiaChi thuongTru, LocalDate ngaySinh, DiaChi noiSinh, DiaChi nguyenQuan, String danToc, String hoChieu, DiaChi diaChiHienTai, String trinhDoChuyenMon, String trinhDoHocVan, String trinhDoNgoaiNgu, String ngheNghiep, DiaChi noiLamViec, String tienAn, LocalDate ngayChuyenDen, String lyDoChuyenDen, String ghiChu, ChungMinhThu chungMinhThu, String idNguoiTao, LocalDate ngayXoa, String idNguoiXoa, String lyDoXoa, LocalDate ngayTao) {
         this.soNhanKhau = soNhanKhau;
         this.ten = ten;
@@ -89,26 +88,6 @@ public class NhanKhau {
         this.idNguoiXoa = idNguoiXoa;
         this.lyDoXoa = lyDoXoa;
         this.ngayTao = ngayTao;
-    }
-    public NhanKhau(String soNhanKhau, String ten, String bietDanh, String tonGiao, boolean isMale, DiaChi thuongTru, LocalDate ngaySinh, DiaChi noiSinh, DiaChi nguyenQuan, String danToc, String hoChieu, DiaChi diaChiHienTai, String trinhDoChuyenMon, String trinhDoHocVan, String trinhDoNgoaiNgu, String ngheNghiep, DiaChi noiLamViec, String tienAn) {
-        this.soNhanKhau = soNhanKhau;
-        this.ten = ten;
-        this.bietDanh = bietDanh;
-        this.tonGiao = tonGiao;
-        this.isMale = isMale;
-        this.thuongTru = thuongTru;
-        this.ngaySinh = ngaySinh;
-        this.noiSinh = noiSinh;
-        this.nguyenQuan = nguyenQuan;
-        this.danToc = danToc;
-        this.hoChieu = hoChieu;
-        this.diaChiHienTai = diaChiHienTai;
-        this.trinhDoChuyenMon = trinhDoChuyenMon;
-        this.trinhDoHocVan = trinhDoHocVan;
-        this.trinhDoNgoaiNgu = trinhDoNgoaiNgu;
-        this.ngheNghiep = ngheNghiep;
-        this.noiLamViec = noiLamViec;
-        this.tienAn = tienAn;
     }
 
 
