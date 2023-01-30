@@ -17,8 +17,11 @@
                <content>
                   <TableView fx:id="tvNhanKhau" prefHeight="1230.0" prefWidth="1908.0">
                      <columns>
-                        <TableColumn prefWidth="75.0" text="C1" />
-                        <TableColumn prefWidth="75.0" text="C2" />
+                        <TableColumn prefWidth="45.60001069307327" text="ID" />
+                        <TableColumn prefWidth="104.80001449584961" text="Họ Tên" />
+                        <TableColumn prefWidth="105.60002136230469" text="Ngày sinh" />
+                        <TableColumn prefWidth="92.0" text="Giới tính" />
+                        <TableColumn prefWidth="268.0" text="Nơi ở hiện nay" />
                      </columns>
                   </TableView>
                </content>

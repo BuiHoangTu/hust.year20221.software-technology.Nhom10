@@ -22,11 +22,11 @@ public class HoKhau {
     private final List<NhanKhau> thanhViens = new ArrayList<>();
 
     public HoKhau(String soHoKhau, NhanKhau chuHo, String maKhuVuc, DiaChi diaChi, LocalDate ngayLap) {
-    	this.soHoKhau = soHoKhau;
-    	this.chuHo = chuHo;
-    	this.maKhuVuc = maKhuVuc;
-    	this.diaChi = diaChi;
-    	this.ngayLap = ngayLap;
+        this.soHoKhau = soHoKhau;
+        this.chuHo = chuHo;
+        this.maKhuVuc = maKhuVuc;
+        this.diaChi = diaChi;
+        this.ngayLap = ngayLap;
     }
 
     public String getSoHoKhau() {
@@ -98,6 +98,12 @@ public class HoKhau {
         subStatement.setString(1, nhanKhau.getSoNhanKhau());
         subStatement.executeUpdate();
     }
+
+    public void xoaThanhVien(NhanKhau... nhanKhaus) throws SQLException {
+        for (var nk : nhanKhaus) {
+            xoaThanhVien(nk);
+        }
+    }
     public void xoaThanhVien(int sttNhanKhau) throws SQLException {
         this.thanhViens.remove(sttNhanKhau);
         PreparedStatement subStatement = Database.getConnection().prepareStatement("""
@@ -111,7 +117,7 @@ public class HoKhau {
 
 
     public static List<HoKhau> filterBySoLuong(int slnk) throws SQLException {
-        List<HoKhau> output = new ArrayList<>();        
+        List<HoKhau> output = new ArrayList<>();
         // TODO fix after get HK
         PreparedStatement subStatement = Database.getConnection().prepareStatement("""
                 select ho_khau.* , nhan_khau.* from quan_ly_nhan_khau.ho_khau
@@ -122,7 +128,7 @@ public class HoKhau {
                 """);
         subStatement.setString(1, String.format("%d", slnk));
         ResultSet res = subStatement.executeQuery();
-        
+
         while (res.next()) {
             NhanKhau NK = new NhanKhau();
             NK.setTen(res.getString("hoTen"));
@@ -143,13 +149,13 @@ public class HoKhau {
             NK.setTienAn(res.getString("tienAn"));
             NK.setNgayChuyenDen(LocalDate.parse(res.getString("ngayChuyenDen")));
             NK.setLyDoChuyenDen(res.getString("lyDoChuyenDen"));
-        	output.add(new HoKhau(res.getString("idHoKhau"), NK, res.getString("maKhuVuc"), DiaChi.parse(res.getString("diaChi")), LocalDate.parse(res.getString("ngayLap"))));
+            output.add(new HoKhau(res.getString("idHoKhau"), NK, res.getString("maKhuVuc"), DiaChi.parse(res.getString("diaChi")), LocalDate.parse(res.getString("ngayLap"))));
         }
         return output;
     }
 
     public void chuyenDiaChi (DiaChi diaChiMoi) throws SQLException {
-    	PreparedStatement subStatement = Database.getConnection().prepareStatement("""
+        PreparedStatement subStatement = Database.getConnection().prepareStatement("""
                 UPDATE quan_ly_nhan_khau.ho_khau
                 SET diaChi = ?
                 WHERE maHoKhau = ?;
@@ -238,7 +244,7 @@ public class HoKhau {
 
             statement.executeUpdate();
         }
-        
+
         if (ngayLapIsChanged) {
             statement.setString(2, "Ngày Lập");
             statement.setString(4, ngayLap.toString());

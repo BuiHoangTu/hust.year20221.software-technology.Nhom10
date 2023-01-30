@@ -2,7 +2,6 @@ package cnpm.quanlynhankhau.models;
 
 import org.junit.jupiter.api.Test;
 
-import javax.xml.crypto.Data;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -11,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class DatabaseTest {
     @Test
     void taoHoKhau() throws SQLException {
-        NhanKhau chuHo = Database.getNhanKhau(1, "8").get(0);
+        NhanKhau chuHo = Database.findNhanKhau(1, "8").get(0);
         DiaChi dc = new DiaChi("Hanoi","HoangMai","HQV","4",null);
         HoKhau nHK = Database.taoHoKhau(chuHo.getSoNhanKhau(), "HN05",dc.toString());
         System.out.println(nHK.getSoHoKhau() + "\t" + nHK.getNgayLap());
@@ -20,24 +19,24 @@ class DatabaseTest {
     void getNhanKhau() throws SQLException {
 
         System.out.println("getNhanKhauTest");
-        List<NhanKhau> res =  Database.getNhanKhau(3,"Mỹ Linh");
+        List<NhanKhau> res =  Database.findNhanKhau(3,"Mỹ Linh");
         for (NhanKhau x : res){
             System.out.println(x.getSoNhanKhau());
         }
 
-        res =  Database.getNhanKhau(1,"Mỹ Linh");
+        res =  Database.findNhanKhau(1,"Mỹ Linh");
         for (NhanKhau x : res){
             System.out.println(x.getSoNhanKhau());
         }
-        res =  Database.getNhanKhau(2,"Mỹ Linh");
+        res =  Database.findNhanKhau(2,"Mỹ Linh");
         for (NhanKhau x : res){
             System.out.println(x.getSoNhanKhau());
         }
-        res =  Database.getNhanKhau(4,"Mỹ Linh");
+        res =  Database.findNhanKhau(4,"Mỹ Linh");
         for (NhanKhau x : res){
             System.out.println(x.getSoNhanKhau());
         }
-        res =  Database.getNhanKhau(5,"Mỹ Linh");
+        res =  Database.findNhanKhau(5,"Mỹ Linh");
         for (NhanKhau x : res){
             System.out.println(x.getSoNhanKhau());
         }
@@ -46,7 +45,7 @@ class DatabaseTest {
 
     @Test
     void xoaNhanKhau() throws SQLException {
-        NhanKhau x = Database.getNhanKhau(1, "5").get(0);
+        NhanKhau x = Database.findNhanKhau(1, "5").get(0);
         Database.xoaNhanKhau(x);
     }
 	@Test

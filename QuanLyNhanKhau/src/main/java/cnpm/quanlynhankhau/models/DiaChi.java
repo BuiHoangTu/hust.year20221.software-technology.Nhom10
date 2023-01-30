@@ -24,29 +24,29 @@ public class DiaChi {
 
         String strDiaChi =  text.toString();
 
-        int soIndex, soNextIndext = -1; 
+        int soIndex, soNextIndext = -1;
         do {
-            soIndex = soNextIndext;    
+            soIndex = soNextIndext;
             soNextIndext = strDiaChi.indexOf("Số ", soNextIndext + 1);
-        } while (soNextIndext >= 0); 
-        
-        int duongIndex, duongNextIndext = -1; 
+        } while (soNextIndext >= 0);
+
+        int duongIndex, duongNextIndext = -1;
         do {
-            duongIndex = duongNextIndext;    
+            duongIndex = duongNextIndext;
             duongNextIndext = strDiaChi.indexOf("Đường ", duongNextIndext + 1);
-        } while (duongNextIndext >= 0); 
+        } while (duongNextIndext >= 0);
 
-        int quanIndex, quanNextIndext = -1; 
+        int quanIndex, quanNextIndext = -1;
         do {
-            quanIndex = quanNextIndext;    
+            quanIndex = quanNextIndext;
             quanNextIndext = strDiaChi.indexOf("Quận ", quanNextIndext + 1);
-        } while (quanNextIndext >= 0); 
+        } while (quanNextIndext >= 0);
 
-        int phoIndex, phoNextIndext = -1; 
+        int phoIndex, phoNextIndext = -1;
         do {
-            phoIndex = phoNextIndext;    
+            phoIndex = phoNextIndext;
             phoNextIndext = strDiaChi.indexOf("Thành phố ", phoNextIndext + 1);
-        } while (phoNextIndext >= 0); 
+        } while (phoNextIndext >= 0);
 
         int begin, end;
         String ghiChu = null;
@@ -58,9 +58,9 @@ public class DiaChi {
             } else if (duongIndex > 0) {
                 end = duongIndex - 2;
             } else if (quanIndex > 0) {
-                end = quanIndex - 2; 
+                end = quanIndex - 2;
             } else if (phoIndex > 0) {
-                end = phoIndex - 2; 
+                end = phoIndex - 2;
             } else if (!strDiaChi.isEmpty()) {
                 end = strDiaChi.length() - 1;
             } else {
@@ -77,9 +77,9 @@ public class DiaChi {
             if (duongIndex > 0) {
                 end = duongIndex - 2;
             } else if (quanIndex > 0) {
-                end = quanIndex - 2; 
+                end = quanIndex - 2;
             } else if (phoIndex > 0) {
-                end = phoIndex - 2; 
+                end = phoIndex - 2;
             } else {
                 end = strDiaChi.length() - 1;
             }
@@ -92,9 +92,9 @@ public class DiaChi {
             begin = duongIndex + 6;
 
             if (quanIndex > 0) {
-                end = quanIndex - 2; 
+                end = quanIndex - 2;
             } else if (phoIndex > 0) {
-                end = phoIndex - 2; 
+                end = phoIndex - 2;
             } else {
                 end = strDiaChi.length() - 1;
             }
@@ -107,7 +107,7 @@ public class DiaChi {
             begin = quanIndex + 5;
 
             if (phoIndex > 0) {
-                end = phoIndex - 2; 
+                end = phoIndex - 2;
             } else {
                 end = strDiaChi.length() - 1;
             }
@@ -137,7 +137,7 @@ public class DiaChi {
         this.ghiChu = ghiChu;
     }
     public DiaChi() {
- 
+
     }
 
 
@@ -152,17 +152,17 @@ public class DiaChi {
 
         if (
                 (ghiChu != null && !ghiChu.trim().isEmpty()) ||
-                (soNha != null && !soNha.trim().isEmpty()) ||
-                (duongPho != null && !duongPho.trim().isEmpty()) ||
-                (quan != null && !quan.trim().isEmpty()) ||
-                (thanhPho != null && !thanhPho.trim().isEmpty())
+                        (soNha != null && !soNha.trim().isEmpty()) ||
+                        (duongPho != null && !duongPho.trim().isEmpty()) ||
+                        (quan != null && !quan.trim().isEmpty()) ||
+                        (thanhPho != null && !thanhPho.trim().isEmpty())
         ) x.append(".");
 
         return x.toString();
     }
     public static void main(String[] args) {
-       	DiaChi diachi = new DiaChi(null, "hbc", null, "111/95", null);
-       	DiaChi diachiparse = DiaChi.parse(diachi.toString());
-    	System.out.println(diachiparse);
+        DiaChi diachi = new DiaChi(null, "hbc", null, "111/95", null);
+        DiaChi diachiparse = DiaChi.parse(diachi.toString());
+        System.out.println(diachiparse);
     }
 }
