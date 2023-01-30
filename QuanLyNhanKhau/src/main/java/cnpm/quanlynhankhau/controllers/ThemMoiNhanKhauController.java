@@ -1,17 +1,14 @@
 package cnpm.quanlynhankhau.controllers;
 
+import cnpm.quanlynhankhau.models.ChungMinhThu;
 import cnpm.quanlynhankhau.models.Database;
 import cnpm.quanlynhankhau.models.DiaChi;
 import cnpm.quanlynhankhau.models.NhanKhau;
 import javafx.event.ActionEvent;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.stage.Popup;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ThemMoiNhanKhauController {
     public TextField tfHoTen;
@@ -63,9 +60,13 @@ public class ThemMoiNhanKhauController {
                 null,
                 null,
                 null,
-                null
+                ChungMinhThu.getChungMinhThu(tfCMND.getText())
         );
         System.out.println(x.getTen() + " " + x.getDiaChiHienTai());
         //TODO tao pop-up lay thong
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Them Nhan Khau Thanh Cong");
+        alert.setContentText("Nhan khau so: " + x.getSoNhanKhau() + "\nTen: " + x.getTen() + "\nSong tai: " + x.getDiaChiHienTai() + "\nDa duoc them thanh cong");
+        alert.show();
     }
 }
