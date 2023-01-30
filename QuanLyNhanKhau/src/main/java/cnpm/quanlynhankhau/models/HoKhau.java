@@ -22,11 +22,11 @@ public class HoKhau {
     private final List<NhanKhau> thanhViens = new ArrayList<>();
 
     public HoKhau(String soHoKhau, NhanKhau chuHo, String maKhuVuc, DiaChi diaChi, LocalDate ngayLap) {
-    	this.soHoKhau = soHoKhau;
-    	this.chuHo = chuHo;
-    	this.maKhuVuc = maKhuVuc;
-    	this.diaChi = diaChi;
-    	this.ngayLap = ngayLap;
+        this.soHoKhau = soHoKhau;
+        this.chuHo = chuHo;
+        this.maKhuVuc = maKhuVuc;
+        this.diaChi = diaChi;
+        this.ngayLap = ngayLap;
     }
 
     public String getSoHoKhau() {
@@ -97,6 +97,12 @@ public class HoKhau {
                 """);
         subStatement.setString(1, nhanKhau.getSoNhanKhau());
         subStatement.executeUpdate();
+    }
+
+    public void xoaThanhVien(NhanKhau... nhanKhaus) throws SQLException {
+        for (var nk : nhanKhaus) {
+            xoaThanhVien(nk);
+        }
     }
     public void xoaThanhVien(int sttNhanKhau) throws SQLException {
         this.thanhViens.remove(sttNhanKhau);
