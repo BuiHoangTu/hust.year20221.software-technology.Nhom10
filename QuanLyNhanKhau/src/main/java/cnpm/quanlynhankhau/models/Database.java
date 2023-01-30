@@ -85,12 +85,8 @@ public class Database {
         statement.setString(1, ma);
         ResultSet rs = statement.executeQuery();
         while(rs.next()){
-            boolean Gender = true;
-            if(rs.getString(5).equals("Nam")){
-                Gender = true;
-            }else{
-                Gender = false;
-            }
+            boolean Gender;
+            Gender = rs.getString(5).equals("Nam");
             NhanKhau x = new NhanKhau(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(9),Gender,DiaChi.parse(rs.getString(12)),
                     rs.getDate(4).toLocalDate(), /*DiaChi.parse(rs.getString(6))*/null,DiaChi.parse(rs.getString(7)), rs.getString(8), rs.getString(11),DiaChi.parse(rs.getString(13)),
                     rs.getString(15),rs.getString(14), rs.getString(17), rs.getString(18),DiaChi.parse(rs.getString(19)), rs.getString(20),/*rs.getDate(21).toLocalDate()*/null,
@@ -99,9 +95,8 @@ public class Database {
             result.add(x);
         }
 
-        StringBuilder sqlQuery2 = new StringBuilder();
-        sqlQuery2.append("Select * from quan_ly_nhan_khau.tam_tru_vang where idNhanKhau = ?");
-        PreparedStatement statement1 = Database.getConnection().prepareStatement(sqlQuery2.toString());
+        String sqlQuery2 = "Select * from quan_ly_nhan_khau.tam_tru_vang where idNhanKhau = ?";
+        PreparedStatement statement1 = Database.getConnection().prepareStatement(sqlQuery2);
         for(NhanKhau nk : result){
             statement1.setString(1, nk.getSoNhanKhau());
             ResultSet lis = statement1.executeQuery();
@@ -174,7 +169,7 @@ public class Database {
     public static HoKhau getHoKhau(String soHK) throws SQLException{
         PreparedStatement statement = Database.getConnection().prepareStatement("""
                 select * from quan_ly_nhan_khau.ho_khau
-        		where ho_Khau.idHoKhau=?
+                where ho_Khau.idHoKhau=?
                 """);
         statement.setString(1, soHK);
         ResultSet res = statement.executeQuery();
@@ -210,8 +205,7 @@ public class Database {
     }
 
     public static NhanKhau taoNhanKhau(String ten, String bietDanh, String tonGiao, boolean isMale, DiaChi thuongTru, LocalDate ngaySinh, DiaChi noiSinh, DiaChi nguyenQuan, String danToc, String hoChieu, DiaChi diaChiHienTai, String trinhDoChuyenMon, String trinhDoHocVan, String trinhDoNgoaiNgu, String ngheNghiep, DiaChi noiLamViec, String tienAn, LocalDate ngayChuyenDen, String lyDoChuyenDen, String ghiChu, ChungMinhThu chungMinhThu) throws SQLException {
-        // // TODO: 28/01/2023 tao trong DB
-        String idNK = "";
+        String idNK;
         String sqlQuery = "Insert into quan_ly_nhan_khau.nhan_khau (hoTen, bietDanh, tonGiao, gioiTinh, noiThuongTru, namSinh, noiSinh, nguyenQuan, danToc, hoChieu, " +
                 "diaChiHienNay, TrinhDoChuyenMon, trinhDoHocVan, trinhDoNgoaiNgu, ngheNghiep, noiLamViec, tienAn, " +
                 "ngayChuyenDen, lyDoChuyenDen, ghiChu)" +
@@ -245,15 +239,13 @@ public class Database {
         ResultSet rs = statement.getGeneratedKeys();
         while (rs.next()){
             idNK = rs.getString(1);
-            NhanKhau x = getNhanKhau(idNK);
-            return x;
+            return getNhanKhau(idNK);
         }
 
         return null;
     }
 
     public static HoKhau taoHoKhau (String soHKChuHo, String maKhuVuc, String diaChi) throws SQLException {
-        String i = "";
         String sqlQuery = "Insert into quan_ly_nhan_khau.ho_khau (idChuHo, maKhuVuc, diaChi) values(?, ?, ?);";
         PreparedStatement statement = Database.getConnection().prepareStatement(sqlQuery, Statement.RETURN_GENERATED_KEYS);
 
@@ -264,15 +256,16 @@ public class Database {
         ResultSet rs = statement.getGeneratedKeys();
         while (rs.next()){
             String soHK = rs.getString(1);
-            StringBuilder sqlQuery2 = new StringBuilder();
-            sqlQuery2.append("Select * from quan_ly_nhan_khau.ho_khau where maHoKhau = ?");
-            PreparedStatement statement1 = Database.getConnection().prepareStatement(sqlQuery2.toString());
+            String sqlQuery2 = "Select * from quan_ly_nhan_khau.ho_khau where maHoKhau = ?";
+            PreparedStatement statement1 = Database.getConnection().prepareStatement(sqlQuery2);
             statement1.setString(1, soHK);
             ResultSet resultSet = statement1.executeQuery();
             while (resultSet.next()){
-                HoKhau newHK = new HoKhau(soHK, Database.findNhanKhau(1, resultSet.getString(2)).get(0), maKhuVuc,
-                        DiaChi.parse(resultSet.getString(4)), resultSet.getDate(5).toLocalDate());
-                return newHK;
+                try {
+                    return new HoKhau(soHK, Database.findNhanKhau(1, resultSet.getString(2)).get(0), maKhuVuc, DiaChi.parse(resultSet.getString(4)), resultSet.getDate(5).toLocalDate());
+                } catch (NullPointerException | IndexOutOfBoundsException e) {
+                    return null;
+                }
             }
         }
         // TODO: 28/01/2023 thay bằng tên cột, get HK tu DB and return

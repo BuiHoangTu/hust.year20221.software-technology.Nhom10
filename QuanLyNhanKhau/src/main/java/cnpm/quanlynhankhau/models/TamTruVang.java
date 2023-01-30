@@ -6,10 +6,12 @@ import java.time.LocalDate;
  * Thể hiện 1 lần tạm trú tạm vắng của 1 người
  */
 public class TamTruVang {
-	private String maTamTruVang;
-	private LocalDate tuNgay, denNgay;
-	private DiaChi dcTamVang, dcTamTru;
-	private String lyDo;
+	private final String maTamTruVang;
+	private final LocalDate tuNgay;
+	private final LocalDate denNgay;
+	private final DiaChi dcTamVang;
+	private final DiaChi dcTamTru;
+	private final String lyDo;
 
 
 	public TamTruVang(String maTamTruVang, LocalDate tuNgay, LocalDate denNgay, DiaChi dcTamVang, DiaChi dcTamTru, String lyDo) {

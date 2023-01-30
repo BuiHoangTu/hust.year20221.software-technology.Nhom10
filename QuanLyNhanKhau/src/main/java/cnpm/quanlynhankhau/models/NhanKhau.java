@@ -280,7 +280,6 @@ public class NhanKhau {
     }
 
     public void addTamTruVang(DiaChi dcTamTru, LocalDate tuNgay, LocalDate denNgay, String lyDo, DiaChi dcTamVang) throws SQLException {
-    	String i = "";
         StringBuilder sqlQuery = new StringBuilder();
         sqlQuery.append("Insert INTO quan_ly_nhan_khau.tam_tru_vang (idNhanKhau, noiTamTru, tuNgay, denNgay, lyDo, noiTamVang) values(?, ?, ?, ?, ?, ?)");
         PreparedStatement statement = Database.getConnection().prepareStatement(sqlQuery.toString(), Statement.RETURN_GENERATED_KEYS);
@@ -323,7 +322,6 @@ public void commit() throws SQLException {
         
     	StringBuilder sqlQuery = new StringBuilder();
     	// commit to db
-        sqlQuery = new StringBuilder();
         sqlQuery.append("UPDATE quan_ly_nhan_khau.nhan_khau ");
 
         if (tenIsChanged) sqlQuery.append("SET hoTen= ? ");
@@ -352,7 +350,7 @@ public void commit() throws SQLException {
         if (tenIsChanged) {
             statement.setString(i, this.ten);
             i += 1;
-        };
+        }
         if (bietDanhIsChanged) {
         	statement.setString(i, this.bietDanh);
             i += 1;
