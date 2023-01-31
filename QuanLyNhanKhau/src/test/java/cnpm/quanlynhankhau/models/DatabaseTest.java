@@ -1,5 +1,6 @@
 package cnpm.quanlynhankhau.models;
 
+import cnpm.quanlynhankhau.services.Database;
 import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
