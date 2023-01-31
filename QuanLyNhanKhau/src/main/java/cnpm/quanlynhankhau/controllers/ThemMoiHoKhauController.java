@@ -9,6 +9,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
+import static javafx.application.Application.launch;
+
 public class ThemMoiHoKhauController {
     @FXML
     public TextField tfMaHoKhau;
