@@ -1,13 +1,16 @@
 package cnpm.quanlynhankhau.controllers;
 
-import cnpm.quanlynhankhau.models.Database;
 import javafx.event.*;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
 public class ThemMoiHoKhauController {
+    @FXML
     public TextField tfMaHoKhau;
     public TextField tfDiaChi;
     public TextField tfChuHo;
