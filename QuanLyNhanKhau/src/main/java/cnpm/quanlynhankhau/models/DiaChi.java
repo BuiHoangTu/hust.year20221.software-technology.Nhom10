@@ -144,19 +144,33 @@ public class DiaChi {
     @Override
     public String toString() {
         var x = new StringBuilder();
-        if (ghiChu != null && ! ghiChu.trim().isEmpty()) x.append(ghiChu);
-        if (soNha != null && !soNha.trim().isEmpty()) x.append(", ").append("Số ").append(soNha);
-        if (duongPho != null && !duongPho.trim().isEmpty()) x.append(", ").append("Đường ").append(duongPho);
-        if (quan != null && !quan.trim().isEmpty()) x.append(", ").append("Quận ").append(quan);
-        if (thanhPho != null && !thanhPho.trim().isEmpty()) x.append(", ").append("Thành phố ").append(thanhPho);
+        var prev = false;
+        if (ghiChu != null && ! ghiChu.trim().isEmpty()){
+            prev = true;
+            x.append(ghiChu);
+        }
+        if (soNha != null && !soNha.trim().isEmpty()){
+            if(prev) x.append(", ");
+            x.append("Số ").append(soNha);
+            prev = true;
+        }
+        if (duongPho != null && !duongPho.trim().isEmpty()){
+            if(prev) x.append(", ");
+            x.append("Đường ").append(duongPho);
+            prev = true;
+        }
+        if (quan != null && !quan.trim().isEmpty()){
+            if(prev) x.append(", ");
+            x.append("Quận ").append(quan);
+            prev = true;
+        }
+        if (thanhPho != null && !thanhPho.trim().isEmpty()){
+            if(prev) x.append(", ");
+            x.append("Thành phố ").append(thanhPho);
+            prev = true;
+        }
 
-        if (
-                (ghiChu != null && !ghiChu.trim().isEmpty()) ||
-                (soNha != null && !soNha.trim().isEmpty()) ||
-                (duongPho != null && !duongPho.trim().isEmpty()) ||
-                (quan != null && !quan.trim().isEmpty()) ||
-                (thanhPho != null && !thanhPho.trim().isEmpty())
-        ) x.append(".");
+        if (prev) x.append(".");
 
         return x.toString();
     }
