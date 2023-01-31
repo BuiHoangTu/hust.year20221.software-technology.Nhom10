@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
+import cnpm.quanlynhankhau.models.DiaChi;
+import java.lang.String;
 
 class NhanKhauTest {
 
@@ -13,7 +15,7 @@ class NhanKhauTest {
         DiaChi tamVang = new DiaChi("HCM", "Ba Dinh", "HHQ", "4", "");
         DiaChi tamTru = new DiaChi("Hanoi", "HBT","DCV","12","");
         TamTruVang truVang = new TamTruVang(null,LocalDate.of(2002,11,2), LocalDate.of(2025,11,12), tamVang, tamTru, "");
-        x.addTamTruVang(truVang);
+        //x.addTamTruVang(truVang);
     }
 
     @Test

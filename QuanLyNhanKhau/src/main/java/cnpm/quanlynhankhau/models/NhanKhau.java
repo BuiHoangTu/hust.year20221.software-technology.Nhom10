@@ -89,6 +89,9 @@ public class NhanKhau {
         this.lyDoXoa = lyDoXoa;
         this.ngayTao = ngayTao;
     }
+    public NhanKhau(){
+
+    }
 
 
     public String getSoNhanKhau() {

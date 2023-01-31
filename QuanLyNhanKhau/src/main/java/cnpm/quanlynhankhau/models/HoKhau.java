@@ -147,7 +147,7 @@ public class HoKhau {
             NK.setNgheNghiep(res.getString("ngheNghiep"));
             NK.setNoiLamViec(DiaChi.parse(res.getString("noiLamViec")));
             NK.setTienAn(res.getString("tienAn"));
-            NK.setNgayChuyenDen(LocalDate.parse(res.getString("ngayChuyenDen")));
+            //NK.setNgayChuyenDen(LocalDate.parse(res.getString("ngayChuyenDen")));
             NK.setLyDoChuyenDen(res.getString("lyDoChuyenDen"));
         	output.add(new HoKhau(res.getString("idHoKhau"), NK, res.getString("maKhuVuc"), DiaChi.parse(res.getString("diaChi")), LocalDate.parse(res.getString("ngayLap"))));
         }
@@ -158,7 +158,7 @@ public class HoKhau {
     	PreparedStatement subStatement = Database.getConnection().prepareStatement("""
                 UPDATE quan_ly_nhan_khau.ho_khau
                 SET diaChi = ?
-                WHERE maHoKhau = ?;
+                WHERE idHoKhau = ?;
                 """);
         subStatement.setString(1, diaChiMoi.toString());
         subStatement.setString(2, this.soHoKhau);
@@ -178,7 +178,8 @@ public class HoKhau {
         // thông tin thay đổi
         PreparedStatement statement = Database.getConnection().prepareStatement(sqlQuery.toString());
         statement.setString(1, soHoKhau);
-        statement.setString(5, String.valueOf(QuanLyNhanKhauApplication.USER));
+        //statement.setString(5, String.valueOf(QuanLyNhanKhauApplication.USER));
+        statement.setString(5, "1");
 
         // luu thay doi
         if (chuHoIsChanged) {
@@ -188,7 +189,7 @@ public class HoKhau {
             PreparedStatement subStatement = Database.getConnection().prepareStatement("""
                     SELECT idChuHo
                     FROM quan_ly_nhan_khau.ho_khau
-                    WHERE maHoKhau = ?;
+                    WHERE idHoKhau = ?;
                     """);
             subStatement.setString(1, soHoKhau);
 
@@ -209,7 +210,7 @@ public class HoKhau {
             PreparedStatement subStatement = Database.getConnection().prepareStatement("""
                     SELECT maKhuVuc
                     FROM quan_ly_nhan_khau.ho_khau
-                    WHERE maHoKhau = ?;
+                    WHERE idHoKhau = ?;
                     """);
             subStatement.setString(1, soHoKhau);
 
@@ -228,9 +229,9 @@ public class HoKhau {
             statement.setString(4, diaChi.toString());
 
             PreparedStatement subStatement = Database.getConnection().prepareStatement("""
-                    SELECT maKhuVuc
+                    SELECT diaChi
                     FROM quan_ly_nhan_khau.ho_khau
-                    WHERE maHoKhau = ?;
+                    WHERE idHoKhau = ?;
                     """);
             subStatement.setString(1, soHoKhau);
 
@@ -250,9 +251,9 @@ public class HoKhau {
             statement.setString(4, ngayLap.toString());
 
             PreparedStatement subStatement = Database.getConnection().prepareStatement("""
-                    SELECT maKhuVuc
+                    SELECT ngayLap
                     FROM quan_ly_nhan_khau.ho_khau
-                    WHERE maHoKhau = ?;
+                    WHERE idHoKhau = ?;
                     """);
             subStatement.setString(1, soHoKhau);
 
@@ -276,7 +277,7 @@ public class HoKhau {
         if (maKhuVucIsChanged) sqlQuery.append("SET maKhuVuc= ? ");
         if (diaChiIsChanged) sqlQuery.append("SET diaChi= ? ");
         if (ngayLapIsChanged) sqlQuery.append("SET ngayLap= ? ");
-        sqlQuery.append("WHERE maHoKhau = ? ");
+        sqlQuery.append("WHERE idHoKhau = ? ");
 
         statement = Database.getConnection().prepareStatement(sqlQuery.toString());
         int i = 1;

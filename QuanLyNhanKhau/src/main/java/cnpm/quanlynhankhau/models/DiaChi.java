@@ -21,9 +21,8 @@ public class DiaChi {
      * @return object DiaChi
      */
     public static DiaChi parse(CharSequence text) {
-
+        if (text == null) return null;
         String strDiaChi =  text.toString();
-
         int soIndex, soNextIndext = -1; 
         do {
             soIndex = soNextIndext;    
