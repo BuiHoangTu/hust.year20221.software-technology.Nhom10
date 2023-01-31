@@ -10,4 +10,6 @@ module cnpm.quanlynhankhau {
     opens cnpm.quanlynhankhau.application to javafx.fxml;
     exports cnpm.quanlynhankhau.controllers;
     opens cnpm.quanlynhankhau.controllers to javafx.fxml;
+	exports cnpm.quanlynhankhau.services;
+	opens cnpm.quanlynhankhau.services to javafx.fxml;
 }

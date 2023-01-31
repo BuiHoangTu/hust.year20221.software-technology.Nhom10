@@ -1,40 +1,28 @@
 package cnpm.quanlynhankhau.controllers;
 
-import javafx.event.ActionEvent;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 
-public class TrangChinhControllers {
+import java.sql.SQLException;
+
+public class TrangChinhControllers extends EdgeController{
     public Pane pnlTrangChu;
-    public Pane pnlNhanKhau;
-    public Pane pnlHoKhau;
-    public Pane pnlThongKe;
-    public TextField tfTimKiem;
-    public TableView tvNhanKhau;
+    public Label lblNhanKhauNum;
+    public Label lblHoKhauNum;
+    public Label lblTamTruNum;
+    public Label lblTamVangNum;
 
-    public void onTrangChuClicked(ActionEvent event) {
+    private void initialize() throws SQLException {
+//        PreparedStatement nhanKhauNum = Database.getConnection().prepareStatement("Select COUNT(maNhanKhau) from quan_ly_nhan_khau.nhan_khau");
+//        ResultSet num = nhanKhauNum.executeQuery();
+//        num.next();
+//        lblNhanKhauNum.setText(num.getString(1));
+//
+//        PreparedStatement hoKhauNum = Database.getConnection().prepareStatement("Select COUNT(maHoKhau) from quan_ly_nhan_khau.ho_khau");
+//        num = hoKhauNum.executeQuery();
+//        num.next();
+//        lblHoKhauNum.setText(num.getString(1));
     }
 
-    public void onNhanKhauClicked(ActionEvent event) {
-    }
 
-    public void onHoKhauClicked(ActionEvent event) {
-    }
-
-    public void onThongKeClicked(ActionEvent event) {
-    }
-
-    public void onThemMoiClicked(ActionEvent event) {
-    }
-
-    public void onDKTamVangClicked(ActionEvent event) {
-    }
-
-    public void onDKTamTruClicked(ActionEvent event) {
-    }
-
-    public void onKhaiTuClicked(ActionEvent event) {
-    }
 }

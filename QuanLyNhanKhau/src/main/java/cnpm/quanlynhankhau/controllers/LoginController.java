@@ -1,7 +1,7 @@
 package cnpm.quanlynhankhau.controllers;
 
 import cnpm.quanlynhankhau.application.QuanLyNhanKhauApplication;
-import cnpm.quanlynhankhau.models.Database;
+import cnpm.quanlynhankhau.services.Database;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -28,7 +28,7 @@ public class LoginController {
             int uID = Database.login(tfUserName.getText(), tfPasswd.getText());
             if (uID >= 0) {
 				QuanLyNhanKhauApplication.USER = uID;
-                FXMLLoader fxmlLoader = new FXMLLoader(LoginController.class.getResource("/cnpm/quanlynhankhau/views/ChooseFunction-view.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(LoginController.class.getResource("/cnpm/quanlynhankhau/views/Trang_chinh.fxml"));
                 Scene scene = null;
                 try {
                     scene = new Scene(fxmlLoader.load());
