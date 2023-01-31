@@ -1,7 +1,7 @@
 package cnpm.quanlynhankhau.controllers;
 
 import cnpm.quanlynhankhau.application.QuanLyNhanKhauApplication;
-import cnpm.quanlynhankhau.models.Database;
+import cnpm.quanlynhankhau.services.Database;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

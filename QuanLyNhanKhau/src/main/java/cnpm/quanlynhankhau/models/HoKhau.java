@@ -1,6 +1,8 @@
 package cnpm.quanlynhankhau.models;
 
 import cnpm.quanlynhankhau.application.QuanLyNhanKhauApplication;
+import cnpm.quanlynhankhau.services.Database;
+import cnpm.quanlynhankhau.services.HoKhauService;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -128,7 +130,7 @@ public class HoKhau {
 		ResultSet res = subStatement.executeQuery();
 
 		while (res.next()) {
-			output.add(Database.getHoKhau(res.getString("idHoKhau")));
+			output.add(HoKhauService.getHoKhau(res.getString("idHoKhau")));
 		}
 		return output;
 	}

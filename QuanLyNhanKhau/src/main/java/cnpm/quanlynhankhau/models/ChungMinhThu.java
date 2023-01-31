@@ -1,5 +1,6 @@
 package cnpm.quanlynhankhau.models;
 
+import cnpm.quanlynhankhau.services.Database;
 import javafx.scene.image.Image;
 
 import java.sql.PreparedStatement;

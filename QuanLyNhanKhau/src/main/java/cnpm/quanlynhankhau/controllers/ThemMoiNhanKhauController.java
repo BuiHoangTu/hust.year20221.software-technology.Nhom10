@@ -1,12 +1,14 @@
 package cnpm.quanlynhankhau.controllers;
 
 import cnpm.quanlynhankhau.models.ChungMinhThu;
-import cnpm.quanlynhankhau.models.Database;
 import cnpm.quanlynhankhau.models.DiaChi;
 import cnpm.quanlynhankhau.models.NhanKhau;
+import cnpm.quanlynhankhau.services.NhanKhauService;
 import javafx.event.ActionEvent;
-import javafx.scene.control.*;
-import javafx.stage.Popup;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextField;
 
 import java.sql.SQLException;
 
@@ -39,7 +41,7 @@ public class ThemMoiNhanKhauController {
     }
 
     public void onTaoClicked(ActionEvent event) throws SQLException {
-        NhanKhau x = Database.taoNhanKhau(
+        NhanKhau x = NhanKhauService.taoNhanKhau(
                 tfHoTen.getText(),
                 tfBietDanh.getText(),
                 tfTonGiao.getText(),

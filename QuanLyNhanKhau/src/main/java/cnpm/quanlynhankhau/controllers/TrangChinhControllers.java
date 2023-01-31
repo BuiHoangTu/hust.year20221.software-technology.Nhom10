@@ -1,11 +1,8 @@
 package cnpm.quanlynhankhau.controllers;
 
-import cnpm.quanlynhankhau.models.Database;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class TrangChinhControllers extends EdgeController{

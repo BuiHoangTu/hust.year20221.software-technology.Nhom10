@@ -1,5 +1,7 @@
 package cnpm.quanlynhankhau.models;
 
+import cnpm.quanlynhankhau.services.Database;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
