@@ -102,7 +102,7 @@ public class Database {
             ResultSet lis = statement1.executeQuery();
             while (lis.next()){
                 TamTruVang ttv = new TamTruVang(lis.getString(2),lis.getDate(4).toLocalDate(), lis.getDate(5).toLocalDate(),
-                                        DiaChi.parse(lis.getString(7)), DiaChi.parse(lis.getString(3)),lis.getString(6));
+                        DiaChi.parse(lis.getString(7)), DiaChi.parse(lis.getString(3)),lis.getString(6));
                 nk.getTamTruVangs().add(ttv);
             }
         }
@@ -260,6 +260,7 @@ public class Database {
             PreparedStatement statement1 = Database.getConnection().prepareStatement(sqlQuery2);
             statement1.setString(1, soHK);
             ResultSet resultSet = statement1.executeQuery();
+
             while (resultSet.next()){
                 try {
                     return new HoKhau(soHK, Database.findNhanKhau(1, resultSet.getString(2)).get(0), maKhuVuc, DiaChi.parse(resultSet.getString(4)), resultSet.getDate(5).toLocalDate());

@@ -110,6 +110,7 @@ public class HoKhau {
                 FROM quan_ly_nhan_khau.thanh_vien_cua_ho
                 WHERE idNhanKhau = ?;
                 """);
+
 		subStatement.setString(1, String.format("%d", sttNhanKhau));
 		subStatement.executeUpdate();
 	}
@@ -232,6 +233,7 @@ public class HoKhau {
                     FROM quan_ly_nhan_khau.ho_khau
                     WHERE maHoKhau = ?;
                     """);
+
 			subStatement.setString(1, soHoKhau);
 
 			ResultSet resultSet = subStatement.executeQuery();

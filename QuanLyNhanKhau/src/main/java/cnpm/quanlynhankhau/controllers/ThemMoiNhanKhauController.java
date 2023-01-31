@@ -1,10 +1,14 @@
 package cnpm.quanlynhankhau.controllers;
 
+import cnpm.quanlynhankhau.models.ChungMinhThu;
+import cnpm.quanlynhankhau.models.Database;
+import cnpm.quanlynhankhau.models.DiaChi;
 import cnpm.quanlynhankhau.models.NhanKhau;
 import javafx.event.ActionEvent;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.stage.Popup;
+
+import java.sql.SQLException;
 
 public class ThemMoiNhanKhauController {
     public TextField tfHoTen;
@@ -26,11 +30,43 @@ public class ThemMoiNhanKhauController {
     public DatePicker dpBirth;
     public ComboBox cbGioiTinh;
 
+    private void initialize() {
+        //TODO set comboBox Gioi Tinh
+        cbGioiTinh.getItems().addAll("Nam","Nu");
+    }
     public void onHuyClicked(ActionEvent event) {
         //TODO
     }
 
-    public void onTaoClicked(ActionEvent event) {
-        //NhanKhau nk = ;
+    public void onTaoClicked(ActionEvent event) throws SQLException {
+        NhanKhau x = Database.taoNhanKhau(
+                tfHoTen.getText(),
+                tfBietDanh.getText(),
+                tfTonGiao.getText(),
+                false,
+                DiaChi.parse(tfNoiThuongTru.getText()),
+                dpBirth.getValue(),
+                null,
+                DiaChi.parse(tfNguyenQuan.getText()),
+                tfDanToc.getText(),
+                tfHoChieu.getText(),
+                DiaChi.parse(tfDiaChiHienTai.getText()),
+                tfTrinhDoChuyenMon.getText(),
+                tfTrinhDoHocVan.getText(),
+                tfTrinhDoNgoaiNgu.getText(),
+                tfNgheNghiep.getText(),
+                DiaChi.parse(tfNoiLamViec.getText()),
+                null,
+                null,
+                null,
+                null,
+                ChungMinhThu.getChungMinhThu(tfCMND.getText())
+        );
+        System.out.println(x.getTen() + " " + x.getDiaChiHienTai());
+        //TODO tao pop-up lay thong
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Them Nhan Khau Thanh Cong");
+        alert.setContentText("Nhan khau so: " + x.getSoNhanKhau() + "\nTen: " + x.getTen() + "\nSong tai: " + x.getDiaChiHienTai() + "\nDa duoc them thanh cong");
+        alert.show();
     }
 }

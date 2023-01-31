@@ -12,9 +12,9 @@ class NhanKhauTest {
         NhanKhau x = Database.findNhanKhau(1, "2").get(0);
         DiaChi tamVang = new DiaChi("HCM", "Ba Dinh", "HHQ", "4", "");
         DiaChi tamTru = new DiaChi("Hanoi", "HBT","DCV","12","");
-        TamTruVang truVang = new TamTruVang(null,LocalDate.of(2002,11,2), LocalDate.of(2025,11,12), tamVang, tamTru, "");
-        x.addTamTruVang(truVang);
+        x.addTamTruVang(tamTru,LocalDate.of(2002,11,2),LocalDate.of(2025,11,12),null,tamVang);
     }
+
 
     @Test
     void testRemoveTamTruVang() throws SQLException {
