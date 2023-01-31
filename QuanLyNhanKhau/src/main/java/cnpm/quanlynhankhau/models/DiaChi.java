@@ -174,9 +174,4 @@ public class DiaChi {
 
         return x.toString();
     }
-    public static void main(String[] args) {
-       	DiaChi diachi = new DiaChi(null, "hbc", null, "111/95", null);
-       	DiaChi diachiparse = DiaChi.parse(diachi.toString());
-    	System.out.println(diachiparse);
-    }
 }

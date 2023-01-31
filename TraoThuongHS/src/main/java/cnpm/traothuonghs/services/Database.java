@@ -3,7 +3,7 @@ package cnpm.traothuonghs.services;
 import java.sql.*;
 
 public class Database {
-	private static final String dbURL = "jdbc:mysql://localhost:3306/quan_ly_nhan_khau"; // TODO: 27/01/2023 change database
+	private static final String dbURL = "jdbc:mysql://localhost:3306/trao_thuong_hoc_sinh"; // TODO: 27/01/2023 change database
 	private static final String dbUName = "root";
 	private static final String dbPasswd = "";
 	private static volatile Connection connection = null;
