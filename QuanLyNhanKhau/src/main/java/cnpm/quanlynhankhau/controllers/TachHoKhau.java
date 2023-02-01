@@ -4,11 +4,13 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
 
-import cnpm.quanlynhankhau.application.QuanLyNhanKhauApplication;
-import cnpm.quanlynhankhau.models.Database;
+import cnpm.quanlynhankhau.services.HoKhauService;
+import cnpm.quanlynhankhau.services.NhanKhauService;
 import cnpm.quanlynhankhau.models.HoKhau;
 import cnpm.quanlynhankhau.models.NhanKhau;
+import cnpm.quanlynhankhau.application.QuanLyNhanKhauApplication;
 import cnpm.quanlynhankhau.models.DiaChi;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -30,26 +32,26 @@ public class TachHoKhau {
 	@FXML
     private TextField tfMaHoKhauMoi;
 	@FXML
-    private ComboBox cbChuHoMoi;
+    private TextField tfChuHoMoi;
 	
+	// TableView HoKhau
 	@FXML
 	private ObservableList<HoKhau> hoKhauDaTimThay = FXCollections.observableArrayList();
 	
 	@FXML
-	TableView<HoKhau> tvHoKhau;
+	private TableView<HoKhau> tvHoKhau;
 	
 	@FXML
-	TableColumn<HoKhau, String> tcMaHoKhau;
+	private TableColumn<HoKhau, String> tcMaHoKhau;
 	
 	@FXML
-	TableColumn<HoKhau, HoKhau> tcChuHo;
+	private TableColumn<HoKhau, HoKhau> tcChuHo;
 	
 	@FXML
-	TableColumn<HoKhau, DiaChi> tcDiaChi;
+	private TableColumn<HoKhau, DiaChi> tcDiaChi;
 	
-	@FXML
-	private ObservableList<NhanKhau> nhanKhauHienTai = FXCollections.observableArrayList();
 	
+	// TableView ThanhVien
 	@FXML
     private TableView<NhanKhau> tvThanhVien;
 	
@@ -63,17 +65,51 @@ public class TachHoKhau {
 	private TableColumn<NhanKhau, String> tcQuanHeVoiChuHo;
 	
 	@FXML
-    private ListView lvThanhVienHoMoi;
-	
-	
+    private ListView<String> lvThanhVienHoMoi;
 	
 	@FXML
-	private void initialize() throws SQLException {
-		// TableView ThanhVien
-		nhanKhauHienTai.addAll(Database.findNhanKhau(1, tfMaHoKhau.getText()));
-		tvThanhVien.setItems(nhanKhauHienTai);
-	    
-		tcHoTen.setCellValueFactory(new PropertyValueFactory<>("ten"));
+	private void initialize() throws SQLException { 		
+		// get hết nhân khẩu khu vực Hà nội
+		hoKhauDaTimThay.addAll(HoKhauService.findHoKhau("Hà Nội"));
+        tvHoKhau.getItems().addAll(hoKhauDaTimThay);
+        
+        tcMaHoKhau.setCellValueFactory(new PropertyValueFactory<>("soHoKhau"));
+		tcMaHoKhau.setMinWidth(20);
+		tcMaHoKhau.prefWidthProperty().bind(tvHoKhau.widthProperty().multiply(0.3));
+		
+		tcChuHo.setCellValueFactory(new PropertyValueFactory<>("chuHo"));
+		tcChuHo.setMinWidth(20);
+		tcChuHo.prefWidthProperty().bind(tvHoKhau.widthProperty().multiply(0.3));
+		
+		tcDiaChi.setCellValueFactory(new PropertyValueFactory<>("diaChi"));
+		tcDiaChi.setMinWidth(20);
+		tcDiaChi.prefWidthProperty().bind(tvHoKhau.widthProperty().multiply(0.4));
+	}
+	
+	// TableView HoKhau
+    @FXML
+    void setupTableViewHoKhau() throws SQLException{
+    	hoKhauDaTimThay.addAll(HoKhauService.findHoKhau(tfMaHoKhau.getText()));
+        tvHoKhau.getItems().addAll(hoKhauDaTimThay);
+        
+        tcMaHoKhau.setCellValueFactory(new PropertyValueFactory<>("soHoKhau"));
+		tcMaHoKhau.setMinWidth(20);
+		tcMaHoKhau.prefWidthProperty().bind(tvHoKhau.widthProperty().multiply(0.3));
+		
+		tcChuHo.setCellValueFactory(new PropertyValueFactory<>("chuHo"));
+		tcChuHo.setMinWidth(20);
+		tcChuHo.prefWidthProperty().bind(tvHoKhau.widthProperty().multiply(0.3));
+		
+		tcDiaChi.setCellValueFactory(new PropertyValueFactory<>("diaChi"));
+		tcDiaChi.setMinWidth(20);
+		tcDiaChi.prefWidthProperty().bind(tvHoKhau.widthProperty().multiply(0.4));
+    }
+    
+    // TableView ThanhVien
+    void setupTableViewThanhVien(HoKhau hoKhau) throws SQLException{
+        tvThanhVien.getItems().addAll(hoKhau.getThanhViens());
+        
+        tcHoTen.setCellValueFactory(new PropertyValueFactory<>("ten"));
 		tcHoTen.setMinWidth(20);
 		tcHoTen.prefWidthProperty().bind(tvThanhVien.widthProperty().multiply(0.3));
 		
@@ -81,70 +117,68 @@ public class TachHoKhau {
 		tcNgaySinh.setMinWidth(20);
 		tcNgaySinh.prefWidthProperty().bind(tvThanhVien.widthProperty().multiply(0.3));
 		
-		tcQuanHeVoiChuHo.setCellValueFactory(new PropertyValueFactory<>("")); // TODO : chưa có trường quan hệ với chủ hộ
+		tcQuanHeVoiChuHo.setCellValueFactory(new PropertyValueFactory<>(null));
 		tcQuanHeVoiChuHo.setMinWidth(20);
 		tcQuanHeVoiChuHo.prefWidthProperty().bind(tvThanhVien.widthProperty().multiply(0.4));
-	}
+    }
 	
 	@FXML
     protected void onInsertClicked() {
-        
+		lvThanhVienHoMoi.getItems().add(tcHoTen.getText());
     }
 	
 	@FXML
     protected void onRemoveClicked() {
-        return;
+		int selectedID = lvThanhVienHoMoi.getSelectionModel().getSelectedIndex();
+        lvThanhVienHoMoi.getItems().remove(selectedID);
     }
 	
     @FXML
     protected void onHuyClicked() {
-        return;
+        // TODO : Hàm j đó Quay lại menu trước đó
+    	FXMLLoader loader = new FXMLLoader(QuanLyNhanKhauApplication.class.getResource("/cnpm/quanlynhankhau/views/QuanLyHoKhau.fxml"));
+		Scene scene = null;
+		try {
+			scene = new Scene(loader.load());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		QuanLyNhanKhauApplication.MAIN_STAGE.setScene(scene);
     }
     
     @FXML
-    protected void onXacNhanClicked() {
-    	ObservableList<HoKhau> currentTableData = tvHoKhau.getItems();
-    	String currentHoKhau = tfMaHoKhau.getText();
+    protected void onXacNhanClicked() throws SQLException {
+    	/* Tìm hộ khẩu và lấy danh sách thành viên
+    	 * Dùng vòng for để tìm trong ListView HoMoi để xóa khỏi nhân khẩu cũ
+    	 */
+    	HoKhau tmp = HoKhauService.getHoKhau(tfMaHoKhau.getText());
+    	for (String str : lvThanhVienHoMoi.getItems()) {
+    		tmp.xoaThanhVien(NhanKhauService.findNhanKhau(3, str).get(0));
+    	}
     	
-    	// TODO : Sử dụng findHoKhau() và taoHoKhau() để hoàn thành
+    	// Thêm nhân khẩu mới vào một hộ mới
+    	tmp = HoKhauService.taoHoKhau(tfMaHoKhauMoi.getText(), tfMaKhuVucMoi.getText(), tfDiaChiMoi.getText());
+    	for (String str : lvThanhVienHoMoi.getItems()) {
+    		tmp.themThanhVien(NhanKhauService.findNhanKhau(3, str).get(0), null);
+    	}
+    	
     }
 
     @FXML
-    void rowClickedHoKhau(MouseEvent event) {
+    void rowClickedHoKhau(MouseEvent event) throws SQLException {
         HoKhau clickedHoKhau = tvHoKhau.getSelectionModel().getSelectedItem();
-        tcMaHoKhau.setText(String.valueOf(clickedHoKhau.getSoHoKhau()));
-        tcChuHo.setText(String.valueOf(clickedHoKhau.getChuHo().getTen()));
-        tcDiaChi.setText(String.valueOf(clickedHoKhau.getDiaChi().toString()));
+        tfChuHo.setText(clickedHoKhau.getChuHo().getTen());
+        
+        setupTableViewThanhVien(clickedHoKhau);
     }
     
     @FXML
     void rowClickedThanhVien(MouseEvent event) {
-        HoKhau clickedThanhVien = tvHoKhau.getSelectionModel().getSelectedItem();
-        tfChuHo.setText(String.valueOf(clickedThanhVien.getSoHoKhau()));
-        tcChuHo.setText(String.valueOf(clickedThanhVien.getChuHo().getTen()));
-        tcDiaChi.setText(String.valueOf(clickedThanhVien.getDiaChi().toString()));
+        NhanKhau clickedThanhVien = tvThanhVien.getSelectionModel().getSelectedItem();
+        tcHoTen.setText(clickedThanhVien.getTen());
+        tcNgaySinh.setText(clickedThanhVien.getNgaySinh().toString());
+        tcQuanHeVoiChuHo.setText("");
     }
     
-    // TableView HoKhau
-    @FXML
-    private void setupTableViewHoKhau() throws SQLException{
-        tvHoKhau.getItems().addAll(Database.findHoKhau(tfMaHoKhau.getText()));
-        
-        tcMaHoKhau.setCellValueFactory(new PropertyValueFactory<>("soHoKhau"));
-		tcMaHoKhau.setMinWidth(20);
-		tcMaHoKhau.prefWidthProperty().bind(tvHoKhau.widthProperty().multiply(0.3));
-		
-		tcChuHo.setCellValueFactory(new PropertyValueFactory<>("chuHo.getTen()"));
-		tcChuHo.setMinWidth(20);
-		tcChuHo.prefWidthProperty().bind(tvHoKhau.widthProperty().multiply(0.3));
-		
-		tcDiaChi.setCellValueFactory(new PropertyValueFactory<>("diaChi.toString()")); 
-		tcDiaChi.setMinWidth(20);
-		tcDiaChi.prefWidthProperty().bind(tvHoKhau.widthProperty().multiply(0.4));
-    }
     
-    // TableView ThanhVien
-    private void setupTableViewThanhVien() throws SQLException{
-        tvThanhVien.getItems().addAll(Database.findHoKhau(tfMaHoKhau.getText()).get(0).getThanhViens());
-    }
 }

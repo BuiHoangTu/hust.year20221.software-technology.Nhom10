@@ -105,6 +105,7 @@ public class HoKhau {
 			xoaThanhVien(nk);
 		}
 	}
+	
 	public void xoaThanhVien(int sttNhanKhau) throws SQLException {
 		this.thanhViens.remove(sttNhanKhau);
 		PreparedStatement subStatement = Database.getConnection().prepareStatement("""
