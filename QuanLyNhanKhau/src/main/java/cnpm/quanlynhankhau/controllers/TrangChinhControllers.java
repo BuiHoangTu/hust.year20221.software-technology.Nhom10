@@ -24,7 +24,7 @@ public class TrangChinhControllers extends EdgeController implements Initializab
     public void initialize(URL url, ResourceBundle resourceBundle) {
         List<NhanKhau> numNK = null;
         try {
-            numNK = NhanKhauService.findNhanKhau(5, "Hai Bà Trưng, Ha Noi");
+            numNK = NhanKhauService.findNhanKhau(5, "Hai Bà Trưng, Hà Nội");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

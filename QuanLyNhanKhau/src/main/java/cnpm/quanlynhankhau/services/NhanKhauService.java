@@ -54,7 +54,7 @@ public class NhanKhauService {
 			NhanKhau x = new NhanKhau(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(9), Gender, DiaChi.parse(rs.getString(12)),
 					rs.getDate(4).toLocalDate(), /*DiaChi.parse(rs.getString(6))*/null, DiaChi.parse(rs.getString(7)), rs.getString(8), rs.getString(11), DiaChi.parse(rs.getString(13)),
 					rs.getString(15), rs.getString(14), rs.getString(17), rs.getString(18), DiaChi.parse(rs.getString(19)), rs.getString(20),/*rs.getDate(21).toLocalDate()*/null,
-					rs.getString(22), rs.getString(31), null, rs.getString(27),/*rs.getDate(28).toLocalDate()*/ null, rs.getString(29), rs.getString(30), rs.getDate(26).toLocalDate());
+					rs.getString(22), rs.getString(31), null, rs.getString(27),/*rs.getDate(28).toLocalDate()*/null, rs.getString(29), rs.getString(30), /*rs.getDate(26).toLocalDate()*/null);
 
 			result.add(x);
 		}
@@ -123,7 +123,7 @@ public class NhanKhauService {
 		statement.setString(15, ngheNghiep);
 		statement.setString(16, noiLamViec.toString());
 		statement.setString(17, tienAn);
-		statement.setString(18, ngayChuyenDen.toString());
+		statement.setString(18, ngaySinh.toString());
 		statement.setString(19, lyDoChuyenDen);
 		statement.setString(20, ghiChu);
 		statement.executeUpdate();

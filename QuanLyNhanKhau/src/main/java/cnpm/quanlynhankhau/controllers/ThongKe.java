@@ -3,8 +3,13 @@ package cnpm.quanlynhankhau.controllers;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
-public class ThongKe {
-	@FXML
+public class ThongKe extends EdgeController{
+    public TextField tfTuoiTu;
+    public TextField tfTuoiDen;
+    public TextField tfNamTu;
+    public TextField tfNamDen;
+    public TableView tvNhanKhau;
+    @FXML
     private ComboBox cbGioiTinh;
 	@FXML
     private ComboBox cbTinhTrang;

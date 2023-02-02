@@ -21,9 +21,10 @@ public class HoKhauService {
 	 */
 	public static List<HoKhau> findHoKhau(String filter) throws SQLException {
 		List<HoKhau> output = new ArrayList<>();
+		filter = "%" + filter + "%";
 		PreparedStatement statement = Database.getConnection().prepareStatement("""
 				select * from quan_ly_nhan_khau.ho_khau
-				where ho_Khau.idHoKhau like %?%""");
+				where maHoKhau like ?""");
 		statement.setString(1, filter);
 		ResultSet res = statement.executeQuery();
 
@@ -31,14 +32,14 @@ public class HoKhauService {
 			var idCH = res.getString("idChuHo");
 			var cH = NhanKhauService.getNhanKhau(idCH);
 
-			var hk = new HoKhau(res.getString("idHoKhau"), cH, res.getString("maKhuVuc"), DiaChi.parse(res.getString("diaChi")), LocalDate.parse(res.getString("ngayLap")));
+			var hk = new HoKhau(res.getString("maHoKhau"), cH, res.getString("maKhuVuc"), DiaChi.parse(res.getString("diaChi")), LocalDate.parse(res.getString("ngayLap")));
 			var tvs = hk.getThanhViens();
 
 			PreparedStatement subStatement = Database.getConnection().prepareStatement("""
 					select * from quan_ly_nhan_khau.thanh_vien_cua_ho
-					where ho_Khau.idHoKhau=?
+					where idHoKhau=?
 					""");
-			subStatement.setString(1, res.getString("idHoKhau"));
+			subStatement.setString(1, res.getString("maHoKhau"));
 			res = subStatement.executeQuery();
 
 			while (res.next()) {

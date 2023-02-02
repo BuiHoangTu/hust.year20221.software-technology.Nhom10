@@ -17,6 +17,7 @@ import javafx.scene.control.TextField;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class ThemMoiNhanKhauController implements Initializable {
@@ -57,7 +58,7 @@ public class ThemMoiNhanKhauController implements Initializable {
 
     public void onTaoClicked(ActionEvent event) throws SQLException {
         Boolean gender = true;
-        if(cbGioiTinh.getItems().equals("Nam")){
+        if(cbGioiTinh.getValue().equals("Nam")){
             gender = true;
         }else {
             gender = false;
