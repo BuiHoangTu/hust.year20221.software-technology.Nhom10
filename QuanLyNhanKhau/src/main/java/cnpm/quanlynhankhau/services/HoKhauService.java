@@ -21,7 +21,39 @@ public class HoKhauService {
 	 * @throws SQLException query lỗi
 	 */
 	public static List<HoKhau> findHoKhau(int loaiMa, String filter) throws SQLException {
+		List<HoKhau> output = new ArrayList<>();
+		StringBuilder sqlQuery = new StringBuilder();
+		sqlQuery.append("Select * from quan_ly_nhan_khau.ho_khau ");
+		if (loaiMa == 1){
+			sqlQuery.append("where maHoKhau = ?");
+		} else if (loaiMa == 2) {
+			sqlQuery.append("where idChuHo = ?");
+		} else if (loaiMa == 3) {
+			filter = "%" + filter + "%";
+			sqlQuery.append("where diaChi like ?");
+		}else{
+			System.out.println("Khong kha dung");
+			return null;
+		}
+		PreparedStatement statement = Database.getConnection().prepareStatement(sqlQuery.toString());
+		statement.setString(1, filter);
+		ResultSet rs = statement.executeQuery();
+		while (rs.next()){
+			HoKhau x = new HoKhau(rs.getString("maHoKhau"), NhanKhauService.getNhanKhau(rs.getString("idChuHo")),
+					rs.getString("maKhuVuc"), DiaChi.parse(rs.getString("diaChi")),rs.getDate("ngayLap").toLocalDate());
+			output.add(x);
+		}
 
+		String sqlQuery2 = "Select * from quan_ly_nhan_khau.thanh_vien_cua_ho where idHoKhau = ?";
+		PreparedStatement statement1 = Database.getConnection().prepareStatement(sqlQuery2);
+		for (HoKhau hk : output){
+			statement1.setString(1, hk.getSoHoKhau());
+			ResultSet lis = statement1.executeQuery();
+			while (lis.next()){
+				hk.getThanhViens().add(NhanKhauService.getNhanKhau(lis.getString("idNhanKhau")));
+			}
+		}
+		return output;
 	}
 
 	/**

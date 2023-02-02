@@ -29,7 +29,7 @@ public class Database {
 		Connection connection = getConnection();
 
 		PreparedStatement preparedStatement = connection.prepareStatement("""
-				SELECT ID
+				SELECT id
 				FROM users
 				WHERE userName = ?
 				AND passwd = ?
@@ -42,6 +42,6 @@ public class Database {
 			return -1;
 		}
 
-		return Integer.parseInt(resultSet.getString("ID"));
+		return Integer.parseInt(resultSet.getString("id"));
 	}
 }

@@ -4,6 +4,7 @@ import cnpm.quanlynhankhau.application.QuanLyNhanKhauApplication;
 import cnpm.quanlynhankhau.models.ChungMinhThu;
 import cnpm.quanlynhankhau.models.DiaChi;
 import cnpm.quanlynhankhau.models.NhanKhau;
+import cnpm.quanlynhankhau.services.ChungMinhThuService;
 import cnpm.quanlynhankhau.services.NhanKhauService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -84,7 +85,7 @@ public class ThemMoiNhanKhauController implements Initializable {
                 null,
                 null,
                 null,
-                ChungMinhThu.getChungMinhThu(tfCMND.getText())
+                ChungMinhThuService.getChungMinhThu(tfCMND.getText())
         );
         //TODO tao pop-up lay thong
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
