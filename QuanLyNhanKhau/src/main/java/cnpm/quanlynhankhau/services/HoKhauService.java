@@ -23,7 +23,7 @@ public class HoKhauService {
 		List<HoKhau> output = new ArrayList<>();
 		PreparedStatement statement = Database.getConnection().prepareStatement("""
 				select * from quan_ly_nhan_khau.ho_khau
-				where maHoKhau like ?""");
+				where ho_Khau.idHoKhau like ?""");
 		statement.setString(1, "%" + filter + "%");
 		ResultSet res = statement.executeQuery();
 
