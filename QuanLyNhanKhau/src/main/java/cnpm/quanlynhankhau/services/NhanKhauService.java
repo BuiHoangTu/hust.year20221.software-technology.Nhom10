@@ -97,20 +97,20 @@ public class NhanKhauService {
 
 	public static NhanKhau taoNhanKhau(String ten, String bietDanh, String tonGiao, boolean isMale, DiaChi thuongTru, LocalDate ngaySinh, DiaChi noiSinh, DiaChi nguyenQuan, String danToc, String hoChieu, DiaChi diaChiHienTai, String trinhDoChuyenMon, String trinhDoHocVan, String trinhDoNgoaiNgu, String ngheNghiep, DiaChi noiLamViec, String tienAn, LocalDate ngayChuyenDen, String lyDoChuyenDen, String ghiChu, ChungMinhThu chungMinhThu) throws SQLException {
 		String idNK;
-		String sqlQuery = "Insert into quan_ly_nhan_khau.nhan_khau (hoTen, bietDanh, tonGiao, gioiTinh, noiThuongTru, namSinh, noiSinh, nguyenQuan, danToc, hoChieu, " +
+		String sqlQuery = "Insert into quan_ly_nhan_khau.nhan_khau (hoTen, bietDanh, tonGiao, gioiTinh, noiThuongTru, namSinh, noiSinh, nguyenQuan, danToc, soHoChieu, " +
 				"diaChiHienNay, TrinhDoChuyenMon, trinhDoHocVan, trinhDoNgoaiNgu, ngheNghiep, noiLamViec, tienAn, " +
 				"ngayChuyenDen, lyDoChuyenDen, ghiChu)" +
 				"values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		PreparedStatement statement = Database.getConnection().prepareStatement(sqlQuery, Statement.RETURN_GENERATED_KEYS);
 		statement.setString(1, ten);
 		statement.setString(2, bietDanh);
+		statement.setString(3, tonGiao);
 		if (isMale) {
-			statement.setString(3, "Nam");
+			statement.setString(4, "Nam");
 		} else {
-			statement.setString(3, "Nu");
+			statement.setString(4, "Nu");
 		}
-		statement.setString(4, thuongTru.toString());
-		statement.setString(5, ngaySinh.toString());
+		statement.setString(5, thuongTru.toString());
 		statement.setString(6, ngaySinh.toString());
 		statement.setString(7, noiSinh.toString());
 		statement.setString(8, nguyenQuan.toString());

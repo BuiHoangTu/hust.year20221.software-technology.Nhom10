@@ -13,7 +13,7 @@ public abstract class EdgeController {
 	}
 
 	public void onNhanKhauClicked(ActionEvent event) {
-		changeScene("/cnpm/quanlynhankhau/views/QuanLyNhanKhau.fxml");
+		changeScene("/cnpm/quanlynhankhau/views/QuanLYNhanKhau.fxml");
 	}
 
 	public void onHoKhauClicked(ActionEvent event) {
