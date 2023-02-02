@@ -2,7 +2,6 @@ package cnpm.quanlynhankhau.controllers;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.time.LocalDate;
 
 import cnpm.quanlynhankhau.services.HoKhauService;
 import cnpm.quanlynhankhau.services.NhanKhauService;
@@ -20,28 +19,40 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-public class QuanLyHoKhauController {
+public class QuanLyHoKhauController extends EdgeController {
 	@FXML
     private TextField tfMaHoKhau;
 	@FXML
     private TableView<HoKhau> tvHoKhau;
 	
+	// changeScene
+	private void changeScene(String fxLink) {
+		FXMLLoader loader = new FXMLLoader(QuanLyNhanKhauApplication.class.getResource(fxLink));
+		Scene scene = null;
+		try {
+			scene = new Scene(loader.load());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		QuanLyNhanKhauApplication.MAIN_STAGE.setScene(scene);
+	}
+	
+	public void initialize() {
+		
+	}
+	
 	@FXML
 	protected void onThemMoiHoKhauClicked() throws IOException {
-		FXMLLoader loader = new FXMLLoader(QuanLyNhanKhauApplication.class.getResource("/cnpm/quanlynhankhau/views/ThemMoiHoKhau.fxml"));
-		Scene scene = new Scene(loader.load());
-		Stage newWindow = new Stage();
-		newWindow.setScene(scene);
-		newWindow.show();
+		
     }
     
 	@FXML
 	protected void onTachHoKhauClicked() {
-		
+		changeScene("/cnpm/quanlynhankhau/views/TachHoKhau.fxml");
     }
 	
     @FXML
     protected void onChuyenHoKhauClicked() throws SQLException {
-    	
+    	changeScene("/cnpm/quanlynhankhau/views/ChuyenHoKhau.fxml");
     }
 }

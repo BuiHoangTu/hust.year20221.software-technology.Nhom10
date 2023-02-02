@@ -1,15 +1,18 @@
 package cnpm.quanlynhankhau.controllers;
 
+import java.io.IOException;
 import java.sql.SQLException;
 
 import cnpm.quanlynhankhau.services.HoKhauService;
 import cnpm.quanlynhankhau.models.HoKhau;
+import cnpm.quanlynhankhau.application.QuanLyNhanKhauApplication;
 import cnpm.quanlynhankhau.models.DiaChi;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
@@ -75,7 +78,15 @@ public class ChuyenHoKhau {
 	
     @FXML
     protected void onHuyClicked() {
-        // TODO : Hàm j đó Quay lại menu trước đó
+    	// TODO : Hàm j đó Quay lại menu trước đó
+    	FXMLLoader loader = new FXMLLoader(QuanLyNhanKhauApplication.class.getResource("/cnpm/quanlynhankhau/views/QuanLyHoKhau.fxml"));
+		Scene scene = null;
+		try {
+			scene = new Scene(loader.load());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		QuanLyNhanKhauApplication.MAIN_STAGE.setScene(scene);
     }
     
     @FXML

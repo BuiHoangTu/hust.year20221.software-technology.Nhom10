@@ -13,7 +13,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
-public class ThongKe {
+public class ThongKe extends EdgeController {
 	@FXML
     private ComboBox<String> cbGioiTinh;
 	@FXML
@@ -35,7 +35,7 @@ public class ThongKe {
 
 	@FXML
 	public void initialize() {
-		cbGioiTinh.setItems(FXCollections.observableArrayList("Toàn bộ", "Nam", "Nữ", "Khác"));
+		cbGioiTinh.setItems(FXCollections.observableArrayList("Toàn bộ", "Nam", "Nữ"));
 		cbTinhTrang.setItems(FXCollections.observableArrayList("Toàn bộ", "Tạm vắng/Tạm trú"));
 	}
 	

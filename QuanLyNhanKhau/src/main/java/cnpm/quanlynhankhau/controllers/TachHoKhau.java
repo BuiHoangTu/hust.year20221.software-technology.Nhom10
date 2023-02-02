@@ -3,6 +3,8 @@ package cnpm.quanlynhankhau.controllers;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import cnpm.quanlynhankhau.services.HoKhauService;
 import cnpm.quanlynhankhau.services.NhanKhauService;
@@ -45,7 +47,7 @@ public class TachHoKhau {
 	private TableColumn<HoKhau, String> tcMaHoKhau;
 	
 	@FXML
-	private TableColumn<HoKhau, HoKhau> tcChuHo;
+	private TableColumn<HoKhau, NhanKhau> tcChuHo;
 	
 	@FXML
 	private TableColumn<HoKhau, DiaChi> tcDiaChi;
@@ -59,7 +61,7 @@ public class TachHoKhau {
 	private TableColumn<NhanKhau, String> tcHoTen;
 	
 	@FXML
-	private TableColumn<NhanKhau, LocalDate> tcNgaySinh;
+	private TableColumn<NhanKhau, String> tcNgaySinh;
 	
 	@FXML
 	private TableColumn<NhanKhau, String> tcQuanHeVoiChuHo;
@@ -70,39 +72,75 @@ public class TachHoKhau {
 	@FXML
 	private void initialize() throws SQLException { 		
 		// get hết nhân khẩu khu vực Hà nội
-		hoKhauDaTimThay.addAll(HoKhauService.findHoKhau("Hà Nội"));
-        tvHoKhau.getItems().addAll(hoKhauDaTimThay);
+//		hoKhauDaTimThay.addAll(HoKhauService.findHoKhau());
+//        tvHoKhau.getItems().addAll(hoKhauDaTimThay);
         
-        tcMaHoKhau.setCellValueFactory(new PropertyValueFactory<>("soHoKhau"));
-		tcMaHoKhau.setMinWidth(20);
-		tcMaHoKhau.prefWidthProperty().bind(tvHoKhau.widthProperty().multiply(0.3));
+//        tcMaHoKhau.setCellValueFactory(new PropertyValueFactory<>("soHoKhau"));
+//		tcMaHoKhau.setMinWidth(20);
+//		tcMaHoKhau.prefWidthProperty().bind(tvHoKhau.widthProperty().multiply(0.3));
+//		
+//		tcChuHo.setCellValueFactory(new PropertyValueFactory<>(null));
+//		tcChuHo.setMinWidth(20);
+//		tcChuHo.prefWidthProperty().bind(tvHoKhau.widthProperty().multiply(0.3));
+//		
+//		tcDiaChi.setCellValueFactory(new PropertyValueFactory<>(null));
+//		tcDiaChi.setMinWidth(20);
+//		tcDiaChi.prefWidthProperty().bind(tvHoKhau.widthProperty().multiply(0.4));
+//		
+//		List<HoKhau> hk = new ArrayList<HoKhau>();
+//		try {
+//			hk = HoKhauService.findHoKhau("1");
+//			for (HoKhau x : hk) {
+//				System.out.print(x.getSoHoKhau());
+//			}
+//		} catch (SQLException e) {
+//			throw new RuntimeException(e);
+//		}
+//		hoKhauDaTimThay = FXCollections.observableArrayList(hk);
+//		tvHoKhau.setItems(hoKhauDaTimThay);
 		
-		tcChuHo.setCellValueFactory(new PropertyValueFactory<>("chuHo"));
-		tcChuHo.setMinWidth(20);
-		tcChuHo.prefWidthProperty().bind(tvHoKhau.widthProperty().multiply(0.3));
 		
-		tcDiaChi.setCellValueFactory(new PropertyValueFactory<>("diaChi"));
-		tcDiaChi.setMinWidth(20);
-		tcDiaChi.prefWidthProperty().bind(tvHoKhau.widthProperty().multiply(0.4));
+		tcHoTen.setCellValueFactory(new PropertyValueFactory<>("ten"));
+		tcHoTen.setMinWidth(20);
+		tcHoTen.prefWidthProperty().bind(tvHoKhau.widthProperty().multiply(0.3));
+		
+		tcNgaySinh.setCellValueFactory(new PropertyValueFactory<>(null));
+		tcNgaySinh.setMinWidth(20);
+		tcNgaySinh.prefWidthProperty().bind(tvHoKhau.widthProperty().multiply(0.3));
+		
+		tcQuanHeVoiChuHo.setCellValueFactory(new PropertyValueFactory<>(null));
+		tcQuanHeVoiChuHo.setMinWidth(20);
+		tcQuanHeVoiChuHo.prefWidthProperty().bind(tvHoKhau.widthProperty().multiply(0.4));
+		
+		List<NhanKhau> nk = null;
+		try {
+			nk = NhanKhauService.findNhanKhau(5, "Quận Hai Bà Trưng");
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		ObservableList<NhanKhau> nko = FXCollections.observableArrayList(nk);
+		tvThanhVien.setItems(nko);
 	}
 	
 	// TableView HoKhau
     @FXML
     void setupTableViewHoKhau() throws SQLException{
-    	hoKhauDaTimThay.addAll(HoKhauService.findHoKhau(tfMaHoKhau.getText()));
-        tvHoKhau.getItems().addAll(hoKhauDaTimThay);
-        
-        tcMaHoKhau.setCellValueFactory(new PropertyValueFactory<>("soHoKhau"));
-		tcMaHoKhau.setMinWidth(20);
-		tcMaHoKhau.prefWidthProperty().bind(tvHoKhau.widthProperty().multiply(0.3));
-		
-		tcChuHo.setCellValueFactory(new PropertyValueFactory<>("chuHo"));
-		tcChuHo.setMinWidth(20);
-		tcChuHo.prefWidthProperty().bind(tvHoKhau.widthProperty().multiply(0.3));
-		
-		tcDiaChi.setCellValueFactory(new PropertyValueFactory<>("diaChi"));
-		tcDiaChi.setMinWidth(20);
-		tcDiaChi.prefWidthProperty().bind(tvHoKhau.widthProperty().multiply(0.4));
+    	if (tfMaHoKhau.getText() != null) {
+	    	hoKhauDaTimThay.addAll(HoKhauService.findHoKhau(tfMaHoKhau.getText()));
+	        tvHoKhau.getItems().addAll(hoKhauDaTimThay);
+	        
+	        tcMaHoKhau.setCellValueFactory(new PropertyValueFactory<>("soHoKhau"));
+			tcMaHoKhau.setMinWidth(20);
+			tcMaHoKhau.prefWidthProperty().bind(tvHoKhau.widthProperty().multiply(0.3));
+			
+			tcChuHo.setCellValueFactory(new PropertyValueFactory<>("chuHo"));
+			tcChuHo.setMinWidth(20);
+			tcChuHo.prefWidthProperty().bind(tvHoKhau.widthProperty().multiply(0.3));
+			
+			tcDiaChi.setCellValueFactory(new PropertyValueFactory<>("diaChi"));
+			tcDiaChi.setMinWidth(20);
+			tcDiaChi.prefWidthProperty().bind(tvHoKhau.widthProperty().multiply(0.4));
+    	}
     }
     
     // TableView ThanhVien
