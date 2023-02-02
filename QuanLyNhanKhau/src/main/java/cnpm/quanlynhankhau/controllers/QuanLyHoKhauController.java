@@ -36,15 +36,15 @@ public class QuanLyHoKhauController extends EdgeController implements Initializa
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-//        colMaHoKhau.setCellValueFactory(new PropertyValueFactory<HoKhau, String>("soHoKhau"));
-//        colDiaChi.setCellValueFactory(new PropertyValueFactory<HoKhau, String>("diaChi"));
-//        List<HoKhau> hk;
-//        try{
-//            hk = HoKhauService.findHoKhau("1");
-//        } catch (SQLException e) {
-//            throw new RuntimeException(e);
-//        }
-//        ObservableList<HoKhau> ls = FXCollections.observableList(hk);
-//        tvHoKhau.setItems(ls);
+        colMaHoKhau.setCellValueFactory(new PropertyValueFactory<HoKhau, String>("soHoKhau"));
+        colDiaChi.setCellValueFactory(new PropertyValueFactory<HoKhau, String>("diaChi"));
+        List<HoKhau> hk;
+        try{
+            hk = HoKhauService.findHoKhau(3,"Hai Bà Trưng, Hà Nội");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        ObservableList<HoKhau> ls = FXCollections.observableList(hk);
+        tvHoKhau.setItems(ls);
     }
 }

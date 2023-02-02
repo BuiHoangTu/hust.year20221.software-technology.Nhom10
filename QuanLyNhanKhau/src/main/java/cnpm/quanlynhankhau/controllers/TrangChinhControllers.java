@@ -3,6 +3,7 @@ package cnpm.quanlynhankhau.controllers;
 import cnpm.quanlynhankhau.models.HoKhau;
 import cnpm.quanlynhankhau.models.NhanKhau;
 import cnpm.quanlynhankhau.services.Database;
+import cnpm.quanlynhankhau.services.HoKhauService;
 import cnpm.quanlynhankhau.services.NhanKhauService;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -30,5 +31,12 @@ public class TrangChinhControllers extends EdgeController implements Initializab
         }
         lblNhanKhauNum.setText(String.valueOf(numNK.size()));
 
+        List<HoKhau> numHK;
+        try{
+            numHK = HoKhauService.findHoKhau(3, "Hai Bà Trưng, Hà Nội");
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        lblHoKhauNum.setText(String.valueOf(numHK.size()));
     }
 }

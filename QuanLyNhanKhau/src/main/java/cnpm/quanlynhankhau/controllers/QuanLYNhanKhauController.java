@@ -71,7 +71,7 @@ public class QuanLYNhanKhauController extends EdgeController implements Initiali
         colID.setCellValueFactory(new PropertyValueFactory<NhanKhau, String>("soNhanKhau"));
         colHoTen.setCellValueFactory(new PropertyValueFactory<NhanKhau, String>("ten"));
         colNgaySinh.setCellValueFactory(new PropertyValueFactory<NhanKhau, String>("ngaySinh"));
-        colGioiTinh.setCellValueFactory(nhanKhauStringCellDataFeatures -> new SimpleStringProperty(nhanKhauStringCellDataFeatures.getValue().isMale() ? "Nam" : "Nu"));
+        colGioiTinh.setCellValueFactory(nhanKhauStringCellDataFeatures -> new SimpleStringProperty(nhanKhauStringCellDataFeatures.getValue().isMale() ? "Nam" : "Nữ"));
         colNoiOHienTai.setCellValueFactory(new PropertyValueFactory<NhanKhau, String>("diaChiHienTai"));
         List<NhanKhau> nk = null;
         try {

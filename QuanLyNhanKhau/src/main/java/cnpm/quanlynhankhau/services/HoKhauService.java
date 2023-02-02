@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HoKhauService {
+	public static final int BY_MA_HO_KHAU = 1, BY_ID_CHU_HO = 2, BY_DIA_CHI = 3;
 	/**
 	 * Lấy các hộ khẩu có
 	 *
@@ -19,36 +20,8 @@ public class HoKhauService {
 	 * @return hộ khẩu chứa filter
 	 * @throws SQLException query lỗi
 	 */
-	public static List<HoKhau> findHoKhau(String filter) throws SQLException {
-		List<HoKhau> output = new ArrayList<>();
-		filter = "%" + filter + "%";
-		PreparedStatement statement = Database.getConnection().prepareStatement("""
-				select * from quan_ly_nhan_khau.ho_khau
-				where maHoKhau like ?""");
-		statement.setString(1, filter);
-		ResultSet res = statement.executeQuery();
+	public static List<HoKhau> findHoKhau(int loaiMa, String filter) throws SQLException {
 
-		while (res.next()) {
-			var idCH = res.getString("idChuHo");
-			var cH = NhanKhauService.getNhanKhau(idCH);
-
-			var hk = new HoKhau(res.getString("maHoKhau"), cH, res.getString("maKhuVuc"), DiaChi.parse(res.getString("diaChi")), LocalDate.parse(res.getString("ngayLap")));
-			var tvs = hk.getThanhViens();
-
-			PreparedStatement subStatement = Database.getConnection().prepareStatement("""
-					select * from quan_ly_nhan_khau.thanh_vien_cua_ho
-					where idHoKhau=?
-					""");
-			subStatement.setString(1, res.getString("maHoKhau"));
-			res = subStatement.executeQuery();
-
-			while (res.next()) {
-				tvs.add(NhanKhauService.getNhanKhau(res.getString("idNhanKhau")));
-			}
-
-			output.add(hk);
-		}
-		return output;
 	}
 
 	/**
