@@ -29,20 +29,19 @@ public class NhanKhauService {
 		StringBuilder sqlQuery = new StringBuilder();
 		sqlQuery.append("Select * from quan_ly_nhan_khau.nhan_khau ");
 
-		if (loaiMa == 1) sqlQuery.append("where maNhanKhau = ?");
-		else if (loaiMa == 2) sqlQuery.append("where soDienThoai = ?");
-		else if (loaiMa == 3) {
-			ma = "%" + ma + "%";
-			sqlQuery.append("where hoTen LIKE ?;");
-		} else if (loaiMa == 4) {
-			ma = "%" + ma + "%";
-			sqlQuery.append("where namSinh LIKE ?;");
-		} else if (loaiMa == 5) {
-			ma = "%" + ma + "%";
-			sqlQuery.append("where diaChiHienNay LIKE ?");
-		} else {
-			System.out.println("Khong kha dung");
-			return null;
+		switch (loaiMa) {
+			case BY_MA_NHAN_KHAU -> sqlQuery.append("where maNhanKhau = ?");
+			case BY_SO_DIEN_THOAI -> sqlQuery.append("where soDienThoai = ?");
+			case BY_TEN -> {
+				ma = "%" + ma + "%";
+				sqlQuery.append("where hoTen LIKE ?;");
+			}
+			case BY_NGAY_SINH -> sqlQuery.append("where namSinh = ?;");
+			case BY_DIA_CHI -> {
+				ma = "%" + ma + "%";
+				sqlQuery.append("where diaChiHienNay LIKE ?");
+			}
+			default -> { return null; }
 		}
 
 		PreparedStatement statement = Database.getConnection().prepareStatement(sqlQuery.toString());
@@ -51,24 +50,26 @@ public class NhanKhauService {
 		while (rs.next()) {
 			boolean Gender;
 			Gender = rs.getString(5).equals("Nam");
+
+			ChungMinhThu cmt = ChungMinhThuService.getChungMinhThu(rs.getString(1));
+
+			String sqlQuery2 = "Select * from quan_ly_nhan_khau.tam_tru_vang where idNhanKhau = ?";
+			PreparedStatement statement1 = Database.getConnection().prepareStatement(sqlQuery2);
+			statement1.setString(1, rs.getString(1));
+			ResultSet lis = statement1.executeQuery();
+			List<TamTruVang> ttvs = new ArrayList<>();
+			while (lis.next()) {
+				ttvs.add(new TamTruVang(lis.getString(2), lis.getDate(4).toLocalDate(), lis.getDate(5).toLocalDate(),
+						DiaChi.parse(lis.getString(7)), DiaChi.parse(lis.getString(3)), lis.getString(6)));
+			}
+
 			NhanKhau x = new NhanKhau(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(9), Gender, DiaChi.parse(rs.getString(12)),
 					rs.getDate(4).toLocalDate(), /*DiaChi.parse(rs.getString(6))*/null, DiaChi.parse(rs.getString(7)), rs.getString(8), rs.getString(11), DiaChi.parse(rs.getString(13)),
 					rs.getString(15), rs.getString(14), rs.getString(17), rs.getString(18), DiaChi.parse(rs.getString(19)), rs.getString(20),/*rs.getDate(21).toLocalDate()*/null,
-					rs.getString(22), rs.getString(31), null, rs.getString(27),/*rs.getDate(28).toLocalDate()*/ null, rs.getString(29), rs.getString(30), rs.getDate(26).toLocalDate());
+					rs.getString(22), rs.getString(31), cmt, rs.getString(27),/*rs.getDate(28).toLocalDate()*/ null, rs.getString(29), rs.getString(30), rs.getDate(26).toLocalDate());
 
+			x.getTamTruVangs().addAll(ttvs);
 			result.add(x);
-		}
-
-		String sqlQuery2 = "Select * from quan_ly_nhan_khau.tam_tru_vang where idNhanKhau = ?";
-		PreparedStatement statement1 = Database.getConnection().prepareStatement(sqlQuery2);
-		for (NhanKhau nk : result) {
-			statement1.setString(1, nk.getSoNhanKhau());
-			ResultSet lis = statement1.executeQuery();
-			while (lis.next()) {
-				TamTruVang ttv = new TamTruVang(lis.getString(2), lis.getDate(4).toLocalDate(), lis.getDate(5).toLocalDate(),
-						DiaChi.parse(lis.getString(7)), DiaChi.parse(lis.getString(3)), lis.getString(6));
-				nk.getTamTruVangs().add(ttv);
-			}
 		}
 		return result;
 	}
