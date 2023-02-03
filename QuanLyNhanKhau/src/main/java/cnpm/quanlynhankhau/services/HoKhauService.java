@@ -99,12 +99,15 @@ public class HoKhauService {
 	}
 
 	public static HoKhau taoHoKhau(String soHKChuHo, String maKhuVuc, String diaChi) throws SQLException {
-		String sqlQuery = "Insert into quan_ly_nhan_khau.ho_khau (idChuHo, maKhuVuc, diaChi) values(?, ?, ?);";
+		int i;
+        String sqlQuery = "Insert into quan_ly_nhan_khau.ho_khau (idChuHo, maKhuVuc, diaChi, idHoKhau) values(?, ?, ?, ?);";
 		PreparedStatement statement = Database.getConnection().prepareStatement(sqlQuery, Statement.RETURN_GENERATED_KEYS);
-
+        for (i=13; HoKhauService.getHoKhau(String.format("%d", i)) != null ; i++){
+        }
 		statement.setString(1, soHKChuHo);
 		statement.setString(2, maKhuVuc);
 		statement.setString(3, diaChi);
+        statement.setString(4, String.format("%d", i));
 		statement.executeUpdate();
 		ResultSet rs = statement.getGeneratedKeys();
 		while (rs.next()) {

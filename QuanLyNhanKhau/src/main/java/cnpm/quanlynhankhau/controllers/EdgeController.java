@@ -24,6 +24,11 @@ public abstract class EdgeController {
 		changeScene("/cnpm/quanlynhankhau/views/ThongKe.fxml");
 	}
 
+	public void onAddClicked(ActionEvent event){changeScene("/cnpm/quanlynhankhau/views/ThemMoiHoKhau.fxml");
+	}
+	public void onSuaClicked(ActionEvent event){changeScene("/cnpm/quanlynhankhau/views/ThemThanhVien.fxml");
+	}
+
 	private void changeScene(String fxLink) {
 		FXMLLoader loader = new FXMLLoader(QuanLyNhanKhauApplication.class.getResource(fxLink));
 		Scene scene = null;

@@ -14,7 +14,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class QuanLyHoKhauController {
+public class QuanLyHoKhauController extends EdgeController {
     @FXML
     private TableView<HoKhau> tvHoKhau;
     @FXML
@@ -25,6 +25,7 @@ public class QuanLyHoKhauController {
     private TableColumn<HoKhau, String> colDiaChi;
     @FXML
     public TextField tfSearch;
+    public Label lblThemMoiNum;
     ObservableList<HoKhau> HK = FXCollections.observableArrayList();
     public QuanLyHoKhauController(){
 
@@ -40,9 +41,6 @@ public class QuanLyHoKhauController {
         colHoTenChuHo.setCellValueFactory(new PropertyValueFactory<HoKhau, String>("hoTenChuHo"));
         colDiaChi.setCellValueFactory(new PropertyValueFactory<HoKhau, String>("diaChiString"));
         tvHoKhau.setItems(HK);
-    }
-    public void onAddClicked(ActionEvent actionEvent) {
-
     }
 
     public void onSeparateClicked(ActionEvent actionEvent) {
