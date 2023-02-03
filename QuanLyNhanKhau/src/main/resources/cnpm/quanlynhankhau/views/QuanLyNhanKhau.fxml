@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="535.0" prefWidth="926.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cnpm.quanlynhankhau.controllers.QuanLYNhanKhauController">
+<AnchorPane prefHeight="535.0" prefWidth="926.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cnpm.quanlynhankhau.controllers.QuanLyNhanKhauController">
    <children>
       <Pane fx:id="pnlNhanKhau" layoutX="223.0" layoutY="-13.0" prefHeight="542.0" prefWidth="674.0" style="-fx-background-color: white;">
          <children>
@@ -31,6 +31,7 @@
             <Button layoutX="601.0" layoutY="121.0" mnemonicParsing="false" onAction="#onDKTamVangClicked" text="ĐK tạm vắng" />
             <Button layoutX="606.0" layoutY="161.0" mnemonicParsing="false" onAction="#onDKTamTruClicked" text="ĐK tạm trú" />
             <Button layoutX="615.0" layoutY="207.0" mnemonicParsing="false" onAction="#onKhaiTuClicked" text="Khai tử" />
+            <Button layoutX="331.0" layoutY="34.0" mnemonicParsing="false" onAction="#onLamMoiClicked" text="Làm mới" />
          </children>
       </Pane>
       <AnchorPane layoutX="-1.0" layoutY="5.0" prefHeight="530.0" prefWidth="206.0" style="-fx-background-color: gray;">

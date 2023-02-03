@@ -1,7 +1,6 @@
 package cnpm.quanlynhankhau.controllers;
 
 import cnpm.quanlynhankhau.application.QuanLyNhanKhauApplication;
-import cnpm.quanlynhankhau.models.ChungMinhThu;
 import cnpm.quanlynhankhau.models.DiaChi;
 import cnpm.quanlynhankhau.models.NhanKhau;
 import cnpm.quanlynhankhau.services.ChungMinhThuService;
@@ -18,7 +17,6 @@ import javafx.scene.control.TextField;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class ThemMoiNhanKhauController implements Initializable {
@@ -47,7 +45,7 @@ public class ThemMoiNhanKhauController implements Initializable {
     }
     public void onHuyClicked(ActionEvent event) {
         //TODO
-        FXMLLoader loader = new FXMLLoader(QuanLyNhanKhauApplication.class.getResource("/cnpm/quanlynhankhau/views/QuanLYNhanKhau.fxml"));
+        FXMLLoader loader = new FXMLLoader(QuanLyNhanKhauApplication.class.getResource("/cnpm/quanlynhankhau/views/QuanLyNhanKhau.fxml"));
         Scene scene = null;
         try {
             scene = new Scene(loader.load());
@@ -89,8 +87,8 @@ public class ThemMoiNhanKhauController implements Initializable {
         );
         //TODO tao pop-up lay thong
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Them Nhan Khau Thanh Cong");
-        alert.setContentText("Nhan khau so: " + x.getSoNhanKhau() + "\nTen: " + x.getTen() + "\nSong tai: " + x.getDiaChiHienTai() + "\nDa duoc them thanh cong");
+        alert.setTitle("Thêm nhân khẩu thành công");
+        alert.setContentText("Nhân khẩu số: " + x.getSoNhanKhau() + "\nTên: " + x.getTen() + "\nSống tại: " + x.getDiaChiHienTai() + "\nĐã được thêm thành công");
         alert.show();
     }
 }

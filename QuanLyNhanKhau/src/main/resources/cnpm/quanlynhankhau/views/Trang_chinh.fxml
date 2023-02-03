@@ -10,12 +10,12 @@
 <AnchorPane prefHeight="542.0" prefWidth="935.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cnpm.quanlynhankhau.controllers.TrangChinhControllers">
    <AnchorPane layoutX="225.0" prefHeight="542.0" prefWidth="711.0">
       <Pane fx:id="pnlTrangChu" layoutX="-1.0" layoutY="-6.0" prefHeight="547.0" prefWidth="711.0" style="-fx-background-color: white;">
-         <Label layoutX="124.0" layoutY="29.0" prefHeight="36.0" prefWidth="574.0" style="-fx-background-color: #656263;" text="Nhân khẩu có trên địa bàn" textFill="#fffbfb">
+         <Label layoutX="115.0" layoutY="29.0" prefHeight="36.0" prefWidth="583.0" style="-fx-background-color: #656263;" text="Nhân khẩu có trên địa bàn" textFill="#fffbfb">
             <font>
                <Font size="17.0" />
             </font>
          </Label>
-         <Label fx:id="lblNhanKhauNum" layoutX="124.0" layoutY="57.0" prefHeight="55.0" prefWidth="574.0" style="-fx-background-color: #656263;" text="0" textFill="#fffbfb">
+         <Label fx:id="lblNhanKhauNum" layoutX="115.0" layoutY="57.0" prefHeight="55.0" prefWidth="583.0" style="-fx-background-color: #656263;" text="0" textFill="#fffbfb">
             <font>
                <Font size="31.0" />
             </font>
@@ -23,12 +23,12 @@
                <Insets />
             </opaqueInsets>
          </Label>
-         <Label layoutX="124.0" layoutY="138.0" prefHeight="36.0" prefWidth="574.0" style="-fx-background-color: #656263;" text="Hộ khẩu có trên địa bàn" textFill="#fffbfb">
+         <Label layoutX="115.0" layoutY="138.0" prefHeight="36.0" prefWidth="583.0" style="-fx-background-color: #656263;" text="Hộ khẩu có trên địa bàn" textFill="#fffbfb">
             <font>
                <Font size="17.0" />
             </font>
          </Label>
-         <Label fx:id="lblHoKhauNum" layoutX="124.0" layoutY="163.0" prefHeight="55.0" prefWidth="574.0" style="-fx-background-color: #656263;" text="0" textFill="#fffbfb">
+         <Label fx:id="lblHoKhauNum" layoutX="115.0" layoutY="163.0" prefHeight="55.0" prefWidth="583.0" style="-fx-background-color: #656263;" text="0" textFill="#fffbfb">
             <font>
                <Font size="31.0" />
             </font>
@@ -36,7 +36,7 @@
                <Insets />
             </opaqueInsets>
          </Label>
-         <Label fx:id="lblTamTruNum" layoutX="124.0" layoutY="263.0" prefHeight="55.0" prefWidth="204.0" style="-fx-background-color: #656263;" text="0" textFill="#fffbfb">
+         <Label fx:id="lblTamTruNum" layoutX="114.0" layoutY="263.0" prefHeight="55.0" prefWidth="214.0" style="-fx-background-color: #656263;" text="0" textFill="#fffbfb">
             <font>
                <Font size="31.0" />
             </font>
@@ -44,7 +44,7 @@
                <Insets />
             </opaqueInsets>
          </Label>
-         <Label layoutX="124.0" layoutY="238.0" prefHeight="36.0" prefWidth="204.0" style="-fx-background-color: #656263;" text="Nhân khẩu tạm trú" textFill="#fffbfb">
+         <Label layoutX="114.0" layoutY="238.0" prefHeight="36.0" prefWidth="214.0" style="-fx-background-color: #656263;" text="Nhân khẩu tạm trú" textFill="#fffbfb">
             <font>
                <Font size="17.0" />
             </font>
