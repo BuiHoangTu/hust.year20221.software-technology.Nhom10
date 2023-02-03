@@ -1,5 +1,6 @@
 package cnpm.quanlynhankhau.controllers;
 
+import cnpm.quanlynhankhau.services.HoKhauService;
 import javafx.event.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,7 +10,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
-import static javafx.application.Application.launch;
+import java.sql.SQLException;
 
 public class ThemMoiHoKhauController {
     @FXML
@@ -32,9 +33,15 @@ public class ThemMoiHoKhauController {
     public void onSuaClicked(ActionEvent actionEvent) {
     }
 
-    public void onLuuClicked(ActionEvent actionEvent) {
+    public void onLuuClicked(ActionEvent actionEvent) throws SQLException {
+        HoKhauService.taoHoKhau(tfMaHoKhau.getText(), tfMaHoKhau.getText(), tfDiaChi.getText());
+
     }
 
     public void onHuyClicked(ActionEvent actionEvent) {
+    }
+
+    public void onXoaClicked(ActionEvent actionEvent){
+
     }
 }

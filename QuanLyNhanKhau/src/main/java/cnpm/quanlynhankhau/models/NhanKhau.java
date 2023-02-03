@@ -95,9 +95,6 @@ public class NhanKhau {
 
     }
 
-    public NhanKhau() {
-
-    }
     public String getSoNhanKhau() {
         return soNhanKhau;
     }

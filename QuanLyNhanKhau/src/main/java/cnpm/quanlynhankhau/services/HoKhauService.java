@@ -74,7 +74,7 @@ public class HoKhauService {
 
 			PreparedStatement subStatement = Database.getConnection().prepareStatement("""
 					select * from quan_ly_nhan_khau.thanh_vien_cua_ho
-					where ho_Khau.idHoKhau=?
+					where thanh_vien_cua_ho.idHoKhau=?
 					""");
 			subStatement.setString(1, soHK);
 			res = subStatement.executeQuery();
@@ -82,6 +82,17 @@ public class HoKhauService {
 			while (res.next()) {
 				tvs.add(NhanKhauService.getNhanKhau(res.getString("idNhanKhau")));
 			}
+
+			subStatement = Database.getConnection().prepareStatement("""
+					select * from quan_ly_nhan_khau.nhan_khau
+					where nhan_khau.maNhanKhau=?
+					""");
+			subStatement.setString(1, idCH);
+			res = subStatement.executeQuery();
+			res.next();
+			hk.setHoTenChuHo(res.getString("hoTen"));
+
+			hk.setDiaChiString(hk.getDiaChi().toString());
 
 			return hk;
 		} else return null;

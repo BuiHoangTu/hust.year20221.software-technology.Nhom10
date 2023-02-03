@@ -44,7 +44,7 @@
             <Button layoutX="417.0" layoutY="486.0" mnemonicParsing="false" onAction="#onLuuClicked" text="Lưu" />
             <Button layoutX="366.0" layoutY="486.0" mnemonicParsing="false" onAction="#onHuyClicked" text="Hủy" />
             <Button layoutX="35.0" layoutY="188.0" mnemonicParsing="false" onAction="#onSuaClicked" text="+" />
-            <Button layoutX="73.0" layoutY="188.0" mnemonicParsing="false" text="-" />
+            <Button layoutX="73.0" layoutY="188.0" mnemonicParsing="false" onAction="#onXoaClicked" text="-" />
          </children></AnchorPane>
   </content>
 </TitledPane>
