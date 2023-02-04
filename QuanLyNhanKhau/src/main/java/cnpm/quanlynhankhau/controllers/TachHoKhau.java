@@ -227,7 +227,7 @@ public class TachHoKhau {
         
         cacThanhVienConLai.clear();
         for (NhanKhau nk : clickedHoKhau.getThanhViens()) {
-        	if (nk.getSoNhanKhau() != clickedHoKhau.getChuHo().getSoNhanKhau()) {
+        	if (!nk.getSoNhanKhau().equals(clickedHoKhau.getChuHo().getSoNhanKhau())) {
         		cacThanhVienConLai.add(nk.getTen());
         	}
         }
