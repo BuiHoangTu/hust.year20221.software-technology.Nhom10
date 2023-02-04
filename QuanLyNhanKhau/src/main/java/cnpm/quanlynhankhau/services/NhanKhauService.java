@@ -209,6 +209,21 @@ public class NhanKhauService {
 			NhanKhau x = findNhanKhau(1, idNhanKhau).get(0);
 			result.add(x);
 		}
+		
+		String sqlQuery2 = "Select * from quan_ly_nhan_khau.tam_tru_vang where idNhanKhau = ?";
+		PreparedStatement statement1 = Database.getConnection().prepareStatement(sqlQuery2);
+		for (NhanKhau nk : result) {
+			statement1.setString(1, nk.getSoNhanKhau());
+			ResultSet lis = statement1.executeQuery();
+			while (lis.next()) {
+				TamTruVang ttv = new TamTruVang(lis.getString(2), lis.getDate(4).toLocalDate(), lis.getDate(5).toLocalDate(),
+						DiaChi.parse(lis.getString(7)), DiaChi.parse(lis.getString(3)), lis.getString(6));
+				nk.getTamTruVangs().add(ttv);
+				if (tuTuoi.equalsIgnoreCase("Tạm vắng/Tạm trú") && nk.getTamTruVangs().get(nk.getTamTruVangs().size()-1).getDenNgay().compareTo(LocalDate.now()) < 0) {
+					result.remove(nk);
+				}
+			}
+		}
 
 		return result;
 	}
