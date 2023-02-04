@@ -17,7 +17,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 
-public class ThemMoiHoKhauController extends EdgeController {
+public class ThemMoiHoKhauController extends ChangeSceneControllers {
     @FXML
     public Label lblMaHoKhau;
     @FXML
@@ -42,12 +42,11 @@ public class ThemMoiHoKhauController extends EdgeController {
     ObservableList<ThanhVienCuaHo> ThanhVienCuaHo = FXCollections.observableArrayList();
     @FXML
     private void initialize() throws SQLException{
-        for (i=13; HoKhauService.getHoKhau(String.format("%d", i)) != null ; i++){
-        }
+
         lblMaHoKhau.setText(String.format("%d",i));
-        colHoTen.setCellValueFactory(new PropertyValueFactory<ThanhVienCuaHo, String>("hoTen"));
-        colNgaySinh.setCellValueFactory(new PropertyValueFactory<ThanhVienCuaHo, String>("ngaySinh"));
-        colQuanHeVoiChuHo.setCellValueFactory(new PropertyValueFactory<ThanhVienCuaHo, String>("quanHeVoiChuHo"));
+        colHoTen.setCellValueFactory(new PropertyValueFactory<>("hoTen"));
+        colNgaySinh.setCellValueFactory(new PropertyValueFactory<>("ngaySinh"));
+        colQuanHeVoiChuHo.setCellValueFactory(new PropertyValueFactory<>("quanHeVoiChuHo"));
         Luu.setDisable(false);
         Them.setDisable(true);
     }
@@ -76,6 +75,12 @@ public class ThemMoiHoKhauController extends EdgeController {
     }
 
     public void onXoaClicked(ActionEvent actionEvent){
-
     }
+
+
+	public void onSuaClicked(ActionEvent event) {
+	}
+
+	public void onHoKhauClicked(ActionEvent event) {
+	}
 }

@@ -49,4 +49,7 @@ public class QuanLyHoKhauController extends EdgeController {
     public void onMoveClicked(ActionEvent actionEvent) {
     }
 
+	public void onAddClicked(ActionEvent event) {
+		changeScene("/cnpm/quanlynhankhau/views/ThemMoiHoKhau.fxml");
+	}
 }
