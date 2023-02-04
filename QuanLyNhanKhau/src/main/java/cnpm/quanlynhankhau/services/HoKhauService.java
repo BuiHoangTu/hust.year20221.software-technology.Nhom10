@@ -23,7 +23,7 @@ public class HoKhauService {
 		List<HoKhau> output = new ArrayList<>();
 		PreparedStatement statement = Database.getConnection().prepareStatement("""
 				select * from quan_ly_nhan_khau.ho_khau
-				where ho_Khau.idHoKhau like ?""");
+				where maHoKhau like ?""");
 		statement.setString(1, "%" + filter + "%");
 		ResultSet res = statement.executeQuery();
 
@@ -31,7 +31,7 @@ public class HoKhauService {
 			var idCH = res.getString("idChuHo");
 			var cH = NhanKhauService.getNhanKhau(idCH);
 
-			var hk = new HoKhau(res.getString("idHoKhau"), cH, res.getString("maKhuVuc"), DiaChi.parse(res.getString("diaChi")), LocalDate.parse(res.getString("ngayLap")));
+			var hk = new HoKhau(res.getString("maHoKhau"), cH, res.getString("maKhuVuc"), DiaChi.parse(res.getString("diaChi")), LocalDate.parse(res.getString("ngayLap")));
 			var tvs = hk.getThanhViens();
 
 			PreparedStatement subStatement = Database.getConnection().prepareStatement("""
@@ -69,7 +69,7 @@ public class HoKhauService {
 			var idCH = res.getString("idChuHo");
 			var cH = NhanKhauService.getNhanKhau(idCH);
 
-			var hk = new HoKhau(res.getString("idHoKhau"), cH, res.getString("maKhuVuc"), DiaChi.parse(res.getString("diaChi")), LocalDate.parse(res.getString("ngayLap")));
+			var hk = new HoKhau(soHK, cH, res.getString("maKhuVuc"), DiaChi.parse(res.getString("diaChi")), LocalDate.parse(res.getString("ngayLap")));
 			var tvs = hk.getThanhViens();
 
 			PreparedStatement subStatement = Database.getConnection().prepareStatement("""
