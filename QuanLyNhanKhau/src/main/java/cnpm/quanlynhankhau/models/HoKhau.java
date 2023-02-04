@@ -210,7 +210,7 @@ public class HoKhau {
 			statement.setString(4, diaChi.toString());
 
 			PreparedStatement subStatement = Database.getConnection().prepareStatement("""
-                    SELECT maKhuVuc
+                    SELECT diaChi
                     FROM quan_ly_nhan_khau.ho_khau
                     WHERE maHoKhau = ?;
                     """);
