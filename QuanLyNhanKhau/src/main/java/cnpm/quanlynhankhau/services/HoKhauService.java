@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HoKhauService {
+	public static final int BY_MA_HO_KHAU = 1, BY_ID_CHU_HO = 2, BY_DIA_CHI = 3;
 	/**
 	 * Lấy các hộ khẩu có
 	 *
@@ -19,33 +20,38 @@ public class HoKhauService {
 	 * @return hộ khẩu chứa filter
 	 * @throws SQLException query lỗi
 	 */
-	public static List<HoKhau> findHoKhau(String filter) throws SQLException {
+	public static List<HoKhau> findHoKhau(int loaiMa, String filter) throws SQLException {
 		List<HoKhau> output = new ArrayList<>();
-		PreparedStatement statement = Database.getConnection().prepareStatement("""
-				select * from quan_ly_nhan_khau.ho_khau
-				where maHoKhau like ?""");
-		statement.setString(1, "%" + filter + "%");
-		ResultSet res = statement.executeQuery();
+		StringBuilder sqlQuery = new StringBuilder();
+		sqlQuery.append("Select * from quan_ly_nhan_khau.ho_khau ");
+		if (loaiMa == 1){
+			sqlQuery.append("where maHoKhau = ?");
+		} else if (loaiMa == 2) {
+			sqlQuery.append("where idChuHo = ?");
+		} else if (loaiMa == 3) {
+			filter = "%" + filter + "%";
+			sqlQuery.append("where diaChi like ?");
+		}else{
+			System.out.println("Khong kha dung");
+			return null;
+		}
+		PreparedStatement statement = Database.getConnection().prepareStatement(sqlQuery.toString());
+		statement.setString(1, filter);
+		ResultSet rs = statement.executeQuery();
+		while (rs.next()){
+			HoKhau x = new HoKhau(rs.getString("maHoKhau"), NhanKhauService.getNhanKhau(rs.getString("idChuHo")),
+					rs.getString("maKhuVuc"), DiaChi.parse(rs.getString("diaChi")),rs.getDate("ngayLap").toLocalDate());
+			output.add(x);
+		}
 
-		while (res.next()) {
-			var idCH = res.getString("idChuHo");
-			var cH = NhanKhauService.getNhanKhau(idCH);
-
-			var hk = new HoKhau(res.getString("maHoKhau"), cH, res.getString("maKhuVuc"), DiaChi.parse(res.getString("diaChi")), LocalDate.parse(res.getString("ngayLap")));
-			var tvs = hk.getThanhViens();
-
-			PreparedStatement subStatement = Database.getConnection().prepareStatement("""
-					select * from quan_ly_nhan_khau.thanh_vien_cua_ho
-					where ho_Khau.idHoKhau=?
-					""");
-			subStatement.setString(1, res.getString("idHoKhau"));
-			res = subStatement.executeQuery();
-
-			while (res.next()) {
-				tvs.add(NhanKhauService.getNhanKhau(res.getString("idNhanKhau")));
+		String sqlQuery2 = "Select * from quan_ly_nhan_khau.thanh_vien_cua_ho where idHoKhau = ?";
+		PreparedStatement statement1 = Database.getConnection().prepareStatement(sqlQuery2);
+		for (HoKhau hk : output){
+			statement1.setString(1, hk.getSoHoKhau());
+			ResultSet lis = statement1.executeQuery();
+			while (lis.next()){
+				hk.getThanhViens().add(NhanKhauService.getNhanKhau(lis.getString("idNhanKhau")));
 			}
-
-			output.add(hk);
 		}
 		return output;
 	}

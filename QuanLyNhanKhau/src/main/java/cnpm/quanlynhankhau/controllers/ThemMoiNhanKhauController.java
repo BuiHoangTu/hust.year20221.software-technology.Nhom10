@@ -1,18 +1,25 @@
 package cnpm.quanlynhankhau.controllers;
 
-import cnpm.quanlynhankhau.models.ChungMinhThu;
+import cnpm.quanlynhankhau.application.QuanLyNhanKhauApplication;
 import cnpm.quanlynhankhau.models.DiaChi;
 import cnpm.quanlynhankhau.models.NhanKhau;
+import cnpm.quanlynhankhau.services.ChungMinhThuService;
 import cnpm.quanlynhankhau.services.NhanKhauService;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 
+import java.io.IOException;
+import java.net.URL;
 import java.sql.SQLException;
+import java.util.ResourceBundle;
 
-public class ThemMoiNhanKhauController {
+public class ThemMoiNhanKhauController implements Initializable {
     public TextField tfHoTen;
     public TextField tfNguyenQuan;
     public TextField tfDanToc;
@@ -31,24 +38,38 @@ public class ThemMoiNhanKhauController {
     public TextField tfNoiLamViec;
     public DatePicker dpBirth;
     public ComboBox cbGioiTinh;
-
-    private void initialize() {
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
         //TODO set comboBox Gioi Tinh
         cbGioiTinh.getItems().addAll("Nam","Nu");
     }
     public void onHuyClicked(ActionEvent event) {
         //TODO
+        FXMLLoader loader = new FXMLLoader(QuanLyNhanKhauApplication.class.getResource("/cnpm/quanlynhankhau/views/QuanLyNhanKhau.fxml"));
+        Scene scene = null;
+        try {
+            scene = new Scene(loader.load());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        QuanLyNhanKhauApplication.MAIN_STAGE.setScene(scene);
     }
 
     public void onTaoClicked(ActionEvent event) throws SQLException {
+        Boolean gender = true;
+        if(cbGioiTinh.getValue().equals("Nam")){
+            gender = true;
+        }else {
+            gender = false;
+        }
         NhanKhau x = NhanKhauService.taoNhanKhau(
                 tfHoTen.getText(),
                 tfBietDanh.getText(),
                 tfTonGiao.getText(),
-                false,
+                gender,
                 DiaChi.parse(tfNoiThuongTru.getText()),
                 dpBirth.getValue(),
-                null,
+                DiaChi.parse(tfNguyenQuan.getText()),
                 DiaChi.parse(tfNguyenQuan.getText()),
                 tfDanToc.getText(),
                 tfHoChieu.getText(),
@@ -62,13 +83,12 @@ public class ThemMoiNhanKhauController {
                 null,
                 null,
                 null,
-                ChungMinhThu.getChungMinhThu(tfCMND.getText())
+                ChungMinhThuService.getChungMinhThu(tfCMND.getText())
         );
-        System.out.println(x.getTen() + " " + x.getDiaChiHienTai());
         //TODO tao pop-up lay thong
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Them Nhan Khau Thanh Cong");
-        alert.setContentText("Nhan khau so: " + x.getSoNhanKhau() + "\nTen: " + x.getTen() + "\nSong tai: " + x.getDiaChiHienTai() + "\nDa duoc them thanh cong");
+        alert.setTitle("Thêm nhân khẩu thành công");
+        alert.setContentText("Nhân khẩu số: " + x.getSoNhanKhau() + "\nTên: " + x.getTen() + "\nSống tại: " + x.getDiaChiHienTai() + "\nĐã được thêm thành công");
         alert.show();
     }
 }
