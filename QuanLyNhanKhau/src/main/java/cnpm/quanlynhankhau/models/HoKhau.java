@@ -14,13 +14,11 @@ import java.util.List;
 public class HoKhau {
 	private String soHoKhau;
 	private NhanKhau chuHo;
-	private String hoTenChuHo;
 	private boolean chuHoIsChanged = false;
 	private String maKhuVuc;
 	private boolean maKhuVucIsChanged = false;
 	private DiaChi diaChi;
 
-	private String diaChiString;
 	private boolean diaChiIsChanged = false;
 	private LocalDate ngayLap;
 	private boolean ngayLapIsChanged = false;
@@ -36,22 +34,6 @@ public class HoKhau {
 
 	public String getSoHoKhau() {
 		return soHoKhau;
-	}
-
-	public void setHoTenChuHo(String hoTenChuho) {
-		this.hoTenChuHo = hoTenChuho;
-	}
-
-	public String getDiaChiString() {
-		return diaChiString;
-	}
-
-	public void setDiaChiString(String diaChiString) {
-		this.diaChiString = diaChiString;
-	}
-
-	public String getHoTenChuHo() {
-		return hoTenChuHo;
 	}
 
 	public NhanKhau getChuHo() {

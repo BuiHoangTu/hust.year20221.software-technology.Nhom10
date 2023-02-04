@@ -12,7 +12,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.sql.SQLException;
 
-public class ThemMoiHoKhauController extends ChangeSceneControllers {
+public class ThemMoiHoKhauController extends ChangeSceneControllers implements IController{
     // region FXML attributes
 	@FXML
     public Label lblMaHoKhau;
@@ -127,7 +127,7 @@ public class ThemMoiHoKhauController extends ChangeSceneControllers {
 	}
 
 
-	private void flush_data() {
+	public void flush_data() {
 		tfChuHo.setText("");
 		tfDiaChi.setText("");
 		tfMaKhuVuc.setText("");

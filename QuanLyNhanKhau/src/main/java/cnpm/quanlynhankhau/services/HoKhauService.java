@@ -90,9 +90,6 @@ public class HoKhauService {
 			subStatement.setString(1, idCH);
 			res = subStatement.executeQuery();
 			res.next();
-			hk.setHoTenChuHo(res.getString("hoTen"));
-
-			hk.setDiaChiString(hk.getDiaChi().toString());
 
 			return hk;
 		} else return null;

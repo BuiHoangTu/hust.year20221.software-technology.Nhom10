@@ -16,7 +16,7 @@ class HoKhauServiceTest {
         ObservableList<HoKhau> HK = FXCollections.observableArrayList();
         for (int i=13; HoKhauService.getHoKhau(String.format("%d", i)) != null ; i++) {
             HK.add(HoKhauService.getHoKhau(String.format("%d", i)));
-            System.out.println(HK.get(i-13).getHoTenChuHo()+" "+HK.get(i-13).getDiaChiString());
+            // System.out.println(HK.get(i-13).getHoTenChuHo()+" "+HK.get(i-13).getDiaChiString());
         }
     }
 }
