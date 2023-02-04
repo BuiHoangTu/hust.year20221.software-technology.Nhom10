@@ -92,9 +92,6 @@ public class NhanKhau {
         this.ngayTao = ngayTao;
     }
 
-    public NhanKhau() {
-
-    }
     public String getSoNhanKhau() {
         return soNhanKhau;
     }
@@ -319,7 +316,15 @@ public class NhanKhau {
         return chungMinhThu;
     }
 
-    /**
+	@Override
+	public String toString() {
+		return "Nhân khẩu " + soNhanKhau +
+				", Tên: " + ten +
+				", Sinh ngày: " + ngaySinh +
+				", Thường trú: " + thuongTru;
+	}
+
+	/**
      * Save changes in this NK in database
      */
 
