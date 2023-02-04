@@ -18,6 +18,7 @@ public class HoKhau {
 	private String maKhuVuc;
 	private boolean maKhuVucIsChanged = false;
 	private DiaChi diaChi;
+
 	private boolean diaChiIsChanged = false;
 	private LocalDate ngayLap;
 	private boolean ngayLapIsChanged = false;
@@ -34,7 +35,6 @@ public class HoKhau {
 	public String getSoHoKhau() {
 		return soHoKhau;
 	}
-
 
 	public NhanKhau getChuHo() {
 		return chuHo;
@@ -145,6 +145,19 @@ public class HoKhau {
 		subStatement.setString(1, diaChiMoi.toString());
 		subStatement.setString(2, this.soHoKhau);
 		subStatement.executeUpdate();
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder output = new StringBuilder ("Hộ khẩu " + soHoKhau +
+				", Chủ hộ: " + chuHo.getTen() +
+				", Trú tại: " + diaChi +
+				", Thành lập ngày " + ngayLap +
+				", Thành viên : \n");
+		for (var tv : thanhViens) {
+			output.append('\t').append(tv.getTen()).append('\n');
+		}
+		return output.toString();
 	}
 
 	/**

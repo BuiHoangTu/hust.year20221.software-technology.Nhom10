@@ -33,6 +33,7 @@ public class QuanLyNhanKhauApplication extends Application {
     }
 
     public static void main(String[] args) {
+
         launch();
     }
 }

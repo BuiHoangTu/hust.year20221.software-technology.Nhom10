@@ -11,9 +11,9 @@ import static org.junit.jupiter.api.Assertions.*;
 class DatabaseTest {
     @Test
     void taoHoKhau() throws SQLException {
-        NhanKhau chuHo = Database.findNhanKhau(1, "8").get(0);
+        NhanKhau chuHo = NhanKhauService.findNhanKhau(1, "8").get(0);
         DiaChi dc = new DiaChi("Hanoi","HoangMai","HQV","4",null);
-        HoKhau nHK = Database.taoHoKhau(chuHo.getSoNhanKhau(), "HN05",dc.toString());
+        HoKhau nHK = HoKhauService.taoHoKhau(chuHo.getSoNhanKhau(), "HN05",dc.toString());
         System.out.println(nHK.getSoHoKhau() + "\t" + nHK.getNgayLap());
     }
     @Test

@@ -2,7 +2,6 @@ package cnpm.quanlynhankhau.services;
 
 import cnpm.quanlynhankhau.models.DiaChi;
 import cnpm.quanlynhankhau.models.HoKhau;
-import cnpm.quanlynhankhau.models.NhanKhau;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -67,21 +66,21 @@ public class HoKhauService {
 	public static HoKhau getHoKhau(String soHK) throws SQLException {
 		PreparedStatement statement = Database.getConnection().prepareStatement("""
 				select * from quan_ly_nhan_khau.ho_khau
-				where ho_Khau.maHoKhau = ?
+				where maHoKhau =?
 				""");
-		statement.setString(1, "%" + soHK + "%");
+		statement.setString(1, soHK);
 		ResultSet res = statement.executeQuery();
 
 		if (res.next()) {
 			var idCH = res.getString("idChuHo");
 			var cH = NhanKhauService.getNhanKhau(idCH);
 
-			var hk = new HoKhau(res.getString("idHoKhau"), cH, res.getString("maKhuVuc"), DiaChi.parse(res.getString("diaChi")), LocalDate.parse(res.getString("ngayLap")));
+			var hk = new HoKhau(soHK, cH, res.getString("maKhuVuc"), DiaChi.parse(res.getString("diaChi")), LocalDate.parse(res.getString("ngayLap")));
 			var tvs = hk.getThanhViens();
 
 			PreparedStatement subStatement = Database.getConnection().prepareStatement("""
 					select * from quan_ly_nhan_khau.thanh_vien_cua_ho
-					where ho_Khau.idHoKhau=?
+					where thanh_vien_cua_ho.idHoKhau=?
 					""");
 			subStatement.setString(1, soHK);
 			res = subStatement.executeQuery();
@@ -90,36 +89,38 @@ public class HoKhauService {
 				tvs.add(NhanKhauService.getNhanKhau(res.getString("idNhanKhau")));
 			}
 
+			subStatement = Database.getConnection().prepareStatement("""
+					select * from quan_ly_nhan_khau.nhan_khau
+					where nhan_khau.maNhanKhau=?
+					""");
+			subStatement.setString(1, idCH);
+			res = subStatement.executeQuery();
+			res.next();
+
 			return hk;
 		} else return null;
 	}
 
 	public static HoKhau taoHoKhau(String soHKChuHo, String maKhuVuc, String diaChi) throws SQLException {
 		String sqlQuery = "Insert into quan_ly_nhan_khau.ho_khau (idChuHo, maKhuVuc, diaChi) values(?, ?, ?);";
-		PreparedStatement statement = Database.getConnection().prepareStatement(sqlQuery, Statement.RETURN_GENERATED_KEYS);
+		ResultSet rs = null;
 
-		statement.setString(1, soHKChuHo);
-		statement.setString(2, maKhuVuc);
-		statement.setString(3, diaChi);
-		statement.executeUpdate();
-		ResultSet rs = statement.getGeneratedKeys();
-		while (rs.next()) {
-			String soHK = rs.getString(1);
-			String sqlQuery2 = "Select * from quan_ly_nhan_khau.ho_khau where maHoKhau = ?";
-			PreparedStatement statement1 = Database.getConnection().prepareStatement(sqlQuery2);
-			statement1.setString(1, soHK);
-			ResultSet resultSet = statement1.executeQuery();
+		try {
+			PreparedStatement statement = Database.getConnection().prepareStatement(sqlQuery, Statement.RETURN_GENERATED_KEYS);
 
-			while (resultSet.next()) {
-				try {
-					return new HoKhau(soHK, NhanKhauService.findNhanKhau(1, resultSet.getString(2)).get(0), maKhuVuc, DiaChi.parse(resultSet.getString(4)), resultSet.getDate(5).toLocalDate());
-				} catch (NullPointerException | IndexOutOfBoundsException e) {
-					return null;
-				}
-			}
+			statement.setString(1, soHKChuHo);
+			statement.setString(2, maKhuVuc);
+			statement.setString(3, diaChi);
+			statement.executeUpdate();
+			rs = statement.getGeneratedKeys();
+		} catch (SQLException e) {
+			throw new SQLException("Hộ khẩu không được tạo, vui lòng thử lại sau");
 		}
-		// TODO: 28/01/2023 thay bằng tên cột, get HK tu DB and return
-		return null;
+
+		if (rs.next()) {
+			return getHoKhau(rs.getString(1));
+		} else throw new SQLException("Hộ khẩu đã được tạo nhưng không tìm thấy, thử lại sau");
+
 	}
 
 }
