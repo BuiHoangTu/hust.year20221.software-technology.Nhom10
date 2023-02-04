@@ -22,7 +22,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 
-public class ChuyenHoKhau {
+public class ChuyenHoKhau extends ChangeSceneControllers {
 	@FXML
     private TextField tfMaHoKhau;
 	@FXML
@@ -105,15 +105,7 @@ public class ChuyenHoKhau {
 	
     @FXML
     protected void onHuyClicked() {
-    	// TODO : Hàm j đó Quay lại menu trước đó
-    	FXMLLoader loader = new FXMLLoader(QuanLyNhanKhauApplication.class.getResource("/cnpm/quanlynhankhau/views/QuanLyHoKhau.fxml"));
-		Scene scene = null;
-		try {
-			scene = new Scene(loader.load());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		QuanLyNhanKhauApplication.MAIN_STAGE.setScene(scene);
+    	changeScene("/cnpm/quanlynhankhau/views/QuanLyHoKhau.fxml");
     }
     
     @FXML
@@ -131,14 +123,8 @@ public class ChuyenHoKhau {
 	    	tmp.setDiaChi(DiaChi.parse(tfDiaChiChuyenDen.getText()));
 	    	tmp.commit();
 	    	
-	    	FXMLLoader loader = new FXMLLoader(QuanLyNhanKhauApplication.class.getResource("/cnpm/quanlynhankhau/views/QuanLyHoKhau.fxml"));
-			Scene scene = null;
-			try {
-				scene = new Scene(loader.load());
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			QuanLyNhanKhauApplication.MAIN_STAGE.setScene(scene);
+	    	// Chuyển về scene trước đó
+			changeScene("/cnpm/quanlynhankhau/views/QuanLyHoKhau.fxml");
     	}
     }
 }

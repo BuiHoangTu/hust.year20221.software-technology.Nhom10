@@ -44,11 +44,11 @@ public class QuanLyHoKhauController extends EdgeController {
         tvHoKhau.setItems(hkKhuVuc);
     }
 
-    public void onSeparateClicked(ActionEvent actionEvent) {
+    public void onTachHoKhauClicked(ActionEvent actionEvent) {
     	changeScene("/cnpm/quanlynhankhau/views/TachHoKhau.fxml");
 	}
 
-    public void onMoveClicked(ActionEvent actionEvent) {
+    public void onChuyenHoKhauClicked(ActionEvent actionEvent) {
     	changeScene("/cnpm/quanlynhankhau/views/ChuyenHoKhau.fxml");
 	}
 

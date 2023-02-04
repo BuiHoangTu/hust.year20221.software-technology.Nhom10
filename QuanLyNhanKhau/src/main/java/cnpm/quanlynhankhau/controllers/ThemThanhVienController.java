@@ -79,7 +79,7 @@ public class ThemThanhVienController extends EdgeController {
 
     public void onThemClicked(ActionEvent actionEvent) throws SQLException{
         if ((selected != null) && (tfQuanHeVoiChuHo.getText()!=null)) {
-            HoKhauService.getHoKhau(String.format("%d", maHK - 1)).themThanhVien(selected, tfQuanHeVoiChuHo.getText());
+            HoKhauService.getHoKhau(String.format("%d", maHK - 1)).themThanhVien(selected);
         }
     }
 }

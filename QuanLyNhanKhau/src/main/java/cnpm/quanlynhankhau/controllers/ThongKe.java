@@ -100,51 +100,8 @@ public class ThongKe extends EdgeController {
 	
 	@FXML	
     protected void onShowClicked() throws SQLException {
-		
-		// TODO : làm alert cho tuoi va Year
-		List<NhanKhau> nhanKhauTimDuoc = new ArrayList<NhanKhau>();
-		nhanKhauTimDuoc.addAll(NhanKhauService.findNhanKhau(5, "Quận Hai Bà Trưng, Hà Nội"));
-		
-		if (cbGioiTinh.getValue() != "Toàn bộ") {
-			for (NhanKhau nk : nhanKhauTimDuoc) {
-				if (cbGioiTinh.getValue() == "Nam" && !nk.isMale()) {
-					nhanKhauTimDuoc.remove(nk);
-				}
-				if (cbGioiTinh.getValue() == "Nữ" && nk.isMale()) {
-					nhanKhauTimDuoc.remove(nk);
-				}
-			}
-		}
-		if (cbTinhTrang.getValue() != "Toàn bộ") {
-			for (NhanKhau nk : nhanKhauTimDuoc) {
-				if(nk.getTamTruVangs().get(nk.getTamTruVangs().size()-1).getDenNgay().compareTo(LocalDate.now()) < 0) {
-					nhanKhauTimDuoc.remove(nk);
-				}
-			}
-		}
-		if (!tfTuoiTu.getText().equals("") && !tfTuoiDen.getText().equals("") ) {
-			int now = LocalDate.now().getYear(), 
-				tuoiTu = Integer.parseInt(tfTuoiTu.getText()), 
-				tuoiDen = Integer.parseInt(tfTuoiDen.getText());
-			for (NhanKhau nk : nhanKhauTimDuoc) {
-				int namSinh = nk.getNgaySinh().getYear();
-				if((now - namSinh) < tuoiTu && (now - namSinh) > tuoiDen) {
-					nhanKhauTimDuoc.remove(nk);
-				}
-			}
-		}
-		if (!tfNamTu.getText().equals("") && !tfNamDen.getText().equals("") ) {
-			int namTu = Integer.parseInt(tfTuoiTu.getText()), 
-				namDen = Integer.parseInt(tfTuoiDen.getText());
-			for (NhanKhau nk : nhanKhauTimDuoc) {
-				int ngayTao = nk.getNgayTao().getYear();
-				if(ngayTao < namTu) {
-					nhanKhauTimDuoc.remove(nk);
-				}
-			}
-		}
-		
-		nhanKhau.addAll(nhanKhauTimDuoc);
+		nhanKhau.clear();
+		nhanKhau.addAll(NhanKhauService.thongKeNhanKhau(tfTuoiTu.getText(), tfTuoiDen.getText(), cbGioiTinh.getValue(), cbTinhTrang.getValue(), tfNamTu.getText(), tfNamDen.getText()));
     }
 	
 	@FXML
@@ -155,10 +112,10 @@ public class ThongKe extends EdgeController {
 		List<String> headers = new ArrayList<String>();
 		
 		headers.add("ID");
-		headers.add("Họ tên");
-		headers.add("Ngày sinh");
-		headers.add("Giới tính");
-		headers.add("Địa chỉ");
+		headers.add("Ho ten");
+		headers.add("Ngay sinh");
+		headers.add("Gioi tính");
+		headers.add("Dia chi");
 		
 		File file = new File("src\\main\\resources\\cnpm\\quanlynhankhau\\data\\Ngay_gio_tao_file.csv");
 		try(PrintWriter writer = new PrintWriter(file)) {

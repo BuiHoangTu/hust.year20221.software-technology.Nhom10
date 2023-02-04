@@ -1,8 +1,6 @@
 package cnpm.quanlynhankhau.controllers;
 
-import java.io.IOException;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,22 +8,19 @@ import cnpm.quanlynhankhau.services.HoKhauService;
 import cnpm.quanlynhankhau.services.NhanKhauService;
 import cnpm.quanlynhankhau.models.HoKhau;
 import cnpm.quanlynhankhau.models.NhanKhau;
-import cnpm.quanlynhankhau.application.QuanLyNhanKhauApplication;
 import cnpm.quanlynhankhau.models.DiaChi;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 
-public class TachHoKhau {	
+public class TachHoKhau extends ChangeSceneControllers {
 	@FXML
     private TextField tfMaHoKhau;
 	@FXML
@@ -36,9 +31,6 @@ public class TachHoKhau {
     private TextField tfDiaChiMoi;
 	
 	// ComboBox
-	@FXML
-	private ObservableList<String> cacThanhVienConLai = FXCollections.observableArrayList();
-	
 	@FXML
     private ComboBox cbChuHoMoi;
 	
@@ -123,14 +115,14 @@ public class TachHoKhau {
 	    tcNgaySinh.setMinWidth(20);
 	    tcNgaySinh.prefWidthProperty().bind(tvThanhVien.widthProperty().multiply(0.25));
 			
-		tcQuanHeVoiChuHo.setCellValueFactory(new PropertyValueFactory<NhanKhau, String>(null));
+		tcQuanHeVoiChuHo.setCellValueFactory(new PropertyValueFactory<NhanKhau, String>("quanHeVoiChuHo"));
 		tcQuanHeVoiChuHo.setMinWidth(20);
 		tcQuanHeVoiChuHo.prefWidthProperty().bind(tvThanhVien.widthProperty().multiply(0.3));
 		
 		tvThanhVien.setItems(thanhVienCuCuaHo);
 		
 		// Set ComboBox ChuHoMoi
-		cbChuHoMoi.setItems(cacThanhVienConLai);
+		cbChuHoMoi.setItems(lvThanhVienHoMoi.getItems());
 	}
 	
 	// TableView HoKhau
@@ -170,15 +162,7 @@ public class TachHoKhau {
 	
     @FXML
     protected void onHuyClicked() {
-        // TODO : Hàm j đó Quay lại menu trước đó
-    	FXMLLoader loader = new FXMLLoader(QuanLyNhanKhauApplication.class.getResource("/cnpm/quanlynhankhau/views/QuanLyHoKhau.fxml"));
-		Scene scene = null;
-		try {
-			scene = new Scene(loader.load());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		QuanLyNhanKhauApplication.MAIN_STAGE.setScene(scene);
+		changeScene("/cnpm/quanlynhankhau/views/QuanLyHoKhau.fxml");
     }
     
     @FXML
@@ -204,19 +188,12 @@ public class TachHoKhau {
 	    	
 	    	// Thêm nhân khẩu mới vào một hộ mới
 	    	tmp = HoKhauService.taoHoKhau(NhanKhauService.findNhanKhau(3, cbChuHoMoi.getValue().toString()).get(0).getSoNhanKhau(), tfMaKhuVucMoi.getText(), tfDiaChiMoi.getText());
-	    	for (String str : lvThanhVienHoMoi.getItems()) {
-	    		tmp.themThanhVien(NhanKhauService.findNhanKhau(3, str).get(0), null);
+	    	for (NhanKhau nk : thanhVienHoMoi) {
+	    		tmp.themThanhVien(nk);
 	    	}
 	    	
 	    	// Trở về scene trước đó
-	    	FXMLLoader loader = new FXMLLoader(QuanLyNhanKhauApplication.class.getResource("/cnpm/quanlynhankhau/views/QuanLyHoKhau.fxml"));
-			Scene scene = null;
-			try {
-				scene = new Scene(loader.load());
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			QuanLyNhanKhauApplication.MAIN_STAGE.setScene(scene);
+	    	changeScene("/cnpm/quanlynhankhau/views/QuanLyHoKhau.fxml");
     	}
     }
 
@@ -224,13 +201,6 @@ public class TachHoKhau {
     void rowClickedHoKhau(MouseEvent event) throws SQLException {
         HoKhau clickedHoKhau = tvHoKhau.getSelectionModel().getSelectedItem();
         tfChuHo.setText(clickedHoKhau.getChuHo().getTen());
-        
-        cacThanhVienConLai.clear();
-        for (NhanKhau nk : clickedHoKhau.getThanhViens()) {
-        	if (!nk.getSoNhanKhau().equals(clickedHoKhau.getChuHo().getSoNhanKhau())) {
-        		cacThanhVienConLai.add(nk.getTen());
-        	}
-        }
         
         idHoKhau = clickedHoKhau.getSoHoKhau();
         lvThanhVienHoMoi.getItems().clear();
