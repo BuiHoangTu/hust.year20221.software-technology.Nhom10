@@ -1,10 +1,8 @@
 package cnpm.quanlynhankhau.controllers;
 
-import cnpm.quanlynhankhau.models.HoKhau;
-import cnpm.quanlynhankhau.models.ThanhVienCuaHo;
-import cnpm.quanlynhankhau.services.Database;
+import cnpm.quanlynhankhau.models.NhanKhau;
 import cnpm.quanlynhankhau.services.HoKhauService;
-import cnpm.quanlynhankhau.services.NhanKhauService;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.*;
@@ -12,13 +10,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 
 public class ThemMoiHoKhauController extends ChangeSceneControllers {
-    @FXML
+    // region FXML attributes
+	@FXML
     public Label lblMaHoKhau;
     @FXML
     public TextField tfMaKhuVuc;
@@ -27,60 +23,115 @@ public class ThemMoiHoKhauController extends ChangeSceneControllers {
     @FXML
     public TextField tfChuHo;
     @FXML
-    public TableView<ThanhVienCuaHo> tvThanhVien;
+    public TableView<NhanKhau> tvThanhVien;
     @FXML
-    private TableColumn<ThanhVienCuaHo, String> colHoTen;
+    private TableColumn<NhanKhau, String> colHoTen;
     @FXML
-    private TableColumn<ThanhVienCuaHo, String> colNgaySinh;
+    private TableColumn<NhanKhau, String> colNgaySinh;
     @FXML
-    private TableColumn<ThanhVienCuaHo, String> colQuanHeVoiChuHo;
+    private TableColumn<NhanKhau, String> colQuanHeVoiChuHo;
     @FXML
     private Button Luu;
     @FXML
     private Button Them;
-    public static int i;
-    ObservableList<ThanhVienCuaHo> ThanhVienCuaHo = FXCollections.observableArrayList();
-    @FXML
-    private void initialize() throws SQLException{
+	// endregion
 
-        lblMaHoKhau.setText(String.format("%d",i));
-        colHoTen.setCellValueFactory(new PropertyValueFactory<>("hoTen"));
-        colNgaySinh.setCellValueFactory(new PropertyValueFactory<>("ngaySinh"));
+	NhanKhau chuHo;
+	ObservableList<NhanKhau> thanhVienMoi = FXCollections.observableArrayList();
+
+	@FXML
+    private void initialize() {
+		// TODO: 04/02/2023 ??
+        lblMaHoKhau.setText("0");
+
+		tvThanhVien.setItems(thanhVienMoi);
+        colHoTen.setCellValueFactory(x -> new SimpleStringProperty(x.getValue().getTen()));
+        colNgaySinh.setCellValueFactory(x -> new SimpleStringProperty(x.getValue().getNgaySinh().toString()));
         colQuanHeVoiChuHo.setCellValueFactory(new PropertyValueFactory<>("quanHeVoiChuHo"));
-        Luu.setDisable(false);
-        Them.setDisable(true);
-    }
-    public void onChonClicked(ActionEvent actionEvent) {
-    }
 
-
-    public void onLuuClicked(ActionEvent actionEvent) throws SQLException {
-        PreparedStatement subStatement = Database.getConnection().prepareStatement("""
-                SELECT maNhanKhau, namSinh FROM quan_ly_nhan_khau.nhan_khau
-                WHERE hoTen like ?
-                """);
-        subStatement.setString(1, "%" +tfChuHo.getText() + "%");
-        ResultSet res = subStatement.executeQuery();
-        String maHK = " ";
-        LocalDate ngaySinh = LocalDate.now();
-        if (res.next()){
-            maHK = res.getString("maNhanKhau");
-            ngaySinh = LocalDate.parse(res.getString("namSinh"));
-            HoKhauService.taoHoKhau(maHK, tfMaKhuVuc.getText(), tfDiaChi.getText());
-        }
-        ThanhVienCuaHo.add(new ThanhVienCuaHo(tfChuHo.getText(), "Chủ Hộ", ngaySinh, maHK));
-        tvThanhVien.setItems(ThanhVienCuaHo);
-        Luu.setDisable(true);
+		Luu.setDisable(false);
         Them.setDisable(false);
+		tfChuHo.setDisable(true);
     }
 
-    public void onXoaClicked(ActionEvent actionEvent){
+	@FXML
+    public void onChonClicked(ActionEvent actionEvent) {
+		chuHo = tvThanhVien.getSelectionModel().getSelectedItem();
+		tfChuHo.setText(chuHo.getTen());
+    }
+
+	@FXML
+    public void onLuuClicked(ActionEvent ignore) {
+		if (tfChuHo.getText().trim().isEmpty()) {
+			Alert alert = new Alert(Alert.AlertType.INFORMATION);
+			alert.setTitle("Thêm hộ khẩu thất bại");
+			alert.setContentText("Không có chủ hộ");
+			alert.show();
+
+			return;
+		}
+		if (tfMaKhuVuc.getText().trim().isEmpty()) {
+			Alert alert = new Alert(Alert.AlertType.INFORMATION);
+			alert.setTitle("Thêm hộ khẩu thất bại");
+			alert.setContentText("Không có mã khu vực");
+			alert.show();
+
+			return;
+		}
+		if (tfDiaChi.getText().trim().isEmpty()) {
+			Alert alert = new Alert(Alert.AlertType.INFORMATION);
+			alert.setTitle("Thêm hộ khẩu thất bại");
+			alert.setContentText("Không có địa chỉ");
+			alert.show();
+
+			return;
+		}
+
+		try {
+			// tao HK
+			var hkMoi = HoKhauService.taoHoKhau(
+					chuHo.getSoNhanKhau(),
+					tfMaKhuVuc.toString(),
+					tfDiaChi.toString()
+			);
+
+			// add tv to that HK
+			for (var tvien : tvThanhVien.getItems()) {
+				hkMoi.themThanhVien(tvien, colQuanHeVoiChuHo.getCellObservableValue(tvien).getValue());
+			}
+
+			Alert alert = new Alert(Alert.AlertType.INFORMATION);
+			alert.setTitle("Thêm hộ khẩu thành công");
+			alert.setContentText(hkMoi.toString());
+			alert.show();
+		} catch (SQLException e) {
+			Alert alert = new Alert(Alert.AlertType.INFORMATION);
+			alert.setTitle("Thêm hộ khẩu thất bại");
+			alert.setContentText(e.getMessage());
+			alert.show();
+		}
+
+		flush_data();
+    }
+
+    public void onXoaClicked(ActionEvent ignore){
+		thanhVienMoi.remove(tvThanhVien.getSelectionModel().getSelectedItem());
     }
 
 
-	public void onSuaClicked(ActionEvent event) {
+	public void onThemClicked(ActionEvent ignore) {
+		// // TODO: 04/02/2023 call other
 	}
 
-	public void onHoKhauClicked(ActionEvent event) {
+	public void onHoKhauClicked(ActionEvent ignore) {
+	}
+
+
+	private void flush_data() {
+		tfChuHo.setText("");
+		tfDiaChi.setText("");
+		tfMaKhuVuc.setText("");
+
+		thanhVienMoi.clear();
 	}
 }

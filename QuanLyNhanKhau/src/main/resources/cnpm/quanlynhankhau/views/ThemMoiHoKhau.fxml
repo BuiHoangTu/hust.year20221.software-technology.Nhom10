@@ -40,7 +40,7 @@
          </children>
       </AnchorPane>
       <Button fx:id="Luu" layoutX="427.0" layoutY="496.0" mnemonicParsing="false" onAction="#onLuuClicked" text="Lưu" />
-      <Button fx:id="Them" layoutX="43.0" layoutY="198.0" mnemonicParsing="false" onAction="#onSuaClicked" text="+" />
+      <Button fx:id="Them" layoutX="43.0" layoutY="198.0" mnemonicParsing="false" onAction="#onThemClicked" text="+" />
       <Button layoutX="83.0" layoutY="198.0" mnemonicParsing="false" onAction="#onXoaClicked" text="-" />
       <Label fx:id="lblMaHoKhau" layoutX="129.0" layoutY="29.0" prefHeight="17.0" prefWidth="337.0" text="Label">
          <font>
