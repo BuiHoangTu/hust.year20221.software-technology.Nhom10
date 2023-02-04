@@ -45,10 +45,12 @@ public class QuanLyHoKhauController extends EdgeController {
     }
 
     public void onSeparateClicked(ActionEvent actionEvent) {
-    }
+    	changeScene("/cnpm/quanlynhankhau/views/TachHoKhau.fxml");
+	}
 
     public void onMoveClicked(ActionEvent actionEvent) {
-    }
+    	changeScene("/cnpm/quanlynhankhau/views/ChuyenHoKhau.fxml");
+	}
 
 	public void onAddClicked(ActionEvent event) {
 		changeScene("/cnpm/quanlynhankhau/views/ThemMoiHoKhau.fxml");

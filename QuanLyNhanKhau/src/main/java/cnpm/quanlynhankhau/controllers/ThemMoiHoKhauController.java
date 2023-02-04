@@ -124,6 +124,7 @@ public class ThemMoiHoKhauController extends ChangeSceneControllers implements I
 	}
 
 	public void onHoKhauClicked(ActionEvent ignore) {
+		changeScene("/cnpm/quanlynhankhau/views/QuanLyHoKhau.fxml");
 	}
 
 

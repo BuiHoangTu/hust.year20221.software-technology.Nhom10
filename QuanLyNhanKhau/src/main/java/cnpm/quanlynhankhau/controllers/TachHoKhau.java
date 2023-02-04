@@ -4,48 +4,41 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 import cnpm.quanlynhankhau.application.QuanLyNhanKhauApplication;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 
 public class TachHoKhau {
-	@FXML
-    private TextField tfMaHoKhau;
-	@FXML
-    private TextField tfChuHo;
-	@FXML
-    private TextField tfMaKhuVuc;
-	@FXML
-    private TextField tfDiaChi;
-	@FXML
-    private TextField tfMaHoKhauMoi;
-	@FXML
-    private TextField tfChuHoMoi;
-	@FXML
-    private TableView tvHoKhau;
-	@FXML
-    private TableView tvThanhVien;
-	@FXML
-    private ListView lvThanhVienHoMoi;
+    public TableView tbThanhVien;
+    public TextField tfChuHo;
+    public TextField tfMaKhuVuc;
+    public TextField tfDiaChi;
+    public TextField tfMaHoKhauMoi;
+    public TextField tfChuHoMoi;
+    public TextField tfMaHoKhau;
+    public TableView tvHoKhau;
+    public ListView lvThanhVienHoMoi;
 
-	@FXML
-    protected void onInsertClicked() {
-        
+
+    public void OnRemoveClicked(ActionEvent event) {
     }
-	
-	@FXML
-    protected void onRemoveClicked() {
-        
+
+    public void OnInsertClicked(ActionEvent event) {
     }
-	
-    @FXML
-    protected void onHuyClicked() {
-        
+
+    public void OnHuyClicked(ActionEvent event) {
+        FXMLLoader loader = new FXMLLoader(QuanLyNhanKhauApplication.class.getResource("/cnpm/quanlynhankhau/views/QuanLyHoKhau.fxml"));
+        Scene scene = null;
+        try {
+            scene = new Scene(loader.load());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        QuanLyNhanKhauApplication.MAIN_STAGE.setScene(scene);
     }
-    
-    @FXML
-    protected void onXacNhanClicked() {
-        
+
+    public void OnXacNhanClicked(ActionEvent event) {
     }
 }
