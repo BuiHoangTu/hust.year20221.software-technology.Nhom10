@@ -42,9 +42,7 @@ public class ThemThanhVienController extends EdgeController {
     @FXML
     public void initialize() throws SQLException {
         TableView.TableViewSelectionModel selectionModel = tvThanhVien.getSelectionModel();
-        for (maHK = 13; HoKhauService.getHoKhau(String.format("%d", maHK)) != null; maHK++) {
-        }
-
+        //System.out.println(ThemMoiHoKhauController.getI());
         for (int i = 26; NhanKhauService.getNhanKhau(String.format("%d", i)) != null; i++) {
             PreparedStatement statement = Database.getConnection().prepareStatement("""
                         select * from quan_ly_nhan_khau.thanh_vien_cua_ho

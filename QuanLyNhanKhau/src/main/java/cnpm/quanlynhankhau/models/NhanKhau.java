@@ -450,4 +450,8 @@ public void commit() throws SQLException {
         ghiChuIsChanged = false;
 
     }
+    @Override
+    public String toString(){
+        return this.ten;
+    }
 }

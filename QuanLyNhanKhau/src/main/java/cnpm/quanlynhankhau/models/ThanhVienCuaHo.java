@@ -1,5 +1,9 @@
 package cnpm.quanlynhankhau.models;
 
+import cnpm.quanlynhankhau.services.Database;
+
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.time.LocalDate;
 
 public class ThanhVienCuaHo {
@@ -22,8 +26,16 @@ public class ThanhVienCuaHo {
         return quanHeVoiChuHo;
     }
 
-    public void setQuanHeVoiChuHo(String quanHeVoiChuHo) {
+    public void setQuanHeVoiChuHo(String quanHeVoiChuHo) throws SQLException {
         this.quanHeVoiChuHo = quanHeVoiChuHo;
+        PreparedStatement subStatement = Database.getConnection().prepareStatement("""
+                UPDATE quan_ly_nhan_khau.thanh_vien_cua_ho
+                SET quanHeVoiChuHo = ?
+                WHERE idNhanKhau = ?;
+                """);
+            subStatement.setString(1, quanHeVoiChuHo);
+        subStatement.setString(2, this.maNhanKhau);
+        subStatement.executeUpdate();
     }
 
     public LocalDate getNgaySinh() {

@@ -53,10 +53,10 @@ CREATE TABLE `ho_khau` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `ho_khau` (`maHoKhau`, `idChuHo`, `maKhuVuc`, `diaChi`, `ngayLap`, `nguoiThucHien`) VALUES
-(000000000001, 000000000026, 'HN03', 'Số 1 Tạ Quang Bửu, quận Hai Bà Trưng, Hà Nội', '2019-12-08', NULL),
-(000000000002, 000000000028, 'HN03', 'Số 2 Tạ Quang Bửu, quần Hai Bà Trưng, Hà Nội', '2019-12-08', NULL),
-(000000000003, 000000000029, 'HN03', 'Số 3 Tạ Quang Bửu, quận Hai Bà Trưng, Hà Nội', '2019-12-08', NULL),
-(000000000004, 000000000033, 'HN03', 'Số 4 Tạ Quang Bửu, quận Hai Bà Trưng, Hà Nội', '2019-12-08', NULL);
+(000000000001, 000000000004, 'HN03', 'Số 1 Tạ Quang Bửu, quận Hai Bà Trưng, Hà Nội', '2019-12-08', NULL),
+(000000000002, 000000000006, 'HN03', 'Số 2 Tạ Quang Bửu, quần Hai Bà Trưng, Hà Nội', '2019-12-08', NULL),
+(000000000003, 000000000007, 'HN03', 'Số 3 Tạ Quang Bửu, quận Hai Bà Trưng, Hà Nội', '2019-12-08', NULL),
+(000000000004, 000000000011, 'HN03', 'Số 4 Tạ Quang Bửu, quận Hai Bà Trưng, Hà Nội', '2019-12-08', NULL);
 
 DROP TABLE IF EXISTS `khai_tu`;
 CREATE TABLE `khai_tu` (
@@ -79,17 +79,17 @@ CREATE TABLE `lam_viec` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `lam_viec` (`idNhanKhau`, `tuNgay`, `denNgay`, `diaChi`, `ngheNghiep`, `noiLamViec`) VALUES
-(000000000027, '2015-09-05', '2015-09-05', 'Số 45, ngõ 56, Nguyễn Khang, Cầu Giấy, Hà Nội', 'Sinh Viên', 'Đại học Thương mại'),
-(000000000028, '2012-09-05', '2017-09-05', '556 La Thành, Hà Nội', 'Sinh Viên', 'Đại học Bách khoa Hà Nội'),
-(000000000029, '1989-05-10', '2000-08-25', 'Số 5 Nguyễn Khuyến, Hà Nội', 'Quản lý nhận sự', 'Công ty BCC'),
-(000000000030, '1987-05-23', '1997-03-01', 'Số 3 Tạ Quang Bửu, quận Hai Bà Trưng, Hà Nội', 'Nhân viên văn phòng', 'Công ty Zezs'),
-(000000000031, '2008-09-05', '2013-09-05', 'Số 3 Tạ Quang Bửu, quận Hai Bà Trưng, Hà Nội', 'Sinh viên', 'Đại học Bách khoa Hà Nội'),
-(000000000032, '2015-09-05', '2019-09-05', 'Số 3 Tạ Quang Bửu, quận Hai Bà Trưng, Hà Nội', 'Sinh viên', 'Đại học Luật Hà Nội'),
-(000000000033, '1998-09-05', '2003-09-05', 'Số 66, ngõ 445 Nguyễn Khang, Cầu Giấy, Hà Nội', 'Sinh Vvên', 'Đại học Bách khoa Hà Nội'),
-(000000000033, '2003-10-03', '2018-08-06', 'Số 4 Tạ Quang Bửu, quận Hai Bà Trưng, Hà Nội', 'Giảng viên', 'Đại học Công ngiệp Hà Nội'),
-(000000000034, '2003-09-05', '2011-09-05', 'Số 8 Tôn Thất Tùng, Hà Nội', 'Sinh viên', 'Đại học Y Hà Nội'),
-(000000000034, '2011-10-03', '2015-08-09', 'Số 8 Tôn Thất Tùng, Hà Nội', 'Bác sĩ nội trú', 'Bệnh viện Bạch Mai'),
-(000000000037, '1961-01-01', '1963-01-01', 'Không rõ', 'Bộ đội', 'Hà Nội');
+(000000000001, '2015-09-05', '2015-09-05', 'Số 45, ngõ 56, Nguyễn Khang, Cầu Giấy, Hà Nội', 'Sinh Viên', 'Đại học Thương mại'),
+(000000000002, '2012-09-05', '2017-09-05', '556 La Thành, Hà Nội', 'Sinh Viên', 'Đại học Bách khoa Hà Nội'),
+(000000000003, '1989-05-10', '2000-08-25', 'Số 5 Nguyễn Khuyến, Hà Nội', 'Quản lý nhận sự', 'Công ty BCC'),
+(000000000004, '1987-05-23', '1997-03-01', 'Số 3 Tạ Quang Bửu, quận Hai Bà Trưng, Hà Nội', 'Nhân viên văn phòng', 'Công ty Zezs'),
+(000000000005, '2008-09-05', '2013-09-05', 'Số 3 Tạ Quang Bửu, quận Hai Bà Trưng, Hà Nội', 'Sinh viên', 'Đại học Bách khoa Hà Nội'),
+(000000000006, '2015-09-05', '2019-09-05', 'Số 3 Tạ Quang Bửu, quận Hai Bà Trưng, Hà Nội', 'Sinh viên', 'Đại học Luật Hà Nội'),
+(000000000007, '1998-09-05', '2003-09-05', 'Số 66, ngõ 445 Nguyễn Khang, Cầu Giấy, Hà Nội', 'Sinh Vvên', 'Đại học Bách khoa Hà Nội'),
+(000000000008, '2003-10-03', '2018-08-06', 'Số 4 Tạ Quang Bửu, quận Hai Bà Trưng, Hà Nội', 'Giảng viên', 'Đại học Công ngiệp Hà Nội'),
+(000000000009, '2003-09-05', '2011-09-05', 'Số 8 Tôn Thất Tùng, Hà Nội', 'Sinh viên', 'Đại học Y Hà Nội'),
+(000000000010, '2011-10-03', '2015-08-09', 'Số 8 Tôn Thất Tùng, Hà Nội', 'Bác sĩ nội trú', 'Bệnh viện Bạch Mai'),
+(000000000011, '1961-01-01', '1963-01-01', 'Không rõ', 'Bộ đội', 'Hà Nội');
 
 DROP TABLE IF EXISTS `nhan_khau`;
 CREATE TABLE `nhan_khau` (
@@ -161,16 +161,16 @@ CREATE TABLE `thanh_vien_cua_ho` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `thanh_vien_cua_ho` (`idNhanKhau`, `idHoKhau`, `quanHeVoiChuHo`) VALUES
-(000000000026, 000000000014, 'Chủ hộ'),
-(000000000027, 000000000013, 'Vợ'),
-(000000000029, 000000000015, 'Chủ hộ'),
-(000000000030, 000000000015, 'Vợ'),
-(000000000031, 000000000015, 'Con trai'),
-(000000000032, 000000000015, 'Con gái'),
-(000000000033, 000000000016, 'Chủ hộ'),
-(000000000034, 000000000016, 'Vợ'),
-(000000000035, 000000000016, 'Con trai'),
-(000000000036, 000000000016, 'Con gái');
+(000000000001, 000000000002, 'Chủ hộ'),
+(000000000002, 000000000001, 'Vợ'),
+(000000000004, 000000000003, 'Chủ hộ'),
+(000000000005, 000000000003, 'Vợ'),
+(000000000006, 000000000003, 'Con trai'),
+(000000000007, 000000000003, 'Con gái'),
+(000000000008, 000000000004, 'Chủ hộ'),
+(000000000009, 000000000004, 'Vợ'),
+(000000000010, 000000000004, 'Con trai'),
+(000000000011, 000000000004, 'Con gái');
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (

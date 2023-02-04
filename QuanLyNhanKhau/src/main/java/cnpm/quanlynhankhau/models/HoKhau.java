@@ -12,6 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HoKhau {
+	public void setSoHoKhau(String soHoKhau) {
+		this.soHoKhau = soHoKhau;
+	}
+
 	private String soHoKhau;
 	private NhanKhau chuHo;
 	private String hoTenChuHo;
@@ -187,7 +191,7 @@ public class HoKhau {
 			PreparedStatement subStatement = Database.getConnection().prepareStatement("""
                     SELECT idChuHo
                     FROM quan_ly_nhan_khau.ho_khau
-                    WHERE maHoKhau = ?;
+                    WHERE idHoKhau = ?;
                     """);
 			subStatement.setString(1, soHoKhau);
 
@@ -208,7 +212,7 @@ public class HoKhau {
 			PreparedStatement subStatement = Database.getConnection().prepareStatement("""
                     SELECT maKhuVuc
                     FROM quan_ly_nhan_khau.ho_khau
-                    WHERE maHoKhau = ?;
+                    WHERE idHoKhau = ?;
                     """);
 			subStatement.setString(1, soHoKhau);
 
@@ -227,9 +231,9 @@ public class HoKhau {
 			statement.setString(4, diaChi.toString());
 
 			PreparedStatement subStatement = Database.getConnection().prepareStatement("""
-                    SELECT maKhuVuc
+                    SELECT diaChi
                     FROM quan_ly_nhan_khau.ho_khau
-                    WHERE maHoKhau = ?;
+                    WHERE idHoKhau = ?;
                     """);
 			subStatement.setString(1, soHoKhau);
 
@@ -249,9 +253,9 @@ public class HoKhau {
 			statement.setString(4, ngayLap.toString());
 
 			PreparedStatement subStatement = Database.getConnection().prepareStatement("""
-                    SELECT maKhuVuc
+                    SELECT ngayLap
                     FROM quan_ly_nhan_khau.ho_khau
-                    WHERE maHoKhau = ?;
+                    WHERE idHoKhau = ?;
                     """);
 
 			subStatement.setString(1, soHoKhau);
@@ -276,7 +280,7 @@ public class HoKhau {
 		if (maKhuVucIsChanged) sqlQuery.append("SET maKhuVuc= ? ");
 		if (diaChiIsChanged) sqlQuery.append("SET diaChi= ? ");
 		if (ngayLapIsChanged) sqlQuery.append("SET ngayLap= ? ");
-		sqlQuery.append("WHERE maHoKhau = ? ");
+		sqlQuery.append("WHERE idHoKhau = ? ");
 
 		statement = Database.getConnection().prepareStatement(sqlQuery.toString());
 		int i = 1;
