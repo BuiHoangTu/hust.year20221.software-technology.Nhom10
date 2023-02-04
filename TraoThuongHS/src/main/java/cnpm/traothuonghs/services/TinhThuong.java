@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class TinhThuong {
 	private static volatile TinhThuong tinhThuong = null;
-	private static String[] cacDanhHieu;
+	private String[] cacDanhHieu;
 
 	private Map<String, Integer> mapTyLeThuong = new HashMap<>();
 	private int giaVo;
@@ -24,6 +24,9 @@ public class TinhThuong {
 		return tinhThuong;
 	}
 
+	public String[] getCacDanhHieu() {
+		return cacDanhHieu;
+	}
 
 	public int getPhanThuong(String danhHieu) {
 		return mapTyLeThuong.get(danhHieu);
