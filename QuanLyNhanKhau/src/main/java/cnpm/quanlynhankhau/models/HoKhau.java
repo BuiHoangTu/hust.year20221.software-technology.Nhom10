@@ -146,6 +146,19 @@ public class HoKhau {
 		subStatement.executeUpdate();
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder output = new StringBuilder ("Hộ khẩu " + soHoKhau +
+				", Chủ hộ: " + chuHo.getTen() +
+				", Trú tại: " + diaChi +
+				", Thành lập ngày " + ngayLap +
+				", Thành viên : \n");
+		for (var tv : thanhViens) {
+			output.append('\t').append(tv.getTen()).append('\n');
+		}
+		return output.toString();
+	}
+
 	/**
 	 * Save changes in this HK in database
 	 * Changes don't include NKs' content changes

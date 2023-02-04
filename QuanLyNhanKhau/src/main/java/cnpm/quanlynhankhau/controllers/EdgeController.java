@@ -7,7 +7,7 @@ import javafx.scene.Scene;
 
 import java.io.IOException;
 
-public abstract class EdgeController {
+public abstract class EdgeController extends ChangeSceneControllers {
 	public void onTrangChuClicked(ActionEvent event) {
 		changeScene("/cnpm/quanlynhankhau/views/Trang_chinh.fxml");
 	}
@@ -24,14 +24,4 @@ public abstract class EdgeController {
 		changeScene("/cnpm/quanlynhankhau/views/ThongKe.fxml");
 	}
 
-	private void changeScene(String fxLink) {
-		FXMLLoader loader = new FXMLLoader(QuanLyNhanKhauApplication.class.getResource(fxLink));
-		Scene scene = null;
-		try {
-			scene = new Scene(loader.load());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		QuanLyNhanKhauApplication.MAIN_STAGE.setScene(scene);
-	}
 }
