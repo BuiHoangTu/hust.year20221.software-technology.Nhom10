@@ -87,7 +87,7 @@ public class QuanLyNhanKhauController extends EdgeController implements Initiali
         colNoiOHienTai.setCellValueFactory(new PropertyValueFactory<NhanKhau, String>("diaChiHienTai"));
         List<NhanKhau> nk = null;
         try {
-            nk = NhanKhauService.findNhanKhau(5, "Hai Bà Trưng, Hà Nội");
+            nk = NhanKhauService.findNhanKhau(5, "Hai Bà Trưng, Hà Nội", null);
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -133,7 +133,7 @@ public class QuanLyNhanKhauController extends EdgeController implements Initiali
         colNoiOHienTai.setCellValueFactory(new PropertyValueFactory<NhanKhau, String>("diaChiHienTai"));
         List<NhanKhau> nk = null;
         try {
-            nk = NhanKhauService.findNhanKhau(5, "Hai Bà Trưng, Hà Nội");
+            nk = NhanKhauService.findNhanKhau(5, "Hai Bà Trưng, Hà Nội", null);
 
         } catch (SQLException e) {
             throw new RuntimeException(e);

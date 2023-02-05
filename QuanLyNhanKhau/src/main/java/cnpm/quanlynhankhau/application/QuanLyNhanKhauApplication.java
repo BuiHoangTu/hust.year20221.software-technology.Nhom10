@@ -7,11 +7,14 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class QuanLyNhanKhauApplication extends Application {
     public static final DiaChi CO_SO_HIEN_TAI = new DiaChi("Hà Nội", "Hai Bà Trưng", "Đại Cồ Việt", "1", "Trụ Sở Quản Lý Nhân Khẩu Bách Khoa");
     public static int USER;
     public static Stage MAIN_STAGE;
+	private static final List<Stage> secondaryStages = new ArrayList<>();
 
     @Override
     public void start(Stage stage){
@@ -30,9 +33,18 @@ public class QuanLyNhanKhauApplication extends Application {
         stage.show();
 
         MAIN_STAGE = stage;
+		MAIN_STAGE.setOnCloseRequest(ev -> {
+			for (var secondaryStage : secondaryStages) {
+				secondaryStage.close();
+			}
+		});
     }
 
     public static void main(String[] args) {
         launch();
     }
+
+	public static void addSecondaryStage(Stage stage) {
+		secondaryStages.add(stage);
+	}
 }

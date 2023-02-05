@@ -3,76 +3,62 @@ package cnpm.quanlynhankhau.controllers;
 import cnpm.quanlynhankhau.application.QuanLyNhanKhauApplication;
 import cnpm.quanlynhankhau.models.HoKhau;
 import cnpm.quanlynhankhau.services.HoKhauService;
-import cnpm.quanlynhankhau.services.NhanKhauService;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Scene;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.event.*;
+import javafx.fxml.FXML;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-import java.io.IOException;
-import java.net.URL;
 import java.sql.SQLException;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.Objects;
 
-public class QuanLyHoKhauController extends EdgeController implements Initializable {
+public class QuanLyHoKhauController extends EdgeController {
+    // region FXML
+	@FXML
+    private TableView<HoKhau> tvHoKhau;
+    @FXML
+    private TableColumn<HoKhau, String> colMaHoKhau;
+    @FXML
+    private TableColumn<HoKhau, String> colHoTenChuHo;
+    @FXML
+    private TableColumn<HoKhau, String> colDiaChi;
+    @FXML
+    public TextField tfSearch;
+    public Label lblThemMoiNum;
+	// endregion
 
-    public TextField tfMaHoKhau;
-    public TableView tvHoKhau;
-    public TableColumn colMaHoKhau;
-    public TableColumn colChuHo;
-    public TableColumn colDiaChi;
+    ObservableList<HoKhau> hkKhuVuc = FXCollections.observableArrayList();
 
-    public void onThemMoiHoKhauClicked(ActionEvent event) {
-        FXMLLoader loader = new FXMLLoader(QuanLyNhanKhauApplication.class.getResource("/cnpm/quanlynhankhau/views/ThemMoiHoKhau.fxml"));
-        Scene scene = null;
-        try {
-            scene = new Scene(loader.load());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        QuanLyNhanKhauApplication.MAIN_STAGE.setScene(scene);
+
+    @FXML
+    public void initialize() {
+		tvHoKhau.setPlaceholder(new Label("Không có hộ khẩu trong thành phố"));
+		try {
+			hkKhuVuc.addAll(Objects.requireNonNull(HoKhauService.findHoKhau(HoKhauService.BY_DIA_CHI, QuanLyNhanKhauApplication.CO_SO_HIEN_TAI.thanhPho)));
+		} catch (SQLException ignored) {
+			tvHoKhau.setPlaceholder(new Label("Hệ thống lỗi! Không thể hiển thị"));
+		}
+
+        colMaHoKhau.setCellValueFactory(new PropertyValueFactory<>("soHoKhau"));
+		try {
+			colDiaChi.setCellValueFactory(x -> new SimpleStringProperty(x.getValue().getDiaChi().toString()));
+		} catch (NullPointerException e) {
+			colDiaChi.setCellValueFactory(x -> new SimpleStringProperty(""));
+		}
+		tvHoKhau.setItems(hkKhuVuc);
     }
 
-    public void onTachHoKhauClicked(ActionEvent event) {
-        FXMLLoader loader = new FXMLLoader(QuanLyNhanKhauApplication.class.getResource("/cnpm/quanlynhankhau/views/TachHoKhau.fxml"));
-        Scene scene = null;
-        try {
-            scene = new Scene(loader.load());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        QuanLyNhanKhauApplication.MAIN_STAGE.setScene(scene);
-    }
+    public void onTachHoKhauClicked(ActionEvent actionEvent) {
+    	changeScene("/cnpm/quanlynhankhau/views/TachHoKhau.fxml");
+	}
 
-    public void onChuyenHoKhauClicked(ActionEvent event) {
-        FXMLLoader loader = new FXMLLoader(QuanLyNhanKhauApplication.class.getResource("/cnpm/quanlynhankhau/views/ChuyenHoKhau.fxml"));
-        Scene scene = null;
-        try {
-            scene = new Scene(loader.load());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        QuanLyNhanKhauApplication.MAIN_STAGE.setScene(scene);
-    }
+    public void onChuyenHoKhauClicked(ActionEvent actionEvent) {
+    	changeScene("/cnpm/quanlynhankhau/views/ChuyenHoKhau.fxml");
+	}
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        colMaHoKhau.setCellValueFactory(new PropertyValueFactory<HoKhau, String>("soHoKhau"));
-        colDiaChi.setCellValueFactory(new PropertyValueFactory<HoKhau, String>("diaChi"));
-        List<HoKhau> hk;
-        try{
-            hk = HoKhauService.findHoKhau(3,"Hai Bà Trưng, Hà Nội");
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        ObservableList<HoKhau> ls = FXCollections.observableList(hk);
-        tvHoKhau.setItems(ls);
-    }
+	public void onAddClicked(ActionEvent event) {
+		changeScene("/cnpm/quanlynhankhau/views/ThemMoiHoKhau.fxml");
+	}
 }

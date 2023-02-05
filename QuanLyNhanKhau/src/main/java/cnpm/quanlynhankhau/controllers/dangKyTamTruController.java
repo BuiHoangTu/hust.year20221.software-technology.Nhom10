@@ -12,6 +12,9 @@ import java.util.ResourceBundle;
 
 public class dangKyTamTruController extends dangKyTamVangController {
     private void initialize(){
-
+        tfNoiTamTru.setDisable(true);
+        dpTuNgay.setDisable(true);
+        dpDenNgay.setDisable(true);
+        taLyDo.setDisable(true);
     }
 }

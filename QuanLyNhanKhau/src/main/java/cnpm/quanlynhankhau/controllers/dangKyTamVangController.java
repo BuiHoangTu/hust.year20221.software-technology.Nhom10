@@ -16,7 +16,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class dangKyTamVangController extends ChangeSceneControllers implements Initializable {
+public class dangKyTamVangController extends ChangeSceneControllers {
 
     public TextField tfCMND;
     public TextField tfMaGiayTamVang;
@@ -58,10 +58,5 @@ public class dangKyTamVangController extends ChangeSceneControllers implements I
         alert.show();
 
 
-    }
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        tfMaGiayTamVang.setDisable(true);
     }
 }

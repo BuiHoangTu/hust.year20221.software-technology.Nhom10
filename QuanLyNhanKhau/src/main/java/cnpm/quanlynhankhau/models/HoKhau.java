@@ -4,6 +4,7 @@ import cnpm.quanlynhankhau.application.QuanLyNhanKhauApplication;
 import cnpm.quanlynhankhau.services.Database;
 import cnpm.quanlynhankhau.services.HoKhauService;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,6 +19,7 @@ public class HoKhau {
 	private String maKhuVuc;
 	private boolean maKhuVucIsChanged = false;
 	private DiaChi diaChi;
+
 	private boolean diaChiIsChanged = false;
 	private LocalDate ngayLap;
 	private boolean ngayLapIsChanged = false;
@@ -34,7 +36,6 @@ public class HoKhau {
 	public String getSoHoKhau() {
 		return soHoKhau;
 	}
-
 
 	public NhanKhau getChuHo() {
 		return chuHo;
@@ -76,7 +77,7 @@ public class HoKhau {
 		return thanhViens;
 	}
 
-	public void themThanhVien(NhanKhau thanhVien, String QuanHeVoiChuHo) throws SQLException {
+	public void themThanhVien(NhanKhau thanhVien, String quanHeChuHo) throws SQLException {
 		this.thanhViens.add(thanhVien);
 
 		PreparedStatement subStatement;
@@ -84,12 +85,16 @@ public class HoKhau {
 		subStatement = Database.getConnection().prepareStatement(sqlQuery);
 		subStatement.setString(1, thanhVien.getSoNhanKhau());
 		subStatement.setString(2, this.soHoKhau);
-		subStatement.setString(3, QuanHeVoiChuHo);
+		subStatement.setString(3, quanHeChuHo);
 		subStatement.executeUpdate();
 
 	}
+	public void themThanhVien(NhanKhau thanhVien) throws SQLException {
+		themThanhVien(thanhVien, thanhVien.getQuanHeVoiChuHo());
+	}
 
-	public void xoaThanhVien(NhanKhau nhanKhau) throws SQLException {
+
+		public void xoaThanhVien(NhanKhau nhanKhau) throws SQLException {
 		this.thanhViens.remove(nhanKhau);
 		PreparedStatement subStatement = Database.getConnection().prepareStatement("""
                 DELETE
@@ -105,6 +110,7 @@ public class HoKhau {
 			xoaThanhVien(nk);
 		}
 	}
+	
 	public void xoaThanhVien(int sttNhanKhau) throws SQLException {
 		this.thanhViens.remove(sttNhanKhau);
 		PreparedStatement subStatement = Database.getConnection().prepareStatement("""
@@ -222,7 +228,7 @@ public class HoKhau {
 			statement.setString(4, diaChi.toString());
 
 			PreparedStatement subStatement = Database.getConnection().prepareStatement("""
-                    SELECT maKhuVuc
+                    SELECT diaChi
                     FROM quan_ly_nhan_khau.ho_khau
                     WHERE maHoKhau = ?;
                     """);
@@ -299,5 +305,41 @@ public class HoKhau {
 		maKhuVucIsChanged = false;
 		diaChiIsChanged = false;
 		ngayLapIsChanged = false;
+	}
+	public void change(NhanKhau chuHo,String maKhuVuc,DiaChi diaChi,LocalDate ngayLap) throws SQLException{
+		StringBuilder sqlQuery = new StringBuilder();
+		sqlQuery.append("UPDATE quan_ly_nhan_khau.ho_khau SET  ");
+		// SET idChuHo=NULL, maKhuVuc=NULL, diaChi=NULL, ngayLap=NULL, nguoiThucHien=NULL
+
+		if (chuHo != null) sqlQuery.append("idChuHo = ? , ");
+		if (maKhuVuc != null) sqlQuery.append("maKhuVuc = ? , ");
+		if (diaChi != null) sqlQuery.append("diaChi = ? , ");
+		if (ngayLap != null) sqlQuery.append("ngayLap = ? , ");
+		sqlQuery.deleteCharAt(sqlQuery.length()-2);
+		sqlQuery.append(" WHERE maHoKhau = ? ");
+
+		PreparedStatement statement = Database.getConnection().prepareStatement(sqlQuery.toString());
+		int i = 1;
+		if (chuHo != null) {
+			statement.setString(i, chuHo.getSoNhanKhau());
+			i += 1;
+		}
+		if (maKhuVuc != null) {
+			statement.setString(i, maKhuVuc);
+			i += 1;
+		}
+		if (diaChi != null) {
+			statement.setString(i, diaChi.toString());
+			i += 1;
+		}
+		if (ngayLap != null) {
+			statement.setDate(i, Date.valueOf(ngayLap));
+			i += 1;
+		}
+		statement.setString(i, soHoKhau);
+		//System.out.println(statement);
+		// gửi câu lệnh đến DB
+		statement.executeUpdate();
+
 	}
 }
