@@ -21,7 +21,7 @@ public class NhanKhauService {
 	 * @return Danh sách các nhân khẩu
 	 * @throws SQLException khi query lỗi
 	 */
-	public static List<NhanKhau> findNhanKhau(int loaiMa, String ma) throws SQLException {
+	public static List<NhanKhau> findNhanKhau(int loaiMa, String ma, String quanHeVoiChuHo) throws SQLException {
 		List<NhanKhau> result = new ArrayList<>();
 		StringBuilder sqlQuery = new StringBuilder();
 		sqlQuery.append("Select * from quan_ly_nhan_khau.nhan_khau ");
@@ -63,7 +63,7 @@ public class NhanKhauService {
 			NhanKhau x = new NhanKhau(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(9), Gender, DiaChi.parse(rs.getString(12)),
 					rs.getDate(4).toLocalDate(), /*DiaChi.parse(rs.getString(6))*/null, DiaChi.parse(rs.getString(7)), rs.getString(8), rs.getString(11), DiaChi.parse(rs.getString(13)),
 					rs.getString(15), rs.getString(14), rs.getString(17), rs.getString(18), DiaChi.parse(rs.getString(19)), rs.getString(20),/*rs.getDate(21).toLocalDate()*/null,
-					rs.getString(22), rs.getString(31), cmt, rs.getString(27),/*rs.getDate(28).toLocalDate()*/ null, rs.getString(29), rs.getString(30), /*rs.getDate(26).toLocalDate()*/null);
+					rs.getString(22), rs.getString(31), cmt, rs.getString(27),/*rs.getDate(28).toLocalDate()*/ null, rs.getString(29), rs.getString(30), /*rs.getDate(26).toLocalDate()*/null, quanHeVoiChuHo);
 
 			result.add(x);
 		}
@@ -79,7 +79,11 @@ public class NhanKhauService {
 				nk.getTamTruVangs().add(ttv);
 			}
 		}
+
 		return result;
+	}
+	public static List<NhanKhau> findNhanKhau(int loaiMa, String ma) throws SQLException {
+		return findNhanKhau(loaiMa, ma, null);
 	}
 
 	/**
@@ -92,6 +96,13 @@ public class NhanKhauService {
 	public static NhanKhau getNhanKhau(String maNK) throws SQLException {
 		try {
 			return findNhanKhau(1, maNK).get(0);
+		} catch (NullPointerException | IndexOutOfBoundsException e) {
+			return null;
+		}
+	}
+	public static NhanKhau getNhanKhau(String maNK, String quanHeVoiChuHo) throws SQLException {
+		try {
+			return findNhanKhau(1, maNK, quanHeVoiChuHo).get(0);
 		} catch (NullPointerException | IndexOutOfBoundsException e) {
 			return null;
 		}
@@ -169,5 +180,51 @@ public class NhanKhauService {
 			statement2.executeUpdate();
 		}
 
+	}
+
+	public static List<NhanKhau> thongKeNhanKhau(String tuTuoi, String denTuoi, String gioiTinh, String tinhTrang, String tuNam, String denNam) throws SQLException {
+		
+		if (tuNam.equalsIgnoreCase("")) tuNam = "0";
+		if (denNam.equalsIgnoreCase("")) denNam = "2100";
+		if (tuTuoi.equalsIgnoreCase("")) tuTuoi = "0";
+		if (denTuoi.equalsIgnoreCase("")) denTuoi = "200";
+		
+		List<NhanKhau> result = new ArrayList<>();
+		StringBuilder sqlQuery = new StringBuilder();
+		sqlQuery.append("Select * from quan_ly_nhan_khau.nhan_khau ");
+		sqlQuery.append(" WHERE ROUND(DATEDIFF(CURDATE(),namSinh)/365 , 0) >= " + Integer.parseInt(tuTuoi));
+		sqlQuery.append(" AND ROUND(DATEDIFF(CURDATE(),namSinh)/365 , 0) <= " + Integer.parseInt(denTuoi));
+
+		if (!gioiTinh.equalsIgnoreCase("Toàn bộ")) {
+			sqlQuery.append(" AND nhan_khau.gioiTinh = '" + gioiTinh + "'");
+		}
+		sqlQuery.append(" AND (YEAR(nhan_khau.ngayTao) BETWEEN " + Integer.parseInt(tuNam) + " AND " + Integer.parseInt(denNam) + ")");
+		sqlQuery.append(" ORDER BY ngayTao DESC");
+		PreparedStatement statement = Database.getConnection().prepareStatement(sqlQuery.toString(), Statement.RETURN_GENERATED_KEYS);
+
+		ResultSet rs = statement.executeQuery();
+		String idNhanKhau = null;
+		while (rs.next()) {
+			idNhanKhau = rs.getString("maNhanKhau");
+			NhanKhau x = findNhanKhau(1, idNhanKhau).get(0);
+			result.add(x);
+		}
+		
+		String sqlQuery2 = "Select * from quan_ly_nhan_khau.tam_tru_vang where idNhanKhau = ?";
+		PreparedStatement statement1 = Database.getConnection().prepareStatement(sqlQuery2);
+		for (NhanKhau nk : result) {
+			statement1.setString(1, nk.getSoNhanKhau());
+			ResultSet lis = statement1.executeQuery();
+			while (lis.next()) {
+				TamTruVang ttv = new TamTruVang(lis.getString(2), lis.getDate(4).toLocalDate(), lis.getDate(5).toLocalDate(),
+						DiaChi.parse(lis.getString(7)), DiaChi.parse(lis.getString(3)), lis.getString(6));
+				nk.getTamTruVangs().add(ttv);
+				if (tuTuoi.equalsIgnoreCase("Tạm vắng/Tạm trú") && nk.getTamTruVangs().get(nk.getTamTruVangs().size()-1).getDenNgay().compareTo(LocalDate.now()) < 0) {
+					result.remove(nk);
+				}
+			}
+		}
+
+		return result;
 	}
 }

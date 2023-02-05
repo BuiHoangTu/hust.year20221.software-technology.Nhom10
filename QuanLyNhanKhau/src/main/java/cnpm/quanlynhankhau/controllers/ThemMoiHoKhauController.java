@@ -97,7 +97,7 @@ public class ThemMoiHoKhauController extends ChangeSceneControllers implements I
 
 			// add tv to that HK
 			for (var tvien : tvThanhVien.getItems()) {
-				hkMoi.themThanhVien(tvien, colQuanHeVoiChuHo.getCellObservableValue(tvien).getValue());
+				hkMoi.themThanhVien(tvien);
 			}
 
 			Alert alert = new Alert(Alert.AlertType.INFORMATION);
