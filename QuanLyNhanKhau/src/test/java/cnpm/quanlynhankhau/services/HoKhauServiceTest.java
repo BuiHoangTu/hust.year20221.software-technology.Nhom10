@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.junit.jupiter.api.Test;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -18,5 +19,16 @@ class HoKhauServiceTest {
             HK.add(HoKhauService.getHoKhau(String.format("%d", i)));
             // System.out.println(HK.get(i-13).getHoTenChuHo()+" "+HK.get(i-13).getDiaChiString());
         }
+    }
+
+    @Test
+    void taoHoKhau() throws SQLException {
+        HoKhauService.taoHoKhau("1", "HN03", "Đồng nai.");
+
+    }
+
+    @Test
+    void testGetHoKhau() throws SQLException {
+        HoKhauService.getHoKhau("0");
     }
 }
