@@ -75,7 +75,7 @@ public class HoKhauService {
 			var idCH = res.getString("idChuHo");
 			var cH = NhanKhauService.getNhanKhau(idCH);
 
-			var hk = new HoKhau(res.getString("idHoKhau"), cH, res.getString("maKhuVuc"), DiaChi.parse(res.getString("diaChi")), LocalDate.parse(res.getString("ngayLap")));
+			var hk = new HoKhau(soHK, cH, res.getString("maKhuVuc"), DiaChi.parse(res.getString("diaChi")), LocalDate.parse(res.getString("ngayLap")));
 			var tvs = hk.getThanhViens();
 
 			PreparedStatement subStatement = Database.getConnection().prepareStatement("""
