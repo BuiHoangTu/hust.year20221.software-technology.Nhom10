@@ -1,5 +1,6 @@
 package cnpm.quanlynhankhau.controllers;
 
+import cnpm.quanlynhankhau.application.QuanLyNhanKhauApplication;
 import cnpm.quanlynhankhau.models.HoKhau;
 import cnpm.quanlynhankhau.services.HoKhauService;
 import javafx.beans.property.SimpleStringProperty;
@@ -11,6 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.sql.SQLException;
+import java.util.Objects;
 
 public class QuanLyHoKhauController extends EdgeController {
     // region FXML
@@ -30,18 +32,22 @@ public class QuanLyHoKhauController extends EdgeController {
     ObservableList<HoKhau> hkKhuVuc = FXCollections.observableArrayList();
 
 
-    public QuanLyHoKhauController(){
-    }
-
-
     @FXML
     public void initialize() {
-		// todo get hk khu vuc hien tai
+		tvHoKhau.setPlaceholder(new Label("Không có hộ khẩu trong thành phố"));
+		try {
+			hkKhuVuc.addAll(Objects.requireNonNull(HoKhauService.findHoKhau(HoKhauService.BY_DIA_CHI, QuanLyNhanKhauApplication.CO_SO_HIEN_TAI.thanhPho)));
+		} catch (SQLException ignored) {
+			tvHoKhau.setPlaceholder(new Label("Hệ thống lỗi! Không thể hiển thị"));
+		}
 
         colMaHoKhau.setCellValueFactory(new PropertyValueFactory<>("soHoKhau"));
-        colHoTenChuHo.setCellValueFactory(x -> new SimpleStringProperty(x.getValue().getChuHo().getTen()));
-        colDiaChi.setCellValueFactory(x -> new SimpleStringProperty(x.getValue().getDiaChi().toString()));
-        tvHoKhau.setItems(hkKhuVuc);
+		try {
+			colDiaChi.setCellValueFactory(x -> new SimpleStringProperty(x.getValue().getDiaChi().toString()));
+		} catch (NullPointerException e) {
+			colDiaChi.setCellValueFactory(x -> new SimpleStringProperty(""));
+		}
+		tvHoKhau.setItems(hkKhuVuc);
     }
 
     public void onSeparateClicked(ActionEvent actionEvent) {
