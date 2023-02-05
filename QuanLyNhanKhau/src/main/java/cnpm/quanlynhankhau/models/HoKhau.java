@@ -4,6 +4,7 @@ import cnpm.quanlynhankhau.application.QuanLyNhanKhauApplication;
 import cnpm.quanlynhankhau.services.Database;
 import cnpm.quanlynhankhau.services.HoKhauService;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -304,5 +305,41 @@ public class HoKhau {
 		maKhuVucIsChanged = false;
 		diaChiIsChanged = false;
 		ngayLapIsChanged = false;
+	}
+	public void change(NhanKhau chuHo,String maKhuVuc,DiaChi diaChi,LocalDate ngayLap) throws SQLException{
+		StringBuilder sqlQuery = new StringBuilder();
+		sqlQuery.append("UPDATE quan_ly_nhan_khau.ho_khau SET  ");
+		// SET idChuHo=NULL, maKhuVuc=NULL, diaChi=NULL, ngayLap=NULL, nguoiThucHien=NULL
+
+		if (chuHo != null) sqlQuery.append("idChuHo = ? , ");
+		if (maKhuVuc != null) sqlQuery.append("maKhuVuc = ? , ");
+		if (diaChi != null) sqlQuery.append("diaChi = ? , ");
+		if (ngayLap != null) sqlQuery.append("ngayLap = ? , ");
+		sqlQuery.deleteCharAt(sqlQuery.length()-2);
+		sqlQuery.append(" WHERE maHoKhau = ? ");
+
+		PreparedStatement statement = Database.getConnection().prepareStatement(sqlQuery.toString());
+		int i = 1;
+		if (chuHo != null) {
+			statement.setString(i, chuHo.getSoNhanKhau());
+			i += 1;
+		}
+		if (maKhuVuc != null) {
+			statement.setString(i, maKhuVuc);
+			i += 1;
+		}
+		if (diaChi != null) {
+			statement.setString(i, diaChi.toString());
+			i += 1;
+		}
+		if (ngayLap != null) {
+			statement.setDate(i, Date.valueOf(ngayLap));
+			i += 1;
+		}
+		statement.setString(i, soHoKhau);
+		//System.out.println(statement);
+		// gửi câu lệnh đến DB
+		statement.executeUpdate();
+
 	}
 }
