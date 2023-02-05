@@ -76,7 +76,7 @@ public class HoKhau {
 		return thanhViens;
 	}
 
-	public void themThanhVien(NhanKhau thanhVien) throws SQLException {
+	public void themThanhVien(NhanKhau thanhVien, String quanHeChuHo) throws SQLException {
 		this.thanhViens.add(thanhVien);
 
 		PreparedStatement subStatement;
@@ -84,12 +84,16 @@ public class HoKhau {
 		subStatement = Database.getConnection().prepareStatement(sqlQuery);
 		subStatement.setString(1, thanhVien.getSoNhanKhau());
 		subStatement.setString(2, this.soHoKhau);
-		subStatement.setString(3, thanhVien.getQuanHeVoiChuHo());
+		subStatement.setString(3, quanHeChuHo);
 		subStatement.executeUpdate();
 
 	}
+	public void themThanhVien(NhanKhau thanhVien) throws SQLException {
+		themThanhVien(thanhVien, thanhVien.getQuanHeVoiChuHo());
+	}
 
-	public void xoaThanhVien(NhanKhau nhanKhau) throws SQLException {
+
+		public void xoaThanhVien(NhanKhau nhanKhau) throws SQLException {
 		this.thanhViens.remove(nhanKhau);
 		PreparedStatement subStatement = Database.getConnection().prepareStatement("""
                 DELETE
