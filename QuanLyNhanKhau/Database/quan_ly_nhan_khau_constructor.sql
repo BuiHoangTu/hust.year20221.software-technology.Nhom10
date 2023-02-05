@@ -5,11 +5,11 @@ SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
-CREATE DATABASE IF NOT EXISTS `quan_ly_nhan_khau` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+create DATABASE IF NOT EXISTS `quan_ly_nhan_khau` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE `quan_ly_nhan_khau`;
 
-DROP TABLE IF EXISTS `chung_minh_thu`;
-CREATE TABLE `chung_minh_thu` (
+drop table IF EXISTS `chung_minh_thu`;
+create TABLE `chung_minh_thu` (
   `soCMT` bigint(12) UNSIGNED ZEROFILL DEFAULT NULL,
   `ngayCap` date DEFAULT NULL,
   `noiCap` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -17,7 +17,7 @@ CREATE TABLE `chung_minh_thu` (
   `maNhanKhau` bigint(12) UNSIGNED ZEROFILL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-INSERT INTO `chung_minh_thu` (`soCMT`, `ngayCap`, `noiCap`, `anhChanDung`, `maNhanKhau`) VALUES
+insert into `chung_minh_thu` (`soCMT`, `ngayCap`, `noiCap`, `anhChanDung`, `maNhanKhau`) VALUES
 (000000000001, NULL, NULL, NULL, NULL),
 (000000000002, NULL, NULL, NULL, NULL),
 (000000000003, NULL, NULL, NULL, NULL),
@@ -32,8 +32,8 @@ INSERT INTO `chung_minh_thu` (`soCMT`, `ngayCap`, `noiCap`, `anhChanDung`, `maNh
 (000000000012, NULL, NULL, NULL, NULL),
 (000000000013, NULL, NULL, NULL, NULL);
 
-DROP TABLE IF EXISTS `dinh_chinh_ho_khau`;
-CREATE TABLE `dinh_chinh_ho_khau` (
+drop table IF EXISTS `dinh_chinh_ho_khau`;
+create TABLE `dinh_chinh_ho_khau` (
   `idHoKhau` bigint(12) UNSIGNED ZEROFILL NOT NULL,
   `thongTinThayDoi` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `thayDoiTu` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -42,8 +42,8 @@ CREATE TABLE `dinh_chinh_ho_khau` (
   `nguoiThayDoi` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-DROP TABLE IF EXISTS `ho_khau`;
-CREATE TABLE `ho_khau` (
+drop table IF EXISTS `ho_khau`;
+create TABLE `ho_khau` (
   `maHoKhau` bigint(12) UNSIGNED ZEROFILL NOT NULL,
   `idChuHo` bigint(12) UNSIGNED ZEROFILL DEFAULT NULL,
   `maKhuVuc` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -58,8 +58,8 @@ INSERT INTO `ho_khau` (`maHoKhau`, `idChuHo`, `maKhuVuc`, `diaChi`, `ngayLap`, `
 (000000000003, 000000000007, 'HN03', 'Số 3 Tạ Quang Bửu, quận Hai Bà Trưng, Hà Nội', '2019-12-08', NULL),
 (000000000004, 000000000011, 'HN03', 'Số 4 Tạ Quang Bửu, quận Hai Bà Trưng, Hà Nội', '2019-12-08', NULL);
 
-DROP TABLE IF EXISTS `khai_tu`;
-CREATE TABLE `khai_tu` (
+drop table IF EXISTS `khai_tu`;
+create TABLE `khai_tu` (
   `soGiayKhaiTu` bigint(12) UNSIGNED ZEROFILL NOT NULL,
   `idNguoiKhai` bigint(12) UNSIGNED ZEROFILL DEFAULT NULL,
   `idNguoiChet` bigint(12) UNSIGNED ZEROFILL DEFAULT NULL,
@@ -68,8 +68,8 @@ CREATE TABLE `khai_tu` (
   `lyDoChet` text COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-DROP TABLE IF EXISTS `lam_viec`;
-CREATE TABLE `lam_viec` (
+drop table IF EXISTS `lam_viec`;
+create TABLE `lam_viec` (
   `idNhanKhau` bigint(12) UNSIGNED ZEROFILL NOT NULL,
   `tuNgay` date NOT NULL,
   `denNgay` date DEFAULT NULL,
@@ -78,7 +78,7 @@ CREATE TABLE `lam_viec` (
   `noiLamViec` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-INSERT INTO `lam_viec` (`idNhanKhau`, `tuNgay`, `denNgay`, `diaChi`, `ngheNghiep`, `noiLamViec`) VALUES
+insert into `lam_viec` (`idNhanKhau`, `tuNgay`, `denNgay`, `diaChi`, `ngheNghiep`, `noiLamViec`) VALUES
 (000000000001, '2015-09-05', '2015-09-05', 'Số 45, ngõ 56, Nguyễn Khang, Cầu Giấy, Hà Nội', 'Sinh Viên', 'Đại học Thương mại'),
 (000000000002, '2012-09-05', '2017-09-05', '556 La Thành, Hà Nội', 'Sinh Viên', 'Đại học Bách khoa Hà Nội'),
 (000000000003, '1989-05-10', '2000-08-25', 'Số 5 Nguyễn Khuyến, Hà Nội', 'Quản lý nhận sự', 'Công ty BCC'),
@@ -91,8 +91,8 @@ INSERT INTO `lam_viec` (`idNhanKhau`, `tuNgay`, `denNgay`, `diaChi`, `ngheNghiep
 (000000000010, '2011-10-03', '2015-08-09', 'Số 8 Tôn Thất Tùng, Hà Nội', 'Bác sĩ nội trú', 'Bệnh viện Bạch Mai'),
 (000000000011, '1961-01-01', '1963-01-01', 'Không rõ', 'Bộ đội', 'Hà Nội');
 
-DROP TABLE IF EXISTS `nhan_khau`;
-CREATE TABLE `nhan_khau` (
+drop table IF EXISTS `nhan_khau`;
+create TABLE `nhan_khau` (
   `maNhanKhau` bigint(12) UNSIGNED ZEROFILL NOT NULL,
   `hoTen` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `bietDanh` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -126,7 +126,7 @@ CREATE TABLE `nhan_khau` (
   `ghiChu` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-INSERT INTO `nhan_khau` (`maNhanKhau`, `hoTen`, `bietDanh`, `namSinh`, `gioiTinh`, `noiSinh`, `nguyenQuan`, `danToc`, `tonGiao`, `quocTich`, `soHoChieu`, `noiThuongTru`, `diaChiHienNay`, `trinhDoHocVan`, `TrinhDoChuyenMon`, `bietTiengDanToc`, `trinhDoNgoaiNgu`, `ngheNghiep`, `noiLamViec`, `tienAn`, `ngayChuyenDen`, `lyDoChuyenDen`, `ngayChuyenDi`, `lyDoChuyenDi`, `diaChiMoi`, `ngayTao`, `idNguoiTao`, `ngayXoa`, `idNguoiXoa`, `lyDoXoa`, `ghiChu`) VALUES
+insert into `nhan_khau` (`maNhanKhau`, `hoTen`, `bietDanh`, `namSinh`, `gioiTinh`, `noiSinh`, `nguyenQuan`, `danToc`, `tonGiao`, `quocTich`, `soHoChieu`, `noiThuongTru`, `diaChiHienNay`, `trinhDoHocVan`, `TrinhDoChuyenMon`, `bietTiengDanToc`, `trinhDoNgoaiNgu`, `ngheNghiep`, `noiLamViec`, `tienAn`, `ngayChuyenDen`, `lyDoChuyenDen`, `ngayChuyenDi`, `lyDoChuyenDi`, `diaChiMoi`, `ngayTao`, `idNguoiTao`, `ngayXoa`, `idNguoiXoa`, `lyDoXoa`, `ghiChu`) VALUES
 (000000000001, 'Trinh Văn An', '', '1990-12-07', 'Nam', NULL, 'Hà Nội', 'Kinh', 'Không', 'Việt Nam', '', 'Số 1 Tạ Quang Bưu, Hai Bà Trưng, Hà Nội', 'Số 1 Tạ Quang Bưu, Hai Bà Trưng, Hà Nội', '12/12 chính quy', 'Thạc sĩ', 'Không', 'Anh trình đọ B', 'Giáo Viên', 'Trường THCS Chu Văn An', NULL, NULL, NULL, NULL, NULL, NULL, '2019-12-08', 1, NULL, NULL, NULL, NULL),
 (000000000002, 'Trần Thanh Duyên', '', '1997-12-23', 'Nữ', NULL, 'Hải Phòng', 'Kinh', 'Không', 'Việt Nam', '', 'Số 3, đường Đình Đông, phường Đình Đông, quận Ngô Quyền, Hải Phòng', 'Số 2 Tạ Quang Bửu, quận Hai Bà Trưng, Hà Nội', '12/12 chính quy', 'Thạc sĩ', 'Không', 'Anh trình độ D', 'Nhân viên văn phòng', 'Công ty ABC', NULL, NULL, NULL, NULL, NULL, NULL, '2019-12-08', 1, NULL, NULL, NULL, NULL),
 (000000000003, 'Nguyễn Minh Quân', '', '1995-05-31', 'Nam', NULL, 'Hà Nội', 'Kinh', 'Không', 'Việt Nam', '', 'Số 2 Tạ Quang Bửu, quận Hai Bà Trưng, Hà Nội', 'Số 2 Tạ Quang Bửu, quận Hai Bà Trưng, Hà Nội', '12/12 chính quy', 'Thạc sĩ', 'Không', 'Anh trình độ D', 'Kỹ sư', 'Viettel', NULL, NULL, NULL, NULL, NULL, NULL, '2019-12-08', 1, NULL, NULL, NULL, NULL),
@@ -141,8 +141,8 @@ INSERT INTO `nhan_khau` (`maNhanKhau`, `hoTen`, `bietDanh`, `namSinh`, `gioiTinh
 (000000000012, 'Lý Văn Công', '', '1945-06-04', 'Nam', NULL, 'Hà Nội', 'Kinh', 'Không', 'Việt Nam', '', 'Số 5 Tạ Quang Bửu, quận Hai Bà Trưng, Hà Nội', 'Số 5 Tạ Quang Bửu, quận Hai Bà Trưng, Hà Nội', '10/12 chính quy', 'Không', 'Không', 'Không', 'Về hưu', 'Không', NULL, NULL, NULL, NULL, NULL, NULL, '2019-12-08', 1, NULL, NULL, NULL, NULL),
 (000000000013, 'Bùi Thị Hà', '', '1948-02-03', 'Nữ', NULL, 'Hải Phòng', 'Kinh', 'Không', 'Việt Nam', '', 'Số 5 Tạ Quang Bửu, quận Hai Bà Trưng, Hà Nội', 'Số 5 Tạ Quang Bửu, quận Hai Bà Trưng, Hà Nội', '10/12', 'Không', 'Không', 'Không', 'Nội trợ', 'Tại nhà', NULL, NULL, NULL, NULL, NULL, NULL, '2019-12-08', 1, NULL, NULL, NULL, NULL);
 
-DROP TABLE IF EXISTS `tam_tru_vang`;
-CREATE TABLE `tam_tru_vang` (
+drop table IF EXISTS `tam_tru_vang`;
+create TABLE `tam_tru_vang` (
   `idNhanKhau` bigint(12) UNSIGNED ZEROFILL DEFAULT NULL,
   `maGiayTamVang` bigint(12) UNSIGNED ZEROFILL NOT NULL,
   `noiTamtru` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -153,112 +153,112 @@ CREATE TABLE `tam_tru_vang` (
   `daXacNhanTamVangTru` tinyint(4) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-DROP TABLE IF EXISTS `thanh_vien_cua_ho`;
-CREATE TABLE `thanh_vien_cua_ho` (
+drop table IF EXISTS `thanh_vien_cua_ho`;
+create TABLE `thanh_vien_cua_ho` (
   `idNhanKhau` bigint(12) UNSIGNED ZEROFILL NOT NULL,
   `idHoKhau` bigint(12) UNSIGNED ZEROFILL NOT NULL,
   `quanHeVoiChuHo` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-INSERT INTO `thanh_vien_cua_ho` (`idNhanKhau`, `idHoKhau`, `quanHeVoiChuHo`) VALUES
-(000000000004, 000000000001, 'Chủ hộ'),
-(000000000002, 000000000001, 'Vợ'),
-(000000000006, 000000000002, 'Chủ hộ'),
-(000000000005, 000000000003, 'Vợ'),
-(000000000003, 000000000003, 'Con trai'),
+insert into `thanh_vien_cua_ho` (`idNhanKhau`, `idHoKhau`, `quanHeVoiChuHo`) VALUES
 (000000000001, 000000000003, 'Con gái'),
+(000000000002, 000000000001, 'Vợ'),
+(000000000003, 000000000003, 'Con trai'),
+(000000000004, 000000000001, 'Chủ hộ'),
+(000000000005, 000000000003, 'Vợ'),
+(000000000006, 000000000002, 'Chủ hộ'),
 (000000000007, 000000000003, 'Chủ hộ'),
 (000000000009, 000000000004, 'Vợ'),
 (000000000010, 000000000004, 'Con trai'),
 (000000000011, 000000000004, 'Chủ hộ');
 
-DROP TABLE IF EXISTS `users`;
-CREATE TABLE `users` (
+drop table IF EXISTS `users`;
+create TABLE `users` (
   `ID` int(11) NOT NULL,
   `userName` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `passwd` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-INSERT INTO `users` (`ID`, `userName`, `passwd`) VALUES
+insert into `users` (`ID`, `userName`, `passwd`) VALUES
 (1, 'admin', '1');
 
 
-ALTER TABLE `chung_minh_thu`
+alter table `chung_minh_thu`
   ADD UNIQUE KEY `chung_minh_thu_soCMT_IDX` (`soCMT`) USING BTREE,
   ADD KEY `chung_minh_thu_FK` (`maNhanKhau`);
 
-ALTER TABLE `dinh_chinh_ho_khau`
+alter table `dinh_chinh_ho_khau`
   ADD PRIMARY KEY (`idHoKhau`,`thongTinThayDoi`,`thoiGianThayDoi`),
   ADD KEY `idHoKhau` (`idHoKhau`),
   ADD KEY `nguoiThayDoi` (`nguoiThayDoi`);
 
-ALTER TABLE `ho_khau`
+alter table `ho_khau`
   ADD PRIMARY KEY (`maHoKhau`),
   ADD UNIQUE KEY `idChuHo` (`idChuHo`) USING BTREE,
   ADD KEY `ho_khau_FK` (`nguoiThucHien`);
 
-ALTER TABLE `khai_tu`
+alter table `khai_tu`
   ADD PRIMARY KEY (`soGiayKhaiTu`),
   ADD KEY `idNguoiKhai` (`idNguoiKhai`),
   ADD KEY `idNguoiChet` (`idNguoiChet`);
 
-ALTER TABLE `lam_viec`
+alter table `lam_viec`
   ADD PRIMARY KEY (`idNhanKhau`,`tuNgay`,`ngheNghiep`),
   ADD KEY `idNhanKhau` (`idNhanKhau`);
 
-ALTER TABLE `nhan_khau`
+alter table `nhan_khau`
   ADD PRIMARY KEY (`maNhanKhau`),
   ADD KEY `tao_nhan_khau_FK` (`idNguoiTao`),
   ADD KEY `xoa_nhan_khau_FK` (`idNguoiXoa`);
-ALTER TABLE `nhan_khau` ADD FULLTEXT KEY `hoTen` (`hoTen`,`bietDanh`);
+alter table `nhan_khau` ADD FULLTEXT KEY `hoTen` (`hoTen`,`bietDanh`);
 
-ALTER TABLE `tam_tru_vang`
+alter table `tam_tru_vang`
   ADD PRIMARY KEY (`maGiayTamVang`),
   ADD KEY `nguoi_tam_tru_vang_FK` (`idNhanKhau`);
 
-ALTER TABLE `thanh_vien_cua_ho`
+alter table `thanh_vien_cua_ho`
   ADD PRIMARY KEY (`idNhanKhau`,`idHoKhau`),
   ADD UNIQUE KEY `idNhanKhau` (`idNhanKhau`),
   ADD KEY `idHoKhau` (`idHoKhau`);
 
-ALTER TABLE `users`
+alter table `users`
   ADD PRIMARY KEY (`ID`);
 
 
-ALTER TABLE `khai_tu`
+alter table `khai_tu`
   MODIFY `soGiayKhaiTu` bigint(12) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
-ALTER TABLE `nhan_khau`
+alter table `nhan_khau`
   MODIFY `maNhanKhau` bigint(12) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
-ALTER TABLE `tam_tru_vang`
+alter table `tam_tru_vang`
   MODIFY `maGiayTamVang` bigint(12) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
-ALTER TABLE `users`
+alter table `users`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
-ALTER TABLE `ho_khau`
+alter table `ho_khau`
     MODIFY `maHoKhau` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
-ALTER TABLE `chung_minh_thu`
+alter table `chung_minh_thu`
   ADD CONSTRAINT `chung_minh_thu_FK` FOREIGN KEY (`maNhanKhau`) REFERENCES `nhan_khau` (`maNhanKhau`);
 
-ALTER TABLE `dinh_chinh_ho_khau`
+alter table `dinh_chinh_ho_khau`
   ADD CONSTRAINT `dinh_chinh_ho_khau_ibfk_2` FOREIGN KEY (`nguoiThayDoi`) REFERENCES `users` (`ID`),
   ADD CONSTRAINT `ho_khau_thay_doi_FK` FOREIGN KEY (`idHoKhau`) REFERENCES `ho_khau` (`maHoKhau`);
 
-ALTER TABLE `ho_khau`
-  ADD CONSTRAINT `ho_khau_FK` FOREIGN KEY (`nguoiThucHien`) REFERENCES `users` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+alter table `ho_khau`
+  ADD CONSTRAINT `ho_khau_FK` FOREIGN KEY (`nguoiThucHien`) REFERENCES `users` (`ID`) ON delete CASCADE ON update CASCADE;
 
-ALTER TABLE `khai_tu`
+alter table `khai_tu`
   ADD CONSTRAINT `nguo_khai_tu_FK` FOREIGN KEY (`idNguoiKhai`) REFERENCES `nhan_khau` (`maNhanKhau`),
   ADD CONSTRAINT `nguoi_bi_khai_tu_FK` FOREIGN KEY (`idNguoiChet`) REFERENCES `nhan_khau` (`maNhanKhau`);
 
-ALTER TABLE `nhan_khau`
-  ADD CONSTRAINT `tao_nhan_khau_FK` FOREIGN KEY (`idNguoiTao`) REFERENCES `users` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `xoa_nhan_khau_FK` FOREIGN KEY (`idNguoiXoa`) REFERENCES `users` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+alter table `nhan_khau`
+  ADD CONSTRAINT `tao_nhan_khau_FK` FOREIGN KEY (`idNguoiTao`) REFERENCES `users` (`ID`) ON delete CASCADE ON update CASCADE,
+  ADD CONSTRAINT `xoa_nhan_khau_FK` FOREIGN KEY (`idNguoiXoa`) REFERENCES `users` (`ID`) ON delete CASCADE ON update CASCADE;
 
-ALTER TABLE `tam_tru_vang`
+alter table `tam_tru_vang`
   ADD CONSTRAINT `nguoi_tam_tru_vang_FK` FOREIGN KEY (`idNhanKhau`) REFERENCES `nhan_khau` (`maNhanKhau`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
