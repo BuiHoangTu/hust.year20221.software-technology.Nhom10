@@ -148,13 +148,14 @@ public class NhanKhauService {
 		return null;
 	}
 
-	public static void khaiTu(NhanKhau nguoiMat, LocalDate ngayMat, String lyDoMat) throws SQLException {
+	public static void khaiTu(NhanKhau nguoiMat, NhanKhau nguoiKhai, LocalDate ngayMat, String lyDoMat) throws SQLException {
 		StringBuilder sqlQuery = new StringBuilder();
-		sqlQuery.append("Insert into quan_ly_nhan_khau.khai_tu (idNguoiChet, ngayChet, lyDoChet) values (?, ?, ?)");
+		sqlQuery.append("Insert into quan_ly_nhan_khau.khai_tu (idNguoiChet, idNguoiKhai, ngayChet, lyDoChet) values (?, ?, ?, ?)");
 		PreparedStatement statement = Database.getConnection().prepareStatement(sqlQuery.toString(), Statement.RETURN_GENERATED_KEYS);
 		statement.setString(1, nguoiMat.getSoNhanKhau());
-		statement.setDate(2, java.sql.Date.valueOf(ngayMat.toString()));
-		statement.setString(3, lyDoMat);
+		statement.setString(2, nguoiKhai.getSoNhanKhau());
+		statement.setDate(3, java.sql.Date.valueOf(ngayMat.toString()));
+		statement.setString(4, lyDoMat);
 		statement.executeUpdate();
 		ResultSet rs = statement.getGeneratedKeys();
 		rs.next();
