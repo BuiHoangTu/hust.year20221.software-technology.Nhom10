@@ -64,6 +64,7 @@ public class NhanKhauService {
 					rs.getDate(4).toLocalDate(), /*DiaChi.parse(rs.getString(6))*/null, DiaChi.parse(rs.getString(7)), rs.getString(8), rs.getString(11), DiaChi.parse(rs.getString(13)),
 					rs.getString(15), rs.getString(14), rs.getString(17), rs.getString(18), DiaChi.parse(rs.getString(19)), rs.getString(20),/*rs.getDate(21).toLocalDate()*/null,
 					rs.getString(22), rs.getString(31), cmt, rs.getString(27),/*rs.getDate(28).toLocalDate()*/ null, rs.getString(29), rs.getString(30), /*rs.getDate(26).toLocalDate()*/null);
+			x.getTamTruVangs().addAll(ttvs);
 
 			result.add(x);
 		}
@@ -146,6 +147,40 @@ public class NhanKhauService {
 		}
 
 		return null;
+	}
+
+	/**
+	 * Tìm những người không có HK trong khu vực
+	 * @param vungHienTai khu vực
+	 * @return danh sách
+	 * @throws SQLException kết nối lỗi
+	 */
+	public static List<NhanKhau> hoKhauLessRegion(DiaChi vungHienTai) throws SQLException {
+		List<NhanKhau> result = new ArrayList<>();
+		String sqlQuery = "select nk.* " +
+				"from nhan_khau nk " +
+				"left join thanh_vien_cua_ho tvch on tvch.idNhanKhau = nk.maNhanKhau " +
+				"WHERE tvch.quanHeVoiChuHo IS NULL " +
+				"AND nk.diaChiHienNay LIKE ?";
+
+		PreparedStatement statement = Database.getConnection().prepareStatement(sqlQuery);
+		statement.setString(1, "%" + vungHienTai.thanhPho + "%");
+
+		ResultSet rs = statement.executeQuery();
+		while (rs.next()) {
+			boolean Gender;
+			Gender = rs.getString(5).equals("Nam");
+
+			ChungMinhThu cmt = ChungMinhThuService.getChungMinhThu(rs.getString(1));
+
+			NhanKhau x = new NhanKhau(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(9), Gender, DiaChi.parse(rs.getString(12)),
+					rs.getDate(4).toLocalDate(), /*DiaChi.parse(rs.getString(6))*/null, DiaChi.parse(rs.getString(7)), rs.getString(8), rs.getString(11), DiaChi.parse(rs.getString(13)),
+					rs.getString(15), rs.getString(14), rs.getString(17), rs.getString(18), DiaChi.parse(rs.getString(19)), rs.getString(20),/*rs.getDate(21).toLocalDate()*/null,
+					rs.getString(22), rs.getString(31), cmt, rs.getString(27),/*rs.getDate(28).toLocalDate()*/ null, rs.getString(29), rs.getString(30), /*rs.getDate(26).toLocalDate()*/null);
+
+			result.add(x);
+		}
+		return result;
 	}
 
 	public static void khaiTu(NhanKhau nguoiMat, LocalDate ngayMat, String lyDoMat) throws SQLException {
