@@ -4,23 +4,23 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class TinhThuong {
-	private static volatile TinhThuong tinhThuong = null;
+public class TinhThuongService {
+	private static volatile TinhThuongService tinhThuong = null;
 	private String[] cacDanhHieu;
 
 	private Map<String, Integer> mapTyLeThuong = new HashMap<>();
 	private int giaVo;
 
 
-	private TinhThuong() {
+	private TinhThuongService() {
 		// // TODO: 27/01/2023 get from database
 		// lay cac danh hieu tu DB
 		cacDanhHieu = mapTyLeThuong.keySet().toArray(new String[0]);
 	}
 
 
-	public static TinhThuong getTinhThuong() {
-		if(tinhThuong == null) tinhThuong = new TinhThuong();
+	public static TinhThuongService getTinhThuong() {
+		if(tinhThuong == null) tinhThuong = new TinhThuongService();
 		return tinhThuong;
 	}
 
