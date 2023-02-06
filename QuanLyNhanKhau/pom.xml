@@ -6,7 +6,7 @@
 
     <groupId>cnpm</groupId>
     <artifactId>QuanLyNhanKhau</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0-DEVELOPMENT</version>
     <name>QuanLyNhanKhau</name>
 
     <properties>
