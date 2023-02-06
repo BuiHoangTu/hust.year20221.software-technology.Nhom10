@@ -91,7 +91,7 @@ public class ThongKe extends EdgeController {
 	    tcDiaChi.prefWidthProperty().bind(tvNhanKhau.widthProperty().multiply(0.4));
 	      
         try {
-            nhanKhau.addAll(NhanKhauService.findNhanKhau(5, "Quận Hai Bà Trưng, Hà Nội"));
+            nhanKhau.addAll(NhanKhauService.findNhanKhau(5, "Quận Hai Bà Trưng, Hà Nội", null));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

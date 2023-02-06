@@ -74,7 +74,7 @@ public class ThemMoiNhanKhauController extends ChangeSceneControllers {
         //TODO tao pop-up lay thong
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Thêm nhân khẩu thành công");
-        alert.setContentText("Nhân khẩu số: " + x.getSoNhanKhau() + "\nTên: " + x.getTen() + "\nSống tại: " + x.getDiaChiHienTai() + "\nĐã được thêm thành công");
+        alert.setContentText(NhanKhauService.getNhanKhau(x.getSoNhanKhau()).toString());
         alert.show();
     }
 }

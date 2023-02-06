@@ -46,7 +46,7 @@ public class QuanLyNhanKhauController extends EdgeController implements Initiali
     }
 
     public void onDKTamVangClicked(ActionEvent event) {
-        FXMLLoader loader = new FXMLLoader(QuanLyNhanKhauApplication.class.getResource("/cnpm/quanlynhankhau/views/Dang-ky-tam-vang.fxml"));
+        FXMLLoader loader = new FXMLLoader(QuanLyNhanKhauApplication.class.getResource("/cnpm/quanlynhankhau/views/Dang_ky_tam_vang.fxml"));
         Scene scene = null;
         try {
             scene = new Scene(loader.load());
@@ -57,6 +57,14 @@ public class QuanLyNhanKhauController extends EdgeController implements Initiali
     }
 
     public void onDKTamTruClicked(ActionEvent event) {
+        FXMLLoader loader = new FXMLLoader(QuanLyNhanKhauApplication.class.getResource("/cnpm/quanlynhankhau/views/Dang_ky_tam_tru.fxml"));
+        Scene scene = null;
+        try {
+            scene = new Scene(loader.load());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        QuanLyNhanKhauApplication.MAIN_STAGE.setScene(scene);
     }
 
     public void onKhaiTuClicked(ActionEvent event) {
@@ -79,7 +87,7 @@ public class QuanLyNhanKhauController extends EdgeController implements Initiali
         colNoiOHienTai.setCellValueFactory(new PropertyValueFactory<NhanKhau, String>("diaChiHienTai"));
         List<NhanKhau> nk = null;
         try {
-            nk = NhanKhauService.findNhanKhau(5, "Hai Bà Trưng, Hà Nội");
+            nk = NhanKhauService.findNhanKhau(5, "Hai Bà Trưng, Hà Nội", null);
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -125,7 +133,7 @@ public class QuanLyNhanKhauController extends EdgeController implements Initiali
         colNoiOHienTai.setCellValueFactory(new PropertyValueFactory<NhanKhau, String>("diaChiHienTai"));
         List<NhanKhau> nk = null;
         try {
-            nk = NhanKhauService.findNhanKhau(5, "Hai Bà Trưng, Hà Nội");
+            nk = NhanKhauService.findNhanKhau(5, "Hai Bà Trưng, Hà Nội", null);
 
         } catch (SQLException e) {
             throw new RuntimeException(e);

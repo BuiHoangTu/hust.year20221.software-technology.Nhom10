@@ -80,11 +80,7 @@ public class NhanKhauService {
 				nk.getTamTruVangs().add(ttv);
 			}
 		}
-
 		return result;
-	}
-	public static List<NhanKhau> findNhanKhau(int loaiMa, String ma) throws SQLException {
-		return findNhanKhau(loaiMa, ma, null);
 	}
 
 	/**
@@ -96,7 +92,7 @@ public class NhanKhauService {
 	 */
 	public static NhanKhau getNhanKhau(String maNK) throws SQLException {
 		try {
-			return findNhanKhau(1, maNK).get(0);
+			return findNhanKhau(1, maNK, null).get(0);
 		} catch (NullPointerException | IndexOutOfBoundsException e) {
 			return null;
 		}
@@ -194,13 +190,15 @@ public class NhanKhauService {
 		return result;
 	}
 
-	public static void khaiTu(NhanKhau nguoiMat, LocalDate ngayMat, String lyDoMat) throws SQLException {
+
+	public static void khaiTu(NhanKhau nguoiMat, NhanKhau nguoiKhai, LocalDate ngayMat, String lyDoMat) throws SQLException {
 		StringBuilder sqlQuery = new StringBuilder();
-		sqlQuery.append("Insert into quan_ly_nhan_khau.khai_tu (idNguoiChet, ngayChet, lyDoChet) values (?, ?, ?)");
+		sqlQuery.append("Insert into quan_ly_nhan_khau.khai_tu (idNguoiChet, idNguoiKhai, ngayChet, lyDoChet) values (?, ?, ?, ?)");
 		PreparedStatement statement = Database.getConnection().prepareStatement(sqlQuery.toString(), Statement.RETURN_GENERATED_KEYS);
 		statement.setString(1, nguoiMat.getSoNhanKhau());
-		statement.setDate(2, java.sql.Date.valueOf(ngayMat.toString()));
-		statement.setString(3, lyDoMat);
+		statement.setString(2, nguoiKhai.getSoNhanKhau());
+		statement.setDate(3, java.sql.Date.valueOf(ngayMat.toString()));
+		statement.setString(4, lyDoMat);
 		statement.executeUpdate();
 		ResultSet rs = statement.getGeneratedKeys();
 		rs.next();
@@ -241,7 +239,7 @@ public class NhanKhauService {
 		String idNhanKhau = null;
 		while (rs.next()) {
 			idNhanKhau = rs.getString("maNhanKhau");
-			NhanKhau x = findNhanKhau(1, idNhanKhau).get(0);
+			NhanKhau x = findNhanKhau(1, idNhanKhau, null).get(0);
 			result.add(x);
 		}
 

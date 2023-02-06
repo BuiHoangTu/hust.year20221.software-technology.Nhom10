@@ -183,11 +183,11 @@ public class TachHoKhau extends ChangeSceneControllers {
     	} else {
     		HoKhau tmp = HoKhauService.findHoKhau(1, idHoKhau).get(0);
 	    	for (String str : lvThanhVienHoMoi.getItems()) {
-	    		tmp.xoaThanhVien(NhanKhauService.findNhanKhau(3, str).get(0));
+	    		tmp.xoaThanhVien(NhanKhauService.findNhanKhau(3, str, null).get(0));
 	    	}
 	    	
 	    	// Thêm nhân khẩu mới vào một hộ mới
-	    	tmp = HoKhauService.taoHoKhau(NhanKhauService.findNhanKhau(3, cbChuHoMoi.getValue().toString()).get(0).getSoNhanKhau(), tfMaKhuVucMoi.getText(), tfDiaChiMoi.getText());
+	    	tmp = HoKhauService.taoHoKhau(NhanKhauService.findNhanKhau(3, cbChuHoMoi.getValue().toString(), null).get(0).getSoNhanKhau(), tfMaKhuVucMoi.getText(), tfDiaChiMoi.getText());
 	    	for (NhanKhau nk : thanhVienHoMoi) {
 	    		tmp.themThanhVien(nk);
 	    	}

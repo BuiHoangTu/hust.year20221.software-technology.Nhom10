@@ -8,6 +8,6 @@ class ChungMinhThuTest {
     @Test
     void lamCMT() throws SQLException {//test
         DiaChi diaChi = new DiaChi("HCM", "TX", "HBT", "120","");
-//        ChungMinhThuSer.lamCMT(null, diaChi);
+        ChungMinhThu.lamCMT(null, diaChi);
     }
 }
