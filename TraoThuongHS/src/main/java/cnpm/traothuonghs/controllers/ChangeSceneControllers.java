@@ -1,7 +1,6 @@
-package cnpm.quanlynhankhau.controllers;
+package cnpm.traothuonghs.controllers;
 
-import cnpm.quanlynhankhau.application.QuanLyNhanKhauApplication;
-import javafx.collections.ObservableList;
+import cnpm.traothuonghs.application.TraoThuongHSApplication;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 
@@ -12,7 +11,7 @@ public abstract class ChangeSceneControllers {
 		changeScene(fxLink, null);
 	}
 	protected void changeScene(String fxLink, Object controller) {
-		FXMLLoader loader = new FXMLLoader(QuanLyNhanKhauApplication.class.getResource(fxLink));
+		FXMLLoader loader = new FXMLLoader(TraoThuongHSApplication.class.getResource(fxLink));
 		if (controller != null) loader.setController(controller);
 		Scene scene = null;
 		try {
@@ -20,6 +19,6 @@ public abstract class ChangeSceneControllers {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		QuanLyNhanKhauApplication.MAIN_STAGE.setScene(scene);
+		TraoThuongHSApplication.MAIN_STAGE.setScene(scene);
 	}
 }

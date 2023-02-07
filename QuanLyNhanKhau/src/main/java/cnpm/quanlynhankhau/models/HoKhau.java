@@ -19,6 +19,7 @@ public class HoKhau {
 	private String maKhuVuc;
 	private boolean maKhuVucIsChanged = false;
 	private DiaChi diaChi;
+
 	private boolean diaChiIsChanged = false;
 	private LocalDate ngayLap;
 	private boolean ngayLapIsChanged = false;
@@ -35,7 +36,6 @@ public class HoKhau {
 	public String getSoHoKhau() {
 		return soHoKhau;
 	}
-
 
 	public NhanKhau getChuHo() {
 		return chuHo;
@@ -77,7 +77,7 @@ public class HoKhau {
 		return thanhViens;
 	}
 
-	public void themThanhVien(NhanKhau thanhVien, String QuanHeVoiChuHo) throws SQLException {
+	public void themThanhVien(NhanKhau thanhVien, String quanHeChuHo) throws SQLException {
 		this.thanhViens.add(thanhVien);
 
 		PreparedStatement subStatement;
@@ -85,12 +85,16 @@ public class HoKhau {
 		subStatement = Database.getConnection().prepareStatement(sqlQuery);
 		subStatement.setString(1, thanhVien.getSoNhanKhau());
 		subStatement.setString(2, this.soHoKhau);
-		subStatement.setString(3, QuanHeVoiChuHo);
+		subStatement.setString(3, quanHeChuHo);
 		subStatement.executeUpdate();
 
 	}
+	public void themThanhVien(NhanKhau thanhVien) throws SQLException {
+		themThanhVien(thanhVien, thanhVien.getQuanHeVoiChuHo());
+	}
 
-	public void xoaThanhVien(NhanKhau nhanKhau) throws SQLException {
+
+		public void xoaThanhVien(NhanKhau nhanKhau) throws SQLException {
 		this.thanhViens.remove(nhanKhau);
 		PreparedStatement subStatement = Database.getConnection().prepareStatement("""
                 DELETE
@@ -106,6 +110,7 @@ public class HoKhau {
 			xoaThanhVien(nk);
 		}
 	}
+	
 	public void xoaThanhVien(int sttNhanKhau) throws SQLException {
 		this.thanhViens.remove(sttNhanKhau);
 		PreparedStatement subStatement = Database.getConnection().prepareStatement("""
@@ -223,7 +228,7 @@ public class HoKhau {
 			statement.setString(4, diaChi.toString());
 
 			PreparedStatement subStatement = Database.getConnection().prepareStatement("""
-                    SELECT maKhuVuc
+                    SELECT diaChi
                     FROM quan_ly_nhan_khau.ho_khau
                     WHERE maHoKhau = ?;
                     """);

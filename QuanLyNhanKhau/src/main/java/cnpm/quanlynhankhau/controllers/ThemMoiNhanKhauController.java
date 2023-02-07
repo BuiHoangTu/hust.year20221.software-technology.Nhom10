@@ -1,8 +1,9 @@
 package cnpm.quanlynhankhau.controllers;
 
-import cnpm.quanlynhankhau.models.ChungMinhThu;
+import cnpm.quanlynhankhau.application.QuanLyNhanKhauApplication;
 import cnpm.quanlynhankhau.models.DiaChi;
 import cnpm.quanlynhankhau.models.NhanKhau;
+import cnpm.quanlynhankhau.services.ChungMinhThuService;
 import cnpm.quanlynhankhau.services.NhanKhauService;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
@@ -12,7 +13,7 @@ import javafx.scene.control.TextField;
 
 import java.sql.SQLException;
 
-public class ThemMoiNhanKhauController {
+public class ThemMoiNhanKhauController extends ChangeSceneControllers {
     public TextField tfHoTen;
     public TextField tfNguyenQuan;
     public TextField tfDanToc;
@@ -30,25 +31,31 @@ public class ThemMoiNhanKhauController {
     public TextField tfBietTiengDanToc;
     public TextField tfNoiLamViec;
     public DatePicker dpBirth;
-    public ComboBox cbGioiTinh;
+    public ComboBox<String> cbGioiTinh;
 
     private void initialize() {
         //TODO set comboBox Gioi Tinh
         cbGioiTinh.getItems().addAll("Nam","Nu");
     }
     public void onHuyClicked(ActionEvent event) {
-        //TODO
+        changeScene("/cnpm/quanlynhankhau/views/QuanLyNhanKhau.fxml");
     }
 
     public void onTaoClicked(ActionEvent event) throws SQLException {
+        Boolean gender = true;
+        if(cbGioiTinh.getValue().equals("Nam")){
+            gender = true;
+        }else {
+            gender = false;
+        }
         NhanKhau x = NhanKhauService.taoNhanKhau(
                 tfHoTen.getText(),
                 tfBietDanh.getText(),
                 tfTonGiao.getText(),
-                false,
+                gender,
                 DiaChi.parse(tfNoiThuongTru.getText()),
                 dpBirth.getValue(),
-                null,
+                DiaChi.parse(tfNguyenQuan.getText()),
                 DiaChi.parse(tfNguyenQuan.getText()),
                 tfDanToc.getText(),
                 tfHoChieu.getText(),
@@ -62,13 +69,12 @@ public class ThemMoiNhanKhauController {
                 null,
                 null,
                 null,
-                ChungMinhThu.getChungMinhThu(tfCMND.getText())
+                ChungMinhThuService.getChungMinhThu(tfCMND.getText())
         );
-        System.out.println(x.getTen() + " " + x.getDiaChiHienTai());
         //TODO tao pop-up lay thong
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Them Nhan Khau Thanh Cong");
-        alert.setContentText("Nhan khau so: " + x.getSoNhanKhau() + "\nTen: " + x.getTen() + "\nSong tai: " + x.getDiaChiHienTai() + "\nDa duoc them thanh cong");
+        alert.setTitle("Thêm nhân khẩu thành công");
+        alert.setContentText(NhanKhauService.getNhanKhau(x.getSoNhanKhau()).toString());
         alert.show();
     }
 }

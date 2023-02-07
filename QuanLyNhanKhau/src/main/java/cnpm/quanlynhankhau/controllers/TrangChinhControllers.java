@@ -1,28 +1,62 @@
 package cnpm.quanlynhankhau.controllers;
 
+import cnpm.quanlynhankhau.models.HoKhau;
+import cnpm.quanlynhankhau.models.NhanKhau;
+import cnpm.quanlynhankhau.services.Database;
+import cnpm.quanlynhankhau.services.HoKhauService;
+import cnpm.quanlynhankhau.services.NhanKhauService;
+import javafx.event.ActionEvent;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 
+import java.net.URL;
 import java.sql.SQLException;
+import java.util.List;
+import java.util.ResourceBundle;
 
-public class TrangChinhControllers extends EdgeController{
+public class TrangChinhControllers extends EdgeController implements Initializable {
     public Pane pnlTrangChu;
     public Label lblNhanKhauNum;
     public Label lblHoKhauNum;
     public Label lblTamTruNum;
     public Label lblTamVangNum;
 
-    private void initialize() throws SQLException {
-//        PreparedStatement nhanKhauNum = Database.getConnection().prepareStatement("Select COUNT(maNhanKhau) from quan_ly_nhan_khau.nhan_khau");
-//        ResultSet num = nhanKhauNum.executeQuery();
-//        num.next();
-//        lblNhanKhauNum.setText(num.getString(1));
-//
-//        PreparedStatement hoKhauNum = Database.getConnection().prepareStatement("Select COUNT(maHoKhau) from quan_ly_nhan_khau.ho_khau");
-//        num = hoKhauNum.executeQuery();
-//        num.next();
-//        lblHoKhauNum.setText(num.getString(1));
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        List<NhanKhau> numNK = null;
+        try {
+            numNK = NhanKhauService.findNhanKhau(5, "Hai Bà Trưng, Hà Nội", null);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        lblNhanKhauNum.setText(String.valueOf(numNK.size()));
+
+        List<HoKhau> numHK;
+        try{
+            numHK = HoKhauService.findHoKhau(3, "Hai Bà Trưng, Hà Nội");
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        lblHoKhauNum.setText(String.valueOf(numHK.size()));
     }
 
-
+    @Override
+    public void onTrangChuClicked(ActionEvent event) {
+        super.onTrangChuClicked(event);
+        List<NhanKhau> numNK = null;
+        try {
+            numNK = NhanKhauService.findNhanKhau(5, "Hai Bà Trưng, Hà Nội", null);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        lblNhanKhauNum.setText(String.valueOf(numNK.size()));
+        List<HoKhau> numHK;
+        try{
+            numHK = HoKhauService.findHoKhau(3, "Hai Bà Trưng, Hà Nội");
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        lblHoKhauNum.setText(String.valueOf(numHK.size()));
+    }
 }

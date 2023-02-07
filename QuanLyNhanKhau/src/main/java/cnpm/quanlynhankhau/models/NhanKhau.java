@@ -50,6 +50,7 @@ public class NhanKhau {
     public boolean lyDoChuyenDenIsChanged = false;
     private String ghiChu;
     public boolean ghiChuIsChanged = false;
+    private String quanHeVoiChuHo;
     private List<TamTruVang> tamTruVangs = new ArrayList<>();
 
     private ChungMinhThu chungMinhThu;
@@ -59,7 +60,7 @@ public class NhanKhau {
     private String lyDoXoa;
     private LocalDate ngayTao;
 
-    public NhanKhau(String soNhanKhau, String ten, String bietDanh, String tonGiao, boolean isMale, DiaChi thuongTru, LocalDate ngaySinh, DiaChi noiSinh, DiaChi nguyenQuan, String danToc, String hoChieu, DiaChi diaChiHienTai, String trinhDoChuyenMon, String trinhDoHocVan, String trinhDoNgoaiNgu, String ngheNghiep, DiaChi noiLamViec, String tienAn, LocalDate ngayChuyenDen, String lyDoChuyenDen, String ghiChu, ChungMinhThu chungMinhThu, String idNguoiTao, LocalDate ngayXoa, String idNguoiXoa, String lyDoXoa, LocalDate ngayTao) {
+    public NhanKhau(String soNhanKhau, String ten, String bietDanh, String tonGiao, boolean isMale, DiaChi thuongTru, LocalDate ngaySinh, DiaChi noiSinh, DiaChi nguyenQuan, String danToc, String hoChieu, DiaChi diaChiHienTai, String trinhDoChuyenMon, String trinhDoHocVan, String trinhDoNgoaiNgu, String ngheNghiep, DiaChi noiLamViec, String tienAn, LocalDate ngayChuyenDen, String lyDoChuyenDen, String ghiChu, ChungMinhThu chungMinhThu, String idNguoiTao, LocalDate ngayXoa, String idNguoiXoa, String lyDoXoa, LocalDate ngayTao, String quanHeVoiChuHo) {
         this.soNhanKhau = soNhanKhau;
         this.ten = ten;
         this.bietDanh = bietDanh;
@@ -87,6 +88,7 @@ public class NhanKhau {
         this.idNguoiXoa = idNguoiXoa;
         this.lyDoXoa = lyDoXoa;
         this.ngayTao = ngayTao;
+        this.quanHeVoiChuHo = quanHeVoiChuHo;
     }
 
     public String getSoNhanKhau() {
@@ -159,6 +161,10 @@ public class NhanKhau {
     public void setNguyenQuan(DiaChi nguyenQuan) {
         this.nguyenQuan = nguyenQuan;
         nguyenQuanIsChanged = true;
+    }
+
+    public String getQuanHeVoiChuHo() {
+        return quanHeVoiChuHo;
     }
 
     public String getDanToc() {

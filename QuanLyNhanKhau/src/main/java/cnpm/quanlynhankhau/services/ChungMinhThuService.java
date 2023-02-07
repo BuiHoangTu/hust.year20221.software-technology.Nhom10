@@ -2,6 +2,7 @@ package cnpm.quanlynhankhau.services;
 
 import cnpm.quanlynhankhau.models.ChungMinhThu;
 import cnpm.quanlynhankhau.models.DiaChi;
+import cnpm.quanlynhankhau.models.NhanKhau;
 import javafx.scene.image.Image;
 
 import java.sql.PreparedStatement;
@@ -16,12 +17,13 @@ public class ChungMinhThuService {
 	 * @param noiCap địa chỉ nơi cấp
 	 * @return chứng minh thư mới
 	 */
-	public static ChungMinhThu lamCMT(Image anhChanDung, DiaChi noiCap) throws SQLException {
+	public static ChungMinhThu lamCMT(NhanKhau nhanKhau, Image anhChanDung, DiaChi noiCap) throws SQLException {
 		String i = "";
-		String sqlQuery = "Insert into quan_ly_nhan_khau.chung_minh_thu(noiCap, anhChanDung) values (?, ?)";
+		String sqlQuery = "Insert into quan_ly_nhan_khau.chung_minh_thu(noiCap, anhChanDung, maNhanKhau) values (?, ?, ?)";
 		PreparedStatement statement = Database.getConnection().prepareStatement(sqlQuery, Statement.RETURN_GENERATED_KEYS);
 		statement.setString(1, noiCap.toString());
 		statement.setBinaryStream(2, null);
+		statement.setString(3, nhanKhau.getSoNhanKhau());
 		statement.executeUpdate();
 
 		ResultSet output = statement.getGeneratedKeys();
@@ -47,5 +49,19 @@ public class ChungMinhThuService {
 
 		if (!rs.next()) return null;
 		return new ChungMinhThu(rs.getString(1), rs.getDate(2).toLocalDate(), DiaChi.parse(rs.getString(3)), null);
+	}
+
+	public static NhanKhau getNhanKhau(String CMND) throws SQLException {
+		StringBuilder sqlQuery = new StringBuilder();
+		sqlQuery.append("select * from quan_ly_nhan_khau.chung_minh_thu where soCMT = ?");
+		PreparedStatement statement = Database.getConnection().prepareStatement(sqlQuery.toString());
+		statement.setString(1, CMND);
+
+		ResultSet rs = statement.executeQuery();
+		while (rs.next()){
+			NhanKhau x = NhanKhauService.getNhanKhau(rs.getString(5));
+			return x;
+		}
+		return null;
 	}
 }

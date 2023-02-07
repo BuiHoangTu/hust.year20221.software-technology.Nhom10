@@ -1,5 +1,7 @@
 package cnpm.traothuonghs.models;
 
+import cnpm.traothuonghs.services.TinhThuongService;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,11 +12,22 @@ public class HocSinh {
 	private String ten;
 	private LocalDate ngaySinh;
 	private String truongHoc;
-	private String lop;
 	private String maHoKhau;
 	private String phuHuynh;
 	private final List<PhanThuong> cacPhanThuong = new ArrayList<>();
 
+	public HocSinh(String ten, LocalDate ngaySinh, String truongHoc, String maHoKhau, String phuHuynh) {
+		this.ten = ten;
+		this.ngaySinh = ngaySinh;
+		this.truongHoc = truongHoc;
+		this.maHoKhau = maHoKhau;
+		this.phuHuynh = phuHuynh;
+	}
 
-
+	public void themPhanThuong(String danhHieu) {
+		/* todo
+		tạo phần thưởng mới, thêm vào cacPhanThuong
+		gọi phần thưởng service để thêm vào DB
+		 */
+	}
 }

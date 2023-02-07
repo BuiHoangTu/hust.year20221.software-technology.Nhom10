@@ -235,6 +235,8 @@ ALTER TABLE `tam_tru_vang`
 ALTER TABLE `users`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
+alter table `ho_khau`
+    MODIFY `maHoKhau` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 ALTER TABLE `chung_minh_thu`
   ADD CONSTRAINT `chung_minh_thu_FK` FOREIGN KEY (`maNhanKhau`) REFERENCES `nhan_khau` (`maNhanKhau`);
