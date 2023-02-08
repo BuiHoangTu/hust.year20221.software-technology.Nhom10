@@ -1,0 +1,40 @@
+package cnpm.traothuonghs.controllers;
+
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.*;
+
+public class quanLyHocSinhController extends BaseLeftController{
+
+    public TableColumn colTenHocSinh;
+    public TableColumn colPhuHuynh;
+    public TableColumn colNgaySinh;
+    public TableColumn colTruong;
+    public TableColumn colLop;
+    public TableView tvHocSinh;
+    public CheckBox chbTen;
+    public CheckBox chbDotPhat;
+    public CheckBox chbDiaChi;
+    public TextField tfTimKiem;
+
+    @FXML
+    private void initialize() {
+        //Lấy dữ liệu trong database đưa vào bảng
+    }
+
+    public void onTimKiemClicked(ActionEvent event) {
+
+    }
+
+    public void onThemHocSinhClicked(ActionEvent event) {
+        //changeScene();
+    }
+
+    public void onChinhSuaHocSinhClicked(ActionEvent event) {
+        //changeScene();
+    }
+
+    public void onXemThongTinClicked(ActionEvent event) {
+        //changeScene();
+    }
+}

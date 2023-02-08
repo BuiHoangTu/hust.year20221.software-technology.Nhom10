@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+            prefWidth="649.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="cnpm.traothuonghs.controllers.quanLyHocSinhController">
+   <VBox layoutX="-1.0" layoutY="1.0" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="402.0"
+         prefWidth="111.0">
+      <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onHomeClicked" text="Trang chủ">
+         <VBox.margin>
+            <Insets top="50.0"/>
+         </VBox.margin>
+         <padding>
+            <Insets bottom="10.0" top="10.0"/>
+         </padding>
+      </Button>
+      <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onHSClicked" text="Học sinh">
+         <VBox.margin>
+            <Insets top="10.0"/>
+         </VBox.margin>
+         <padding>
+            <Insets bottom="10.0" top="10.0"/>
+         </padding>
+      </Button>
+      <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onPTClicked" text="Phần thưởng">
+         <VBox.margin>
+            <Insets top="10.0"/>
+         </VBox.margin>
+         <padding>
+            <Insets bottom="10.0" top="10.0"/>
+         </padding>
+      </Button>
+      <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onTKClicked" text="Thống kê">
+         <padding>
+            <Insets bottom="10.0" top="10.0"/>
+         </padding>
+         <VBox.margin>
+            <Insets top="10.0"/>
+         </VBox.margin>
+      </Button>
+   </VBox>
+   <AnchorPane layoutX="115.0" layoutY="1.0" prefHeight="402.0" prefWidth="531.0">
+      <ScrollPane layoutX="1.0" layoutY="76.0" prefHeight="300.0" prefWidth="398.0">
+         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="598.0" prefWidth="534.0">
+            <TableView fx:id="tvHocSinh" layoutX="-4.0" layoutY="-1.0" prefHeight="607.0" prefWidth="538.0">
+               <columns>
+                  <TableColumn fx:id="colTenHocSinh" prefWidth="130.93326258659363" text="Tên học sinh"/>
+                  <TableColumn fx:id="colPhuHuynh" prefWidth="129.86663818359375" text="Phụ huynh"/>
+                  <TableColumn fx:id="colNgaySinh" prefWidth="72.0" text="Ngày sinh"/>
+                  <TableColumn fx:id="colTruong" minWidth="5.86663818359375" prefWidth="115.199951171875"
+                               text="Trường "/>
+                  <TableColumn fx:id="colLop" prefWidth="90.666748046875" text="Lớp"/>
+               </columns>
+            </TableView>
+         </AnchorPane>
+      </ScrollPane>
+      <CheckBox fx:id="chbTen" layoutX="198.0" layoutY="26.0" mnemonicParsing="false" text="Tên"/>
+      <CheckBox fx:id="chbDotPhat" layoutX="256.0" layoutY="26.0" mnemonicParsing="false" text="Đợt phát"/>
+      <CheckBox fx:id="chbDiaChi" layoutX="339.0" layoutY="26.0" mnemonicParsing="false" text="Địa chỉ"/>
+      <TextField fx:id="tfTimKiem" layoutX="22.0" layoutY="23.0"/>
+      <Button layoutX="429.0" layoutY="22.0" mnemonicParsing="false" onAction="#onTimKiemClicked" text="Tìm kiếm"/>
+      <Button layoutX="416.0" layoutY="80.0" mnemonicParsing="false" onAction="#onThemHocSinhClicked"
+              text="Thêm học sinh"/>
+      <Button layoutX="404.0" layoutY="122.0" mnemonicParsing="false" onAction="#onChinhSuaHocSinhClicked"
+              text="Chỉnh sửa học sinh"/>
+      <Button layoutX="415.0" layoutY="188.0" mnemonicParsing="false" onAction="#onXemThongTinClicked"
+              text="Xem thông tin"/>
+   </AnchorPane>
+</AnchorPane>

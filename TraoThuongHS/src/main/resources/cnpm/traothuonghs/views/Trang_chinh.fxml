@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="542.0" prefWidth="935.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cnpm.traothuonghs.controllers.trangChinhController">
@@ -51,26 +52,39 @@
          </Label>
       </Pane>
    </AnchorPane>
-   <AnchorPane layoutX="-1.0" layoutY="4.0" prefHeight="506.0" prefWidth="202.0" style="-fx-background-color: gray;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-1.0" AnchorPane.topAnchor="4.0">
-      <Button layoutX="3.0" layoutY="-4.0" mnemonicParsing="false" onAction="#onTrangChuClicked" prefHeight="62.0" prefWidth="222.0" style="-fx-background-color: black;" text="Trang Chủ" textFill="#f7f3f3">
-         <font>
-            <Font name="System Bold" size="20.0" />
-         </font>
+   <AnchorPane layoutX="-2.0" prefHeight="543.0" prefWidth="226.0" />
+   <VBox maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="542.0" prefWidth="226.0">
+      <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onHomeClicked" text="Trang chủ">
+         <VBox.margin>
+            <Insets top="50.0"/>
+         </VBox.margin>
+         <padding>
+            <Insets bottom="10.0" top="10.0"/>
+         </padding>
       </Button>
-      <Button layoutX="22.0" layoutY="103.0" mnemonicParsing="false" onAction="#onHocSinhClicked" prefHeight="44.0" prefWidth="204.0" style="-fx-background-color: #47484b;" text="Học sinh" textFill="#f7f3f3">
-         <font>
-            <Font name="System Bold" size="20.0" />
-         </font>
+      <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onHSClicked" text="Học sinh">
+         <VBox.margin>
+            <Insets top="10.0"/>
+         </VBox.margin>
+         <padding>
+            <Insets bottom="10.0" top="10.0"/>
+         </padding>
       </Button>
-      <Button layoutX="22.0" layoutY="164.0" mnemonicParsing="false" onAction="#onTiLePhanTHuongClicked" prefHeight="44.0" prefWidth="204.0" style="-fx-background-color: #47484b;" text="Tỉ lệ phần thưởng" textFill="#f7f3f3">
-         <font>
-            <Font name="System Bold" size="20.0" />
-         </font>
+      <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onPTClicked" text="Phần thưởng">
+         <VBox.margin>
+            <Insets top="10.0"/>
+         </VBox.margin>
+         <padding>
+            <Insets bottom="10.0" top="10.0"/>
+         </padding>
       </Button>
-      <Button layoutX="22.0" layoutY="227.0" mnemonicParsing="false" onAction="#onThongKeClicked" prefHeight="44.0" prefWidth="204.0" style="-fx-background-color: #47484b;" text="Thống kê" textFill="#f7f3f3">
-         <font>
-            <Font name="System Bold" size="20.0" />
-         </font>
+      <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onTKClicked" text="Thống kê">
+         <padding>
+            <Insets bottom="10.0" top="10.0"/>
+         </padding>
+         <VBox.margin>
+            <Insets top="10.0"/>
+         </VBox.margin>
       </Button>
-   </AnchorPane>
+   </VBox>
 </AnchorPane>

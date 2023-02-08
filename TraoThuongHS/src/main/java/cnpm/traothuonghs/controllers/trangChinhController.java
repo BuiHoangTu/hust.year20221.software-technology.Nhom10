@@ -4,22 +4,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
-public class trangChinhController {
+public class trangChinhController extends BaseLeftController{
     public Label lblHocSinhNum;
     public Label lblPhanThuongTraoNum;
     public Label lblPhanThuongConNum;
-
-    public void onHocSinhClicked(ActionEvent event) {
-    }
-
-    public void onTiLePhanTHuongClicked(ActionEvent event) {
-    }
-
-    public void onTrangChuClicked(ActionEvent event) {
-    }
-
-    public void onThongKeClicked(ActionEvent event) {
-    }
 
     @FXML
     private void initialize() {
