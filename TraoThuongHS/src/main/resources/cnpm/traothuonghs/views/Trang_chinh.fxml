@@ -7,15 +7,15 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="542.0" prefWidth="935.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cnpm.quanlynhankhau.controllers.TrangChinhControllers">
+<AnchorPane prefHeight="542.0" prefWidth="935.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cnpm.traothuonghs.controllers.trangChinhController">
    <AnchorPane layoutX="225.0" prefHeight="542.0" prefWidth="711.0">
-      <Pane fx:id="pnlTrangChu" layoutX="-1.0" layoutY="-6.0" prefHeight="547.0" prefWidth="711.0" style="-fx-background-color: white;">
-         <Label layoutX="115.0" layoutY="29.0" prefHeight="36.0" prefWidth="583.0" style="-fx-background-color: #656263;" text="Nhân khẩu có trên địa bàn" textFill="#fffbfb">
+      <Pane layoutX="-1.0" layoutY="-6.0" prefHeight="547.0" prefWidth="711.0" style="-fx-background-color: white;">
+         <Label layoutX="115.0" layoutY="29.0" prefHeight="36.0" prefWidth="583.0" style="-fx-background-color: #656263;" text="Số học sinh trên địa bàn" textFill="#fffbfb">
             <font>
                <Font size="17.0" />
             </font>
          </Label>
-         <Label fx:id="lblNhanKhauNum" layoutX="115.0" layoutY="57.0" prefHeight="55.0" prefWidth="583.0" style="-fx-background-color: #656263;" text="0" textFill="#fffbfb">
+         <Label fx:id="lblHocSinhNum" layoutX="115.0" layoutY="57.0" prefHeight="55.0" prefWidth="583.0" style="-fx-background-color: #656263;" text="0" textFill="#fffbfb">
             <font>
                <Font size="31.0" />
             </font>
@@ -23,12 +23,12 @@
                <Insets />
             </opaqueInsets>
          </Label>
-         <Label layoutX="115.0" layoutY="138.0" prefHeight="36.0" prefWidth="583.0" style="-fx-background-color: #656263;" text="Hộ khẩu có trên địa bàn" textFill="#fffbfb">
+         <Label layoutX="115.0" layoutY="138.0" prefHeight="36.0" prefWidth="583.0" style="-fx-background-color: #656263;" text="Số phần thưởng đã được trao" textFill="#fffbfb">
             <font>
                <Font size="17.0" />
             </font>
          </Label>
-         <Label fx:id="lblHoKhauNum" layoutX="115.0" layoutY="163.0" prefHeight="55.0" prefWidth="583.0" style="-fx-background-color: #656263;" text="0" textFill="#fffbfb">
+         <Label fx:id="lblPhanThuongTraoNum" layoutX="115.0" layoutY="163.0" prefHeight="55.0" prefWidth="583.0" style="-fx-background-color: #656263;" text="0" textFill="#fffbfb">
             <font>
                <Font size="31.0" />
             </font>
@@ -36,7 +36,7 @@
                <Insets />
             </opaqueInsets>
          </Label>
-         <Label fx:id="lblTamTruNum" layoutX="114.0" layoutY="263.0" prefHeight="55.0" prefWidth="583.0" style="-fx-background-color: #656263;" text="0" textFill="#fffbfb">
+         <Label fx:id="lblPhanThuongConNum" layoutX="114.0" layoutY="263.0" prefHeight="55.0" prefWidth="583.0" style="-fx-background-color: #656263;" text="0" textFill="#fffbfb">
             <font>
                <Font size="31.0" />
             </font>
@@ -57,12 +57,12 @@
             <Font name="System Bold" size="20.0" />
          </font>
       </Button>
-      <Button layoutX="22.0" layoutY="103.0" mnemonicParsing="false" onAction="#onNhanKhauClicked" prefHeight="44.0" prefWidth="204.0" style="-fx-background-color: #47484b;" text="Nhân khẩu" textFill="#f7f3f3">
+      <Button layoutX="22.0" layoutY="103.0" mnemonicParsing="false" onAction="#onHocSinhClicked" prefHeight="44.0" prefWidth="204.0" style="-fx-background-color: #47484b;" text="Học sinh" textFill="#f7f3f3">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Button>
-      <Button layoutX="22.0" layoutY="164.0" mnemonicParsing="false" onAction="#onHoKhauClicked" prefHeight="44.0" prefWidth="204.0" style="-fx-background-color: #47484b;" text="Hộ Khẩu" textFill="#f7f3f3">
+      <Button layoutX="22.0" layoutY="164.0" mnemonicParsing="false" onAction="#onTiLePhanTHuongClicked" prefHeight="44.0" prefWidth="204.0" style="-fx-background-color: #47484b;" text="Tỉ lệ phần thưởng" textFill="#f7f3f3">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
