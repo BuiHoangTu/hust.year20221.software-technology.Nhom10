@@ -59,27 +59,24 @@
    </top>
    <right>
       <AnchorPane prefHeight="360.0" prefWidth="111.0" BorderPane.alignment="CENTER">
-         <Button layoutX="28.0" layoutY="23.0" mnemonicParsing="false" onAction="#onThemHocSinhClicked" text="Thêm học sinh" />
+         <Button layoutX="16.0" layoutY="24.0" mnemonicParsing="false" onAction="#onThemHocSinhClicked" text="Thêm học sinh" />
          <Button layoutX="5.0" layoutY="66.0" mnemonicParsing="false" onAction="#onChinhSuaHocSinhClicked" text="Chỉnh sửa học sinh" />
-         <Button layoutX="29.0" layoutY="111.0" mnemonicParsing="false" onAction="#onXemThongTinClicked" text="Xem thông tin" />
+         <Button layoutX="17.0" layoutY="111.0" mnemonicParsing="false" onAction="#onXemThongTinClicked" text="Xem thông tin" />
       </AnchorPane>
    </right>
    <center>
-      <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
-            <ScrollPane prefHeight="358.0" prefWidth="451.0">
-               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="598.0" prefWidth="169.0">
-                  <TableView fx:id="tvHocSinh" layoutX="-4.0" layoutY="-1.0" prefHeight="607.0" prefWidth="577.0">
-                     <columns>
-                        <TableColumn fx:id="colTenHocSinh" prefWidth="130.93326258659363" text="Tên học sinh" />
-                        <TableColumn fx:id="colPhuHuynh" prefWidth="129.86663818359375" text="Phụ huynh" />
-                        <TableColumn fx:id="colNgaySinh" prefWidth="72.0" text="Ngày sinh" />
-                        <TableColumn fx:id="colTruong" minWidth="5.86663818359375" prefWidth="115.199951171875" text="Trường " />
-                        <TableColumn fx:id="colLop" prefWidth="90.666748046875" text="Lớp" />
-                     </columns>
-                  </TableView>
-               </AnchorPane>
-            </ScrollPane>
+      <ScrollPane prefHeight="416.0" prefWidth="538.0" BorderPane.alignment="CENTER">
+         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="503.0" prefWidth="577.0">
+            <TableView fx:id="tvHocSinh" prefHeight="607.0" prefWidth="577.0">
+               <columns>
+                  <TableColumn fx:id="colTenHocSinh" prefWidth="130.93326258659363" text="Tên học sinh"/>
+                  <TableColumn fx:id="colPhuHuynh" prefWidth="129.86663818359375" text="Phụ huynh"/>
+                  <TableColumn fx:id="colNgaySinh" prefWidth="72.0" text="Ngày sinh"/>
+                  <TableColumn fx:id="colTruong" minWidth="5.86663818359375" prefWidth="176.79989624023438"
+                               text="Trường "/>
+                  <TableColumn fx:id="colLop" prefWidth="66.40008544921875" text="Lớp"/>
+               </columns>
+            </TableView>
          </AnchorPane>
       </ScrollPane>
    </center>
