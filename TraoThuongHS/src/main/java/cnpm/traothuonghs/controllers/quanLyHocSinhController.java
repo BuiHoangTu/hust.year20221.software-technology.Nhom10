@@ -23,7 +23,7 @@ public class quanLyHocSinhController extends BaseLeftController{
     }
 
     public void onTimKiemClicked(ActionEvent event) {
-
+        //Tìm học sinh theo checkBox và textField từ database
     }
 
     public void onThemHocSinhClicked(ActionEvent event) {
