@@ -2,12 +2,12 @@ package cnpm.quanlynhankhau.controllers;
 
 import cnpm.quanlynhankhau.models.HoKhau;
 import cnpm.quanlynhankhau.models.NhanKhau;
-import cnpm.quanlynhankhau.services.Database;
 import cnpm.quanlynhankhau.services.HoKhauService;
 import cnpm.quanlynhankhau.services.NhanKhauService;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
 import java.net.URL;
@@ -24,7 +24,7 @@ public class TrangChinhControllers extends EdgeController implements Initializab
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        List<NhanKhau> numNK = null;
+        List<NhanKhau> numNK;
         try {
             numNK = NhanKhauService.findNhanKhau(5, "Hai Bà Trưng, Hà Nội", null);
         } catch (SQLException e) {
@@ -44,7 +44,7 @@ public class TrangChinhControllers extends EdgeController implements Initializab
     @Override
     public void onTrangChuClicked(ActionEvent event) {
         super.onTrangChuClicked(event);
-        List<NhanKhau> numNK = null;
+        List<NhanKhau> numNK;
         try {
             numNK = NhanKhauService.findNhanKhau(5, "Hai Bà Trưng, Hà Nội", null);
         } catch (SQLException e) {

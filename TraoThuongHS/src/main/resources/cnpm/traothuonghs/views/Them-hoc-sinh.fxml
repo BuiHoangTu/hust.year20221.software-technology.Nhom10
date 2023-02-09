@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane prefHeight="245.0" prefWidth="687.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cnpm.traothuonghs.controllers.themHocSinhController">
+<AnchorPane prefHeight="267.0" prefWidth="687.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cnpm.traothuonghs.controllers.ThemHocSinhController">
     <GridPane layoutY="44.0" prefHeight="150.0" prefWidth="681.0">
         <columnConstraints>
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="145.20001220703125" minWidth="10.0" prefWidth="67.2" />
@@ -49,7 +49,7 @@
         <rowConstraints>
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
-        <Button mnemonicParsing="false" onAction="#onHuyClicked" prefHeight="26.0" prefWidth="346.0" text="Hủy" />
-        <Button mnemonicParsing="false" onAction="#onXacNhanClicked" prefHeight="26.0" prefWidth="344.0" text="Xác nhận" GridPane.columnIndex="1" />
     </GridPane>
+     <Button layoutX="344.0" layoutY="239.0" mnemonicParsing="false" onAction="#onXacNhanClicked" prefHeight="26.0" prefWidth="344.0" text="Xác nhận" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="341.6" AnchorPane.rightAnchor="0.0" />
+     <Button layoutY="240.0" mnemonicParsing="false" onAction="#onHuyClicked" prefHeight="26.0" prefWidth="346.0" text="Hủy" AnchorPane.bottomAnchor="7.105427357601002E-15" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="341.6" />
 </AnchorPane>

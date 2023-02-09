@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="675.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cnpm.traothuonghs.controllers.quanLyHocSinhController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="675.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cnpm.traothuonghs.controllers.QuanLyHocSinhController">
    <left>
       <VBox maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onHomeClicked" text="Trang chủ">
@@ -69,12 +69,11 @@
          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="503.0" prefWidth="577.0">
             <TableView fx:id="tvHocSinh" prefHeight="607.0" prefWidth="577.0">
                <columns>
-                  <TableColumn fx:id="colTenHocSinh" prefWidth="130.93326258659363" text="Tên học sinh"/>
-                  <TableColumn fx:id="colPhuHuynh" prefWidth="129.86663818359375" text="Phụ huynh"/>
-                  <TableColumn fx:id="colNgaySinh" prefWidth="72.0" text="Ngày sinh"/>
-                  <TableColumn fx:id="colTruong" minWidth="5.86663818359375" prefWidth="176.79989624023438"
-                               text="Trường "/>
-                  <TableColumn fx:id="colLop" prefWidth="66.40008544921875" text="Lớp"/>
+                  <TableColumn fx:id="colTenHocSinh" prefWidth="130.93326258659363" text="Tên học sinh" />
+                  <TableColumn fx:id="colPhuHuynh" prefWidth="129.86663818359375" text="Phụ huynh" />
+                  <TableColumn fx:id="colNgaySinh" prefWidth="72.0" text="Ngày sinh" />
+                  <TableColumn fx:id="colTruong" minWidth="5.86663818359375" prefWidth="176.79989624023438" text="Trường " />
+                  <TableColumn fx:id="colLop" prefWidth="66.40008544921875" text="Lớp" />
                </columns>
             </TableView>
          </AnchorPane>

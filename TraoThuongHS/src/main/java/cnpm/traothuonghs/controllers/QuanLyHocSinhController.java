@@ -4,7 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
-public class quanLyHocSinhController extends BaseLeftController{
+public class QuanLyHocSinhController extends BaseLeftController{
 
     public TableColumn colTenHocSinh;
     public TableColumn colPhuHuynh;

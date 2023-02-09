@@ -1,10 +1,9 @@
 package cnpm.traothuonghs.controllers;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
-public class trangChinhController extends BaseLeftController{
+public class TrangChinhController extends BaseLeftController{
     public Label lblHocSinhNum;
     public Label lblPhanThuongTraoNum;
     public Label lblPhanThuongConNum;
