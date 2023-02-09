@@ -1,27 +1,26 @@
 package cnpm.traothuonghs.services;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 
 public class TinhThuongService {
-	private static volatile TinhThuongService tinhThuong = null;
 	private String[] cacDanhHieu;
 
 	private Map<String, Integer> mapTyLeThuong = new HashMap<>();
 	private int giaVo;
 
 
-	private TinhThuongService() {
+	public TinhThuongService() {
 		// // TODO: 27/01/2023 get from database
-		// lay cac danh hieu tu DB
+		// lay cac danh hieu mới nhất tu DB
 		cacDanhHieu = mapTyLeThuong.keySet().toArray(new String[0]);
 	}
-
-
-	public static TinhThuongService getTinhThuong() {
-		if(tinhThuong == null) tinhThuong = new TinhThuongService();
-		return tinhThuong;
+	public TinhThuongService(Date ngayThuong) {
+		// TODO: 27/01/2023 get from database
+		// lay cac danh hieu phù hơp với @ngayThuong tu DB
+		cacDanhHieu = mapTyLeThuong.keySet().toArray(new String[0]);
 	}
 
 	public String[] getCacDanhHieu() {
