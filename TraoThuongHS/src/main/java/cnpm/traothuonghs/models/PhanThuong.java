@@ -24,7 +24,7 @@ public class PhanThuong {
 		this.danhHieu = danhHieu;
 		this.lop = lop;
 
-		TinhThuongService tinhThuongService = TinhThuongService.getTinhThuong();
+		TinhThuongService tinhThuongService = new TinhThuongService(ngayPhatThuong);
 		this.soVo = tinhThuongService.getPhanThuong(danhHieu);
 		this.giaTri = soVo * tinhThuongService.getGiaVo();
 
