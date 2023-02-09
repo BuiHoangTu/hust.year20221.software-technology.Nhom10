@@ -44,7 +44,7 @@ public class ThongKeController extends BaseLeftController {
 
 
 	@FXML
-	protected void onFindClicked(ActionEvent ignored) {
+	public void onFindClicked(ActionEvent ignored) {
 		if (filterType.getSelectedToggle().equals(rbDot)) {
 			// TODO: 08/02/2023 find by dot
 		} else if (filterType.getSelectedToggle().equals(rbHo)) {
