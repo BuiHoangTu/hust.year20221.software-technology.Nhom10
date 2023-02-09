@@ -1,5 +1,6 @@
 package cnpm.traothuonghs.services;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -17,7 +18,7 @@ public class TinhThuongService {
 		// lay cac danh hieu mới nhất tu DB
 		cacDanhHieu = mapTyLeThuong.keySet().toArray(new String[0]);
 	}
-	public TinhThuongService(Date ngayThuong) {
+	public TinhThuongService(LocalDate ngayThuong) {
 		// TODO: 27/01/2023 get from database
 		// lay cac danh hieu phù hơp với @ngayThuong tu DB
 		cacDanhHieu = mapTyLeThuong.keySet().toArray(new String[0]);
