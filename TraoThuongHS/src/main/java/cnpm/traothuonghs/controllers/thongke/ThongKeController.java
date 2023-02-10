@@ -5,15 +5,15 @@ import cnpm.traothuonghs.controllers.BaseLeftController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class ThongKeController extends BaseLeftController {
@@ -28,8 +28,10 @@ public class ThongKeController extends BaseLeftController {
 	protected RadioButton rbHo;
 	@FXML
 	protected ToggleGroup filterType;
+	@FXML
+	protected TableView tvThongKe;
 	// endregion
-	private Scene previousScene;
+	private final Scene previousScene;
 
 
 	public ThongKeController(Scene previousScene) {
@@ -70,22 +72,18 @@ public class ThongKeController extends BaseLeftController {
 		var createTime = LocalDateTime.now();
 		String fileName = null;
 		if (filterType.getSelectedToggle().equals(rbDot)) {
-			fileName = createTime + "Đợt phát thưởng \"" + tfFilter.getText() + "\"";
+			fileName = createTime + "Đợt phát thưởng \"" + tfFilter.getText() + "\".csv";
 		}
 		if (filterType.getSelectedToggle().equals(rbHo)) {
-			fileName = createTime + "Hộ nhận thưởng \"" + tfFilter.getText() + "\"";
+			fileName = createTime + "Hộ nhận thưởng \"" + tfFilter.getText() + "\".csv";
 		}
 		// make file
 		if (fileName != null) {
 			File applicationFile = new File(applicationFolder, fileName);
 			try {
 				applicationFile.createNewFile();
-
-				BufferedWriter writer = new BufferedWriter(new FileWriter(applicationFile));
-				writer.write("strhg\n");
-				writer.write("more");
-
-				writer.close();
+				// write tv
+				export(applicationFile);
 			} catch (IOException e) {/*todo error*/}
 		} else {
 			// TODO: 10/02/2023 nodate notification
@@ -96,5 +94,44 @@ public class ThongKeController extends BaseLeftController {
 	@FXML
 	protected void onReturnClicked(ActionEvent ignored) {
 		TraoThuongHSApplication.MAIN_STAGE.setScene(previousScene);
+	}
+
+	/**
+	 * viết cái tv thành file
+	 * @param outputFile file output
+	 */
+	private void export(File outputFile) {
+		HSSFWorkbook hssfWorkbook = new HSSFWorkbook();
+		HSSFSheet hssfSheet = hssfWorkbook.createSheet("Sheet1");
+		HSSFRow firstRow = hssfSheet.createRow(0);
+
+		///set titles of columns
+		for (int i = 0; i < tvThongKe.getColumns().size(); i++) {
+			firstRow.createCell(i).setCellValue(((TableColumn<?, ?>)tvThongKe.getColumns().get(i)).getText());
+
+		}
+
+		for (int row = 0; row < tvThongKe.getItems().size(); row++) {
+			HSSFRow hssfRow = hssfSheet.createRow(row + 1);
+			for (int col = 0; col < tvThongKe.getColumns().size(); col++) {
+				Object celValue = ((TableColumn<?,?>)tvThongKe.getColumns().get(col)).getCellObservableValue(row).getValue();
+				try {
+					if (celValue != null && Double.parseDouble(celValue.toString()) != 0.0) {
+						hssfRow.createCell(col).setCellValue(Double.parseDouble(celValue.toString()));
+					}
+				} catch (NumberFormatException e) {
+					hssfRow.createCell(col).setCellValue(celValue.toString());
+				}
+			}
+		}
+
+		//save Excel file and close the workbook
+		try {
+			hssfWorkbook.write(outputFile);
+			hssfWorkbook.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 	}
 }
