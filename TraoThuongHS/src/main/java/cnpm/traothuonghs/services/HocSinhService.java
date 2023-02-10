@@ -55,4 +55,15 @@ public class HocSinhService {
 
         return lisHS;
     }
+
+    public static int getSoHocSinh() throws SQLException {
+        int count;
+        StringBuilder sqlQuery = new StringBuilder();
+        sqlQuery.append("Select COUNT(id) from trao_thuong_hoc_sinh.hoc_sinh");
+        PreparedStatement statement = Database.getConnection().prepareStatement(sqlQuery.toString());
+        ResultSet resultSet = statement.executeQuery();
+        resultSet.next();
+        count = resultSet.getInt("COUNT(id)");
+        return count;
+    }
 }
