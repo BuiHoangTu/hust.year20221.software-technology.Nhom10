@@ -77,14 +77,41 @@ public class TinhThuongService {
 	 * Thay tỉ lệ thưởng. Những ô để trống phải thay bằng tỷ lệ gốc
 	 * @param mapTyLeThuongMoi tỉ lệ mới
 	 */
-	public void chinhTyLe(Map<String, Integer> mapTyLeThuongMoi) {
-		mapTyLeThuong = mapTyLeThuongMoi;
-		// todo update database
+	public static void chinhTyLe(Map<String, Integer> mapTyLeThuongMoi) throws SQLException {
+		var today = LocalDate.now();
+
+		StringBuilder query = new StringBuilder("""
+				insert into muc_trao_thuong (ngayApDung, danhHieu, soVo)
+				values""");
+		for (int i = mapTyLeThuongMoi.size() - 1; i >= 0; i --) {
+			query.append("(?,?,?)").append(i != 0 ? ',' : ';');
+		}
+		PreparedStatement statement = Database.getConnection().prepareStatement(query.toString());
+
+		int i = 1;
+		for (var tlt : mapTyLeThuongMoi.entrySet()) {
+			statement.setDate(i++ , Date.valueOf(today));
+			statement.setString(i++ , tlt.getKey());
+			statement.setString(i++ , tlt.getValue().toString());
+		}
+
+		statement.executeUpdate();
 	}
 
-	public void chinhGiaVo(int giaVoMoi) {
-		this.giaVo = giaVoMoi;
-		// TODO: 27/01/2023 update db
+	public static void chinhGiaVo(int giaVoMoi) throws SQLException {
+		var today = LocalDate.now();
+
+		String query = """
+				insert into gia_thuong (ngayApDung, giaTien)
+				values (?,?);
+				""";
+
+		PreparedStatement statement = Database.getConnection().prepareStatement(query);
+
+		statement.setDate(1, Date.valueOf(today));
+		statement.setString(2, Integer.toString(giaVoMoi));
+
+		statement.executeUpdate();
 	}
 
 
