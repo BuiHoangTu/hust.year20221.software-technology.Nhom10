@@ -9,6 +9,13 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 public class ThongKeController extends BaseLeftController {
 	public static final RadioButton BY_DOT = new RadioButton();
 	public static final RadioButton BY_HO = new RadioButton();
@@ -54,6 +61,36 @@ public class ThongKeController extends BaseLeftController {
 
 	@FXML
 	protected void onExportClicked(ActionEvent ignored) {
+		// get or make applicationFolder in Home
+		String home = System.getProperty("user.home");
+		File applicationFolder = new File(home, "Trao Thưởng Học Sinh");
+		if (!applicationFolder.exists()) applicationFolder.mkdir();
+
+		// make file name
+		var createTime = LocalDateTime.now();
+		String fileName = null;
+		if (filterType.getSelectedToggle().equals(rbDot)) {
+			fileName = createTime + "Đợt phát thưởng \"" + tfFilter.getText() + "\"";
+		}
+		if (filterType.getSelectedToggle().equals(rbHo)) {
+			fileName = createTime + "Hộ nhận thưởng \"" + tfFilter.getText() + "\"";
+		}
+		// make file
+		if (fileName != null) {
+			File applicationFile = new File(applicationFolder, fileName);
+			try {
+				applicationFile.createNewFile();
+
+				BufferedWriter writer = new BufferedWriter(new FileWriter(applicationFile));
+				writer.write("strhg\n");
+				writer.write("more");
+
+				writer.close();
+			} catch (IOException e) {/*todo error*/}
+		} else {
+			// TODO: 10/02/2023 nodate notification
+		}
+
 	}
 
 	@FXML
