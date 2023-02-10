@@ -355,7 +355,6 @@ public void commit() throws SQLException {
         if (tienAnIsChanged) sqlQuery.append("SET tienAn = ? ");
         if (ghiChuIsChanged) sqlQuery.append("SET ghiChu = ? ");
 
-        // TODO: 14/01/2023 tuong tu
         sqlQuery.append("WHERE maNhanKhau = ? ");
 
         PreparedStatement statement = Database.getConnection().prepareStatement(sqlQuery.toString());
@@ -430,7 +429,6 @@ public void commit() throws SQLException {
             i += 1;
         }
 
-        // TODO: 14/01/2023 tuong tu
         statement.setString(i, this.soNhanKhau);
         // gửi câu lệnh đến DB
         statement.executeUpdate();
@@ -484,7 +482,6 @@ public void commit() throws SQLException {
         if (tienAn != null) sqlQuery.append("tienAn = ? , ");
         if (ghiChu != null) sqlQuery.append("ghiChu = ? , ");
 
-        // TODO: 14/01/2023 tuong tu
         sqlQuery.deleteCharAt(sqlQuery.length()-2);
         sqlQuery.append("WHERE maNhanKhau = ? ");
 
@@ -559,7 +556,6 @@ public void commit() throws SQLException {
             statement.setString(i, ghiChu);
             i += 1;
         }
-        // TODO: 14/01/2023 tuong tu
         statement.setString(i, this.soNhanKhau);
         // gửi câu lệnh đến DB
         statement.executeUpdate();

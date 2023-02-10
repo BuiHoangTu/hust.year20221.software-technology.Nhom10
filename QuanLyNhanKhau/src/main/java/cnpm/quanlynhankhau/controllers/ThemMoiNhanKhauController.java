@@ -1,6 +1,5 @@
 package cnpm.quanlynhankhau.controllers;
 
-import cnpm.quanlynhankhau.application.QuanLyNhanKhauApplication;
 import cnpm.quanlynhankhau.models.DiaChi;
 import cnpm.quanlynhankhau.models.NhanKhau;
 import cnpm.quanlynhankhau.services.ChungMinhThuService;
@@ -34,7 +33,6 @@ public class ThemMoiNhanKhauController extends ChangeSceneControllers {
     public ComboBox<String> cbGioiTinh;
 
     private void initialize() {
-        //TODO set comboBox Gioi Tinh
         cbGioiTinh.getItems().addAll("Nam","Nu");
     }
     public void onHuyClicked(ActionEvent event) {
@@ -42,10 +40,9 @@ public class ThemMoiNhanKhauController extends ChangeSceneControllers {
     }
 
     public void onTaoClicked(ActionEvent event) throws SQLException {
-        Boolean gender = true;
+        boolean gender = true;
         if(cbGioiTinh.getValue().equals("Nam")){
-            gender = true;
-        }else {
+		}else {
             gender = false;
         }
         NhanKhau x = NhanKhauService.taoNhanKhau(
@@ -71,7 +68,6 @@ public class ThemMoiNhanKhauController extends ChangeSceneControllers {
                 null,
                 ChungMinhThuService.getChungMinhThu(tfCMND.getText())
         );
-        //TODO tao pop-up lay thong
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Thêm nhân khẩu thành công");
         alert.setContentText(NhanKhauService.getNhanKhau(x.getSoNhanKhau()).toString());

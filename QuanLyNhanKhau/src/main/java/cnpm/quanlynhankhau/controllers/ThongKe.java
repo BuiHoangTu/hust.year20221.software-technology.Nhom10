@@ -106,9 +106,6 @@ public class ThongKe extends EdgeController {
 	
 	@FXML
     protected void onExportClicked() throws FileNotFoundException {
-        // TODO : làm xuất file
-		// csv
-		
 		List<String> headers = new ArrayList<String>();
 		
 		headers.add("ID");
