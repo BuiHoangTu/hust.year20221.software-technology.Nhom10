@@ -70,7 +70,7 @@ public class ThongKeController extends BaseLeftController {
 	public void onFindClicked(ActionEvent ignored) {
 		try {
 			if (filterType.getSelectedToggle().equals(rbDot)) {
-				tvThongKe.setItems(FXCollections.observableList(PhanThuongService.getPTDot()));
+				tvThongKe.setItems(FXCollections.observableList(PhanThuongService.getPTDot(tfFilter.getText())));
 
 				// clean table cols
 				tvThongKe.getColumns().clear();
@@ -94,7 +94,7 @@ public class ThongKeController extends BaseLeftController {
 				tvThongKe.getColumns().addAll(colTenDot, colNgayPhat, colVo, colTien);
 
 			} else if (filterType.getSelectedToggle().equals(rbHo)) {
-				tvThongKe.setItems(FXCollections.observableList(PhanThuongService.getPTHK()));
+				tvThongKe.setItems(FXCollections.observableList(PhanThuongService.getPTHK(tfFilter.getText())));
 
 				// clean table cols
 				tvThongKe.getColumns().clear();

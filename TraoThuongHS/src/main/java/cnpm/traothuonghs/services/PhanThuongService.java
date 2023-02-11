@@ -56,7 +56,7 @@ public class PhanThuongService {
 		return voChuaPhat;
 	}
 
-	public static List<PhanThuongHK> getPTHK() throws SQLException {
+	public static List<PhanThuongHK> getPTHK(String filter) throws SQLException {
 		List<PhanThuongHK> output = new ArrayList<>();
 
 		Connection connection = Database.getConnection();
@@ -70,9 +70,11 @@ public class PhanThuongService {
 					and pt.danhHieu = mtt.danhHieu\s
 				Join gia_thuong gt\s
 					on gt.ngayApDung  = (SELECT MAX(ngayApDung) from gia_thuong WHERE gia_thuong .ngayApDung <= pt.ngayPhatThuong)
+				WHERE hs.maHoKhau like ?
 				GROUP by hs.maHoKhau\s""";
 
 		PreparedStatement statement = connection.prepareStatement(sql);
+		statement.setString(1, "%"+filter+"%");
 
 		var rs = statement.executeQuery();
 
@@ -83,7 +85,7 @@ public class PhanThuongService {
 		return output;
 	}
 
-	public static List<PhanThuongDot> getPTDot() throws SQLException {
+	public static List<PhanThuongDot> getPTDot(String filter) throws SQLException {
 		List<PhanThuongDot> output = new ArrayList<>();
 
 		Connection connection = Database.getConnection();
@@ -96,9 +98,11 @@ public class PhanThuongService {
 					and pt.danhHieu = mtt.danhHieu\s
 				Join gia_thuong gt\s
 					on gt.ngayApDung  = (SELECT MAX(ngayApDung) from gia_thuong WHERE gia_thuong .ngayApDung <= pt.ngayPhatThuong)
+				where pt.dotPhatThuong like ?
 				GROUP by pt.ngayPhatThuong \s""";
 
 		PreparedStatement statement = connection.prepareStatement(sql);
+		statement.setString(1, "%" + filter + "%");
 		var rs = statement.executeQuery();
 
 		while (rs.next()) {
