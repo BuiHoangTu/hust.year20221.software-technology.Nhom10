@@ -12,23 +12,25 @@ public class ThongKeScreenController extends BaseLeftController{
 		controller.onFindClicked(new ActionEvent());
 
 		changeScene(
-				"/cnpm/traothuonghs/views/thongke/ThongKeScreen-view.fxml",
+				"/cnpm/traothuonghs/views/thongke/ThongKe-view.fxml",
 				controller);
     }
 
 	@FXML
 	protected void onDotClicked(ActionEvent ignoredEvent) {
 		var controller = new ThongKeController(TraoThuongHSApplication.MAIN_STAGE.getScene(), ThongKeController.BY_DOT);
-		controller.onFindClicked(new ActionEvent());
+
 		changeScene(
-				"/cnpm/traothuonghs/views/thongke/ThongKeScreen-view.fxml",
+				"/cnpm/traothuonghs/views/thongke/ThongKe-view.fxml",
 				controller);
+
+		controller.onFindClicked(new ActionEvent());
 	}
 
 	@FXML
 	protected void onRawClicked(ActionEvent ignoredEvent) {
 		changeScene(
-				"/cnpm/traothuonghs/views/thongke/ThongKeScreen-view.fxml",
+				"/cnpm/traothuonghs/views/thongke/ThongKe-view.fxml",
 				new ThongKeController(TraoThuongHSApplication.MAIN_STAGE.getScene()));
 	}
 

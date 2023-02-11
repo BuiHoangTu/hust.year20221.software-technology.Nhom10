@@ -2,6 +2,12 @@ package cnpm.traothuonghs.controllers.thongke;
 
 import cnpm.traothuonghs.application.TraoThuongHSApplication;
 import cnpm.traothuonghs.controllers.BaseLeftController;
+import cnpm.traothuonghs.records.PhanThuongDot;
+import cnpm.traothuonghs.records.PhanThuongHK;
+import cnpm.traothuonghs.services.PhanThuongService;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -14,7 +20,11 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 
 public class ThongKeController extends BaseLeftController {
 	public static final RadioButton BY_DOT = new RadioButton();
@@ -54,10 +64,53 @@ public class ThongKeController extends BaseLeftController {
 
 	@FXML
 	public void onFindClicked(ActionEvent ignored) {
-		if (filterType.getSelectedToggle().equals(rbDot)) {
-			// TODO: 08/02/2023 find by dot
-		} else if (filterType.getSelectedToggle().equals(rbHo)) {
-			// TODO: 08/02/2023 find by ho
+		try {
+			if (filterType.getSelectedToggle().equals(rbDot)) {
+				tvThongKe.setItems(FXCollections.observableList(PhanThuongService.getPTDot()));
+
+				// clean table cols
+				tvThongKe.getColumns().clear();
+				// name col
+				TableColumn<PhanThuongDot, String> colTenDot = new TableColumn<>("Đợt phát thưởng");
+				colTenDot.setCellValueFactory(x -> new SimpleStringProperty(x.getValue().tenDotPhat()));
+				colTenDot.prefWidthProperty().bind(tvThongKe.widthProperty().multiply(0.3));
+				// date col
+				TableColumn<PhanThuongDot, String> colNgayPhat = new TableColumn<>("Ngày phát");
+				colNgayPhat.setCellValueFactory(x -> new SimpleStringProperty(x.getValue().ngayPhat().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM))));
+				colNgayPhat.prefWidthProperty().bind(tvThongKe.widthProperty().multiply(0.2));
+				// sum vo
+				TableColumn<PhanThuongDot, Integer> colVo = new TableColumn<>("Tổng số vở");
+				colVo.setCellValueFactory(x -> new SimpleIntegerProperty(x.getValue().tongSoVo()).asObject());
+				colVo.prefWidthProperty().bind(tvThongKe.widthProperty().multiply(0.2));
+				// sum tien
+				TableColumn<PhanThuongDot, Integer> colTien = new TableColumn<>("Tổng số tiền");
+				colTien.setCellValueFactory(x -> new SimpleIntegerProperty(x.getValue().tongSoTien()).asObject());
+				colTien.prefWidthProperty().bind(tvThongKe.widthProperty().multiply(0.3));
+				// add col to table
+				tvThongKe.getColumns().addAll(colTenDot, colNgayPhat, colVo, colTien);
+
+			} else if (filterType.getSelectedToggle().equals(rbHo)) {
+				tvThongKe.setItems(FXCollections.observableList(PhanThuongService.getPTHK()));
+
+				// clean table cols
+				tvThongKe.getColumns().clear();
+				// name col
+				TableColumn<PhanThuongHK, String> colMaHK = new TableColumn<>("Mã hộ khẩu");
+				colMaHK.setCellValueFactory(x -> new SimpleStringProperty(x.getValue().maHK()));
+				colMaHK.prefWidthProperty().bind(tvThongKe.widthProperty().multiply(0.3));
+				// sum vo
+				TableColumn<PhanThuongHK, Integer> colVo = new TableColumn<>("Tổng số vở");
+				colVo.setCellValueFactory(x -> new SimpleIntegerProperty(x.getValue().tongSoVo()).asObject());
+				colVo.prefWidthProperty().bind(tvThongKe.widthProperty().multiply(0.2));
+				// sum tien
+				TableColumn<PhanThuongHK, Integer> colTien = new TableColumn<>("Tổng số tiền");
+				colTien.setCellValueFactory(x -> new SimpleIntegerProperty(x.getValue().tongSoTien()).asObject());
+				colTien.prefWidthProperty().bind(tvThongKe.widthProperty().multiply(0.5));
+				// add col to table
+				tvThongKe.getColumns().addAll(colMaHK, colVo, colTien);
+			}
+		} catch (SQLException e) {
+			tvThongKe.setPlaceholder(new Label("Lỗi hệ thống"));
 		}
 	}
 
@@ -84,9 +137,19 @@ public class ThongKeController extends BaseLeftController {
 				applicationFile.createNewFile();
 				// write tv
 				export(applicationFile);
-			} catch (IOException e) {/*todo error*/}
+
+				Alert success = new Alert(Alert.AlertType.INFORMATION);
+				success.setContentText("Export thành công. Đường dẫn : " + applicationFile.getAbsolutePath());
+				success.show();
+			} catch (IOException e) {
+				Alert noFile = new Alert(Alert.AlertType.ERROR);
+				noFile.setContentText("Hệ thống không phản hồi. Chưa ghi ra file");
+				noFile.show();
+			}
 		} else {
-			// TODO: 10/02/2023 nodate notification
+			Alert noData = new Alert(Alert.AlertType.WARNING);
+			noData.setContentText("Không có dữ liệu");
+			noData.show();
 		}
 
 	}
