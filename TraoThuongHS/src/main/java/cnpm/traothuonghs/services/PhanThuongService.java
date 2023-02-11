@@ -1,11 +1,16 @@
 package cnpm.traothuonghs.services;
 
 import cnpm.traothuonghs.models.PhanThuong;
+import cnpm.traothuonghs.records.PhanThuongDot;
+import cnpm.traothuonghs.records.PhanThuongHK;
 
 import java.lang.ref.PhantomReference;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PhanThuongService {
 	public static void themPhanThuong(String ten, String maHK, String danhHieu){}
@@ -49,5 +54,61 @@ public class PhanThuongService {
 		res.next();
 		voChuaPhat = res.getInt("SUM(soVo)");
 		return voChuaPhat;
+	}
+
+	public static List<PhanThuongHK> getPTHK(String filter) throws SQLException {
+		List<PhanThuongHK> output = new ArrayList<>();
+
+		Connection connection = Database.getConnection();
+
+		String sql = """
+				SELECT hs.maHoKhau , SUM(mtt.soVo * gt.giaTien) as tongGiaTri, SUM(mtt.soVo) as tongSoVo
+				from hoc_sinh hs\s
+				join phan_thuong pt on pt.idHocSinh  = hs.id\s
+				JOIN  muc_trao_thuong mtt\s
+					on mtt.ngayApDung  = (SELECT MAX(ngayApDung) from muc_trao_thuong WHERE muc_trao_thuong.ngayApDung <= pt.ngayPhatThuong)
+					and pt.danhHieu = mtt.danhHieu\s
+				Join gia_thuong gt\s
+					on gt.ngayApDung  = (SELECT MAX(ngayApDung) from gia_thuong WHERE gia_thuong .ngayApDung <= pt.ngayPhatThuong)
+				WHERE hs.maHoKhau like ?
+				GROUP by hs.maHoKhau\s""";
+
+		PreparedStatement statement = connection.prepareStatement(sql);
+		statement.setString(1, "%"+filter+"%");
+
+		var rs = statement.executeQuery();
+
+		while (rs.next()) {
+			output.add(new PhanThuongHK(rs.getInt(3), rs.getInt(2), rs.getString(1)));
+		}
+
+		return output;
+	}
+
+	public static List<PhanThuongDot> getPTDot(String filter) throws SQLException {
+		List<PhanThuongDot> output = new ArrayList<>();
+
+		Connection connection = Database.getConnection();
+
+		String sql = """
+				SELECT SUM(mtt.soVo * gt.giaTien) as tongSoTien, SUM(mtt.soVo) as tongSoVo, pt.ngayPhatThuong , pt.dotPhatThuong\s
+				from phan_thuong pt
+				JOIN  muc_trao_thuong mtt\s
+					on mtt.ngayApDung  = (SELECT MAX(ngayApDung) from muc_trao_thuong WHERE muc_trao_thuong.ngayApDung <= pt.ngayPhatThuong)
+					and pt.danhHieu = mtt.danhHieu\s
+				Join gia_thuong gt\s
+					on gt.ngayApDung  = (SELECT MAX(ngayApDung) from gia_thuong WHERE gia_thuong .ngayApDung <= pt.ngayPhatThuong)
+				where pt.dotPhatThuong like ?
+				GROUP by pt.ngayPhatThuong \s""";
+
+		PreparedStatement statement = connection.prepareStatement(sql);
+		statement.setString(1, "%" + filter + "%");
+		var rs = statement.executeQuery();
+
+		while (rs.next()) {
+			output.add(new PhanThuongDot(rs.getInt(2), rs.getInt(1), rs.getDate(3).toLocalDate(), rs.getString(4)));
+		}
+
+		return output;
 	}
 }

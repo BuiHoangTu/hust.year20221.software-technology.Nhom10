@@ -3,6 +3,7 @@ module cnpm.traothuonghs {
 	requires javafx.fxml;
 	requires cnpm.quanlynhankhau;
 	requires java.sql;
+	requires poi;
 
 
 	exports cnpm.traothuonghs.models;
@@ -14,5 +15,6 @@ module cnpm.traothuonghs {
 	exports cnpm.traothuonghs.controllers;
 	opens cnpm.traothuonghs.controllers;
 
-
+	exports cnpm.traothuonghs.controllers.thongke;
+	opens cnpm.traothuonghs.controllers.thongke;
 }
