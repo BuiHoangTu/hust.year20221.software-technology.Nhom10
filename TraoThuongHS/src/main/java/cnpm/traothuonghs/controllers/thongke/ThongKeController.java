@@ -16,12 +16,9 @@ import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
@@ -42,6 +39,7 @@ public class ThongKeController extends BaseLeftController {
 	protected TableView tvThongKe;
 	// endregion
 	private final Scene previousScene;
+	private RadioButton selectedToggle = null;
 
 
 	public ThongKeController(Scene previousScene) {
@@ -53,14 +51,20 @@ public class ThongKeController extends BaseLeftController {
 	 */
 	public ThongKeController(Scene previousScene, RadioButton selectedToggle) {
 		this.previousScene = previousScene;
-
-		if (BY_DOT.equals(selectedToggle)) {
-			filterType.selectToggle(rbDot);
-		} else if (BY_HO.equals(selectedToggle)) {
-			filterType.selectToggle(rbHo);
-		}
+		this.selectedToggle = selectedToggle;
 	}
 
+
+	@FXML
+	protected void initialize() {
+		if (BY_DOT.equals(selectedToggle)) {
+			filterType.selectToggle(rbDot);
+			onFindClicked(new ActionEvent());
+		} else if (BY_HO.equals(selectedToggle)) {
+			filterType.selectToggle(rbHo);
+			onFindClicked(new ActionEvent());
+		}
+	}
 
 	@FXML
 	public void onFindClicked(ActionEvent ignored) {
