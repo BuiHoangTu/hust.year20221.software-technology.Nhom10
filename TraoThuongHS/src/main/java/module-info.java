@@ -7,8 +7,13 @@ module cnpm.traothuonghs {
 
 
 	exports cnpm.traothuonghs.models;
-	opens cnpm.traothuonghs.models to javafx.fxml;
+	opens cnpm.traothuonghs.models;
 
 	exports cnpm.traothuonghs.application;
 	opens cnpm.traothuonghs.application;
+
+	exports cnpm.traothuonghs.controllers;
+	opens cnpm.traothuonghs.controllers;
+
+
 }
