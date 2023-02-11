@@ -6,12 +6,13 @@ import javafx.fxml.FXML;
 public abstract class BaseLeftController extends ChangeSceneControllers{
 	@FXML
 	public void onHomeClicked(ActionEvent ignored) {
-		changeScene(""); // link to home
+		changeScene("/cnpm/traothuonghs/views/Trang_chinh.fxml"); // link to home
 	}
 
 	@FXML
 	public void onHSClicked(ActionEvent ignored) {
 		// link to hs
+		changeScene("/cnpm/traothuonghs/views/Quan-ly-hoc-sinh.fxml");
 	}
 
 	@FXML

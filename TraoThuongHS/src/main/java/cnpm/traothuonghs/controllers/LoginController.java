@@ -29,7 +29,7 @@ public class LoginController {
             int uID = Database.login(tfUserName.getText(), tfPasswd.getText());
             if (uID >= 0) {
 				QuanLyNhanKhauApplication.USER = uID;
-                FXMLLoader fxmlLoader = new FXMLLoader(LoginController.class.getResource("/cnpm/traothuonghs/views/Them-hoc-sinh.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(LoginController.class.getResource("/cnpm/traothuonghs/views/Trang_chinh.fxml"));
                 Scene scene = null;
                 try {
                     scene = new Scene(fxmlLoader.load());

@@ -27,7 +27,7 @@ public class QuanLyHocSinhController extends BaseLeftController{
     }
 
     public void onThemHocSinhClicked(ActionEvent event) {
-        //changeScene();
+        changeScene("/cnpm/traothuonghs/views/Them-hoc-sinh.fxml");
     }
 
     public void onChinhSuaHocSinhClicked(ActionEvent event) {
