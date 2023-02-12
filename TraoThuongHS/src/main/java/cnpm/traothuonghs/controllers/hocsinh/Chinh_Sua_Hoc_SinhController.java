@@ -1,4 +1,4 @@
-package cnpm.traothuonghs.controllers;
+package cnpm.traothuonghs.controllers.hocsinh;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

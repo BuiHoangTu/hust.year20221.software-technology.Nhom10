@@ -1,12 +1,14 @@
-package cnpm.traothuonghs.controllers;
+package cnpm.traothuonghs.controllers.hocsinh;
 
+import cnpm.traothuonghs.controllers.ChangeSceneControllers;
+import cnpm.traothuonghs.controllers.IFlushableController;
 import cnpm.traothuonghs.models.HocSinh;
 import javafx.event.ActionEvent;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 
-public class ThemHocSinhController extends ChangeSceneControllers implements IFlushableController{
+public class ThemHocSinhController extends ChangeSceneControllers implements IFlushableController {
     public TextField tfTenHocSinh;
     public TextField tfLop;
     public TextField tfDanhHieu;

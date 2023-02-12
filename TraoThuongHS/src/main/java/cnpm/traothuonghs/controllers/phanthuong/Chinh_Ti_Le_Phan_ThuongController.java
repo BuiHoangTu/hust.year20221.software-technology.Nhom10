@@ -1,5 +1,6 @@
-package cnpm.traothuonghs.controllers;
+package cnpm.traothuonghs.controllers.phanthuong;
 
+import cnpm.traothuonghs.controllers.EdgeController;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;

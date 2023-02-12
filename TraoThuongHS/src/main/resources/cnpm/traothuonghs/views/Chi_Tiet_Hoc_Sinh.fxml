@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="542.0" prefWidth="935.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cnpm.traothuonghs.controllers.Chi_Tiet_Hoc_SinhController">
+<AnchorPane prefHeight="542.0" prefWidth="935.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cnpm.traothuonghs.controllers.hocsinh.Chi_Tiet_Hoc_SinhController">
    <AnchorPane layoutX="225.0" layoutY="2.0" prefHeight="542.0" prefWidth="711.0">
       <children>
          <GridPane layoutX="20.0" layoutY="41.0" prefHeight="100.0" prefWidth="670.0" style="-fx-border-color: black; -fx-padding: 5;">
