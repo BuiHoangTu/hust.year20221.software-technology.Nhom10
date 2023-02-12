@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Line?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cnpm.traothuonghs.controllers.Chinh_Sua_Hoc_SinhController">
+   <bottom>
+      <AnchorPane prefHeight="49.0" prefWidth="602.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button layoutX="444.0" layoutY="13.0" mnemonicParsing="false" onAction="#onHuyClicked" prefHeight="26.0" prefWidth="69.0" text="Hủy" />
+            <Button layoutX="521.0" layoutY="13.0" mnemonicParsing="false" onAction="#onXacNhanClicked" text="Xác nhận" />
+            <Line endX="570.0928955078125" endY="3.6597251892089844E-5" layoutX="30.0" layoutY="-1.0" startX="-29.9999942779541" startY="3.6597251892089844E-5" />
+         </children>
+      </AnchorPane>
+   </bottom>
+   <top>
+      <AnchorPane prefHeight="29.0" prefWidth="602.0" BorderPane.alignment="CENTER">
+         <children>
+            <Line endX="570.0928955078125" endY="3.6597251892089844E-5" layoutX="30.0" layoutY="28.0" startX="-29.9999942779541" startY="3.6597251892089844E-5" />
+         </children>
+      </AnchorPane>
+   </top>
+   <left>
+      <AnchorPane prefHeight="330.0" prefWidth="12.0" BorderPane.alignment="CENTER">
+         <children>
+            <GridPane prefHeight="331.0" prefWidth="103.0" style="-fx-padding: 10;">
+              <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="195.20001220703125" minWidth="10.0" prefWidth="76.79998779296875" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label text="Tên học sinh" />
+                  <Label text="Ngày sinh" GridPane.rowIndex="1" />
+                  <Label text="Trường học" GridPane.rowIndex="2" />
+                  <Label text="Lớp" GridPane.rowIndex="3" />
+                  <Label text="Danh hiệu" GridPane.rowIndex="4" />
+                  <Label text="Mã hộ khẩu" GridPane.rowIndex="5" />
+                  <Label text="Tên phụ huynh" GridPane.rowIndex="6" />
+               </children>
+            </GridPane>
+            <Line endX="100.00001525878906" endY="7.200000762939453" startX="100.00001525878906" startY="326.4000244140625" />
+         </children>
+      </AnchorPane>
+   </left>
+   <right>
+      <AnchorPane prefHeight="330.0" prefWidth="278.0" BorderPane.alignment="CENTER">
+         <children>
+            <GridPane prefHeight="330.0" prefWidth="278.0" style="-fx-padding: 10;">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <TextField fx:id="tfTen" prefHeight="26.0" prefWidth="258.0" />
+                  <TextField fx:id="tfNgaySinh" GridPane.rowIndex="1" />
+                  <TextField fx:id="tfTruong" GridPane.rowIndex="2" />
+                  <TextField fx:id="tfLop" GridPane.rowIndex="3" />
+                  <TextField fx:id="tfDanhHieu" GridPane.rowIndex="4" />
+                  <TextField fx:id="tfMaHoKhau" GridPane.rowIndex="5" />
+                  <TextField fx:id="tfPhuHuynh" GridPane.rowIndex="6" />
+               </children>
+            </GridPane>
+         </children>
+      </AnchorPane>
+   </right>
+   <center>
+      <AnchorPane prefHeight="330.0" prefWidth="232.0" BorderPane.alignment="CENTER">
+         <children>
+            <GridPane prefHeight="331.0" prefWidth="226.0" style="-fx-padding: 10;">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="195.20001220703125" minWidth="10.0" prefWidth="79.59998779296875" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="195.20001220703125" minWidth="10.0" prefWidth="125.20001220703124" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Label text="Thông tin cũ : " />
+                  <Label text="Thông tin cũ :" GridPane.rowIndex="1" />
+                  <Label text="Thông tin cũ :" GridPane.rowIndex="2" />
+                  <Label text="Thông tin cũ :" GridPane.rowIndex="3" />
+                  <Label text="Thông tin cũ :" GridPane.rowIndex="4" />
+                  <Label text="Thông tin cũ :" GridPane.rowIndex="5" />
+                  <Label text="Thông tin cũ :" GridPane.rowIndex="6" />
+                  <Label text="Thông tin cũ : " />
+                  <Label text="Thông tin cũ : " />
+                  <Label fx:id="lbTenCu" text="Label" GridPane.columnIndex="1" />
+                  <Label fx:id="lbNgaySinhCu" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label fx:id="lbTruongCu" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Label fx:id="lbLopCu" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Label fx:id="lbDanhHieuCu" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <Label fx:id="lbMaHoKhauCu" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <Label fx:id="lbPhuHuynhCu" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+               </children>
+            </GridPane>
+            <Line endX="100.800048828125" endY="5.400012969970703" layoutX="125.0" layoutY="1.0" startX="100.00001525878906" startY="326.4000244140625" />
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>
