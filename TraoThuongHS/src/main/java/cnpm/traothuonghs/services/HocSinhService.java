@@ -55,14 +55,13 @@ public class HocSinhService {
 
     public static HocSinh themHocSinh (String ten, String phuHuynh, LocalDate ngaySinh, String truongHoc, String lop, String maHK, String danhHieu, String dotPhatThuong) throws SQLException {
         String idNK;
-        String sqlQuery = "Insert into trao_thuong_hoc_sinh.hoc_sinh (ten, ngaySinh, truongHoc, lop, maHoKhau, phuHuynh) values (?, ?, ?, ?, ?, ?)";
+        String sqlQuery = "Insert into trao_thuong_hoc_sinh.hoc_sinh (ten, ngaySinh, truongHoc, lop, maHoKhau, phuHuynh) values (?, ?, ?, ?, ?)";
         PreparedStatement statement = Database.getConnection().prepareStatement(sqlQuery, Statement.RETURN_GENERATED_KEYS);
         statement.setString(1, ten);
         statement.setString(2, ngaySinh.toString());
         statement.setString(3, truongHoc);
-        statement.setString(4, lop);
-        statement.setString(5, maHK);
-        statement.setString(6, phuHuynh);
+        statement.setString(4, maHK);
+        statement.setString(5, phuHuynh);
 
         statement.executeUpdate();
         ResultSet rs = statement.getGeneratedKeys();
@@ -70,13 +69,14 @@ public class HocSinhService {
 
             // TODO : Thêm danh hiệu
             idNK = rs.getString(1);
-            String sqlQuery2 = "Insert into trao_thuong_hoc_sinh.phan_thuong (idHocSinh, ngayPhatThuong, dotPhatThuong, danhHieu) values (?, ?, ?, ?)";
+            String sqlQuery2 = "Insert into trao_thuong_hoc_sinh.phan_thuong (idHocSinh, ngayPhatThuong, lop, dotPhatThuong, danhHieu) values (?, ?, ?, ?, ?)";
             PreparedStatement statement1 = Database.getConnection().prepareStatement(sqlQuery2);
 
             statement1.setString(1, rs.getString(1)); // Lấy idHocSinh
             statement1.setString(2, LocalDate.now().toString()); // TODO : thêm theo ngày hôm nay
-            statement1.setString(3, dotPhatThuong); // TODO : thêm tên đợt theo đợt gần nhất so với ngày hiện tại
-            statement1.setString(4, danhHieu);
+            statement1.setString(3, lop);
+            statement1.setString(4, dotPhatThuong); // TODO : thêm tên đợt theo đợt gần nhất so với ngày hiện tại
+            statement1.setString(5, danhHieu);
 
             statement1.executeUpdate();
 
@@ -84,5 +84,16 @@ public class HocSinhService {
         }
 
         return null;
+    }
+
+    public static int getSoHocSinh() throws SQLException {
+        int soHS = 0;
+        StringBuilder sqlQuery = new StringBuilder();
+        sqlQuery.append("Select COUNT(id) from hoc_sinh");
+        PreparedStatement statement = Database.getConnection().prepareStatement(sqlQuery.toString());
+        ResultSet res = statement.executeQuery();
+        res.next();
+        soHS = res.getInt(1);
+        return soHS;
     }
 }

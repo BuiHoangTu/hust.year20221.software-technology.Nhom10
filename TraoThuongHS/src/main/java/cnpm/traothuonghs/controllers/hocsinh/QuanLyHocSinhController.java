@@ -1,18 +1,19 @@
 package cnpm.traothuonghs.controllers.hocsinh;
 
 import cnpm.traothuonghs.controllers.BaseLeftController;
+import cnpm.traothuonghs.models.HocSinh;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 public class QuanLyHocSinhController extends BaseLeftController {
 
-    public TableColumn colTenHocSinh;
-    public TableColumn colPhuHuynh;
-    public TableColumn colNgaySinh;
-    public TableColumn colTruong;
-    public TableColumn colLop;
-    public TableView tvHocSinh;
+    public TableColumn<HocSinh, String> colTenHocSinh;
+    public TableColumn<HocSinh, String> colPhuHuynh;
+    public TableColumn<HocSinh, String> colNgaySinh;
+    public TableColumn<HocSinh, String> colTruong;
+    public TableColumn<HocSinh, String> colLop;
+    public TableView<HocSinh> tvHocSinh;
     public CheckBox chbTen;
     public CheckBox chbDotPhat;
     public CheckBox chbDiaChi;
@@ -20,7 +21,7 @@ public class QuanLyHocSinhController extends BaseLeftController {
 
     @FXML
     private void initialize() {
-        //Lấy dữ liệu trong database đưa vào bảng
+
     }
 
     public void onTimKiemClicked(ActionEvent event) {
