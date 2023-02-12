@@ -175,4 +175,18 @@ public class PhanThuongService {
 
 		return output;
 	}
+
+	public static List<PhanThuong> findPhanThuongHS(String idHS) throws SQLException {
+		List<PhanThuong> result = new ArrayList<>();
+		StringBuilder sqlQuery = new StringBuilder();
+		sqlQuery.append("Select * from trao_thuong_hoc_sinh.phan_thuong where idHocSinh = ?");
+		PreparedStatement statement = Database.getConnection().prepareStatement(sqlQuery.toString());
+		statement.setString(1, idHS);
+		ResultSet res = statement.executeQuery();
+		while (res.next()){
+			PhanThuong x = new PhanThuong(res.getDate(3).toLocalDate(), res.getString(4), res.getString(5), res.getString(2));
+			result.add(x);
+		}
+		return result;
+	}
 }
