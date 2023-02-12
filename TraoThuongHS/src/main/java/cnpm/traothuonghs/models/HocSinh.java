@@ -24,6 +24,10 @@ public class HocSinh {
 		this.phuHuynh = phuHuynh;
 	}
 
+	public String getTen() {
+		return ten;
+	}
+
 	public void themPhanThuong(String danhHieu) {
 		/* todo
 		tạo phần thưởng mới, thêm vào cacPhanThuong

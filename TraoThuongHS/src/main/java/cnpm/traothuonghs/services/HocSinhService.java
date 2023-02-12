@@ -53,7 +53,7 @@ public class HocSinhService {
         }
     }
 
-    public static HocSinh themHocSinh (String ten, String phuHuynh, LocalDate ngaySinh, String truongHoc, String lop, String maHK, String danhHieu) throws SQLException {
+    public static HocSinh themHocSinh (String ten, String phuHuynh, LocalDate ngaySinh, String truongHoc, String lop, String maHK, String danhHieu, String dotPhatThuong) throws SQLException {
         String idNK;
         String sqlQuery = "Insert into trao_thuong_hoc_sinh.hoc_sinh (ten, ngaySinh, truongHoc, lop, maHoKhau, phuHuynh) values (?, ?, ?, ?, ?, ?)";
         PreparedStatement statement = Database.getConnection().prepareStatement(sqlQuery, Statement.RETURN_GENERATED_KEYS);
@@ -70,11 +70,13 @@ public class HocSinhService {
 
             // TODO : Thêm danh hiệu
             idNK = rs.getString(1);
-            String sqlQuery2 = "Insert into trao_thuong_hoc_sinh.phan_thuong (ngayPhatThuong, dotPhatThuong, danhHieu) values (?, ?, ?)";
+            String sqlQuery2 = "Insert into trao_thuong_hoc_sinh.phan_thuong (idHocSinh, ngayPhatThuong, dotPhatThuong, danhHieu) values (?, ?, ?, ?)";
             PreparedStatement statement1 = Database.getConnection().prepareStatement(sqlQuery2);
-            statement1.setString(1, LocalDate.now().toString()); // TODO : thêm theo ngày hôm nay
-            statement1.setString(2, new TinhThuongService().toString()); // TODO : thêm tên đợt theo đợt gần nhất so với ngày hiện tại
-            statement1.setString(3, danhHieu);
+
+            statement1.setString(1, rs.getString(1)); // Lấy idHocSinh
+            statement1.setString(2, LocalDate.now().toString()); // TODO : thêm theo ngày hôm nay
+            statement1.setString(3, dotPhatThuong); // TODO : thêm tên đợt theo đợt gần nhất so với ngày hiện tại
+            statement1.setString(4, danhHieu);
 
             statement1.executeUpdate();
 

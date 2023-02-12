@@ -1,5 +1,6 @@
-package cnpm.traothuonghs.controllers;
+package cnpm.traothuonghs.controllers.hocsinh;
 
+import cnpm.traothuonghs.controllers.EdgeController;
 import cnpm.traothuonghs.models.PhanThuong;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

@@ -17,4 +17,8 @@ module cnpm.traothuonghs {
 
 	exports cnpm.traothuonghs.controllers.thongke;
 	opens cnpm.traothuonghs.controllers.thongke;
+    exports cnpm.traothuonghs.controllers.hocsinh;
+    opens cnpm.traothuonghs.controllers.hocsinh;
+	exports cnpm.traothuonghs.controllers.phanthuong;
+	opens cnpm.traothuonghs.controllers.phanthuong;
 }

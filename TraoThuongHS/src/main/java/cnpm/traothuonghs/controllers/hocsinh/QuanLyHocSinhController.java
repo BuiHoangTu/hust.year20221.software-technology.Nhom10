@@ -1,10 +1,11 @@
-package cnpm.traothuonghs.controllers;
+package cnpm.traothuonghs.controllers.hocsinh;
 
+import cnpm.traothuonghs.controllers.BaseLeftController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
-public class QuanLyHocSinhController extends BaseLeftController{
+public class QuanLyHocSinhController extends BaseLeftController {
 
     public TableColumn colTenHocSinh;
     public TableColumn colPhuHuynh;
