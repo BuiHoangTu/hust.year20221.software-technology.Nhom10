@@ -1,10 +1,11 @@
-package cnpm.traothuonghs.controllers;
+package cnpm.traothuonghs.controllers.hocSinh;
 
+import cnpm.traothuonghs.controllers.BaseLeftController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
-public class QuanLyHocSinhController extends BaseLeftController{
+public class QuanLyHocSinhController extends BaseLeftController {
 
     public TableColumn colTenHocSinh;
     public TableColumn colPhuHuynh;
@@ -27,7 +28,7 @@ public class QuanLyHocSinhController extends BaseLeftController{
     }
 
     public void onThemHocSinhClicked(ActionEvent event) {
-        changeScene("/cnpm/traothuonghs/views/Them-hoc-sinh.fxml");
+        changeScene("/cnpm/traothuonghs/views/hocSinh/Them-hoc-sinh.fxml");
     }
 
     public void onChinhSuaHocSinhClicked(ActionEvent event) {
