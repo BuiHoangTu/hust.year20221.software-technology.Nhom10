@@ -17,9 +17,8 @@ public class TamTruVangService {
         statement.setString(1, maTamTruVang);
         ResultSet rs = statement.executeQuery();
         while (rs.next()){
-            TamTruVang x = new TamTruVang(rs.getString(2), rs.getDate(4).toLocalDate(),rs.getDate(5).toLocalDate()
+            return new TamTruVang(rs.getString(2), rs.getDate(4).toLocalDate(),rs.getDate(5).toLocalDate()
                                             , DiaChi.parse(rs.getString(7)),DiaChi.parse(rs.getString(3)), rs.getString(6));
-            return x;
         }
         return null;
     }

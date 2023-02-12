@@ -4,10 +4,14 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import cnpm.quanlynhankhau.models.DiaChi;
+import cnpm.quanlynhankhau.models.HoKhau;
 import cnpm.quanlynhankhau.models.NhanKhau;
+import cnpm.quanlynhankhau.services.HoKhauService;
 import cnpm.quanlynhankhau.services.NhanKhauService;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -16,7 +20,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-public class ThongKeController extends EdgeController {
+public class ThongKe extends EdgeController {
 	
 	private static final String DELIMITER = ",";
 	private static final String LINE_SEPARATOR = "\n";
@@ -102,9 +106,6 @@ public class ThongKeController extends EdgeController {
 	
 	@FXML
     protected void onExportClicked() throws FileNotFoundException {
-        // TODO : làm xuất file
-		// csv
-		
 		List<String> headers = new ArrayList<String>();
 		
 		headers.add("ID");

@@ -4,6 +4,8 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
@@ -29,7 +31,7 @@
          </columnResizePolicy>
       </TableView>
    </AnchorPane>
-   <AnchorPane layoutX="-1.0" layoutY="4.0" prefHeight="506.0" prefWidth="202.0" style="-fx-background-color: gray;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-1.0" AnchorPane.topAnchor="4.0">
+   <AnchorPane layoutY="2.0" prefHeight="506.0" prefWidth="202.0" style="-fx-background-color: gray;" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="2.0">
       <Button layoutX="3.0" layoutY="-4.0" mnemonicParsing="false" onAction="#onTrangChuClicked" prefHeight="62.0" prefWidth="222.0" style="-fx-background-color: black;" text="Trang Chủ" textFill="#f7f3f3">
          <font>
             <Font name="System Bold" size="20.0" />
@@ -50,5 +52,25 @@
             <Font name="System Bold" size="20.0" />
          </font>
       </Button>
+      <ImageView fitHeight="47.0" fitWidth="38.0" layoutX="15.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../Icons/app.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="33.0" fitWidth="38.0" layoutX="34.0" layoutY="170.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../Icons/home.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="33.0" fitWidth="38.0" layoutX="34.0" layoutY="109.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../Icons/multiple-users-silhouette.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="33.0" fitWidth="38.0" layoutX="34.0" layoutY="233.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../Icons/increasing-stocks-graphic.png" />
+         </image>
+      </ImageView>
    </AnchorPane>
 </AnchorPane>
