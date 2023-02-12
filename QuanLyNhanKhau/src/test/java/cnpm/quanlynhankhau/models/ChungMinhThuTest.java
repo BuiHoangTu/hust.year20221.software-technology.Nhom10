@@ -5,9 +5,9 @@ import java.sql.SQLException;
 
 class ChungMinhThuTest {
 
-    @Test
-    void lamCMT() throws SQLException {//test
-        DiaChi diaChi = new DiaChi("HCM", "TX", "HBT", "120","");
-//        ChungMinhThu.lamCMT(null, diaChi);
-    }
+//    @Test
+//    void lamCMT() throws SQLException {//test
+//        DiaChi diaChi = new DiaChi("HCM", "TX", "HBT", "120","");
+////        ChungMinhThu.lamCMT(null, diaChi);
+//    }
 }

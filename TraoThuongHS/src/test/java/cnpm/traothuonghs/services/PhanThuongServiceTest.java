@@ -1,18 +1,19 @@
 package cnpm.traothuonghs.services;
 
-import cnpm.traothuonghs.models.HocSinh;
+import cnpm.traothuonghs.models.PhanThuong;
 import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-class HocSinhServiceTest {
+
+class PhanThuongServiceTest {
 
 //    @Test
-//    void getHocSinh() throws SQLException {
-//        List<HocSinh> lis =  HocSinhService.getHocSinh(2, "Nguyễn");
-//        for (HocSinh x : lis){
+//    void findPhanThuongHS() throws SQLException {
+//        List<PhanThuong> lis = PhanThuongService.findPhanThuongHS("1");
+//        for (PhanThuong x : lis){
 //            System.out.println(x);
 //        }
 //    }
