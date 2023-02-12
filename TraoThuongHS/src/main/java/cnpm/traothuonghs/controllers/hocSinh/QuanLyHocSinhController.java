@@ -32,10 +32,10 @@ public class QuanLyHocSinhController extends BaseLeftController {
     }
 
     public void onChinhSuaHocSinhClicked(ActionEvent event) {
-        //changeScene();
+        changeScene("/cnpm/traothuonghs/views/Chinh_Sua_Hoc_Sinh.fxml");
     }
 
     public void onXemThongTinClicked(ActionEvent event) {
-        //changeScene();
+        changeScene("/cnpm/traothuonghs/views/Chi_Tiet_Hoc_Sinh.fxml");
     }
 }
