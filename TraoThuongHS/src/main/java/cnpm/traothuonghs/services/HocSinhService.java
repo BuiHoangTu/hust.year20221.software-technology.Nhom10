@@ -72,8 +72,8 @@ public class HocSinhService {
             idNK = rs.getString(1);
             String sqlQuery2 = "Insert into trao_thuong_hoc_sinh.phan_thuong (ngayPhatThuong, dotPhatThuong, danhHieu) values (?, ?, ?)";
             PreparedStatement statement1 = Database.getConnection().prepareStatement(sqlQuery2);
-            statement1.setString(1, null); // TODO : thêm theo ngày hôm nay
-            statement1.setString(2, null); // TODO : thêm tên đợt theo đợt gần nhất so với ngày hiện tại
+            statement1.setString(1, LocalDate.now().toString()); // TODO : thêm theo ngày hôm nay
+            statement1.setString(2, new TinhThuongService().toString()); // TODO : thêm tên đợt theo đợt gần nhất so với ngày hiện tại
             statement1.setString(3, danhHieu);
 
             statement1.executeUpdate();
