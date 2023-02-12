@@ -38,7 +38,7 @@ public class HocSinhService {
         statement.setString(1, filter);
         ResultSet rs = statement.executeQuery();
         while (rs.next()) {
-            HocSinh x = new HocSinh(rs.getString(2), rs.getDate(3).toLocalDate(), rs.getString(4), rs.getString(6), rs.getString(7));
+            HocSinh x = new HocSinh(rs.getString(2), rs.getDate(3).toLocalDate(), rs.getString(4), rs.getString(5), rs.getString(6));
             output.add(x);
         }
 
@@ -55,14 +55,13 @@ public class HocSinhService {
 
     public static HocSinh themHocSinh (String ten, String phuHuynh, LocalDate ngaySinh, String truongHoc, String lop, String maHK, String danhHieu) throws SQLException {
         String idNK;
-        String sqlQuery = "Insert into trao_thuong_hoc_sinh.hoc_sinh (ten, ngaySinh, truongHoc, lop, maHoKhau, phuHuynh) values (?, ?, ?, ?, ?, ?)";
+        String sqlQuery = "Insert into trao_thuong_hoc_sinh.hoc_sinh (ten, ngaySinh, truongHoc, maHoKhau, phuHuynh) values ( ?, ?, ?, ?, ?)";
         PreparedStatement statement = Database.getConnection().prepareStatement(sqlQuery, Statement.RETURN_GENERATED_KEYS);
         statement.setString(1, ten);
         statement.setString(2, ngaySinh.toString());
         statement.setString(3, truongHoc);
-        statement.setString(4, lop);
-        statement.setString(5, maHK);
-        statement.setString(6, phuHuynh);
+        statement.setString(4, maHK);
+        statement.setString(5, phuHuynh);
 
         statement.executeUpdate();
         ResultSet rs = statement.getGeneratedKeys();
@@ -70,11 +69,13 @@ public class HocSinhService {
 
             // TODO : Thêm danh hiệu
             idNK = rs.getString(1);
-            String sqlQuery2 = "Insert into trao_thuong_hoc_sinh.phan_thuong (ngayPhatThuong, dotPhatThuong, danhHieu) values (?, ?, ?)";
+            String sqlQuery2 = "Insert into trao_thuong_hoc_sinh.phan_thuong (idHocSinh, ngayPhatThuong, lop, dotPhatThuong, danhHieu) values (?, ?, ?, ?, ?)";
             PreparedStatement statement1 = Database.getConnection().prepareStatement(sqlQuery2);
-            statement1.setString(1, LocalDate.now().toString()); // TODO : thêm theo ngày hôm nay
-            statement1.setString(2, new TinhThuongService().toString()); // TODO : thêm tên đợt theo đợt gần nhất so với ngày hiện tại
-            statement1.setString(3, danhHieu);
+            statement1.setString(1, idNK);
+            statement1.setString(2, LocalDate.now().toString()); // TODO : thêm theo ngày hôm nay
+            statement1.setString(3, lop);
+            statement1.setString(4, new TinhThuongService().toString()); // TODO : thêm tên đợt theo đợt gần nhất so với ngày hiện tại
+            statement1.setString(5, danhHieu);
 
             statement1.executeUpdate();
 
