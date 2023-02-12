@@ -22,6 +22,6 @@ public abstract class BaseLeftController extends ChangeSceneControllers{
 
 	@FXML
 	public void onTKClicked(ActionEvent ignored) {
-		// link to tk
+		changeScene("/cnpm/traothuonghs/views/thongke/ThongKeScreen-view.fxml");
 	}
 }

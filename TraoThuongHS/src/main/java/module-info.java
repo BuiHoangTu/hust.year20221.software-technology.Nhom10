@@ -3,14 +3,18 @@ module cnpm.traothuonghs {
 	requires javafx.fxml;
 	requires cnpm.quanlynhankhau;
 	requires java.sql;
+	requires poi;
 
 
 	exports cnpm.traothuonghs.models;
-	opens cnpm.traothuonghs.models to javafx.fxml;
-	exports cnpm.traothuonghs.controllers;
-	opens cnpm.traothuonghs.controllers to javafx.fxml;
+	opens cnpm.traothuonghs.models;
+
 	exports cnpm.traothuonghs.application;
-	opens cnpm.traothuonghs.application to javafx.fxml;
-	exports cnpm.traothuonghs.services;
-	opens cnpm.traothuonghs.services to javafx.fxml;
+	opens cnpm.traothuonghs.application;
+
+	exports cnpm.traothuonghs.controllers;
+	opens cnpm.traothuonghs.controllers;
+
+	exports cnpm.traothuonghs.controllers.thongke;
+	opens cnpm.traothuonghs.controllers.thongke;
 }
