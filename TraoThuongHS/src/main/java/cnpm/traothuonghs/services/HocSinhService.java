@@ -1,6 +1,7 @@
 package cnpm.traothuonghs.services;
 
 import cnpm.traothuonghs.models.HocSinh;
+import cnpm.traothuonghs.models.PhanThuong;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -38,7 +39,7 @@ public class HocSinhService {
         statement.setString(1, filter);
         ResultSet rs = statement.executeQuery();
         while (rs.next()) {
-            HocSinh x = new HocSinh(rs.getString(2), rs.getDate(3).toLocalDate(), rs.getString(4), rs.getString(6), rs.getString(7));
+            HocSinh x = new HocSinh(rs.getString(2), rs.getDate(3).toLocalDate(), rs.getString(4), rs.getString(5), rs.getString(6));
             output.add(x);
         }
 

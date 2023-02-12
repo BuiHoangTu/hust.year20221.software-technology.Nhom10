@@ -2,9 +2,17 @@ package cnpm.traothuonghs.controllers.hocsinh;
 
 import cnpm.traothuonghs.controllers.BaseLeftController;
 import cnpm.traothuonghs.models.HocSinh;
+import cnpm.traothuonghs.services.HocSinhService;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Callback;
+
+import java.sql.SQLException;
 
 public class QuanLyHocSinhController extends BaseLeftController {
 
@@ -20,8 +28,14 @@ public class QuanLyHocSinhController extends BaseLeftController {
     public TextField tfTimKiem;
 
     @FXML
-    private void initialize() {
+    private void initialize() throws SQLException {
+        colTenHocSinh.setCellValueFactory(new PropertyValueFactory<HocSinh, String>("ten"));
+        colPhuHuynh.setCellValueFactory(new PropertyValueFactory<HocSinh, String>("phuHuynh"));
+        colNgaySinh.setCellValueFactory(new PropertyValueFactory<HocSinh, String>("ngaySinh"));
+        colTruong.setCellValueFactory(new PropertyValueFactory<HocSinh,String>("truongHoc"));
 
+        ObservableList<HocSinh> ls = FXCollections.observableList(HocSinhService.findHocSinh(1, "1"));
+        tvHocSinh.setItems(ls);
     }
 
     public void onTimKiemClicked(ActionEvent event) {
