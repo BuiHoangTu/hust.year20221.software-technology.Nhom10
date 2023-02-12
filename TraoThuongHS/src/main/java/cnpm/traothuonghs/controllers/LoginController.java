@@ -1,6 +1,5 @@
 package cnpm.traothuonghs.controllers;
 
-import cnpm.quanlynhankhau.application.QuanLyNhanKhauApplication;
 import cnpm.quanlynhankhau.services.Database;
 import cnpm.traothuonghs.application.TraoThuongHSApplication;
 import javafx.fxml.FXML;
@@ -28,7 +27,7 @@ public class LoginController {
         try {
             int uID = Database.login(tfUserName.getText(), tfPasswd.getText());
             if (uID >= 0) {
-				QuanLyNhanKhauApplication.USER = uID;
+				TraoThuongHSApplication.USER = uID;
                 FXMLLoader fxmlLoader = new FXMLLoader(LoginController.class.getResource("/cnpm/traothuonghs/views/Trang_chinh.fxml"));
                 Scene scene = null;
                 try {
