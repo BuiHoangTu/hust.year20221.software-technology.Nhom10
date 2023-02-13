@@ -4,7 +4,9 @@ import cnpm.quanlynhankhau.models.HoKhau;
 import cnpm.quanlynhankhau.models.NhanKhau;
 import cnpm.quanlynhankhau.services.HoKhauService;
 import cnpm.quanlynhankhau.services.NhanKhauService;
+import cnpm.quanlynhankhau.services.TamTruVangService;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -15,15 +17,15 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class TrangChinhControllers extends EdgeController implements Initializable {
+public class TrangChinhControllers extends EdgeController {
     public Pane pnlTrangChu;
     public Label lblNhanKhauNum;
     public Label lblHoKhauNum;
     public Label lblTamTruNum;
     public Label lblTamVangNum;
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    @FXML
+    public void initialize() throws SQLException {
         List<NhanKhau> numNK;
         try {
             numNK = NhanKhauService.findNhanKhau(5, "Hai Bà Trưng, Hà Nội", null);
@@ -39,6 +41,9 @@ public class TrangChinhControllers extends EdgeController implements Initializab
             throw new RuntimeException(e);
         }
         lblHoKhauNum.setText(String.valueOf(numHK.size()));
+
+        lblTamTruNum.setText(String.valueOf(TamTruVangService.getSoTamTru()));
+        lblTamVangNum.setText(String.valueOf(TamTruVangService.getSoTamVang()));
     }
 
     @Override

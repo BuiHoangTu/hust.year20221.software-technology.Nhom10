@@ -2,7 +2,9 @@ package cnpm.traothuonghs.controllers.hocsinh;
 
 import cnpm.traothuonghs.controllers.BaseLeftController;
 import cnpm.traothuonghs.models.HocSinh;
+import cnpm.traothuonghs.models.PhanThuong;
 import cnpm.traothuonghs.services.HocSinhService;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,6 +15,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class QuanLyHocSinhController extends BaseLeftController {
 
@@ -20,7 +24,7 @@ public class QuanLyHocSinhController extends BaseLeftController {
     public TableColumn<HocSinh, String> colPhuHuynh;
     public TableColumn<HocSinh, String> colNgaySinh;
     public TableColumn<HocSinh, String> colTruong;
-    public TableColumn<HocSinh, String> colLop;
+    public TableColumn<PhanThuong, String> colLop;
     public TableView<HocSinh> tvHocSinh;
     public CheckBox chbTen;
     public CheckBox chbDotPhat;
@@ -34,7 +38,13 @@ public class QuanLyHocSinhController extends BaseLeftController {
         colNgaySinh.setCellValueFactory(new PropertyValueFactory<HocSinh, String>("ngaySinh"));
         colTruong.setCellValueFactory(new PropertyValueFactory<HocSinh,String>("truongHoc"));
 
-        ObservableList<HocSinh> ls = FXCollections.observableList(HocSinhService.findHocSinh(1, "1"));
+        List<HocSinh> lsHS = new ArrayList<>();
+        int n = HocSinhService.getSoHocSinh();
+        for(int i = 1; i <= n; i++){
+             lsHS.add(HocSinhService.getHocSinh(1, String.valueOf(i)));
+        }
+
+        ObservableList<HocSinh> ls = FXCollections.observableList(lsHS);
         tvHocSinh.setItems(ls);
     }
 
@@ -43,14 +53,14 @@ public class QuanLyHocSinhController extends BaseLeftController {
     }
 
     public void onThemHocSinhClicked(ActionEvent event) {
-        //changeScene();
+        changeScene("/cnpm/traothuonghs/views/Them-hoc-sinh.fxml");
     }
 
     public void onChinhSuaHocSinhClicked(ActionEvent event) {
-        //changeScene();
+        changeScene("/cnpm/traothuonghs/views/Chinh_Sua_Hoc_Sinh.fxml");
     }
 
     public void onXemThongTinClicked(ActionEvent event) {
-        //changeScene();
+        changeScene("/cnpm/traothuonghs/views/Chi_Tiet_Hoc_Sinh.fxml");
     }
 }

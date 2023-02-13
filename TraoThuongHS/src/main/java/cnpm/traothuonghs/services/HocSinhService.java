@@ -56,7 +56,7 @@ public class HocSinhService {
 
     public static HocSinh themHocSinh (String ten, String phuHuynh, LocalDate ngaySinh, String truongHoc, String lop, String maHK, String danhHieu, String dotPhatThuong) throws SQLException {
         String idNK;
-        String sqlQuery = "Insert into trao_thuong_hoc_sinh.hoc_sinh (ten, ngaySinh, truongHoc, lop, maHoKhau, phuHuynh) values (?, ?, ?, ?, ?)";
+        String sqlQuery = "Insert into trao_thuong_hoc_sinh.hoc_sinh (ten, ngaySinh, truongHoc, maHoKhau, phuHuynh) values (?, ?, ?, ?, ?)";
         PreparedStatement statement = Database.getConnection().prepareStatement(sqlQuery, Statement.RETURN_GENERATED_KEYS);
         statement.setString(1, ten);
         statement.setString(2, ngaySinh.toString());

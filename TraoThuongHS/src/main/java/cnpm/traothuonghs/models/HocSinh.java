@@ -28,6 +28,26 @@ public class HocSinh {
 		return ten;
 	}
 
+	public LocalDate getNgaySinh() {
+		return ngaySinh;
+	}
+
+	public String getTruongHoc() {
+		return truongHoc;
+	}
+
+	public String getMaHoKhau() {
+		return maHoKhau;
+	}
+
+	public String getPhuHuynh() {
+		return phuHuynh;
+	}
+
+	public List<PhanThuong> getCacPhanThuong() {
+		return cacPhanThuong;
+	}
+
 	public void themPhanThuong(String danhHieu) {
 		/* todo
 		tạo phần thưởng mới, thêm vào cacPhanThuong

@@ -42,6 +42,7 @@ public class QuanLyHoKhauController extends EdgeController {
 		}
 
         colMaHoKhau.setCellValueFactory(new PropertyValueFactory<>("soHoKhau"));
+		colHoTenChuHo.setCellValueFactory(hoKhauStringCellDataFeatures -> new SimpleStringProperty(hoKhauStringCellDataFeatures.getValue().getChuHo().getTen()));
 		try {
 			colDiaChi.setCellValueFactory(x -> new SimpleStringProperty(x.getValue().getDiaChi().toString()));
 		} catch (NullPointerException e) {
