@@ -1,12 +1,12 @@
 package cnpm.traothuonghs.controllers.phanthuong;
 
-import cnpm.traothuonghs.controllers.EdgeController;
+import cnpm.traothuonghs.controllers.BaseLeftController;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
-public class Chinh_Ti_Le_Phan_ThuongController extends EdgeController {
+public class Chinh_Ti_Le_Phan_ThuongController extends BaseLeftController {
     // ComboBox Danh hiệu
     @FXML
     private ComboBox cbDanhHieu;

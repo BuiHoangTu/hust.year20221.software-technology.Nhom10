@@ -38,7 +38,7 @@ public class HocSinhService {
         statement.setString(1, filter);
         ResultSet rs = statement.executeQuery();
         while (rs.next()) {
-            HocSinh x = new HocSinh(rs.getString(2), rs.getDate(3).toLocalDate(), rs.getString(4), rs.getString(5), rs.getString(6));
+            HocSinh x = new HocSinh(rs.getString(1), rs.getString(2), rs.getDate(3).toLocalDate(), rs.getString(4), rs.getString(5), rs.getString(6));
             output.add(x);
         }
 

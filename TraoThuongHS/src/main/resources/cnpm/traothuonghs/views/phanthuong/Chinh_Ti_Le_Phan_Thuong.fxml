@@ -58,22 +58,22 @@
       </children>
    </AnchorPane>
    <AnchorPane layoutX="-1.0" layoutY="4.0" prefHeight="506.0" prefWidth="202.0" style="-fx-background-color: gray;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-1.0" AnchorPane.topAnchor="4.0">
-      <Button layoutX="3.0" layoutY="-4.0" mnemonicParsing="false" onAction="#onTrangChuClicked" prefHeight="62.0" prefWidth="222.0" style="-fx-background-color: black;" text="Trang Chủ" textFill="#f7f3f3">
+      <Button layoutX="3.0" layoutY="-4.0" mnemonicParsing="false" onAction="#onHomeClicked" prefHeight="62.0" prefWidth="222.0" style="-fx-background-color: black;" text="Trang Chủ" textFill="#f7f3f3">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Button>
-      <Button layoutX="22.0" layoutY="103.0" mnemonicParsing="false" onAction="#onNhanKhauClicked" prefHeight="44.0" prefWidth="204.0" style="-fx-background-color: #47484b;" text="Nhân khẩu" textFill="#f7f3f3">
+      <Button layoutX="22.0" layoutY="103.0" mnemonicParsing="false" onAction="#onHSClicked" prefHeight="44.0" prefWidth="204.0" style="-fx-background-color: #47484b;" text="Học Sinh" textFill="#f7f3f3">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Button>
-      <Button layoutX="22.0" layoutY="164.0" mnemonicParsing="false" onAction="#onHoKhauClicked" prefHeight="44.0" prefWidth="204.0" style="-fx-background-color: #47484b;" text="Hộ Khẩu" textFill="#f7f3f3">
+      <Button layoutX="22.0" layoutY="164.0" mnemonicParsing="false" onAction="#onPTClicked" prefHeight="44.0" prefWidth="204.0" style="-fx-background-color: #47484b;" text="Phần Thưởng" textFill="#f7f3f3">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Button>
-      <Button layoutX="22.0" layoutY="227.0" mnemonicParsing="false" onAction="#onThongKeClicked" prefHeight="44.0" prefWidth="204.0" style="-fx-background-color: #47484b;" text="Thống kê" textFill="#f7f3f3">
+      <Button layoutX="22.0" layoutY="227.0" mnemonicParsing="false" onAction="#onTKClicked" prefHeight="44.0" prefWidth="204.0" style="-fx-background-color: #47484b;" text="Thống kê" textFill="#f7f3f3">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>

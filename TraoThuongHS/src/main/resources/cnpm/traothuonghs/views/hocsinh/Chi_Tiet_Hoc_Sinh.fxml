@@ -13,14 +13,12 @@
 <AnchorPane prefHeight="542.0" prefWidth="935.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cnpm.traothuonghs.controllers.hocsinh.Chi_Tiet_Hoc_SinhController">
    <AnchorPane layoutX="225.0" layoutY="2.0" prefHeight="542.0" prefWidth="711.0">
       <children>
-         <GridPane layoutX="20.0" layoutY="41.0" prefHeight="100.0" prefWidth="670.0" style="-fx-border-color: black; -fx-padding: 5;">
+         <GridPane layoutX="20.0" layoutY="41.0" prefHeight="100.0" prefWidth="498.0" style="-fx-border-color: black; -fx-padding: 5;">
            <columnConstraints>
              <ColumnConstraints hgrow="SOMETIMES" maxWidth="113.59998779296875" minWidth="10.0" prefWidth="110.40003662109375" />
                <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.39998779296874" minWidth="10.0" prefWidth="119.99996337890626" />
              <ColumnConstraints hgrow="SOMETIMES" maxWidth="102.20001220703122" minWidth="10.0" prefWidth="89.80000000000001" />
                <ColumnConstraints hgrow="SOMETIMES" maxWidth="120.39998779296877" minWidth="10.0" prefWidth="120.39998779296877" />
-               <ColumnConstraints hgrow="SOMETIMES" maxWidth="107.20007324218744" minWidth="10.0" prefWidth="81.19997558593747" />
-               <ColumnConstraints hgrow="SOMETIMES" maxWidth="148.0" minWidth="10.0" prefWidth="134.4000244140625" />
            </columnConstraints>
            <rowConstraints>
              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -37,16 +35,6 @@
                      <Font size="14.0" />
                   </font>
                </Label>
-               <Label text="Địa chỉ :" GridPane.rowIndex="1">
-                  <font>
-                     <Font size="14.0" />
-                  </font>
-               </Label>
-               <Label fx:id="lbDiaChi" text="ABC" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                  <font>
-                     <Font size="14.0" />
-                  </font>
-               </Label>
                <Label text="Trường :" GridPane.columnIndex="2">
                   <font>
                      <Font size="14.0" />
@@ -57,45 +45,34 @@
                      <Font size="14.0" />
                   </font>
                </Label>
-               <Label text="Mã Hộ khẩu :" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <Label text="Mã Hộ khẩu :" GridPane.rowIndex="1">
                   <font>
                      <Font size="14.0" />
                   </font>
                </Label>
-               <Label fx:id="lbMaHoKhau" text="ABC" GridPane.columnIndex="3" GridPane.rowIndex="1">
+               <Label fx:id="lbMaHoKhau" text="ABC" GridPane.columnIndex="1" GridPane.rowIndex="1">
                   <font>
                      <Font size="14.0" />
                   </font>
                </Label>
-               <Label text="Lớp :" GridPane.columnIndex="4">
+               <Label text="Phụ huynh :" GridPane.columnIndex="2" GridPane.rowIndex="1">
                   <font>
                      <Font size="14.0" />
                   </font>
                </Label>
-               <Label fx:id="lbLop" text="ABC" GridPane.columnIndex="5">
-                  <font>
-                     <Font size="14.0" />
-                  </font>
-               </Label>
-               <Label text="Phụ huynh :" GridPane.columnIndex="4" GridPane.rowIndex="1">
-                  <font>
-                     <Font size="14.0" />
-                  </font>
-               </Label>
-               <Label fx:id="lbPhuHuynh" text="ABC" GridPane.columnIndex="5" GridPane.rowIndex="1">
+               <Label fx:id="lbPhuHuynh" text="ABC" GridPane.columnIndex="3" GridPane.rowIndex="1">
                   <font>
                      <Font size="14.0" />
                   </font>
                </Label>
             </children>
          </GridPane>
-         <Button layoutX="20.0" layoutY="490.0" mnemonicParsing="false" onAction="#onHSTruocDoClicked" prefHeight="30.0" prefWidth="114.0" text="Học sinh trước đó" />
          <Label layoutX="20.0" layoutY="14.0" text="Thông tin chi tiết học sinh (ID :        ) :">
             <font>
                <Font name="System Bold" size="18.0" />
             </font>
          </Label>
-         <Button layoutX="552.0" layoutY="149.0" mnemonicParsing="false" onAction="#onChinhSuaClicked" prefHeight="26.0" prefWidth="137.0" text="Chỉnh sửa thông tin" />
+         <Button layoutX="542.0" layoutY="41.0" mnemonicParsing="false" onAction="#onChinhSuaClicked" prefHeight="26.0" prefWidth="137.0" text="Chỉnh sửa thông tin" />
          <TableView fx:id="tvDanhSachThuong" layoutX="20.0" layoutY="184.0" prefHeight="295.0" prefWidth="670.0">
            <columns>
              <TableColumn fx:id="tcDanhHieu" prefWidth="144.00001525878906" text="Danh hiệu" />
@@ -109,7 +86,7 @@
                <Font name="System Bold" size="14.0" />
             </font>
          </Label>
-         <Button layoutX="570.0" layoutY="490.0" mnemonicParsing="false" onAction="#onHSTiepTheoClicked" prefHeight="30.0" prefWidth="120.0" text="Học sinh tiếp theo" />
+         <Button layoutX="570.0" layoutY="490.0" mnemonicParsing="false" onAction="#onQuayLaiClicked" prefHeight="30.0" prefWidth="120.0" text="Quay lại" />
          <Label fx:id="lbID" layoutX="290.0" layoutY="18.0" text="ABC">
             <font>
                <Font size="14.0" />
@@ -118,17 +95,17 @@
       </children>
    </AnchorPane>
    <AnchorPane layoutX="-1.0" layoutY="4.0" prefHeight="506.0" prefWidth="202.0" style="-fx-background-color: gray;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-1.0" AnchorPane.topAnchor="4.0">
-      <Button layoutX="3.0" layoutY="-4.0" mnemonicParsing="false" onAction="#onTrangChuClicked" prefHeight="62.0" prefWidth="222.0" style="-fx-background-color: black;" text="Trang Chủ" textFill="#f7f3f3">
+      <Button layoutX="3.0" layoutY="-4.0" mnemonicParsing="false" onAction="#onHomeClicked" prefHeight="62.0" prefWidth="222.0" style="-fx-background-color: black;" text="Trang Chủ" textFill="#f7f3f3">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Button>
-      <Button layoutX="22.0" layoutY="103.0" mnemonicParsing="false" onAction="#onNhanKhauClicked" prefHeight="44.0" prefWidth="204.0" style="-fx-background-color: #47484b;" text="Nhân khẩu" textFill="#f7f3f3">
+      <Button layoutX="22.0" layoutY="103.0" mnemonicParsing="false" onAction="#onNhanKhauClicked" prefHeight="44.0" prefWidth="204.0" style="-fx-background-color: #47484b;" text="Học sinh" textFill="#f7f3f3">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Button>
-      <Button layoutX="22.0" layoutY="164.0" mnemonicParsing="false" onAction="#onHoKhauClicked" prefHeight="44.0" prefWidth="204.0" style="-fx-background-color: #47484b;" text="Hộ Khẩu" textFill="#f7f3f3">
+      <Button layoutX="22.0" layoutY="164.0" mnemonicParsing="false" onAction="#onHoKhauClicked" prefHeight="44.0" prefWidth="204.0" style="-fx-background-color: #47484b;" text="Phần thưởng" textFill="#f7f3f3">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>

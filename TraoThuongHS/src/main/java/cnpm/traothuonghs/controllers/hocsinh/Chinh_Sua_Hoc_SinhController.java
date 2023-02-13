@@ -1,11 +1,26 @@
 package cnpm.traothuonghs.controllers.hocsinh;
 
+import cnpm.quanlynhankhau.models.DiaChi;
+import cnpm.quanlynhankhau.models.HoKhau;
+import cnpm.quanlynhankhau.services.HoKhauService;
+import cnpm.traothuonghs.controllers.BaseLeftController;
+import cnpm.traothuonghs.models.HocSinh;
+import cnpm.traothuonghs.models.PhanThuong;
+import cnpm.traothuonghs.services.HocSinhService;
+import cnpm.traothuonghs.services.PhanThuongService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 
-public class Chinh_Sua_Hoc_SinhController {
+import java.sql.SQLException;
+import java.time.LocalDate;
+
+public class Chinh_Sua_Hoc_SinhController extends BaseLeftController {
+    public static String idHocSinh = null;
+
     // Label Thông tin cũ
     @FXML
     private Label lbTenCu;
@@ -13,8 +28,6 @@ public class Chinh_Sua_Hoc_SinhController {
     private Label lbNgaySinhCu;
     @FXML
     private Label lbTruongCu;
-    @FXML
-    private Label lbLopCu;
     @FXML
     private Label lbDanhHieuCu;
     @FXML
@@ -30,23 +43,56 @@ public class Chinh_Sua_Hoc_SinhController {
     @FXML
     private TextField tfTruong;
     @FXML
-    private TextField tfLop;
-    @FXML
     private TextField tfDanhHieu;
     @FXML
     private TextField tfMaHoKhau;
     @FXML
     private TextField tfPhuHuynh;
 
+    @FXML
+    private void initialize() throws SQLException {
+        // Set Label thông tin cũ
+        HocSinh hocSinh = HocSinhService.getHocSinh(1, idHocSinh);
+        lbTenCu.setText(hocSinh.getTen());
+        lbNgaySinhCu.setText(hocSinh.getNgaySinh().toString());
+        lbDanhHieuCu.setText(PhanThuongService.findPhanThuongHS(idHocSinh).get(0).getDanhHieu());
+        lbMaHoKhauCu.setText(hocSinh.getMaHoKhau());
+        lbTruongCu.setText(hocSinh.getTruongHoc());
+        lbPhuHuynhCu.setText(hocSinh.getPhuHuynh());
+    }
+
     // Button
     @FXML
     protected void onHuyClicked() {
-
+        changeScene("/cnpm/quanlynhankhau/views/hocsinh/Quan-ly-hoc-sinh.fxml");
     }
 
     @FXML
-    protected void onXacNhanClicked() {
+    protected void onXacNhanClicked() throws SQLException {
+        if (tfTen.getText().equals("") || tfNgaySinh.getText().equals("") || tfTruong.getText().equals("") || tfDanhHieu.getText().equals("") || tfMaHoKhau.getText().equals("") || tfPhuHuynh.getText().equals("")) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Chưa nhập các trường cần thiết");
+            String str = "";
+            if (tfTen.getText().equals("")) str = str + "\n    Tên";
+            if (tfNgaySinh.getText().equals("")) str = str + "\n	Ngày sinh";
+            if (tfTruong.getText().equals("")) str = str + "\n	Trường";
+            if (tfDanhHieu.getText().equals("")) str = str + "\n	Danh hiệu";
+            if (tfMaHoKhau.getText().equals("")) str = str + "\n	Mã hộ khẩu";
+            if (tfPhuHuynh.getText().equals("")) str = str + "\n	Phụ huynh";
+            alert.setContentText("Các trường : " + str + "\nđang còn trống");
+            alert.show();
+        } else {
+            HocSinh tmp = HocSinhService.getHocSinh(1, idHocSinh);
+            tmp = new HocSinh(idHocSinh, tfTen.getText(), LocalDate.parse(tfNgaySinh.getText()), tfTruong.getText(), tfMaHoKhau.getText(), tfPhuHuynh.getText());
+            tmp.change(tfTen.getText(), LocalDate.parse(tfNgaySinh.getText()), tfTruong.getText(), tfMaHoKhau.getText(), tfPhuHuynh.getText());
 
+            PhanThuong tmp1 = PhanThuongService.findPhanThuongHS(idHocSinh).get(0);
+            tmp1.setDanhHieu(tfDanhHieu.getText());
+            tmp1.change(null, null, tfDanhHieu.getText(), null);
+
+            // Chuyển về scene trước đó
+            changeScene("/cnpm/quanlynhankhau/views/QuanLyHoKhau.fxml");
+        }
     }
 
 }

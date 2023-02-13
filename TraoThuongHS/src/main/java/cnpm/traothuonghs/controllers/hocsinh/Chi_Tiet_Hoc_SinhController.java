@@ -1,13 +1,26 @@
 package cnpm.traothuonghs.controllers.hocsinh;
 
-import cnpm.traothuonghs.controllers.EdgeController;
+import cnpm.traothuonghs.controllers.BaseLeftController;
+import cnpm.traothuonghs.models.HocSinh;
 import cnpm.traothuonghs.models.PhanThuong;
+import cnpm.traothuonghs.services.HocSinhService;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Callback;
 
-public class Chi_Tiet_Hoc_SinhController extends EdgeController {
+import java.sql.SQLException;
+
+public class Chi_Tiet_Hoc_SinhController extends BaseLeftController {
+
+    public static String idHocSinh = null;
+
     // Label Thông tin học sinh
     @FXML
     private Label lbID;
@@ -16,15 +29,12 @@ public class Chi_Tiet_Hoc_SinhController extends EdgeController {
     @FXML
     private Label lbTruong;
     @FXML
-    private Label lbLop;
-    @FXML
-    private Label lbDiaChi;
-    @FXML
     private Label lbMaHoKhau;
     @FXML
     private Label lbPhuHuynh;
 
     // TableView Danh sách phần thưởng cá nhân
+    private ObservableList<PhanThuong> danhSachThuong = FXCollections.observableArrayList();
     @FXML
     private TableView<PhanThuong> tvDanhSachThuong;
     @FXML
@@ -36,19 +46,45 @@ public class Chi_Tiet_Hoc_SinhController extends EdgeController {
     @FXML
     private TableColumn<PhanThuong, String> tcSoVo;
 
+    @FXML
+    private void initialize() throws SQLException {
+        // Set Label thông tin học sinh
+        lbID.setText("1");
+        HocSinh hocSinh = HocSinhService.getHocSinh(1, lbID.getText());
+        lbTen.setText(hocSinh.getTen());
+        lbTruong.setText(hocSinh.getTruongHoc());
+        lbMaHoKhau.setText(hocSinh.getMaHoKhau());
+        lbPhuHuynh.setText(hocSinh.getPhuHuynh());
+
+        // Set TableView ThanhVien
+        tcDanhHieu.setCellValueFactory(new PropertyValueFactory<PhanThuong, String>("danhHieu"));
+        tcDanhHieu.setMinWidth(20);
+        tcDanhHieu.prefWidthProperty().bind(tvDanhSachThuong.widthProperty().multiply(0.3));
+
+        tcLop.setCellValueFactory(new PropertyValueFactory<PhanThuong, String>("ngaySinh"));
+        tcLop.setMinWidth(20);
+        tcLop.prefWidthProperty().bind(tvDanhSachThuong.widthProperty().multiply(0.25));
+
+        tcNgayNhan.setCellValueFactory(new PropertyValueFactory<PhanThuong, String>("quanHeVoiChuHo"));
+        tcNgayNhan.setMinWidth(20);
+        tcNgayNhan.prefWidthProperty().bind(tvDanhSachThuong.widthProperty().multiply(0.3));
+
+        tcSoVo.setCellValueFactory(new PropertyValueFactory<PhanThuong, String>("quanHeVoiChuHo"));
+        tcSoVo.setMinWidth(20);
+        tcSoVo.prefWidthProperty().bind(tvDanhSachThuong.widthProperty().multiply(0.3));
+
+        tvDanhSachThuong.setItems(danhSachThuong);
+    }
+
     // Button
     @FXML
     protected void onChinhSuaClicked() {
-
+        Chinh_Sua_Hoc_SinhController.idHocSinh = idHocSinh;
+        changeScene("/cnpm/traothuonghs/views/hocsinh/Chinh_Sua_Hoc_Sinh.fxml");
     }
     @FXML
-    protected void onHSTruocDoClicked() {
-
-    }
-
-    @FXML
-    protected void onHSTiepTheoClicked() {
-
+    protected void onQuayLaiClicked() {
+        changeScene("/cnpm/traothuonghs/views/hocsinh/Quan-ly-hoc-sinh.fxml");
     }
 
 }
