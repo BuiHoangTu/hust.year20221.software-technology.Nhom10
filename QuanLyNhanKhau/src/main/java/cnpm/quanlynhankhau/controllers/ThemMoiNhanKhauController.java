@@ -5,6 +5,7 @@ import cnpm.quanlynhankhau.models.NhanKhau;
 import cnpm.quanlynhankhau.services.ChungMinhThuService;
 import cnpm.quanlynhankhau.services.NhanKhauService;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -32,8 +33,9 @@ public class ThemMoiNhanKhauController extends ChangeSceneControllers {
     public DatePicker dpBirth;
     public ComboBox<String> cbGioiTinh;
 
+    @FXML
     private void initialize() {
-        cbGioiTinh.getItems().addAll("Nam","Nu");
+        cbGioiTinh.getItems().addAll("Nam","Nữ");
     }
     public void onHuyClicked(ActionEvent event) {
         changeScene("/cnpm/quanlynhankhau/views/QuanLyNhanKhau.fxml");
