@@ -6,6 +6,8 @@ import cnpm.quanlynhankhau.services.HoKhauService;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -49,6 +51,30 @@ public class QuanLyHoKhauController extends EdgeController {
 			colDiaChi.setCellValueFactory(x -> new SimpleStringProperty(""));
 		}
 		tvHoKhau.setItems(hkKhuVuc);
+
+		FilteredList<HoKhau> ls = new FilteredList<>(hkKhuVuc, b-> true);
+		tfSearch.textProperty().addListener((observable, oldValue, newValue) -> {
+			ls.setPredicate(HoKhau -> {
+				if(newValue.isEmpty() || newValue.isBlank() || newValue == null){
+					return true;
+				}
+
+				String keywrd = newValue.toLowerCase();
+				if(HoKhau.getSoHoKhau().toLowerCase().contains(keywrd)){
+					return true;
+				} else if (HoKhau.getChuHo().getTen().toLowerCase().contains(keywrd)) {
+					return true;
+				} else if (HoKhau.getDiaChi().toString().toLowerCase().contains(keywrd)) {
+					return true;
+				} else
+					return false;
+			});
+		});
+
+		SortedList<HoKhau> sorted = new SortedList<>(ls);
+		sorted.comparatorProperty().bind(tvHoKhau.comparatorProperty());
+
+		tvHoKhau.setItems(sorted);
     }
 
     public void onTachHoKhauClicked(ActionEvent actionEvent) {
