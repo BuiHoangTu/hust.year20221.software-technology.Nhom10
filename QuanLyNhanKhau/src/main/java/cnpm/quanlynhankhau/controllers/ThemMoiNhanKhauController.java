@@ -33,9 +33,12 @@ public class ThemMoiNhanKhauController extends ChangeSceneControllers {
     public ComboBox<String> cbGioiTinh;
 
     private void initialize() {
+
         cbGioiTinh.getItems().addAll("Nam","Nu");
     }
+
     public void onHuyClicked(ActionEvent event) {
+
         changeScene("/cnpm/quanlynhankhau/views/QuanLyNhanKhau.fxml");
     }
 
