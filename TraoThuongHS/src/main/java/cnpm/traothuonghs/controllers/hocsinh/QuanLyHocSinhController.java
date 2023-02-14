@@ -8,6 +8,8 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -16,7 +18,9 @@ import javafx.util.Callback;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class QuanLyHocSinhController extends BaseLeftController {
 
@@ -48,8 +52,20 @@ public class QuanLyHocSinhController extends BaseLeftController {
         tvHocSinh.setItems(ls);
     }
 
-    public void onTimKiemClicked(ActionEvent event) {
+    public void onTimKiemClicked(ActionEvent event) throws SQLException {
         //Tìm học sinh theo checkBox và textField từ database
+        if(chbTen.isSelected()){
+            ObservableList<HocSinh> ls = FXCollections.observableList(HocSinhService.findHocSinh(2, tfTimKiem.getText()));
+            tvHocSinh.getItems().clear();
+            tvHocSinh.getItems().addAll(ls);
+        }
+
+        if (chbDiaChi.isSelected()){
+            ObservableList<HocSinh> ls = FXCollections.observableList(HocSinhService.findHocSinh(3, tfTimKiem.getText()));
+            tvHocSinh.getItems().clear();
+            tvHocSinh.getItems().addAll(ls);
+        }
+
     }
 
     public void onThemHocSinhClicked(ActionEvent event) {
@@ -63,4 +79,5 @@ public class QuanLyHocSinhController extends BaseLeftController {
     public void onXemThongTinClicked(ActionEvent event) {
         changeScene("/cnpm/traothuonghs/views/Chi_Tiet_Hoc_Sinh.fxml");
     }
+
 }
