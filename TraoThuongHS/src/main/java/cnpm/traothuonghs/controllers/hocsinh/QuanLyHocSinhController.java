@@ -4,6 +4,7 @@ import cnpm.traothuonghs.controllers.BaseLeftController;
 import cnpm.traothuonghs.models.HocSinh;
 import cnpm.traothuonghs.models.PhanThuong;
 import cnpm.traothuonghs.services.HocSinhService;
+import cnpm.traothuonghs.services.PhanThuongService;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -28,7 +29,7 @@ public class QuanLyHocSinhController extends BaseLeftController {
     public TableColumn<HocSinh, String> colPhuHuynh;
     public TableColumn<HocSinh, String> colNgaySinh;
     public TableColumn<HocSinh, String> colTruong;
-    public TableColumn<PhanThuong, String> colLop;
+    public TableColumn<HocSinh, String> colLop;
     public TableView<HocSinh> tvHocSinh;
     public CheckBox chbTen;
     public CheckBox chbDotPhat;
@@ -41,11 +42,13 @@ public class QuanLyHocSinhController extends BaseLeftController {
         colPhuHuynh.setCellValueFactory(new PropertyValueFactory<HocSinh, String>("phuHuynh"));
         colNgaySinh.setCellValueFactory(new PropertyValueFactory<HocSinh, String>("ngaySinh"));
         colTruong.setCellValueFactory(new PropertyValueFactory<HocSinh,String>("truongHoc"));
+        colLop.setCellValueFactory(hocSinhStringCellDataFeatures -> new SimpleStringProperty(hocSinhStringCellDataFeatures.getValue().getCacPhanThuong().get(hocSinhStringCellDataFeatures.getValue().getCacPhanThuong().size()-1).getLop()));
 
         List<HocSinh> lsHS = new ArrayList<>();
-        int n = HocSinhService.getSoHocSinh();
-        for(int i = 1; i <= n; i++){
-             lsHS.add(HocSinhService.getHocSinh(1, String.valueOf(i)));
+        for(int i = 1; i <= 1000; i++){
+            if(HocSinhService.getHocSinh(1, String.valueOf(i)) != null){
+                lsHS.add(HocSinhService.getHocSinh(1, String.valueOf(i)));
+            }
         }
 
         ObservableList<HocSinh> ls = FXCollections.observableList(lsHS);
@@ -56,6 +59,22 @@ public class QuanLyHocSinhController extends BaseLeftController {
         //Tìm học sinh theo checkBox và textField từ database
         if(chbTen.isSelected()){
             ObservableList<HocSinh> ls = FXCollections.observableList(HocSinhService.findHocSinh(2, tfTimKiem.getText()));
+            tvHocSinh.getItems().clear();
+            tvHocSinh.getItems().addAll(ls);
+        }
+
+        if(chbDotPhat.isSelected()){
+            List<HocSinh> ls = new ArrayList<>();
+            for (int i =1; i <= 1000; i++){
+                if(HocSinhService.getHocSinh(1, String.valueOf(i)) != null){
+                    List<PhanThuong> lisPT = HocSinhService.getHocSinh(1, String.valueOf(i)).getCacPhanThuong();
+                    for (PhanThuong x : lisPT){
+                        if(x.getTenDotPhatThuong().contains(tfTimKiem.getText())){
+                            ls.add(HocSinhService.getHocSinh(1, String.valueOf(i)));
+                        }
+                    }
+                }
+            }
             tvHocSinh.getItems().clear();
             tvHocSinh.getItems().addAll(ls);
         }

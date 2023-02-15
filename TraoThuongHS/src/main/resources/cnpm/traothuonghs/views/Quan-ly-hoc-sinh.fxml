@@ -65,15 +65,15 @@
       </AnchorPane>
    </right>
    <center>
-      <ScrollPane prefHeight="416.0" prefWidth="538.0" BorderPane.alignment="CENTER">
-         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="503.0" prefWidth="577.0">
-            <TableView fx:id="tvHocSinh" prefHeight="607.0" prefWidth="577.0">
+      <ScrollPane prefHeight="360.0" prefWidth="462.0" BorderPane.alignment="CENTER">
+         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="503.0" prefWidth="658.0">
+            <TableView fx:id="tvHocSinh" prefHeight="607.0" prefWidth="661.0">
                <columns>
                   <TableColumn fx:id="colTenHocSinh" prefWidth="130.93326258659363" text="Tên học sinh" />
                   <TableColumn fx:id="colPhuHuynh" prefWidth="129.86663818359375" text="Phụ huynh" />
                   <TableColumn fx:id="colNgaySinh" prefWidth="72.0" text="Ngày sinh" />
                   <TableColumn fx:id="colTruong" minWidth="5.86663818359375" prefWidth="176.79989624023438" text="Trường " />
-                  <TableColumn fx:id="colLop" prefWidth="66.40008544921875" text="Lớp" />
+                  <TableColumn fx:id="colLop" prefWidth="150.40004882812502" text="Lớp" />
                </columns>
             </TableView>
          </AnchorPane>

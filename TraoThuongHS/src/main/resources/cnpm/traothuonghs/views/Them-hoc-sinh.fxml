@@ -39,6 +39,8 @@
         <TextField fx:id="tfTenPhuHuynh" GridPane.columnIndex="4" GridPane.rowIndex="2" />
         <DatePicker fx:id="dpNgaySinh" GridPane.columnIndex="1" GridPane.rowIndex="1" />
         <ComboBox fx:id="cbTruong" prefHeight="26.0" prefWidth="224.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <TextField fx:id="tfDotPhatThuong" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+      <Label text="Đợt phát thưởng" GridPane.columnIndex="3" GridPane.rowIndex="3" />
     </GridPane>
     <Label layoutX="305.0" layoutY="14.0" text="Thêm học sinh" />
     <GridPane layoutY="214.0" prefHeight="30.0" prefWidth="687.0">

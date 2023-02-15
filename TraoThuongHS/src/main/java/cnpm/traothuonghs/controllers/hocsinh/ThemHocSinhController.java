@@ -4,6 +4,7 @@ import cnpm.traothuonghs.controllers.ChangeSceneControllers;
 import cnpm.traothuonghs.controllers.IFlushableController;
 import cnpm.traothuonghs.models.HocSinh;
 import cnpm.traothuonghs.services.HocSinhService;
+import cnpm.traothuonghs.services.PhanThuongService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -21,6 +22,7 @@ public class ThemHocSinhController extends ChangeSceneControllers implements IFl
     public TextField tfTenPhuHuynh;
     public DatePicker dpNgaySinh;
     public ComboBox cbTruong;
+    public TextField tfDotPhatThuong;
 
     @Override
     public void flush_data() {
@@ -38,8 +40,9 @@ public class ThemHocSinhController extends ChangeSceneControllers implements IFl
 
     public void onXacNhanClicked(ActionEvent event) throws SQLException {
         //Thêm học sinh vào database
-        HocSinhService.themHocSinh(tfTenHocSinh.getText(), tfTenPhuHuynh.getText(), dpNgaySinh.getValue(), cbTruong.getValue().toString(), tfLop.getText(), tfMaHoKhau.getText(), tfDanhHieu.getText(), null);
+        HocSinhService.themHocSinh(tfTenHocSinh.getText(), tfTenPhuHuynh.getText(), dpNgaySinh.getValue(), cbTruong.getValue().toString(), tfLop.getText(), tfMaHoKhau.getText(), tfDanhHieu.getText(),tfDotPhatThuong.getText());
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setContentText("Đã được thêm thành công");
+        alert.show();
     }
 }
