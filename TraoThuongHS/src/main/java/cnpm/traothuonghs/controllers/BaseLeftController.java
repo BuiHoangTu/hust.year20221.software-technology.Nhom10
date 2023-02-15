@@ -12,7 +12,7 @@ public abstract class BaseLeftController extends ChangeSceneControllers{
 	@FXML
 	public void onHSClicked(ActionEvent ignored) {
 		// link to hs
-		changeScene("/cnpm/traothuonghs/views/Quan-ly-hoc-sinh.fxml");
+		changeScene("/cnpm/traothuonghs/views/hocsinh/Quan-ly-hoc-sinh.fxml");
 	}
 
 	@FXML

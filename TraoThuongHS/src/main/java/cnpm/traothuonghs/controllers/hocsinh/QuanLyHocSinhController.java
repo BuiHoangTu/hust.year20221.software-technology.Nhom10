@@ -4,24 +4,17 @@ import cnpm.traothuonghs.controllers.BaseLeftController;
 import cnpm.traothuonghs.models.HocSinh;
 import cnpm.traothuonghs.models.PhanThuong;
 import cnpm.traothuonghs.services.HocSinhService;
-import cnpm.traothuonghs.services.PhanThuongService;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
-import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.util.Callback;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class QuanLyHocSinhController extends BaseLeftController {
 
@@ -45,7 +38,7 @@ public class QuanLyHocSinhController extends BaseLeftController {
         colLop.setCellValueFactory(hocSinhStringCellDataFeatures -> new SimpleStringProperty(hocSinhStringCellDataFeatures.getValue().getCacPhanThuong().get(hocSinhStringCellDataFeatures.getValue().getCacPhanThuong().size()-1).getLop()));
 
         List<HocSinh> lsHS = new ArrayList<>();
-        for(int i = 1; i <= 1000; i++){
+        for(int i = 1; i <= 200; i++){
             if(HocSinhService.getHocSinh(1, String.valueOf(i)) != null){
                 lsHS.add(HocSinhService.getHocSinh(1, String.valueOf(i)));
             }
@@ -65,11 +58,11 @@ public class QuanLyHocSinhController extends BaseLeftController {
 
         if(chbDotPhat.isSelected()){
             List<HocSinh> ls = new ArrayList<>();
-            for (int i =1; i <= 1000; i++){
+            for (int i =1; i <= 200; i++){
                 if(HocSinhService.getHocSinh(1, String.valueOf(i)) != null){
                     List<PhanThuong> lisPT = HocSinhService.getHocSinh(1, String.valueOf(i)).getCacPhanThuong();
                     for (PhanThuong x : lisPT){
-                        if(x.getTenDotPhatThuong().contains(tfTimKiem.getText())){
+                        if(x.getTenDotPhatThuong().toLowerCase().contains(tfTimKiem.getText().toLowerCase())){
                             ls.add(HocSinhService.getHocSinh(1, String.valueOf(i)));
                         }
                     }
@@ -88,15 +81,15 @@ public class QuanLyHocSinhController extends BaseLeftController {
     }
 
     public void onThemHocSinhClicked(ActionEvent event) {
-        changeScene("/cnpm/traothuonghs/views/Them-hoc-sinh.fxml");
+        changeScene("/cnpm/traothuonghs/views/hocsinh/Them-hoc-sinh.fxml");
     }
 
     public void onChinhSuaHocSinhClicked(ActionEvent event) {
-        changeScene("/cnpm/traothuonghs/views/Chinh_Sua_Hoc_Sinh.fxml");
+        changeScene("/cnpm/traothuonghs/views/hocsinh/Chinh_Sua_Hoc_Sinh.fxml");
     }
 
     public void onXemThongTinClicked(ActionEvent event) {
-        changeScene("/cnpm/traothuonghs/views/Chi_Tiet_Hoc_Sinh.fxml");
+        changeScene("/cnpm/traothuonghs/views/hocsinh/Chi_Tiet_Hoc_Sinh.fxml");
     }
 
 }

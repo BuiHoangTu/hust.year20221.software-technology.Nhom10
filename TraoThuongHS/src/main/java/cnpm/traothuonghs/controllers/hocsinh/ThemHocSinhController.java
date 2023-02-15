@@ -4,7 +4,6 @@ import cnpm.traothuonghs.controllers.ChangeSceneControllers;
 import cnpm.traothuonghs.controllers.IFlushableController;
 import cnpm.traothuonghs.models.HocSinh;
 import cnpm.traothuonghs.services.HocSinhService;
-import cnpm.traothuonghs.services.PhanThuongService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -35,7 +34,7 @@ public class ThemHocSinhController extends ChangeSceneControllers implements IFl
     }
 
     public void onHuyClicked(ActionEvent event) {
-        changeScene("/cnpm/traothuonghs/views/Quan-ly-hoc-sinh.fxml");
+        changeScene("/cnpm/traothuonghs/views/hocsinh/Quan-ly-hoc-sinh.fxml");
     }
 
     public void onXacNhanClicked(ActionEvent event) throws SQLException {
