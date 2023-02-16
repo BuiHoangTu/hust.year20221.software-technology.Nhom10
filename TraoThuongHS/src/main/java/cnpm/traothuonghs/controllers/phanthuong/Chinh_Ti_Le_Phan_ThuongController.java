@@ -108,7 +108,6 @@ public class Chinh_Ti_Le_Phan_ThuongController extends BaseLeftController {
     protected void onLuuClicked() throws SQLException {
         if (tfSoVo.getText().equals("")) {
             TinhThuongService.chinhTyLe(tiLeThuong);
-            if (!tfGiaVo.getText().equals("")) TinhThuongService.chinhGiaVo(Integer.valueOf(tfGiaVo.getText()));
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Thay đổi tỉ lệ phần thưởng");
@@ -121,9 +120,15 @@ public class Chinh_Ti_Le_Phan_ThuongController extends BaseLeftController {
             if (!tfGiaVo.getText().equals("")) {
                 str += "- Giá một cuốn vở : " + tinhThuong.getGiaVo() + " -> " + tfGiaVo.getText() + "\n";
                 TinhThuongService.chinhGiaVo(Integer.valueOf(tfGiaVo.getText()));
+                TinhThuongService.giaVo = Integer.valueOf(tfGiaVo.getText());
+                tfGiaVo.setText("");
+
+                setThongTinThuong();
             }
             alert.setContentText("Các mục đã chỉnh sửa: " + str + "\n");
             alert.show();
+
+            TinhThuongService.mapTyLeThuong = tiLeThuong;
         } else {
             thayDoi.add(count,"\nTên phần thưởng thay đổi : " + danhHieuTamThoi + "\n    - Số lượng vở thưởng : " + tinhThuong.getPhanThuong(danhHieuTamThoi) + " -> " + tfSoVo.getText() + "\n");
             count = (count + 1) % tiLeThuong.size();
@@ -137,7 +142,6 @@ public class Chinh_Ti_Le_Phan_ThuongController extends BaseLeftController {
 
             // Lưu thông tin
             TinhThuongService.chinhTyLe(tiLeThuong);
-            if (!tfGiaVo.getText().equals("")) TinhThuongService.chinhGiaVo(Integer.valueOf(tfGiaVo.getText()));
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Thay đổi tỉ lệ phần thưởng");
@@ -150,9 +154,15 @@ public class Chinh_Ti_Le_Phan_ThuongController extends BaseLeftController {
             if (!tfGiaVo.getText().equals("")) {
                 str += "- Giá một cuốn vở : " + tinhThuong.getGiaVo() + " -> " + tfGiaVo.getText() + "\n";
                 TinhThuongService.chinhGiaVo(Integer.valueOf(tfGiaVo.getText()));
+                TinhThuongService.giaVo = Integer.valueOf(tfGiaVo.getText());
+                tfGiaVo.setText("");
+
+                setThongTinThuong();
             }
             alert.setContentText("Các mục đã chỉnh sửa: " + str + "\n");
             alert.show();
+
+            TinhThuongService.mapTyLeThuong = tiLeThuong;
         }
     }
 
