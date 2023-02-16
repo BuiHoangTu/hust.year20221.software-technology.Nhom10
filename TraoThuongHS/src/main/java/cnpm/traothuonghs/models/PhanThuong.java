@@ -1,10 +1,17 @@
 package cnpm.traothuonghs.models;
 
+import cnpm.quanlynhankhau.models.DiaChi;
+import cnpm.quanlynhankhau.models.NhanKhau;
+import cnpm.quanlynhankhau.services.Database;
 import cnpm.traothuonghs.services.TinhThuongService;
 
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.time.LocalDate;
 
-public class PhanThuong {
+public class PhanThuong extends TinhThuongService {
+	private  String idHocSinh;
 	private LocalDate ngayPhatThuong;
 	private String tenDotPhatThuong;
 	private String danhHieu;
@@ -18,7 +25,8 @@ public class PhanThuong {
 	 * @param tenDotPhatThuong
 	 * @param danhHieu
 	 */
-	public PhanThuong(LocalDate ngayPhatThuong, String tenDotPhatThuong, String danhHieu, String lop) {
+	public PhanThuong(String idHocSinh, LocalDate ngayPhatThuong, String tenDotPhatThuong, String danhHieu, String lop) {
+		this.idHocSinh = idHocSinh;
 		this.ngayPhatThuong = ngayPhatThuong;
 		this.tenDotPhatThuong = tenDotPhatThuong;
 		this.danhHieu = danhHieu;
@@ -35,47 +43,64 @@ public class PhanThuong {
 		return ngayPhatThuong;
 	}
 
-	public void setNgayPhatThuong(LocalDate ngayPhatThuong) {
-		this.ngayPhatThuong = ngayPhatThuong;
-	}
-
 	public String getTenDotPhatThuong() {
 		return tenDotPhatThuong;
-	}
-
-	public void setTenDotPhatThuong(String tenDotPhatThuong) {
-		this.tenDotPhatThuong = tenDotPhatThuong;
 	}
 
 	public String getDanhHieu() {
 		return danhHieu;
 	}
 
-	public void setDanhHieu(String danhHieu) {
-		this.danhHieu = danhHieu;
-	}
-
 	public String getLop() {
 		return lop;
-	}
-
-	public void setLop(String lop) {
-		this.lop = lop;
 	}
 
 	public int getSoVo() {
 		return soVo;
 	}
 
-	public void setSoVo(int soVo) {
-		this.soVo = soVo;
-	}
-
 	public int getGiaTri() {
 		return giaTri;
 	}
 
-	public void setGiaTri(int giaTri) {
-		this.giaTri = giaTri;
+	public void setDanhHieu(String danhHieu) {
+		this.danhHieu = danhHieu;
+	}
+
+	public void change(LocalDate ngayPhatThuong, String tenDotPhatThuong, String danhHieu, String lop) throws SQLException {
+		StringBuilder sqlQuery = new StringBuilder();
+		sqlQuery.append("UPDATE trao_thuong_hoc_sinh.phan_thuong SET  ");
+
+		if (ngayPhatThuong != null) sqlQuery.append("ngayPhatThuong like ? , ");
+		if (tenDotPhatThuong != null) sqlQuery.append("dotPhatThuong = ? , ");
+		if (danhHieu != null) sqlQuery.append("danhHieu = ? , ");
+		if (lop != null) sqlQuery.append("lop = ? , ");
+
+		sqlQuery.deleteCharAt(sqlQuery.length()-2);
+		sqlQuery.append(" WHERE idHocSinh = ? ");
+
+		PreparedStatement statement = Database.getConnection().prepareStatement(sqlQuery.toString());
+		int i = 1;
+		if (ngayPhatThuong != null) {
+			statement.setString(i, ngayPhatThuong.toString());
+			i += 1;
+		}
+		if (tenDotPhatThuong != null) {
+			statement.setString(i, tenDotPhatThuong);
+			i += 1;
+		}
+		if (danhHieu != null) {
+			statement.setString(i, danhHieu);
+			i += 1;
+		}
+		if (lop != null) {
+			statement.setString(i, lop);
+			i += 1;
+		}
+
+		statement.setString(i, idHocSinh);
+		//System.out.println(statement);
+		// gửi câu lệnh đến DB
+		statement.executeUpdate();
 	}
 }

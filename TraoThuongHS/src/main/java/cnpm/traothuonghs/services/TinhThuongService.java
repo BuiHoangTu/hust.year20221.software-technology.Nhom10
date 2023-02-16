@@ -114,5 +114,7 @@ public class TinhThuongService {
 		statement.executeUpdate();
 	}
 
-
+	public Map<String, Integer> getMapTyLeThuong() {
+		return mapTyLeThuong;
+	}
 }
