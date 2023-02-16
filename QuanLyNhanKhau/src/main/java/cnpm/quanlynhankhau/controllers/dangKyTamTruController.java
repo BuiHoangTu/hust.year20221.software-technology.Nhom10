@@ -1,5 +1,6 @@
 package cnpm.quanlynhankhau.controllers;
 
+import cnpm.quanlynhankhau.models.ChungMinhThu;
 import cnpm.quanlynhankhau.models.TamTruVang;
 import cnpm.quanlynhankhau.services.ChungMinhThuService;
 import cnpm.quanlynhankhau.services.TamTruVangService;
@@ -45,6 +46,8 @@ public class dangKyTamTruController extends ChangeSceneControllers{
         }else {
             TamTruVangService.xacNhanTamTruVang(tfMaGiayTamVang.getText());
             TamTruVang x = TamTruVangService.getTamTruVang(tfMaGiayTamVang.getText());
+            ChungMinhThu cmt = ChungMinhThuService.getCMT(tfMaGiayTamVang.getText());
+            tfCMND.setText(cmt.getSoCMT());
             tfNoiTamTru.setText(x.getDcTamTru().toString());
             dpTuNgay.setValue(x.getTuNgay());
             dpDenNgay.setValue(x.getDenNgay());

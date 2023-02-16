@@ -2,7 +2,9 @@ package cnpm.traothuonghs.controllers.hocsinh;
 
 import cnpm.traothuonghs.controllers.BaseLeftController;
 import cnpm.traothuonghs.models.HocSinh;
+import cnpm.traothuonghs.models.PhanThuong;
 import cnpm.traothuonghs.services.HocSinhService;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -21,6 +23,7 @@ public class QuanLyHocSinhController extends BaseLeftController {
     public TableColumn<HocSinh, String> colPhuHuynh;
     public TableColumn<HocSinh, String> colNgaySinh;
     public TableColumn<HocSinh, String> colTruong;
+    public TableColumn<HocSinh, String> colLop;
     public TableView<HocSinh> tvHocSinh;
     private String idHocSinhDuocChon;
     public CheckBox chbTen;
@@ -34,23 +37,53 @@ public class QuanLyHocSinhController extends BaseLeftController {
         colPhuHuynh.setCellValueFactory(new PropertyValueFactory<HocSinh, String>("phuHuynh"));
         colNgaySinh.setCellValueFactory(new PropertyValueFactory<HocSinh, String>("ngaySinh"));
         colTruong.setCellValueFactory(new PropertyValueFactory<HocSinh,String>("truongHoc"));
+        colLop.setCellValueFactory(hocSinhStringCellDataFeatures -> new SimpleStringProperty(hocSinhStringCellDataFeatures.getValue().getCacPhanThuong().get(hocSinhStringCellDataFeatures.getValue().getCacPhanThuong().size()-1).getLop()));
 
         List<HocSinh> lsHS = new ArrayList<>();
-        int n = HocSinhService.getSoHocSinh();
-        for(int i = 1; i <= n; i++){
-            lsHS.add(HocSinhService.getHocSinh(1, String.valueOf(i)));
+        for(int i = 1; i <= 200; i++){
+            if(HocSinhService.getHocSinh(1, String.valueOf(i)) != null){
+                lsHS.add(HocSinhService.getHocSinh(1, String.valueOf(i)));
+            }
         }
 
         ObservableList<HocSinh> ls = FXCollections.observableList(lsHS);
         tvHocSinh.setItems(ls);
     }
 
-    public void onTimKiemClicked(ActionEvent event) {
+    public void onTimKiemClicked(ActionEvent event) throws SQLException {
         //Tìm học sinh theo checkBox và textField từ database
+        if(chbTen.isSelected()){
+            ObservableList<HocSinh> ls = FXCollections.observableList(HocSinhService.findHocSinh(2, tfTimKiem.getText()));
+            tvHocSinh.getItems().clear();
+            tvHocSinh.getItems().addAll(ls);
+        }
+
+        if(chbDotPhat.isSelected()){
+            List<HocSinh> ls = new ArrayList<>();
+            for (int i =1; i <= 200; i++){
+                if(HocSinhService.getHocSinh(1, String.valueOf(i)) != null){
+                    List<PhanThuong> lisPT = HocSinhService.getHocSinh(1, String.valueOf(i)).getCacPhanThuong();
+                    for (PhanThuong x : lisPT){
+                        if(x.getTenDotPhatThuong().toLowerCase().contains(tfTimKiem.getText().toLowerCase())){
+                            ls.add(HocSinhService.getHocSinh(1, String.valueOf(i)));
+                        }
+                    }
+                }
+            }
+            tvHocSinh.getItems().clear();
+            tvHocSinh.getItems().addAll(ls);
+        }
+
+        if (chbDiaChi.isSelected()){
+            ObservableList<HocSinh> ls = FXCollections.observableList(HocSinhService.findHocSinh(3, tfTimKiem.getText()));
+            tvHocSinh.getItems().clear();
+            tvHocSinh.getItems().addAll(ls);
+        }
+
     }
 
     public void onThemHocSinhClicked(ActionEvent event) {
-        //changeScene();
+        changeScene("/cnpm/traothuonghs/views/hocsinh/Them-hoc-sinh.fxml");
     }
 
     public void onChinhSuaHocSinhClicked(ActionEvent event) {

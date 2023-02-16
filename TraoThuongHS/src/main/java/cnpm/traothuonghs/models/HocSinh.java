@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HocSinh {
-	public static final String[] tenCacTruongHoc = {"", ""}; // TODO: 27/01/2023 thêm tên các trường
+	public static final String[] tenCacTruongHoc = {"Tiểu Học Tây Sơn", "Tiểu Học Thanh Lương", "THCS Đoàn Kết", "THCS Hà Huy Tập", "THPT Thăng Long", "THPT Trần Nhân Tông"}; // TODO: 27/01/2023 thêm tên các trường
 	private  String id;
 	private String ten;
 	private LocalDate ngaySinh;

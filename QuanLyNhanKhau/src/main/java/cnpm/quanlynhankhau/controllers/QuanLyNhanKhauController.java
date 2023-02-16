@@ -80,6 +80,7 @@ public class QuanLyNhanKhauController extends EdgeController implements Initiali
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         colID.setCellValueFactory(new PropertyValueFactory<NhanKhau, String>("soNhanKhau"));
         colHoTen.setCellValueFactory(new PropertyValueFactory<NhanKhau, String>("ten"));
         colNgaySinh.setCellValueFactory(new PropertyValueFactory<NhanKhau, String>("ngaySinh"));

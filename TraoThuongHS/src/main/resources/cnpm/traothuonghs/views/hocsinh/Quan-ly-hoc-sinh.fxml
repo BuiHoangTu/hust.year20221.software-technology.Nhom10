@@ -10,70 +10,83 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="675.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cnpm.traothuonghs.controllers.hocsinh.QuanLyHocSinhController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="543.0" prefWidth="936.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cnpm.traothuonghs.controllers.hocsinh.QuanLyHocSinhController">
    <left>
-      <VBox maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
-         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onHomeClicked" text="Trang chủ">
+      <VBox maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="676.0" prefWidth="168.0" style="-fx-background-color: gray;" BorderPane.alignment="CENTER">
+         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onHomeClicked" style="-fx-background-color: black;" text="Trang chủ" textFill="WHITE">
             <VBox.margin>
                <Insets top="50.0" />
             </VBox.margin>
             <padding>
                <Insets bottom="10.0" top="10.0" />
             </padding>
+            <font>
+               <Font name="System Bold" size="18.0" />
+            </font>
          </Button>
-         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onHSClicked" text="Học sinh">
+         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onHSClicked" style="-fx-background-color: #47484b;" text="Học sinh" textFill="WHITE">
             <VBox.margin>
                <Insets top="10.0" />
             </VBox.margin>
             <padding>
                <Insets bottom="10.0" top="10.0" />
             </padding>
+            <font>
+               <Font name="System Bold" size="16.0" />
+            </font>
          </Button>
-         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onPTClicked" text="Phần thưởng">
+         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onPTClicked" style="-fx-background-color: #47484b;" text="Phần thưởng" textFill="#fcfcfc">
             <VBox.margin>
                <Insets top="10.0" />
             </VBox.margin>
             <padding>
                <Insets bottom="10.0" top="10.0" />
             </padding>
+            <font>
+               <Font name="System Bold" size="16.0" />
+            </font>
          </Button>
-         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onTKClicked" text="Thống kê">
+         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onTKClicked" style="-fx-background-color: #47484b;" text="Thống kê" textFill="#fff9f9">
             <padding>
                <Insets bottom="10.0" top="10.0" />
             </padding>
             <VBox.margin>
                <Insets top="10.0" />
             </VBox.margin>
+            <font>
+               <Font name="System Bold" size="16.0" />
+            </font>
          </Button>
       </VBox>
    </left>
    <top>
-      <AnchorPane prefHeight="40.0" prefWidth="598.0" BorderPane.alignment="CENTER">
-         <TextField fx:id="tfTimKiem" layoutX="99.0" layoutY="8.0" prefHeight="26.0" prefWidth="187.0" />
-         <CheckBox fx:id="chbTen" layoutX="295.0" layoutY="12.0" mnemonicParsing="false" text="Tên" />
-         <CheckBox fx:id="chbDotPhat" layoutX="349.0" layoutY="11.0" mnemonicParsing="false" text="Đợt phát" />
-         <CheckBox fx:id="chbDiaChi" layoutX="436.0" layoutY="11.0" mnemonicParsing="false" text="Địa chỉ" />
-         <Button layoutX="598.0" layoutY="8.0" mnemonicParsing="false" onAction="#onTimKiemClicked" text="Tìm" />
+      <AnchorPane prefHeight="40.0" prefWidth="763.0" BorderPane.alignment="CENTER">
+         <TextField fx:id="tfTimKiem" layoutX="199.0" layoutY="6.0" prefHeight="26.0" prefWidth="187.0" />
+         <CheckBox fx:id="chbTen" layoutX="447.0" layoutY="12.0" mnemonicParsing="false" text="Tên" />
+         <CheckBox fx:id="chbDotPhat" layoutX="562.0" layoutY="12.0" mnemonicParsing="false" text="Đợt phát" />
+         <CheckBox fx:id="chbDiaChi" layoutX="710.0" layoutY="11.0" mnemonicParsing="false" text="Địa chỉ" />
+         <Button layoutX="850.0" layoutY="8.0" mnemonicParsing="false" onAction="#onTimKiemClicked" text="Tìm" />
       </AnchorPane>
    </top>
    <right>
-      <AnchorPane prefHeight="360.0" prefWidth="111.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="514.0" prefWidth="119.0" BorderPane.alignment="CENTER">
          <Button layoutX="16.0" layoutY="24.0" mnemonicParsing="false" onAction="#onThemHocSinhClicked" text="Thêm học sinh" />
          <Button layoutX="5.0" layoutY="66.0" mnemonicParsing="false" onAction="#onChinhSuaHocSinhClicked" text="Chỉnh sửa học sinh" />
          <Button layoutX="17.0" layoutY="111.0" mnemonicParsing="false" onAction="#onXemThongTinClicked" text="Xem thông tin" />
       </AnchorPane>
    </right>
    <center>
-      <ScrollPane prefHeight="416.0" prefWidth="538.0" BorderPane.alignment="CENTER">
-         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="503.0" prefWidth="577.0">
-            <TableView fx:id="tvHocSinh" onMouseClicked="#rowClickedHocSinh" prefHeight="607.0" prefWidth="577.0">
+      <ScrollPane prefHeight="360.0" prefWidth="462.0" BorderPane.alignment="CENTER">
+         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="503.0" prefWidth="715.0">
+            <TableView fx:id="tvHocSinh" onMouseClicked="#rowClickedHocSinh" prefHeight="607.0" prefWidth="702.0">
                <columns>
                   <TableColumn fx:id="colTenHocSinh" prefWidth="130.93326258659363" text="Tên học sinh" />
                   <TableColumn fx:id="colPhuHuynh" prefWidth="129.86663818359375" text="Phụ huynh" />
                   <TableColumn fx:id="colNgaySinh" prefWidth="72.0" text="Ngày sinh" />
                   <TableColumn fx:id="colTruong" minWidth="5.86663818359375" prefWidth="176.79989624023438" text="Trường " />
-                  <TableColumn fx:id="colLop" prefWidth="66.40008544921875" text="Lớp" />
+                  <TableColumn fx:id="colLop" prefWidth="150.40004882812502" text="Lớp" />
                </columns>
             </TableView>
          </AnchorPane>

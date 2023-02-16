@@ -3,6 +3,7 @@ package cnpm.quanlynhankhau.services;
 import cnpm.quanlynhankhau.models.ChungMinhThu;
 import cnpm.quanlynhankhau.models.DiaChi;
 import cnpm.quanlynhankhau.models.NhanKhau;
+import cnpm.quanlynhankhau.models.TamTruVang;
 import javafx.scene.image.Image;
 
 import java.sql.PreparedStatement;
@@ -48,7 +49,7 @@ public class ChungMinhThuService {
 		var rs = statement.executeQuery();
 
 		if (!rs.next()) return null;
-		return new ChungMinhThu(rs.getString(1), rs.getDate(2).toLocalDate(), DiaChi.parse(rs.getString(3)), null);
+		return new ChungMinhThu(rs.getString(1), rs.getDate(2).toLocalDate(),null, /*DiaChi.parse(rs.getString(3)),*/ null);
 	}
 
 	public static NhanKhau getNhanKhau(String CMND) throws SQLException {
@@ -60,6 +61,19 @@ public class ChungMinhThuService {
 		ResultSet rs = statement.executeQuery();
 		while (rs.next()){
 			NhanKhau x = NhanKhauService.getNhanKhau(rs.getString(5));
+			return x;
+		}
+		return null;
+	}
+
+	public static ChungMinhThu getCMT(String maTamTruVang) throws SQLException {
+		StringBuilder sqlQuery = new StringBuilder();
+		sqlQuery.append("Select * from quan_ly_nhan_khau.tam_tru_vang where maGiayTamVang = ?");
+		PreparedStatement statement = Database.getConnection().prepareStatement(sqlQuery.toString());
+		statement.setString(1, maTamTruVang);
+		ResultSet rs = statement.executeQuery();
+		while (rs.next()){
+			ChungMinhThu x = ChungMinhThuService.getChungMinhThu(rs.getString(1));
 			return x;
 		}
 		return null;

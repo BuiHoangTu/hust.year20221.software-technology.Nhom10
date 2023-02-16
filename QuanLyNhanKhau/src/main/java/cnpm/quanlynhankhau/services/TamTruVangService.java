@@ -32,4 +32,25 @@ public class TamTruVangService {
         statement.setString(1, maTamTruVang);
         statement.executeUpdate();
     }
+
+    public static int getSoTamTru() throws SQLException {
+        int soTamTru = 0;
+        String sqlQuery = "Select COUNT(idNhanKhau) from quan_ly_nhan_khau.tam_tru_vang where daXacNhanTamVangTru = 1";
+        PreparedStatement statement = Database.getConnection().prepareStatement(sqlQuery);
+        ResultSet res = statement.executeQuery();
+        res.next();
+        soTamTru = res.getInt(1);
+        return soTamTru;
+    }
+
+    public static int getSoTamVang() throws SQLException {
+        int soTamVang = 0;
+        String sqlQuery = "Select COUNT(idNhanKhau) from quan_ly_nhan_khau.tam_tru_vang where daXacNhanTamVangTru != 1";
+        PreparedStatement statement = Database.getConnection().prepareStatement(sqlQuery);
+        ResultSet res = statement.executeQuery();
+        res.next();
+        soTamVang = res.getInt(1);
+        return soTamVang;
+    }
+
 }
