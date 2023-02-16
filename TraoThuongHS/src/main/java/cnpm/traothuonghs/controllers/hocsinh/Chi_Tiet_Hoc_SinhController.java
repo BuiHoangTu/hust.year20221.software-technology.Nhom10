@@ -86,7 +86,7 @@ public class Chi_Tiet_Hoc_SinhController extends BaseLeftController {
         tcSoVo.prefWidthProperty().bind(tvDanhSachThuong.widthProperty().multiply(0.2));
 
         try{
-            danhSachThuong.addAll(PhanThuongService.findPhanThuongHS(idHocSinh));
+            danhSachThuong.addAll(PhanThuongService.getThuong(idHocSinh));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

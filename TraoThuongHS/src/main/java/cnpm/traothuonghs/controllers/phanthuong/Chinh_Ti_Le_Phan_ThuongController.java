@@ -91,7 +91,6 @@ public class Chinh_Ti_Le_Phan_ThuongController extends BaseLeftController {
             alert.setContentText("Các trường : " + str + "\nđang còn trống");
             alert.show();
         } else {
-            count = tiLeThuong.size();
             tiLeThuong.put(tfThemPT.getText(), Integer.valueOf(tfSoVo.getText()));
             danhHieu.add(tfThemPT.getText());
 

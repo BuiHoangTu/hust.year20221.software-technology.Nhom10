@@ -55,7 +55,7 @@ public class Chinh_Sua_Hoc_SinhController extends BaseLeftController {
         HocSinh hocSinh = HocSinhService.getHocSinh(1, idHocSinh);
         lbTenCu.setText(hocSinh.getTen());
         lbNgaySinhCu.setText(hocSinh.getNgaySinh().toString());
-        lbDanhHieuCu.setText(PhanThuongService.findPhanThuongHS(idHocSinh).get(0).getDanhHieu());
+        lbDanhHieuCu.setText(PhanThuongService.getThuong(idHocSinh).get(0).getDanhHieu());
         lbMaHoKhauCu.setText(hocSinh.getMaHoKhau());
         lbTruongCu.setText(hocSinh.getTruongHoc());
         lbPhuHuynhCu.setText(hocSinh.getPhuHuynh());
@@ -84,7 +84,7 @@ public class Chinh_Sua_Hoc_SinhController extends BaseLeftController {
             tmp = new HocSinh(idHocSinh, tfTen.getText(), LocalDate.parse(tfNgaySinh.getText()), tfTruong.getText(), tfMaHoKhau.getText(), tfPhuHuynh.getText());
             tmp.change(tfTen.getText(), LocalDate.parse(tfNgaySinh.getText()), tfTruong.getText(), tfMaHoKhau.getText(), tfPhuHuynh.getText());
 
-            PhanThuong tmp1 = PhanThuongService.findPhanThuongHS(idHocSinh).get(0);
+            PhanThuong tmp1 = PhanThuongService.getThuong(idHocSinh).get(0);
             tmp1.setDanhHieu(tfDanhHieu.getText());
             tmp1.change(null, null, tfDanhHieu.getText(), null);
 
