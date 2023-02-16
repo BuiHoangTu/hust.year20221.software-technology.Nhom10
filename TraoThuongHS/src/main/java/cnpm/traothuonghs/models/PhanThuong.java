@@ -30,4 +30,52 @@ public class PhanThuong {
 
 		// TODO: 27/01/2023 database this
 	}
+
+	public LocalDate getNgayPhatThuong() {
+		return ngayPhatThuong;
+	}
+
+	public void setNgayPhatThuong(LocalDate ngayPhatThuong) {
+		this.ngayPhatThuong = ngayPhatThuong;
+	}
+
+	public String getTenDotPhatThuong() {
+		return tenDotPhatThuong;
+	}
+
+	public void setTenDotPhatThuong(String tenDotPhatThuong) {
+		this.tenDotPhatThuong = tenDotPhatThuong;
+	}
+
+	public String getDanhHieu() {
+		return danhHieu;
+	}
+
+	public void setDanhHieu(String danhHieu) {
+		this.danhHieu = danhHieu;
+	}
+
+	public String getLop() {
+		return lop;
+	}
+
+	public void setLop(String lop) {
+		this.lop = lop;
+	}
+
+	public int getSoVo() {
+		return soVo;
+	}
+
+	public void setSoVo(int soVo) {
+		this.soVo = soVo;
+	}
+
+	public int getGiaTri() {
+		return giaTri;
+	}
+
+	public void setGiaTri(int giaTri) {
+		this.giaTri = giaTri;
+	}
 }

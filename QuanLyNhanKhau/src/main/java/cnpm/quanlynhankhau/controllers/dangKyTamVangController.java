@@ -49,7 +49,7 @@ public class dangKyTamVangController extends ChangeSceneControllers {
             return;
         }
         NhanKhau x = ChungMinhThuService.getNhanKhau(tfCMND.getText());
-        x.addTamTruVang(DiaChi.parse(tfNoiTamTru.getText()),dpTuNgay.getValue(),dpDenNgay.getValue(),taLyDo.getText(),DiaChi.parse(""));
+        x.addTamTruVang(DiaChi.parse(tfNoiTamTru.getText()),dpTuNgay.getValue(),dpDenNgay.getValue(),taLyDo.getText(),DiaChi.parse(" "));
         tfMaGiayTamVang.setDisable(false);
         tfMaGiayTamVang.setText(x.getTamTruVangs().get(x.getTamTruVangs().size()-1).getMaTamTruVang());
 

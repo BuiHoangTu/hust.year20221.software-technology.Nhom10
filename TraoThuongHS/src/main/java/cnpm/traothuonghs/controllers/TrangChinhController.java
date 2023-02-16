@@ -1,7 +1,11 @@
 package cnpm.traothuonghs.controllers;
 
+import cnpm.traothuonghs.services.HocSinhService;
+import cnpm.traothuonghs.services.PhanThuongService;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+
+import java.sql.SQLException;
 
 public class TrangChinhController extends BaseLeftController{
     public Label lblHocSinhNum;
@@ -9,9 +13,9 @@ public class TrangChinhController extends BaseLeftController{
     public Label lblPhanThuongConNum;
 
     @FXML
-    private void initialize() {
-        //Lấy thông tin số học sinh                 |
-        //lấy thông tin số phần thưởng được trao    | từ database
-        //lấy thông tin số phần thưởng còn lại      |
+    private void initialize() throws SQLException {
+        lblHocSinhNum.setText(String.valueOf(HocSinhService.getSoHocSinh()));
+        lblPhanThuongTraoNum.setText(String.valueOf(PhanThuongService.getVoDaPhat()));
+        lblPhanThuongConNum.setText(String.valueOf(PhanThuongService.getVoChuaPhat()));
     }
 }
