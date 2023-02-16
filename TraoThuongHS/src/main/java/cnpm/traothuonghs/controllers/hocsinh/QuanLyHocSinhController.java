@@ -11,6 +11,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ public class QuanLyHocSinhController extends BaseLeftController {
     public TableColumn<HocSinh, String> colTruong;
     public TableColumn<HocSinh, String> colLop;
     public TableView<HocSinh> tvHocSinh;
+    private String idHocSinhDuocChon;
     public CheckBox chbTen;
     public CheckBox chbDotPhat;
     public CheckBox chbDiaChi;
@@ -85,11 +87,20 @@ public class QuanLyHocSinhController extends BaseLeftController {
     }
 
     public void onChinhSuaHocSinhClicked(ActionEvent event) {
+        //changeScene();
+        Chinh_Sua_Hoc_SinhController.idHocSinh = idHocSinhDuocChon;
         changeScene("/cnpm/traothuonghs/views/hocsinh/Chinh_Sua_Hoc_Sinh.fxml");
     }
 
-    public void onXemThongTinClicked(ActionEvent event) {
-        changeScene("/cnpm/traothuonghs/views/hocsinh/Chi_Tiet_Hoc_Sinh.fxml");
+    @FXML
+    void rowClickedHocSinh(MouseEvent event) throws SQLException {
+        HocSinh clickedHocSinh = tvHocSinh.getSelectionModel().getSelectedItem();
+        idHocSinhDuocChon = clickedHocSinh.getId();
     }
 
+    public void onXemThongTinClicked(ActionEvent event) {
+        //changeScene();
+        Chi_Tiet_Hoc_SinhController.idHocSinh = idHocSinhDuocChon;
+        changeScene("/cnpm/traothuonghs/views/hocsinh/Chi_Tiet_Hoc_Sinh.fxml");
+    }
 }

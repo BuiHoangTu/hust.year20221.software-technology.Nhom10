@@ -80,7 +80,7 @@
    <center>
       <ScrollPane prefHeight="360.0" prefWidth="462.0" BorderPane.alignment="CENTER">
          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="503.0" prefWidth="715.0">
-            <TableView fx:id="tvHocSinh" prefHeight="607.0" prefWidth="702.0">
+            <TableView fx:id="tvHocSinh" onMouseClicked="#rowClickedHocSinh" prefHeight="607.0" prefWidth="702.0">
                <columns>
                   <TableColumn fx:id="colTenHocSinh" prefWidth="130.93326258659363" text="Tên học sinh" />
                   <TableColumn fx:id="colPhuHuynh" prefWidth="129.86663818359375" text="Phụ huynh" />

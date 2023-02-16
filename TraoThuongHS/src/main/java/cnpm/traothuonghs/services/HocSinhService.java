@@ -39,7 +39,7 @@ public class HocSinhService {
         statement.setString(1, filter);
         ResultSet rs = statement.executeQuery();
         while (rs.next()) {
-            HocSinh x = new HocSinh(rs.getString(2), rs.getDate(3).toLocalDate(), rs.getString(4), rs.getString(5), rs.getString(6));
+            HocSinh x = new HocSinh(rs.getString(1), rs.getString(2), rs.getDate(3).toLocalDate(), rs.getString(4), rs.getString(5), rs.getString(6));
             List<PhanThuong> lis = PhanThuongService.getThuong(rs.getString(1));
             for (PhanThuong pt : lis){
                 if(pt != null){
@@ -54,7 +54,7 @@ public class HocSinhService {
 
     public static HocSinh getHocSinh (int loaiMa, String filter) throws SQLException {
         try {
-            return findHocSinh(1, filter).get(0);
+            return findHocSinh(loaiMa, filter).get(0);
         } catch (NullPointerException | IndexOutOfBoundsException e) {
             return null;
         }
@@ -79,7 +79,7 @@ public class HocSinhService {
             String sqlQuery2 = "Insert into trao_thuong_hoc_sinh.phan_thuong (idHocSinh, ngayPhatThuong, lop, dotPhatThuong, danhHieu) values (?, ?, ?, ?, ?)";
             PreparedStatement statement1 = Database.getConnection().prepareStatement(sqlQuery2);
 
-            statement1.setString(1, rs.getString(1)); // Lấy idHocSinh
+            statement1.setString(1, idNK); // Lấy idHocSinh
             statement1.setString(2, LocalDate.now().toString()); // TODO : thêm theo ngày hôm nay
             statement1.setString(3, lop);
             statement1.setString(4, dotPhatThuong); // TODO : thêm tên đợt theo đợt gần nhất so với ngày hiện tại

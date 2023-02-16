@@ -4,6 +4,7 @@ import cnpm.traothuonghs.models.PhanThuong;
 import cnpm.traothuonghs.records.PhanThuongDot;
 import cnpm.traothuonghs.records.PhanThuongHK;
 
+import java.lang.ref.PhantomReference;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,9 +12,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
-
+import java.util.ArrayList;
+import java.util.List;
 
 public class PhanThuongService {
 	public static final int BY_SO_VO = 1, BY_GIA_TRI = 2;
@@ -179,7 +184,7 @@ public class PhanThuongService {
 		statement.setString(1, maHS);
 		ResultSet res = statement.executeQuery();
 		while (res.next()){
-			PhanThuong x = new PhanThuong(res.getDate(3).toLocalDate(), res.getString(4), res.getString(5), res.getString(2));
+			PhanThuong x = new PhanThuong(res.getString(1), res.getDate(3).toLocalDate(), res.getString(4), res.getString(5), res.getString(2));
 			result.add(x);
 		}
 		return result;
