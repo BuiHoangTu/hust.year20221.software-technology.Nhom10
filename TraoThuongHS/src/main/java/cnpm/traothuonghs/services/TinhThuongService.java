@@ -11,8 +11,8 @@ import java.util.Map;
 public class TinhThuongService {
 	private String[] cacDanhHieu;
 
-	private Map<String, Integer> mapTyLeThuong = new HashMap<>();
-	private int giaVo;
+	public static Map<String, Integer> mapTyLeThuong = new HashMap<>();
+	public static int giaVo;
 
 
 	public TinhThuongService() {
