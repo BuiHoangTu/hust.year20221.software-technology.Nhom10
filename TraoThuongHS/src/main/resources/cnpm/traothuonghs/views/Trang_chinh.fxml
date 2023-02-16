@@ -64,7 +64,7 @@
          </ImageView>
          <ImageView fitHeight="99.0" fitWidth="85.0" layoutX="20.0" layoutY="232.0" pickOnBounds="true" preserveRatio="true">
             <image>
-               <Image url="@../../../icons/R%20(1).png" />
+               <Image url="@../../../icons/R (1).png" />
             </image>
          </ImageView>
       </Pane>

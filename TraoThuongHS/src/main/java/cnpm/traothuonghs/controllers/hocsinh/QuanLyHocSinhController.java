@@ -88,8 +88,14 @@ public class QuanLyHocSinhController extends BaseLeftController {
 
     public void onChinhSuaHocSinhClicked(ActionEvent event) {
         //changeScene();
-        Chinh_Sua_Hoc_SinhController.idHocSinh = idHocSinhDuocChon;
-        changeScene("/cnpm/traothuonghs/views/hocsinh/Chinh_Sua_Hoc_Sinh.fxml");
+        if(idHocSinhDuocChon == null){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setContentText("Chưa chọn học sinh nào !");
+            alert.show();
+        }else {
+            Chinh_Sua_Hoc_SinhController.idHocSinh = idHocSinhDuocChon;
+            changeScene("/cnpm/traothuonghs/views/hocsinh/Chinh_Sua_Hoc_Sinh.fxml");
+        }
     }
 
     @FXML
@@ -100,7 +106,13 @@ public class QuanLyHocSinhController extends BaseLeftController {
 
     public void onXemThongTinClicked(ActionEvent event) {
         //changeScene();
-        Chi_Tiet_Hoc_SinhController.idHocSinh = idHocSinhDuocChon;
-        changeScene("/cnpm/traothuonghs/views/hocsinh/Chi_Tiet_Hoc_Sinh.fxml");
+        if(idHocSinhDuocChon == null){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setContentText("Chưa chọn học sinh nào !");
+            alert.show();
+        }else{
+            Chi_Tiet_Hoc_SinhController.idHocSinh = idHocSinhDuocChon;
+            changeScene("/cnpm/traothuonghs/views/hocsinh/Chi_Tiet_Hoc_Sinh.fxml");
+        }
     }
 }
