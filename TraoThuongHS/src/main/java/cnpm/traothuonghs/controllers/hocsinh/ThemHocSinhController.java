@@ -41,7 +41,7 @@ public class ThemHocSinhController extends ChangeSceneControllers implements IFl
         //Thêm học sinh vào database
         HocSinhService.themHocSinh(tfTenHocSinh.getText(), tfTenPhuHuynh.getText(), dpNgaySinh.getValue(), cbTruong.getValue().toString(), tfLop.getText(), tfMaHoKhau.getText(), tfDanhHieu.getText(),tfDotPhatThuong.getText());
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setContentText("Đã được thêm thành công");
+        alert.setContentText("Học sinh: " + tfTenHocSinh.getText() + "\nSinh ngày: " + dpNgaySinh.getValue() + "\nHọc trường: " + cbTruong.getValue().toString() + "\nLớp: " + tfLop.getText() + "\nĐã được thêm thành công");
         alert.show();
     }
 }
