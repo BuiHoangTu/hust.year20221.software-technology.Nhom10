@@ -47,7 +47,7 @@ public class HocSinhService {
 
     public static HocSinh getHocSinh (int loaiMa, String filter) throws SQLException {
         try {
-            return findHocSinh(1, filter).get(0);
+            return findHocSinh(loaiMa, filter).get(0);
         } catch (NullPointerException | IndexOutOfBoundsException e) {
             return null;
         }
@@ -83,5 +83,16 @@ public class HocSinhService {
             return HocSinhService.getHocSinh(1, idNK);
         }
         return null;
+    }
+
+    public static int getSoHocSinh() throws SQLException {
+        int soHS = 0;
+        StringBuilder sqlQuery = new StringBuilder();
+        sqlQuery.append("Select COUNT(id) from hoc_sinh");
+        PreparedStatement statement = Database.getConnection().prepareStatement(sqlQuery.toString());
+        ResultSet res = statement.executeQuery();
+        res.next();
+        soHS = res.getInt(1);
+        return soHS;
     }
 }

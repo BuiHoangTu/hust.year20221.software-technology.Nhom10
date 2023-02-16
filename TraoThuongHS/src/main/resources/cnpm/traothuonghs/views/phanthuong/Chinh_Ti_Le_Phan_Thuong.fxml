@@ -3,9 +3,9 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="542.0" prefWidth="935.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cnpm.traothuonghs.controllers.phanthuong.Chinh_Ti_Le_Phan_ThuongController">
@@ -16,45 +16,34 @@
                <Font name="System Bold" size="18.0" />
             </font>
          </Label>
-         <ComboBox fx:id="cbDanhHieu" layoutX="132.0" layoutY="67.0" prefHeight="34.0" prefWidth="270.0" promptText="Danh hiệu" />
-         <Label layoutX="28.0" layoutY="72.0" text="Loại học sinh">
+         <ComboBox fx:id="cbDanhHieu" layoutX="132.0" layoutY="67.0" onAction="#onChangedText" prefHeight="34.0" prefWidth="237.0" promptText="Danh hiệu" />
+         <Label layoutX="28.0" layoutY="72.0" text="Loại PT">
             <font>
                <Font size="16.0" />
             </font>
          </Label>
-         <Pane layoutX="428.0" layoutY="41.0" prefHeight="248.0" prefWidth="270.0" style="-fx-border-color: black;">
-            <children>
-               <Label layoutX="17.0" layoutY="4.0" text="Thông tin tỉ lệ phần thưởng hiện tại">
-                  <font>
-                     <Font name="System Bold" size="14.0" />
-                  </font>
-               </Label>
-               <Label layoutX="14.0" layoutY="45.0" text="+ Tên phần thưởng :" />
-               <Label fx:id="lbHSGioi" layoutX="170.0" layoutY="45.0" text="ABC" />
-               <Label layoutX="25.0" layoutY="62.0" text="Số lượng vở được nhận :" />
-               <Label fx:id="lbSoVoGioi" layoutX="170.0" layoutY="62.0" prefHeight="17.0" prefWidth="22.0" text="ABC" />
-               <Label layoutX="14.0" layoutY="107.0" text="+ Tên phần thưởng :" />
-               <Label fx:id="lbHSKha" layoutX="170.0" layoutY="107.0" text="ABC" />
-               <Label layoutX="25.0" layoutY="124.0" text="Số lượng vở được nhận :" />
-               <Label fx:id="lbSoVoKha" layoutX="170.0" layoutY="124.0" prefHeight="17.0" prefWidth="22.0" text="ABC" />
-               <Label layoutX="37.0" layoutY="205.0" text="Có thể sử dụng SQL" />
-               <Label layoutX="56.0" layoutY="169.0" text="Giá 1 cuốn vở :" />
-               <Label fx:id="lbGiaVo" layoutX="144.0" layoutY="169.0" prefHeight="17.0" prefWidth="22.0" text="ABC" />
-            </children>
-         </Pane>
-         <Label layoutX="28.0" layoutY="134.0" text="Số vở">
+         <Label layoutX="28.0" layoutY="170.0" text="Số vở">
             <font>
                <Font size="16.0" />
             </font>
          </Label>
-         <Label layoutX="28.0" layoutY="199.0" text="Giá trị vở">
+         <Label layoutX="28.0" layoutY="217.0" text="Giá trị vở">
             <font>
                <Font size="16.0" />
             </font>
          </Label>
-         <TextField fx:id="tfGiaVo" layoutX="132.0" layoutY="194.0" prefHeight="34.0" prefWidth="270.0" promptText="Giá" />
-         <Button layoutX="323.0" layoutY="254.0" mnemonicParsing="false" onAction="#onLuuClicked" prefHeight="34.0" prefWidth="78.0" text="Lưu" />
-         <TextField fx:id="tfSoVo" layoutX="132.0" layoutY="129.0" prefHeight="34.0" prefWidth="270.0" promptText="Số lượng" />
+         <TextField fx:id="tfGiaVo" layoutX="132.0" layoutY="213.0" prefHeight="34.0" prefWidth="270.0" promptText="Giá" />
+         <Button layoutX="323.0" layoutY="261.0" mnemonicParsing="false" onAction="#onLuuClicked" prefHeight="34.0" prefWidth="78.0" text="Lưu" />
+         <TextField fx:id="tfSoVo" layoutX="132.0" layoutY="165.0" prefHeight="34.0" prefWidth="270.0" promptText="Số lượng" />
+         <TextArea fx:id="taTTThuong" layoutX="420.0" layoutY="17.0" prefHeight="276.0" prefWidth="270.0" />
+         <Button layoutX="372.0" layoutY="117.0" mnemonicParsing="false" onAction="#onAddPTClicked" prefHeight="34.0" prefWidth="33.0" text="+" />
+         <Button layoutX="371.0" layoutY="67.0" mnemonicParsing="false" onAction="#onRemovePTClicked" prefHeight="34.0" prefWidth="34.0" text="-" />
+         <Label layoutX="28.0" layoutY="122.0" text="Thêm PT">
+            <font>
+               <Font size="16.0" />
+            </font>
+         </Label>
+         <TextField fx:id="tfThemPT" layoutX="132.0" layoutY="117.0" prefHeight="34.0" prefWidth="237.0" promptText="Tên phần thưởng muốn thêm" />
       </children>
    </AnchorPane>
    <AnchorPane layoutX="-1.0" layoutY="4.0" prefHeight="506.0" prefWidth="202.0" style="-fx-background-color: gray;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-1.0" AnchorPane.topAnchor="4.0">

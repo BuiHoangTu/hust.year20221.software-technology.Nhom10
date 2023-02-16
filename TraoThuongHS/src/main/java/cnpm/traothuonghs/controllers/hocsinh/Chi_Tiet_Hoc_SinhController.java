@@ -1,9 +1,14 @@
 package cnpm.traothuonghs.controllers.hocsinh;
 
+import cnpm.quanlynhankhau.models.HoKhau;
+import cnpm.quanlynhankhau.services.HoKhauService;
 import cnpm.traothuonghs.controllers.BaseLeftController;
 import cnpm.traothuonghs.models.HocSinh;
 import cnpm.traothuonghs.models.PhanThuong;
 import cnpm.traothuonghs.services.HocSinhService;
+import cnpm.traothuonghs.services.PhanThuongService;
+import cnpm.traothuonghs.services.TinhThuongService;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -16,6 +21,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 public class Chi_Tiet_Hoc_SinhController extends BaseLeftController {
 
@@ -49,7 +55,7 @@ public class Chi_Tiet_Hoc_SinhController extends BaseLeftController {
     @FXML
     private void initialize() throws SQLException {
         // Set Label thông tin học sinh
-        lbID.setText("1");
+        lbID.setText(idHocSinh);
         HocSinh hocSinh = HocSinhService.getHocSinh(1, lbID.getText());
         lbTen.setText(hocSinh.getTen());
         lbTruong.setText(hocSinh.getTruongHoc());
@@ -61,18 +67,29 @@ public class Chi_Tiet_Hoc_SinhController extends BaseLeftController {
         tcDanhHieu.setMinWidth(20);
         tcDanhHieu.prefWidthProperty().bind(tvDanhSachThuong.widthProperty().multiply(0.3));
 
-        tcLop.setCellValueFactory(new PropertyValueFactory<PhanThuong, String>("ngaySinh"));
+        tcLop.setCellValueFactory(new PropertyValueFactory<PhanThuong, String>("lop"));
         tcLop.setMinWidth(20);
-        tcLop.prefWidthProperty().bind(tvDanhSachThuong.widthProperty().multiply(0.25));
+        tcLop.prefWidthProperty().bind(tvDanhSachThuong.widthProperty().multiply(0.3));
 
-        tcNgayNhan.setCellValueFactory(new PropertyValueFactory<PhanThuong, String>("quanHeVoiChuHo"));
+        tcNgayNhan.setCellValueFactory(new PropertyValueFactory<PhanThuong, String>("ngayPhatThuong"));
         tcNgayNhan.setMinWidth(20);
-        tcNgayNhan.prefWidthProperty().bind(tvDanhSachThuong.widthProperty().multiply(0.3));
+        tcNgayNhan.prefWidthProperty().bind(tvDanhSachThuong.widthProperty().multiply(0.2));
 
-        tcSoVo.setCellValueFactory(new PropertyValueFactory<PhanThuong, String>("quanHeVoiChuHo"));
+//        tcSoVo.setCellValueFactory(new PropertyValueFactory<PhanThuong, String>(null));
+        tcSoVo.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<PhanThuong, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<PhanThuong, String> arg0) {
+                return new SimpleStringProperty(String.valueOf(arg0.getValue().getSoVo()));
+            }
+        });
         tcSoVo.setMinWidth(20);
-        tcSoVo.prefWidthProperty().bind(tvDanhSachThuong.widthProperty().multiply(0.3));
+        tcSoVo.prefWidthProperty().bind(tvDanhSachThuong.widthProperty().multiply(0.2));
 
+        try{
+            danhSachThuong.addAll(PhanThuongService.findPhanThuongHS(idHocSinh));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         tvDanhSachThuong.setItems(danhSachThuong);
     }
 

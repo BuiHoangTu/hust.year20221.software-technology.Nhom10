@@ -64,7 +64,7 @@ public class Chinh_Sua_Hoc_SinhController extends BaseLeftController {
     // Button
     @FXML
     protected void onHuyClicked() {
-        changeScene("/cnpm/quanlynhankhau/views/hocsinh/Quan-ly-hoc-sinh.fxml");
+        changeScene("/cnpm/traothuonghs/views/hocsinh/Quan-ly-hoc-sinh.fxml");
     }
 
     @FXML
@@ -73,15 +73,13 @@ public class Chinh_Sua_Hoc_SinhController extends BaseLeftController {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Chưa nhập các trường cần thiết");
             String str = "";
-            if (tfTen.getText().equals("")) str = str + "\n    Tên";
-            if (tfNgaySinh.getText().equals("")) str = str + "\n	Ngày sinh";
-            if (tfTruong.getText().equals("")) str = str + "\n	Trường";
-            if (tfDanhHieu.getText().equals("")) str = str + "\n	Danh hiệu";
-            if (tfMaHoKhau.getText().equals("")) str = str + "\n	Mã hộ khẩu";
-            if (tfPhuHuynh.getText().equals("")) str = str + "\n	Phụ huynh";
-            alert.setContentText("Các trường : " + str + "\nđang còn trống");
-            alert.show();
-        } else {
+            if (tfTen.getText().equals("")) tfTen.setText(lbTenCu.getText());
+            if (tfNgaySinh.getText().equals("")) tfNgaySinh.setText(lbNgaySinhCu.getText());
+            if (tfTruong.getText().equals("")) tfTruong.setText(lbTruongCu.getText());
+            if (tfDanhHieu.getText().equals("")) tfDanhHieu.setText(lbDanhHieuCu.getText());
+            if (tfMaHoKhau.getText().equals("")) tfMaHoKhau.setText(lbMaHoKhauCu.getText());
+            if (tfPhuHuynh.getText().equals("")) tfPhuHuynh.setText(lbPhuHuynhCu.getText());
+        }
             HocSinh tmp = HocSinhService.getHocSinh(1, idHocSinh);
             tmp = new HocSinh(idHocSinh, tfTen.getText(), LocalDate.parse(tfNgaySinh.getText()), tfTruong.getText(), tfMaHoKhau.getText(), tfPhuHuynh.getText());
             tmp.change(tfTen.getText(), LocalDate.parse(tfNgaySinh.getText()), tfTruong.getText(), tfMaHoKhau.getText(), tfPhuHuynh.getText());
@@ -91,8 +89,7 @@ public class Chinh_Sua_Hoc_SinhController extends BaseLeftController {
             tmp1.change(null, null, tfDanhHieu.getText(), null);
 
             // Chuyển về scene trước đó
-            changeScene("/cnpm/quanlynhankhau/views/QuanLyHoKhau.fxml");
-        }
+            changeScene("/cnpm/traothuonghs/views/hocsinh/Quan-ly-hoc-sinh.fxml");
     }
 
 }

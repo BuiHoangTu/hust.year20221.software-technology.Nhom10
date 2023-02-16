@@ -14,7 +14,7 @@ public class TraoThuongHSApplication extends Application {
 	public static Stage MAIN_STAGE;
 
 	@Override
-	public void start(Stage stage){
+	public void start(Stage stage) {
 		FXMLLoader fxmlLoader = new FXMLLoader(TraoThuongHSApplication.class.getResource("/cnpm/traothuonghs/views/Login-view.fxml"));
 		Scene scene = null;
 		try {

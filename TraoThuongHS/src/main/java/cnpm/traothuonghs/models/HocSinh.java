@@ -48,6 +48,10 @@ public class HocSinh {
 		return phuHuynh;
 	}
 
+	public String getId() {
+		return id;
+	}
+
 	public List<PhanThuong> getCacPhanThuong() {
 		return cacPhanThuong;
 	}
@@ -63,7 +67,7 @@ public class HocSinh {
 		StringBuilder sqlQuery = new StringBuilder();
 		sqlQuery.append("UPDATE trao_thuong_hoc_sinh.hoc_sinh SET  ");
 
-		if (ten != null) sqlQuery.append("ten like ? , ");
+		if (ten != null) sqlQuery.append("ten = ? , ");
 		if (ngaySinh != null) sqlQuery.append("ngaySinh = ? , ");
 		if (truongHoc != null) sqlQuery.append("truongHoc = ? , ");
 		if (maHoKhau != null) sqlQuery.append("maHoKhau = ? , ");

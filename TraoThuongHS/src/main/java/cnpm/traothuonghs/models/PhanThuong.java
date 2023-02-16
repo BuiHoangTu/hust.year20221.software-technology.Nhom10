@@ -10,7 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDate;
 
-public class PhanThuong {
+public class PhanThuong extends TinhThuongService {
 	private  String idHocSinh;
 	private LocalDate ngayPhatThuong;
 	private String tenDotPhatThuong;
