@@ -14,8 +14,8 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="543.0" prefWidth="936.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cnpm.traothuonghs.controllers.hocsinh.QuanLyHocSinhController">
    <left>
-      <VBox maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="676.0" prefWidth="168.0" style="-fx-background-color: gray;" BorderPane.alignment="CENTER">
-         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onHomeClicked" style="-fx-background-color: black;" text="Trang chủ" textFill="WHITE">
+      <VBox maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="682.0" prefWidth="206.0" style="-fx-background-color: gray;" BorderPane.alignment="CENTER">
+         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onHomeClicked" prefHeight="62.0" style="-fx-background-color: black;" text="Trang chủ" textFill="WHITE">
             <VBox.margin>
                <Insets top="50.0" />
             </VBox.margin>
@@ -28,7 +28,7 @@
          </Button>
          <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onHSClicked" style="-fx-background-color: #47484b;" text="Học sinh" textFill="WHITE">
             <VBox.margin>
-               <Insets top="10.0" />
+               <Insets top="40.0" />
             </VBox.margin>
             <padding>
                <Insets bottom="10.0" top="10.0" />
@@ -62,8 +62,8 @@
       </VBox>
    </left>
    <top>
-      <AnchorPane prefHeight="40.0" prefWidth="763.0" BorderPane.alignment="CENTER">
-         <TextField fx:id="tfTimKiem" layoutX="199.0" layoutY="6.0" prefHeight="26.0" prefWidth="187.0" />
+      <AnchorPane prefHeight="0.0" prefWidth="763.0" BorderPane.alignment="CENTER">
+         <TextField fx:id="tfTimKiem" layoutX="219.0" layoutY="6.0" prefHeight="26.0" prefWidth="187.0" />
          <CheckBox fx:id="chbTen" layoutX="447.0" layoutY="12.0" mnemonicParsing="false" text="Tên" />
          <CheckBox fx:id="chbDotPhat" layoutX="562.0" layoutY="12.0" mnemonicParsing="false" text="Đợt phát" />
          <CheckBox fx:id="chbDiaChi" layoutX="710.0" layoutY="11.0" mnemonicParsing="false" text="Địa chỉ" />
