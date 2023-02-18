@@ -95,8 +95,8 @@ public class QuanLyHocSinhController extends BaseLeftController {
 
     public void onChinhSuaHocSinhClicked(ActionEvent event) {
         //changeScene();
-        Chinh_Sua_Hoc_SinhController.idHocSinh = idHocSinhDuocChon;
-        changeScene("/cnpm/traothuonghs/views/hocsinh/Chinh_Sua_Hoc_Sinh.fxml");
+        ChinhSuaHocSinhController.idHocSinh = idHocSinhDuocChon;
+        changeScene("/cnpm/traothuonghs/views/hocsinh/Chinh-sua-hoc-sinh.fxml");
     }
 
     @FXML
@@ -107,7 +107,7 @@ public class QuanLyHocSinhController extends BaseLeftController {
 
     public void onXemThongTinClicked(ActionEvent event) {
         //changeScene();
-        Chi_Tiet_Hoc_SinhController.idHocSinh = idHocSinhDuocChon;
-        changeScene("/cnpm/traothuonghs/views/hocsinh/Chi_Tiet_Hoc_Sinh.fxml");
+        ChiTietHocSinhController.idHocSinh = idHocSinhDuocChon;
+        changeScene("/cnpm/traothuonghs/views/hocsinh/Chi-tiet-hoc-sinh.fxml");
     }
 }

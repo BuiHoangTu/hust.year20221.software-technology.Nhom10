@@ -17,7 +17,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-public class Chinh_Ti_Le_Phan_ThuongController extends BaseLeftController {
+public class ChinhTiLePhanThuongController extends BaseLeftController {
     // region FXML
 	// ComboBox Danh hiệu
     @FXML
@@ -45,14 +45,6 @@ public class Chinh_Ti_Le_Phan_ThuongController extends BaseLeftController {
     // Temp info
     private String danhHieuTamThoi = "";
     private int count = 0;
-
-
-	public Chinh_Ti_Le_Phan_ThuongController() {
-		for (var x : danhHieu) {
-			System.out.println(x);
-		}
-	}
-
 
     // Function thiết lập thông tin thưởng
     private void setThongTinThuong() {
@@ -87,10 +79,11 @@ public class Chinh_Ti_Le_Phan_ThuongController extends BaseLeftController {
 
     @FXML
     protected void onAddPTClicked() {
-        if (tfSoVo.getText().trim().equals("")) {
+        if (tfSoVo.getText().trim().equals("") || tfThemPT.getText().equals("")) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Chưa nhập các trường cần thiết");
             String str = "";
+            if (tfThemPT.getText().equals("")) str = str + "\n        Tên phần thưởng cần thêm";
             if (tfSoVo.getText().equals("")) str = str + "\n	Số vở";
             alert.setContentText("Các trường : " + str + "\nđang còn trống");
             alert.show();
