@@ -37,7 +37,14 @@ public class QuanLyHocSinhController extends BaseLeftController {
         colPhuHuynh.setCellValueFactory(new PropertyValueFactory<HocSinh, String>("phuHuynh"));
         colNgaySinh.setCellValueFactory(new PropertyValueFactory<HocSinh, String>("ngaySinh"));
         colTruong.setCellValueFactory(new PropertyValueFactory<HocSinh,String>("truongHoc"));
-        colLop.setCellValueFactory(hocSinhStringCellDataFeatures -> new SimpleStringProperty(hocSinhStringCellDataFeatures.getValue().getCacPhanThuong().get(hocSinhStringCellDataFeatures.getValue().getCacPhanThuong().size()-1).getLop()));
+        colLop.setCellValueFactory(hocSinhStringCellDataFeatures -> {
+			var cacPhanThuong = hocSinhStringCellDataFeatures.getValue().getCacPhanThuong();
+			try {
+				return new SimpleStringProperty(cacPhanThuong.get(cacPhanThuong.size() - 1).getLop());
+			} catch (IndexOutOfBoundsException e) {
+				return new SimpleStringProperty("Không rõ");
+			}
+		});
 
         List<HocSinh> lsHS = new ArrayList<>();
         for(int i = 1; i <= 200; i++){
