@@ -83,10 +83,11 @@ public class Chinh_Ti_Le_Phan_ThuongController extends BaseLeftController {
 
     @FXML
     protected void onAddPTClicked() {
-        if (tfSoVo.getText().equals("")) {
+        if (tfSoVo.getText().equals("") || tfThemPT.getText().equals("")) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Chưa nhập các trường cần thiết");
             String str = "";
+            if (tfThemPT.getText().equals("")) str = str + "\n        Tên phần thưởng cần thêm";
             if (tfSoVo.getText().equals("")) str = str + "\n	Số vở";
             alert.setContentText("Các trường : " + str + "\nđang còn trống");
             alert.show();
