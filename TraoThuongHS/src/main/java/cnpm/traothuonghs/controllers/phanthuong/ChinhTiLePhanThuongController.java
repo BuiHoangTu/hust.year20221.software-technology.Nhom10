@@ -1,29 +1,27 @@
 package cnpm.traothuonghs.controllers.phanthuong;
 
-import cnpm.quanlynhankhau.models.NhanKhau;
 import cnpm.traothuonghs.controllers.BaseLeftController;
-import cnpm.traothuonghs.models.HocSinh;
-import cnpm.traothuonghs.services.HocSinhService;
 import cnpm.traothuonghs.services.TinhThuongService;
-import javafx.beans.Observable;
-import javafx.beans.value.ObservableStringValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-public class Chinh_Ti_Le_Phan_ThuongController extends BaseLeftController {
-    // ComboBox Danh hiệu
+public class ChinhTiLePhanThuongController extends BaseLeftController {
+    // region FXML
+	// ComboBox Danh hiệu
     @FXML
-    private ComboBox cbDanhHieu;
-
+    private ComboBox<String> cbDanhHieu;
     // TextField Chỉnh tỉ lệ
     @FXML
     private TextField tfThemPT;
@@ -31,20 +29,18 @@ public class Chinh_Ti_Le_Phan_ThuongController extends BaseLeftController {
     private TextField tfSoVo;
     @FXML
     private TextField tfGiaVo;
-
     // TextArea Thông tin thưởng
     @FXML
     private TextArea taTTThuong;
-
+	// endregion
     // Service
-    private TinhThuongService tinhThuong = new TinhThuongService(LocalDate.now());
-    private Map<String, Integer> tiLeThuong = new TinhThuongService(LocalDate.now()).getMapTyLeThuong();
-    private ObservableList<String> danhHieu = FXCollections.observableList(new ArrayList<>(tiLeThuong.keySet()));
-    private ObservableList<String> thongTinThayDoi = FXCollections.observableArrayList();
-    private String themMoi = "";
+    private final TinhThuongService tinhThuong = new TinhThuongService(LocalDate.now());
+    private final Map<String, Integer> tiLeThuong = tinhThuong.getMapTyLeThuong();
+    private final ObservableList<String> danhHieu = FXCollections.observableList(new ArrayList<>(Arrays.stream(tinhThuong.getCacDanhHieu()).toList()));
+	private String themMoi = "";
 
     private String xoaDi = "";
-    private List<String> thayDoi = new ArrayList<String>();
+    private final List<String> thayDoi = new ArrayList<>();
 
     // Temp info
     private String danhHieuTamThoi = "";
@@ -62,7 +58,7 @@ public class Chinh_Ti_Le_Phan_ThuongController extends BaseLeftController {
 
     // initiallize
     @FXML
-    private void initialize() throws SQLException {
+    private void initialize() {
         // SetItems cho ComboBox danhHieu
         cbDanhHieu.setItems(danhHieu);
 
@@ -83,7 +79,7 @@ public class Chinh_Ti_Le_Phan_ThuongController extends BaseLeftController {
 
     @FXML
     protected void onAddPTClicked() {
-        if (tfSoVo.getText().equals("") || tfThemPT.getText().equals("")) {
+        if (tfSoVo.getText().trim().equals("") || tfThemPT.getText().equals("")) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Chưa nhập các trường cần thiết");
             String str = "";
@@ -112,16 +108,16 @@ public class Chinh_Ti_Le_Phan_ThuongController extends BaseLeftController {
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Thay đổi tỉ lệ phần thưởng");
-            String str = "";
+            StringBuilder str = new StringBuilder();
             for (String tmp : thayDoi) {
-                str += tmp;
+                str.append(tmp);
             }
-            str += themMoi;
-            str += xoaDi;
+            str.append(themMoi);
+            str.append(xoaDi);
             if (!tfGiaVo.getText().equals("")) {
-                str += "- Giá một cuốn vở : " + tinhThuong.getGiaVo() + " -> " + tfGiaVo.getText() + "\n";
-                TinhThuongService.chinhGiaVo(Integer.valueOf(tfGiaVo.getText()));
-                TinhThuongService.giaVo = Integer.valueOf(tfGiaVo.getText());
+                str.append("- Giá một cuốn vở : ").append(tinhThuong.getGiaVo()).append(" -> ").append(tfGiaVo.getText()).append("\n");
+                TinhThuongService.chinhGiaVo(Integer.parseInt(tfGiaVo.getText()));
+                // TinhThuongService.giaVo = Integer.parseInt(tfGiaVo.getText());
                 tfGiaVo.setText("");
 
                 setThongTinThuong();
@@ -129,8 +125,7 @@ public class Chinh_Ti_Le_Phan_ThuongController extends BaseLeftController {
             alert.setContentText("Các mục đã chỉnh sửa: " + str + "\n");
             alert.show();
 
-            TinhThuongService.mapTyLeThuong = tiLeThuong;
-        } else {
+		} else {
             thayDoi.add(count,"\nTên phần thưởng thay đổi : " + danhHieuTamThoi + "\n    - Số lượng vở thưởng : " + tinhThuong.getPhanThuong(danhHieuTamThoi) + " -> " + tfSoVo.getText() + "\n");
             count = (count + 1) % tiLeThuong.size();
 
@@ -139,23 +134,22 @@ public class Chinh_Ti_Le_Phan_ThuongController extends BaseLeftController {
             setThongTinThuong();
 
             tfSoVo.setText("");
-            danhHieuTamThoi = cbDanhHieu.getValue().toString();
+            danhHieuTamThoi = cbDanhHieu.getValue();
 
             // Lưu thông tin
             TinhThuongService.chinhTyLe(tiLeThuong);
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Thay đổi tỉ lệ phần thưởng");
-            String str = "";
+            StringBuilder str = new StringBuilder();
             for (String tmp : thayDoi) {
-                str += tmp;
+                str.append(tmp);
             }
-            str += themMoi;
-            str += xoaDi;
+            str.append(themMoi);
+            str.append(xoaDi);
             if (!tfGiaVo.getText().equals("")) {
-                str += "- Giá một cuốn vở : " + tinhThuong.getGiaVo() + " -> " + tfGiaVo.getText() + "\n";
-                TinhThuongService.chinhGiaVo(Integer.valueOf(tfGiaVo.getText()));
-                TinhThuongService.giaVo = Integer.valueOf(tfGiaVo.getText());
+                str.append("- Giá một cuốn vở : ").append(tinhThuong.getGiaVo()).append(" -> ").append(tfGiaVo.getText()).append("\n");
+                TinhThuongService.chinhGiaVo(Integer.parseInt(tfGiaVo.getText()));
                 tfGiaVo.setText("");
 
                 setThongTinThuong();
@@ -163,9 +157,8 @@ public class Chinh_Ti_Le_Phan_ThuongController extends BaseLeftController {
             alert.setContentText("Các mục đã chỉnh sửa: " + str + "\n");
             alert.show();
 
-            TinhThuongService.mapTyLeThuong = tiLeThuong;
-        }
-    }
+		}
+	}
 
     @FXML
     void onChangedText() { // Chưa chạy được
@@ -178,9 +171,9 @@ public class Chinh_Ti_Le_Phan_ThuongController extends BaseLeftController {
             setThongTinThuong();
 
             tfSoVo.setText("");
-            danhHieuTamThoi = cbDanhHieu.getValue().toString();
+            danhHieuTamThoi = cbDanhHieu.getValue();
         } else if (danhHieuTamThoi.equals("")) {
-            danhHieuTamThoi = cbDanhHieu.getValue().toString();
+            danhHieuTamThoi = cbDanhHieu.getValue();
         }
     }
 }

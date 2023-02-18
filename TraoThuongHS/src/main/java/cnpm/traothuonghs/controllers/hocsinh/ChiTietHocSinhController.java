@@ -1,14 +1,10 @@
 package cnpm.traothuonghs.controllers.hocsinh;
 
-import cnpm.quanlynhankhau.models.HoKhau;
-import cnpm.quanlynhankhau.services.HoKhauService;
 import cnpm.traothuonghs.controllers.BaseLeftController;
 import cnpm.traothuonghs.models.HocSinh;
 import cnpm.traothuonghs.models.PhanThuong;
 import cnpm.traothuonghs.services.HocSinhService;
 import cnpm.traothuonghs.services.PhanThuongService;
-import cnpm.traothuonghs.services.TinhThuongService;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -21,9 +17,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 
 import java.sql.SQLException;
-import java.time.LocalDate;
 
-public class Chi_Tiet_Hoc_SinhController extends BaseLeftController {
+public class ChiTietHocSinhController extends BaseLeftController {
 
     public static String idHocSinh = null;
 
@@ -96,8 +91,8 @@ public class Chi_Tiet_Hoc_SinhController extends BaseLeftController {
     // Button
     @FXML
     protected void onChinhSuaClicked() {
-        Chinh_Sua_Hoc_SinhController.idHocSinh = idHocSinh;
-        changeScene("/cnpm/traothuonghs/views/hocsinh/Chinh_Sua_Hoc_Sinh.fxml");
+        ChinhSuaHocSinhController.idHocSinh = idHocSinh;
+        changeScene("/cnpm/traothuonghs/views/hocsinh/Chinh-sua-hoc-sinh.fxml");
     }
     @FXML
     protected void onQuayLaiClicked() {
