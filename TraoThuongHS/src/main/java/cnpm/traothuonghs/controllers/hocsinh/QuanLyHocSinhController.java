@@ -32,11 +32,18 @@ public class QuanLyHocSinhController extends BaseLeftController {
 
     @FXML
     private void initialize() throws SQLException {
-        colTenHocSinh.setCellValueFactory(new PropertyValueFactory<>("ten"));
-        colPhuHuynh.setCellValueFactory(new PropertyValueFactory<>("phuHuynh"));
-        colNgaySinh.setCellValueFactory(new PropertyValueFactory<>("ngaySinh"));
-        colTruong.setCellValueFactory(new PropertyValueFactory<>("truongHoc"));
-        colLop.setCellValueFactory(hocSinhStringCellDataFeatures -> new SimpleStringProperty(hocSinhStringCellDataFeatures.getValue().getCacPhanThuong().get(hocSinhStringCellDataFeatures.getValue().getCacPhanThuong().size()-1).getLop()));
+        colTenHocSinh.setCellValueFactory(new PropertyValueFactory<HocSinh, String>("ten"));
+        colPhuHuynh.setCellValueFactory(new PropertyValueFactory<HocSinh, String>("phuHuynh"));
+        colNgaySinh.setCellValueFactory(new PropertyValueFactory<HocSinh, String>("ngaySinh"));
+        colTruong.setCellValueFactory(new PropertyValueFactory<HocSinh,String>("truongHoc"));
+        colLop.setCellValueFactory(hocSinhStringCellDataFeatures -> {
+			var cacPhanThuong = hocSinhStringCellDataFeatures.getValue().getCacPhanThuong();
+			try {
+				return new SimpleStringProperty(cacPhanThuong.get(cacPhanThuong.size() - 1).getLop());
+			} catch (IndexOutOfBoundsException e) {
+				return new SimpleStringProperty("Không rõ");
+			}
+		});
 
         List<HocSinh> lsHS = new ArrayList<>();
         for(int i = 1; i <= 200; i++){
@@ -49,7 +56,7 @@ public class QuanLyHocSinhController extends BaseLeftController {
         tvHocSinh.setItems(ls);
     }
 
-    public void onTimKiemClicked() throws SQLException {
+    public void onTimKiemClicked(ActionEvent event) throws SQLException {
         //Tìm học sinh theo checkBox và textField từ database
         if(chbTen.isSelected()){
             ObservableList<HocSinh> ls = FXCollections.observableList(HocSinhService.findHocSinh(2, tfTimKiem.getText()));

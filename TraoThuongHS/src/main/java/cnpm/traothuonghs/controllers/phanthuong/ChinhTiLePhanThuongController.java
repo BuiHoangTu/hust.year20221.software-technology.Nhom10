@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class ChinhTiLePhanThuongController extends BaseLeftController {
+public class Chinh_Ti_Le_Phan_ThuongController extends BaseLeftController {
     // ComboBox Danh hiệu
     @FXML
     private ComboBox cbDanhHieu;
@@ -38,7 +38,7 @@ public class ChinhTiLePhanThuongController extends BaseLeftController {
     private String themMoi = "";
 
     private String xoaDi = "";
-    private List<String> thayDoi = new ArrayList<>();
+    private List<String> thayDoi = new ArrayList<String>();
 
     // Temp info
     private String danhHieuTamThoi = "";
