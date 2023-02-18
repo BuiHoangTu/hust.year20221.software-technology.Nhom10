@@ -11,6 +11,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -100,7 +101,7 @@ public class QuanLyHocSinhController extends BaseLeftController {
             alert.show();
         }else {
             ChinhSuaHocSinhController.idHocSinh = idHocSinhDuocChon;
-            changeScene("/cnpm/traothuonghs/views/hocsinh/Chinh_Sua_Hoc_Sinh.fxml");
+            changeScene("/cnpm/traothuonghs/views/hocsinh/Chinh-sua-hoc-sinh.fxml");
         }
     }
 
@@ -118,7 +119,7 @@ public class QuanLyHocSinhController extends BaseLeftController {
             alert.show();
         }else{
             ChiTietHocSinhController.idHocSinh = idHocSinhDuocChon;
-            changeScene("/cnpm/traothuonghs/views/hocsinh/Chi_Tiet_Hoc_Sinh.fxml");
+            changeScene("/cnpm/traothuonghs/views/hocsinh/Chi-tiet-hoc-sinh.fxml");
         }
     }
 }

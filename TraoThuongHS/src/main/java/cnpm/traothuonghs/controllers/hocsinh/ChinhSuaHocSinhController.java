@@ -1,19 +1,14 @@
 package cnpm.traothuonghs.controllers.hocsinh;
 
-import cnpm.quanlynhankhau.models.DiaChi;
-import cnpm.quanlynhankhau.models.HoKhau;
-import cnpm.quanlynhankhau.services.HoKhauService;
 import cnpm.traothuonghs.controllers.BaseLeftController;
 import cnpm.traothuonghs.models.HocSinh;
 import cnpm.traothuonghs.models.PhanThuong;
 import cnpm.traothuonghs.services.HocSinhService;
 import cnpm.traothuonghs.services.PhanThuongService;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.sql.SQLException;
 import java.time.LocalDate;

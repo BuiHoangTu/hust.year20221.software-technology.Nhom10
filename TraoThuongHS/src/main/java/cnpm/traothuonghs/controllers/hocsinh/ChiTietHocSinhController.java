@@ -92,7 +92,7 @@ public class ChiTietHocSinhController extends BaseLeftController {
     @FXML
     protected void onChinhSuaClicked() {
         ChinhSuaHocSinhController.idHocSinh = idHocSinh;
-        changeScene("/cnpm/traothuonghs/views/hocsinh/Chinh_Sua_Hoc_Sinh.fxml");
+        changeScene("/cnpm/traothuonghs/views/hocsinh/Chinh-sua-hoc-sinh.fxml");
     }
     @FXML
     protected void onQuayLaiClicked() {
