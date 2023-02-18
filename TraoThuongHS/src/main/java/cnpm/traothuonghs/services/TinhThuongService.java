@@ -11,10 +11,11 @@ import java.util.Map;
 public class TinhThuongService {
 	private String[] cacDanhHieu;
 
-	public static Map<String, Integer> mapTyLeThuong = new HashMap<>();
-	public static int giaVo;
+	private final Map<String, Integer> mapTyLeThuong = new HashMap<>();
+	private int giaVo;
 
 
+	// constructor
 	public TinhThuongService() {
 		new TinhThuongService(LocalDate.now());
 	}
