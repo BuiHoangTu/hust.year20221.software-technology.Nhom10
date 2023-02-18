@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class Chinh_Ti_Le_Phan_ThuongController extends BaseLeftController {
+public class ChinhTiLePhanThuongController extends BaseLeftController {
     // ComboBox Danh hiệu
     @FXML
     private ComboBox cbDanhHieu;
@@ -114,7 +114,7 @@ public class Chinh_Ti_Le_Phan_ThuongController extends BaseLeftController {
             if (!tfGiaVo.getText().equals("")) {
                 str += "- Giá một cuốn vở : " + tinhThuong.getGiaVo() + " -> " + tfGiaVo.getText() + "\n";
                 TinhThuongService.chinhGiaVo(Integer.valueOf(tfGiaVo.getText()));
-                TinhThuongService.giaVo = Integer.valueOf(tfGiaVo.getText());
+                //TinhThuongService.giaVo = Integer.valueOf(tfGiaVo.getText());
                 tfGiaVo.setText("");
 
                 setThongTinThuong();
@@ -122,7 +122,7 @@ public class Chinh_Ti_Le_Phan_ThuongController extends BaseLeftController {
             alert.setContentText("Các mục đã chỉnh sửa: " + str + "\n");
             alert.show();
 
-            TinhThuongService.mapTyLeThuong = tiLeThuong;
+
         } else {
             thayDoi.add(count,"\nTên phần thưởng thay đổi : " + danhHieuTamThoi + "\n    - Số lượng vở thưởng : " + tinhThuong.getPhanThuong(danhHieuTamThoi) + " -> " + tfSoVo.getText() + "\n");
             count = (count + 1) % tiLeThuong.size();
@@ -148,7 +148,7 @@ public class Chinh_Ti_Le_Phan_ThuongController extends BaseLeftController {
             if (!tfGiaVo.getText().equals("")) {
                 str += "- Giá một cuốn vở : " + tinhThuong.getGiaVo() + " -> " + tfGiaVo.getText() + "\n";
                 TinhThuongService.chinhGiaVo(Integer.valueOf(tfGiaVo.getText()));
-                TinhThuongService.giaVo = Integer.valueOf(tfGiaVo.getText());
+                //TinhThuongService.giaVo = Integer.valueOf(tfGiaVo.getText());
                 tfGiaVo.setText("");
 
                 setThongTinThuong();
@@ -156,7 +156,6 @@ public class Chinh_Ti_Le_Phan_ThuongController extends BaseLeftController {
             alert.setContentText("Các mục đã chỉnh sửa: " + str + "\n");
             alert.show();
 
-            TinhThuongService.mapTyLeThuong = tiLeThuong;
         }
     }
 
