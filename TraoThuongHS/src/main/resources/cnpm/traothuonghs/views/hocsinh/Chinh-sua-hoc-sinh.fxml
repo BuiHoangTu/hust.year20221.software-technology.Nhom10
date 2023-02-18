@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -72,11 +73,11 @@
               </rowConstraints>
                <children>
                   <TextField fx:id="tfTen" prefHeight="26.0" prefWidth="258.0" />
-                  <TextField fx:id="tfNgaySinh" GridPane.rowIndex="1" />
                   <TextField fx:id="tfTruong" GridPane.rowIndex="2" />
                   <TextField fx:id="tfDanhHieu" GridPane.rowIndex="3" />
                   <TextField fx:id="tfMaHoKhau" GridPane.rowIndex="4" />
                   <TextField fx:id="tfPhuHuynh" GridPane.rowIndex="5" />
+                  <DatePicker fx:id="dpNgaySinh" prefHeight="26.0" prefWidth="258.0" GridPane.rowIndex="1" />
                </children>
             </GridPane>
          </children>

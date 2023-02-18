@@ -7,6 +7,7 @@ import cnpm.traothuonghs.services.HocSinhService;
 import cnpm.traothuonghs.services.PhanThuongService;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
@@ -34,7 +35,7 @@ public class ChinhSuaHocSinhController extends BaseLeftController {
     @FXML
     private TextField tfTen;
     @FXML
-    private TextField tfNgaySinh;
+    private DatePicker dpNgaySinh;
     @FXML
     private TextField tfTruong;
     @FXML
@@ -64,20 +65,20 @@ public class ChinhSuaHocSinhController extends BaseLeftController {
 
     @FXML
     protected void onXacNhanClicked() throws SQLException {
-        if (tfTen.getText().equals("") || tfNgaySinh.getText().equals("") || tfTruong.getText().equals("") || tfDanhHieu.getText().equals("") || tfMaHoKhau.getText().equals("") || tfPhuHuynh.getText().equals("")) {
+        if (tfTen.getText().equals("") || dpNgaySinh.getValue() == null || tfTruong.getText().equals("") || tfDanhHieu.getText().equals("") || tfMaHoKhau.getText().equals("") || tfPhuHuynh.getText().equals("")) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Chưa nhập các trường cần thiết");
             String str = "";
             if (tfTen.getText().equals("")) tfTen.setText(lbTenCu.getText());
-            if (tfNgaySinh.getText().equals("")) tfNgaySinh.setText(lbNgaySinhCu.getText());
+            if (dpNgaySinh.getValue() == null) dpNgaySinh.setValue(LocalDate.parse(lbNgaySinhCu.getText()));
             if (tfTruong.getText().equals("")) tfTruong.setText(lbTruongCu.getText());
             if (tfDanhHieu.getText().equals("")) tfDanhHieu.setText(lbDanhHieuCu.getText());
             if (tfMaHoKhau.getText().equals("")) tfMaHoKhau.setText(lbMaHoKhauCu.getText());
             if (tfPhuHuynh.getText().equals("")) tfPhuHuynh.setText(lbPhuHuynhCu.getText());
         }
             HocSinh tmp = HocSinhService.getHocSinh(1, idHocSinh);
-            tmp = new HocSinh(idHocSinh, tfTen.getText(), LocalDate.parse(tfNgaySinh.getText()), tfTruong.getText(), tfMaHoKhau.getText(), tfPhuHuynh.getText());
-            tmp.change(tfTen.getText(), LocalDate.parse(tfNgaySinh.getText()), tfTruong.getText(), tfMaHoKhau.getText(), tfPhuHuynh.getText());
+            tmp = new HocSinh(idHocSinh, tfTen.getText(), dpNgaySinh.getValue(), tfTruong.getText(), tfMaHoKhau.getText(), tfPhuHuynh.getText());
+            tmp.change(tfTen.getText(), dpNgaySinh.getValue(), tfTruong.getText(), tfMaHoKhau.getText(), tfPhuHuynh.getText());
 
             PhanThuong tmp1 = PhanThuongService.getThuong(idHocSinh).get(0);
             tmp1.setDanhHieu(tfDanhHieu.getText());
