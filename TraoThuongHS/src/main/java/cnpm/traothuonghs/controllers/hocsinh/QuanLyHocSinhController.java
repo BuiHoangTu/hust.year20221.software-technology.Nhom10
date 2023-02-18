@@ -89,25 +89,37 @@ public class QuanLyHocSinhController extends BaseLeftController {
 
     }
 
-    public void onThemHocSinhClicked(ActionEvent event) {
+    public void onThemHocSinhClicked() {
         changeScene("/cnpm/traothuonghs/views/hocsinh/Them-hoc-sinh.fxml");
     }
 
-    public void onChinhSuaHocSinhClicked(ActionEvent event) {
+    public void onChinhSuaHocSinhClicked() {
         //changeScene();
-        ChinhSuaHocSinhController.idHocSinh = idHocSinhDuocChon;
-        changeScene("/cnpm/traothuonghs/views/hocsinh/Chinh-sua-hoc-sinh.fxml");
+        if(idHocSinhDuocChon == null){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setContentText("Chưa chọn học sinh nào !");
+            alert.show();
+        }else {
+            ChinhSuaHocSinhController.idHocSinh = idHocSinhDuocChon;
+            changeScene("/cnpm/traothuonghs/views/hocsinh/Chinh-sua-hoc-sinh.fxml");
+        }
     }
 
     @FXML
-    void rowClickedHocSinh(MouseEvent event) throws SQLException {
+    void rowClickedHocSinh() {
         HocSinh clickedHocSinh = tvHocSinh.getSelectionModel().getSelectedItem();
         idHocSinhDuocChon = clickedHocSinh.getId();
     }
 
-    public void onXemThongTinClicked(ActionEvent event) {
+    public void onXemThongTinClicked() {
         //changeScene();
-        ChiTietHocSinhController.idHocSinh = idHocSinhDuocChon;
-        changeScene("/cnpm/traothuonghs/views/hocsinh/Chi-tiet-hoc-sinh.fxml");
+        if(idHocSinhDuocChon == null){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setContentText("Chưa chọn học sinh nào !");
+            alert.show();
+        }else{
+            ChiTietHocSinhController.idHocSinh = idHocSinhDuocChon;
+            changeScene("/cnpm/traothuonghs/views/hocsinh/Chi-tiet-hoc-sinh.fxml");
+        }
     }
 }

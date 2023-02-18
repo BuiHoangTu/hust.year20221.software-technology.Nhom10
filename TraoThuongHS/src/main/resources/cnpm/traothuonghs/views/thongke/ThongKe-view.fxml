@@ -13,41 +13,53 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="818.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="542.0" prefWidth="936.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
     <left>
-        <VBox maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+        <VBox maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="402.0" prefWidth="206.0" style="-fx-background-color: gray;" BorderPane.alignment="CENTER">
             <children>
-                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onHomeClicked" text="Trang chủ">
+                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onHomeClicked" prefHeight="62.0" style="-fx-background-color: black;" text="Trang chủ" textFill="#fffdfd">
                     <VBox.margin>
-                        <Insets top="50.0" />
+                        <Insets />
                     </VBox.margin>
                     <padding>
                         <Insets bottom="10.0" top="10.0" />
                     </padding>
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
                 </Button>
-                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onHSClicked" text="Học sinh">
+                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onHSClicked" style="-fx-background-color: #47484b;" text="Học sinh" textFill="#fff8f8">
                     <VBox.margin>
-                        <Insets top="10.0" />
+                        <Insets left="20.0" top="40.0" />
                     </VBox.margin>
                     <padding>
                         <Insets bottom="10.0" top="10.0" />
                     </padding>
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
                 </Button>
-                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onPTClicked" text="Phần thưởng">
+                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onPTClicked" style="-fx-background-color: #47484b;" text="Phần thưởng" textFill="#fffafa">
                     <VBox.margin>
-                        <Insets top="10.0" />
+                        <Insets left="20.0" top="10.0" />
                     </VBox.margin>
                     <padding>
                         <Insets bottom="10.0" top="10.0" />
                     </padding>
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
                 </Button>
-                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onTKClicked" text="Thống kê">
+                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onTKClicked" style="-fx-background-color: #47484b;" text="Thống kê" textFill="WHITE">
                     <padding>
                         <Insets bottom="10.0" top="10.0" />
                     </padding>
                     <VBox.margin>
-                        <Insets top="10.0" />
+                        <Insets left="20.0" top="10.0" />
                     </VBox.margin>
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
                 </Button>
             </children>
         </VBox>
@@ -57,10 +69,13 @@
             <children>
             <HBox layoutY="30.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
                <children>
-                      <Label minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="200.0" text="Thống kê" textAlignment="CENTER">
+                      <Label minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="199.0" text="Thống kê" textAlignment="CENTER">
                           <font>
                               <Font name="System Bold" size="28.0" />
                           </font>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
                       </Label>
                   <TextField fx:id="tfFilter" />
                   <RadioButton fx:id="rbDot" mnemonicParsing="false" text="Đợt phát">
@@ -80,7 +95,10 @@
             </HBox>
             <VBox layoutX="206.0" layoutY="65.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0">
                <children>
-                  <TableView fx:id="tvThongKe" prefHeight="200.0" prefWidth="200.0" />
+                  <TableView fx:id="tvThongKe" prefHeight="462.0" prefWidth="736.0">
+                     <VBox.margin>
+                        <Insets left="10.0" />
+                     </VBox.margin></TableView>
                </children>
             </VBox>
             </children>
