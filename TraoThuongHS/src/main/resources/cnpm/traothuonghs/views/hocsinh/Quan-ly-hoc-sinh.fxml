@@ -14,10 +14,10 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="543.0" prefWidth="936.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cnpm.traothuonghs.controllers.hocsinh.QuanLyHocSinhController">
    <left>
-      <VBox maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="682.0" prefWidth="206.0" style="-fx-background-color: gray;" BorderPane.alignment="CENTER">
-         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onHomeClicked" prefHeight="62.0" style="-fx-background-color: black;" text="Trang chủ" textFill="WHITE">
+      <VBox maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="578.0" prefWidth="206.0" style="-fx-background-color: gray;" BorderPane.alignment="CENTER">
+         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onHomeClicked" prefHeight="62.0" prefWidth="206.0" style="-fx-background-color: black;" text="Trang chủ" textFill="WHITE">
             <VBox.margin>
-               <Insets top="50.0" />
+               <Insets />
             </VBox.margin>
             <padding>
                <Insets bottom="10.0" top="10.0" />
@@ -28,7 +28,7 @@
          </Button>
          <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onHSClicked" style="-fx-background-color: #47484b;" text="Học sinh" textFill="WHITE">
             <VBox.margin>
-               <Insets top="40.0" />
+               <Insets left="20.0" top="40.0" />
             </VBox.margin>
             <padding>
                <Insets bottom="10.0" top="10.0" />
@@ -39,7 +39,7 @@
          </Button>
          <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onPTClicked" style="-fx-background-color: #47484b;" text="Phần thưởng" textFill="#fcfcfc">
             <VBox.margin>
-               <Insets top="10.0" />
+               <Insets left="20.0" top="10.0" />
             </VBox.margin>
             <padding>
                <Insets bottom="10.0" top="10.0" />
@@ -53,7 +53,7 @@
                <Insets bottom="10.0" top="10.0" />
             </padding>
             <VBox.margin>
-               <Insets top="10.0" />
+               <Insets left="20.0" top="10.0" />
             </VBox.margin>
             <font>
                <Font name="System Bold" size="16.0" />
@@ -62,7 +62,7 @@
       </VBox>
    </left>
    <top>
-      <AnchorPane prefHeight="0.0" prefWidth="763.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="20.0" prefWidth="728.0" BorderPane.alignment="CENTER">
          <TextField fx:id="tfTimKiem" layoutX="219.0" layoutY="6.0" prefHeight="26.0" prefWidth="187.0" />
          <CheckBox fx:id="chbTen" layoutX="447.0" layoutY="12.0" mnemonicParsing="false" text="Tên" />
          <CheckBox fx:id="chbDotPhat" layoutX="562.0" layoutY="12.0" mnemonicParsing="false" text="Đợt phát" />
@@ -79,14 +79,14 @@
    </right>
    <center>
       <ScrollPane prefHeight="360.0" prefWidth="462.0" BorderPane.alignment="CENTER">
-         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="503.0" prefWidth="715.0">
+         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="503.0" prefWidth="689.0">
             <TableView fx:id="tvHocSinh" onMouseClicked="#rowClickedHocSinh" prefHeight="607.0" prefWidth="702.0">
                <columns>
                   <TableColumn fx:id="colTenHocSinh" prefWidth="130.93326258659363" text="Tên học sinh" />
                   <TableColumn fx:id="colPhuHuynh" prefWidth="129.86663818359375" text="Phụ huynh" />
                   <TableColumn fx:id="colNgaySinh" prefWidth="72.0" text="Ngày sinh" />
-                  <TableColumn fx:id="colTruong" minWidth="5.86663818359375" prefWidth="176.79989624023438" text="Trường " />
-                  <TableColumn fx:id="colLop" prefWidth="150.40004882812502" text="Lớp" />
+                  <TableColumn fx:id="colTruong" minWidth="5.86663818359375" prefWidth="201.59994506835938" text="Trường " />
+                  <TableColumn fx:id="colLop" prefWidth="166.39999999999998" text="Lớp" />
                </columns>
             </TableView>
          </AnchorPane>
