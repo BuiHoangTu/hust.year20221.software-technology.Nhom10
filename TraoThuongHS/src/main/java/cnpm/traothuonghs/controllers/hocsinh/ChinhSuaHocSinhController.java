@@ -18,7 +18,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.sql.SQLException;
 import java.time.LocalDate;
 
-public class Chinh_Sua_Hoc_SinhController extends BaseLeftController {
+public class ChinhSuaHocSinhController extends BaseLeftController {
     public static String idHocSinh = null;
 
     // Label Thông tin cũ

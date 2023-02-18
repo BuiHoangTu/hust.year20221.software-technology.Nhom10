@@ -69,10 +69,13 @@
             <children>
             <HBox layoutY="30.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
                <children>
-                      <Label minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="200.0" text="Thống kê" textAlignment="CENTER">
+                      <Label minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="199.0" text="Thống kê" textAlignment="CENTER">
                           <font>
                               <Font name="System Bold" size="28.0" />
                           </font>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
                       </Label>
                   <TextField fx:id="tfFilter" />
                   <RadioButton fx:id="rbDot" mnemonicParsing="false" text="Đợt phát">
@@ -92,7 +95,10 @@
             </HBox>
             <VBox layoutX="206.0" layoutY="65.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0">
                <children>
-                  <TableView fx:id="tvThongKe" prefHeight="462.0" prefWidth="736.0" />
+                  <TableView fx:id="tvThongKe" prefHeight="462.0" prefWidth="736.0">
+                     <VBox.margin>
+                        <Insets left="10.0" />
+                     </VBox.margin></TableView>
                </children>
             </VBox>
             </children>

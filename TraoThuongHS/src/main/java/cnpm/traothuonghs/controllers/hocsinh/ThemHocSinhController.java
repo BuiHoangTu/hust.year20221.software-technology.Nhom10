@@ -4,7 +4,6 @@ import cnpm.traothuonghs.controllers.ChangeSceneControllers;
 import cnpm.traothuonghs.controllers.IFlushableController;
 import cnpm.traothuonghs.models.HocSinh;
 import cnpm.traothuonghs.services.HocSinhService;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
@@ -33,11 +32,11 @@ public class ThemHocSinhController extends ChangeSceneControllers implements IFl
         cbTruong.getItems().addAll(HocSinh.tenCacTruongHoc);
     }
 
-    public void onHuyClicked(ActionEvent event) {
+    public void onHuyClicked() {
         changeScene("/cnpm/traothuonghs/views/hocsinh/Quan-ly-hoc-sinh.fxml");
     }
 
-    public void onXacNhanClicked(ActionEvent event) throws SQLException {
+    public void onXacNhanClicked() throws SQLException {
         //Thêm học sinh vào database
         if(tfTenHocSinh.getText().equals("")|| tfLop.getText().equals("") || tfTenPhuHuynh.getText().equals("") || tfDanhHieu.getText().equals("") || tfMaHoKhau.getText().equals("") || tfDotPhatThuong.getText().equals("") || cbTruong.getValue().toString().equals("") || dpNgaySinh.getValue().equals("")){
             Alert alert = new Alert(Alert.AlertType.ERROR);

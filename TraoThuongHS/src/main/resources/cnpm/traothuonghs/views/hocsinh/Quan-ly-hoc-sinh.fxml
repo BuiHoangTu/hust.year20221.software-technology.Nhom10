@@ -62,12 +62,15 @@
       </VBox>
    </left>
    <top>
-      <AnchorPane prefHeight="20.0" prefWidth="728.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="34.0" prefWidth="762.0" BorderPane.alignment="CENTER">
          <TextField fx:id="tfTimKiem" layoutX="219.0" layoutY="6.0" prefHeight="26.0" prefWidth="187.0" />
          <CheckBox fx:id="chbTen" layoutX="447.0" layoutY="12.0" mnemonicParsing="false" text="Tên" />
          <CheckBox fx:id="chbDotPhat" layoutX="562.0" layoutY="12.0" mnemonicParsing="false" text="Đợt phát" />
          <CheckBox fx:id="chbDiaChi" layoutX="710.0" layoutY="11.0" mnemonicParsing="false" text="Địa chỉ" />
          <Button layoutX="850.0" layoutY="8.0" mnemonicParsing="false" onAction="#onTimKiemClicked" text="Tìm" />
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
       </AnchorPane>
    </top>
    <right>
@@ -78,9 +81,9 @@
       </AnchorPane>
    </right>
    <center>
-      <ScrollPane prefHeight="360.0" prefWidth="462.0" BorderPane.alignment="CENTER">
-         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="503.0" prefWidth="689.0">
-            <TableView fx:id="tvHocSinh" onMouseClicked="#rowClickedHocSinh" prefHeight="607.0" prefWidth="702.0">
+      <ScrollPane prefHeight="507.0" prefWidth="602.0" BorderPane.alignment="CENTER">
+         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="503.0" prefWidth="698.0">
+            <TableView fx:id="tvHocSinh" onMouseClicked="#rowClickedHocSinh" prefHeight="607.0" prefWidth="702.0" AnchorPane.leftAnchor="0.0">
                <columns>
                   <TableColumn fx:id="colTenHocSinh" prefWidth="130.93326258659363" text="Tên học sinh" />
                   <TableColumn fx:id="colPhuHuynh" prefWidth="129.86663818359375" text="Phụ huynh" />
@@ -90,6 +93,9 @@
                </columns>
             </TableView>
          </AnchorPane>
+         <padding>
+            <Insets left="13.0" />
+         </padding>
       </ScrollPane>
    </center>
 </BorderPane>

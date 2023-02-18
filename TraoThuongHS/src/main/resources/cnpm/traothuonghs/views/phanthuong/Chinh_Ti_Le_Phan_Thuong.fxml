@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="542.0" prefWidth="935.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cnpm.traothuonghs.controllers.phanthuong.Chinh_Ti_Le_Phan_ThuongController">
+<AnchorPane prefHeight="542.0" prefWidth="935.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cnpm.traothuonghs.controllers.phanthuong.ChinhTiLePhanThuongController">
    <AnchorPane layoutX="206.0" prefHeight="542.0" prefWidth="730.0">
       <children>
          <Label layoutX="14.0" layoutY="14.0" text="Chỉnh sửa tỉ lệ phần thưởng">

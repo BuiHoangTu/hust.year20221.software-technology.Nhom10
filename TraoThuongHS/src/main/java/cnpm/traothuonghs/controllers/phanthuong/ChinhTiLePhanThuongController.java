@@ -1,17 +1,11 @@
 package cnpm.traothuonghs.controllers.phanthuong;
 
-import cnpm.quanlynhankhau.models.NhanKhau;
 import cnpm.traothuonghs.controllers.BaseLeftController;
-import cnpm.traothuonghs.models.HocSinh;
-import cnpm.traothuonghs.services.HocSinhService;
 import cnpm.traothuonghs.services.TinhThuongService;
-import javafx.beans.Observable;
-import javafx.beans.value.ObservableStringValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -19,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class Chinh_Ti_Le_Phan_ThuongController extends BaseLeftController {
+public class ChinhTiLePhanThuongController extends BaseLeftController {
     // ComboBox Danh hiệu
     @FXML
     private ComboBox cbDanhHieu;
@@ -44,7 +38,7 @@ public class Chinh_Ti_Le_Phan_ThuongController extends BaseLeftController {
     private String themMoi = "";
 
     private String xoaDi = "";
-    private List<String> thayDoi = new ArrayList<String>();
+    private List<String> thayDoi = new ArrayList<>();
 
     // Temp info
     private String danhHieuTamThoi = "";

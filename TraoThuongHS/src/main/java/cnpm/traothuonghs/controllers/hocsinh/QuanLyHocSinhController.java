@@ -11,7 +11,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -33,10 +32,10 @@ public class QuanLyHocSinhController extends BaseLeftController {
 
     @FXML
     private void initialize() throws SQLException {
-        colTenHocSinh.setCellValueFactory(new PropertyValueFactory<HocSinh, String>("ten"));
-        colPhuHuynh.setCellValueFactory(new PropertyValueFactory<HocSinh, String>("phuHuynh"));
-        colNgaySinh.setCellValueFactory(new PropertyValueFactory<HocSinh, String>("ngaySinh"));
-        colTruong.setCellValueFactory(new PropertyValueFactory<HocSinh,String>("truongHoc"));
+        colTenHocSinh.setCellValueFactory(new PropertyValueFactory<>("ten"));
+        colPhuHuynh.setCellValueFactory(new PropertyValueFactory<>("phuHuynh"));
+        colNgaySinh.setCellValueFactory(new PropertyValueFactory<>("ngaySinh"));
+        colTruong.setCellValueFactory(new PropertyValueFactory<>("truongHoc"));
         colLop.setCellValueFactory(hocSinhStringCellDataFeatures -> new SimpleStringProperty(hocSinhStringCellDataFeatures.getValue().getCacPhanThuong().get(hocSinhStringCellDataFeatures.getValue().getCacPhanThuong().size()-1).getLop()));
 
         List<HocSinh> lsHS = new ArrayList<>();
@@ -50,7 +49,7 @@ public class QuanLyHocSinhController extends BaseLeftController {
         tvHocSinh.setItems(ls);
     }
 
-    public void onTimKiemClicked(ActionEvent event) throws SQLException {
+    public void onTimKiemClicked() throws SQLException {
         //Tìm học sinh theo checkBox và textField từ database
         if(chbTen.isSelected()){
             ObservableList<HocSinh> ls = FXCollections.observableList(HocSinhService.findHocSinh(2, tfTimKiem.getText()));
@@ -82,36 +81,36 @@ public class QuanLyHocSinhController extends BaseLeftController {
 
     }
 
-    public void onThemHocSinhClicked(ActionEvent event) {
+    public void onThemHocSinhClicked() {
         changeScene("/cnpm/traothuonghs/views/hocsinh/Them-hoc-sinh.fxml");
     }
 
-    public void onChinhSuaHocSinhClicked(ActionEvent event) {
+    public void onChinhSuaHocSinhClicked() {
         //changeScene();
         if(idHocSinhDuocChon == null){
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setContentText("Chưa chọn học sinh nào !");
             alert.show();
         }else {
-            Chinh_Sua_Hoc_SinhController.idHocSinh = idHocSinhDuocChon;
+            ChinhSuaHocSinhController.idHocSinh = idHocSinhDuocChon;
             changeScene("/cnpm/traothuonghs/views/hocsinh/Chinh_Sua_Hoc_Sinh.fxml");
         }
     }
 
     @FXML
-    void rowClickedHocSinh(MouseEvent event) throws SQLException {
+    void rowClickedHocSinh() {
         HocSinh clickedHocSinh = tvHocSinh.getSelectionModel().getSelectedItem();
         idHocSinhDuocChon = clickedHocSinh.getId();
     }
 
-    public void onXemThongTinClicked(ActionEvent event) {
+    public void onXemThongTinClicked() {
         //changeScene();
         if(idHocSinhDuocChon == null){
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setContentText("Chưa chọn học sinh nào !");
             alert.show();
         }else{
-            Chi_Tiet_Hoc_SinhController.idHocSinh = idHocSinhDuocChon;
+            ChiTietHocSinhController.idHocSinh = idHocSinhDuocChon;
             changeScene("/cnpm/traothuonghs/views/hocsinh/Chi_Tiet_Hoc_Sinh.fxml");
         }
     }
